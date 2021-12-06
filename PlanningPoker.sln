@@ -1,4 +1,4 @@
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 16.0.0.0
@@ -7,6 +7,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlanningPoker.Client", "src\Client\PlanningPoker.Client.csproj", "{F2BF3D26-A471-44AA-8A3E-E0E7C364BAC1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlanningPoker.Shared", "src\Shared\PlanningPoker.Shared.csproj", "{0D6EFE3C-DAFC-4CBD-A164-A32B0C2DB2F8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "build\_build.csproj", "{70D9622F-52BF-4ADF-A1C6-A179C339C273}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,6 +20,8 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{70D9622F-52BF-4ADF-A1C6-A179C339C273}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70D9622F-52BF-4ADF-A1C6-A179C339C273}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E00022E5-EB9A-409F-A96C-372B8315A3D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E00022E5-EB9A-409F-A96C-372B8315A3D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E00022E5-EB9A-409F-A96C-372B8315A3D4}.Debug|x64.ActiveCfg = Debug|Any CPU

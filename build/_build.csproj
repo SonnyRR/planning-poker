@@ -11,8 +11,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Nuke.Common" Version="6.0.0-beta0010"/>
-        <PackageDownload Include="GitVersion.Tool" Version="[5.8.1]"/>
+        <PackageReference Include="Nuke.Common" Version="6.0.1" />
+        <PackageDownload Include="GitVersion.Tool" Version="[5.8.1]" />
     </ItemGroup>
 
 </Project>

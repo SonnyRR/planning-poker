@@ -7,6 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Linq;
 using Serilog;
+using PlanningPoker.SharedKernel;
+using CorrelationId;
 
 namespace PlanningPoker.Server
 {
@@ -23,6 +25,7 @@ namespace PlanningPoker.Server
         {
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddSharedKernelServices();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -37,12 +40,12 @@ namespace PlanningPoker.Server
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
-
+            app.UseCorrelationId();
+            app.UseSerilogIngestion();
             app.UseSerilogRequestLogging();
             app.UseBlazorFrameworkFiles();
             app.UseStaticFiles();
             app.UseHttpsRedirection();
-            app.UseSerilogIngestion();
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>

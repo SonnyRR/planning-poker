@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using PlanningPoker.Models;
 using PlanningPoker.Services;
 using Microsoft.AspNetCore.Components;
+using Serilog;
 
 namespace PlanningPoker.Pages.Account.Center
 {
@@ -25,6 +26,8 @@ namespace PlanningPoker.Pages.Account.Center
             await base.OnInitializedAsync();
             _currentUser = await UserService.GetCurrentUserAsync();
             _fakeList = await ProjectService.GetFakeListAsync();
+
+            Log.Information("Incremented count aaa");
         }
 
         protected void ShowInput()

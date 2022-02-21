@@ -13,7 +13,7 @@ namespace PlanningPoker.Server
         {
             CreateHostBuilder(args)
                 .UseSerilog((builderContext, loggerConfig) =>
-                    loggerConfig.Configure(builderContext.Configuration))
+                    loggerConfig.ConfigureFromSettings(builderContext.Configuration))
                 .Build()
                 .Run();
         }

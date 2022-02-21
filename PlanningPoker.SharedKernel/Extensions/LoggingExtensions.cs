@@ -1,6 +1,7 @@
 ﻿using Ardalis.GuardClauses;
 
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 using PlanningPoker.SharedKernel.Enrichers;
@@ -60,6 +61,19 @@ namespace PlanningPoker.SharedKernel.Extensions
             Guard.Against.Null(enrichmentConfiguration, nameof(enrichmentConfiguration));
 
             return enrichmentConfiguration.With<InstanceEnricher>();
+        }
+
+        /// <summary>
+        /// Adds the Correlatio ID enricher to the logger configuraion.
+        /// </summary>
+        /// <param name="enrichmentConfiguration">The logger enrichment configuration.</param>
+        /// <param name="serviceProvider">The service provider used to resolve the enricher.</param>
+        /// <returns>An instance of <see cref="LoggerConfiguration"/>.</returns>
+        public static LoggerConfiguration WithCorrelationId(this LoggerEnrichmentConfiguration enrichmentConfiguration, IServiceProvider serviceProvider)
+        {
+            Guard.Against.Null(enrichmentConfiguration, nameof(enrichmentConfiguration));
+
+            return enrichmentConfiguration.With(serviceProvider.GetService<CorrelationIdEnricher>());
         }
     }
 }

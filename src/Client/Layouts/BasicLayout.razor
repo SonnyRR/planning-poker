@@ -1,10 +1,10 @@
 ﻿@namespace PlanningPoker
+@using Microsoft.Extensions.Options
+@using PlanningPoker.Client.Models
 @using Serilog
 @inherits LayoutComponentBase
 
-<AntDesign.ProLayout.BasicLayout 
-    Logo="@("https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg")"
-    MenuData="_menuData">
+<AntDesign.ProLayout.BasicLayout MenuData="_menuData">
     <RightContentRender>
         <PlanningPoker.Components.RightContent />
     </RightContentRender>
@@ -12,7 +12,7 @@
         @Body
     </ChildContent>
     <FooterRender>
-        <FooterView Copyright="2021 Ant Design Blazor" Links="Links"></FooterView>
+        <FooterView Copyright="@($"{DateTime.UtcNow.Year} - {this.LayoutSettings.Value.Author}")" Links="this.LayoutSettings.Value.Links"></FooterView>
     </FooterRender>
 </AntDesign.ProLayout.BasicLayout>
 <SettingDrawer />
@@ -21,36 +21,24 @@
 {
     private MenuDataItem[] _menuData = { };
 
-    [Inject] public HttpClient HttpClient { get; set; }
+    [Inject]
+    public HttpClient HttpClient { get; set; }
+
+    [Inject]
+    public IOptions<LayoutSettings> LayoutSettings { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
-        _menuData = await HttpClient.GetFromJsonAsync<MenuDataItem[]>("data/menu.json");
-    }
 
-    public LinkItem[] Links { get; set; } =
-    {
-        new LinkItem
+        var githubLink = this.LayoutSettings
+            .Value
+            .Links?
+            .SingleOrDefault(l => l.Key.Contains("github", StringComparison.InvariantCultureIgnoreCase));
+
+        if (githubLink is not null)
         {
-            Key = "Ant Design Blazor",
-            Title = "Ant Design Blazor",
-            Href = "https://antblazor.com",
-            BlankTarget = true,
-        },
-        new LinkItem
-        {
-            Key = "github",
-            Title = (RenderFragment)(@<Icon Type="github" />),
-            Href = "https://github.com/ant-design-blazor/ant-design-pro-blazor",
-            BlankTarget = true,
-        },
-        new LinkItem
-        {
-            Key = "Blazor",
-            Title = "Blazor",
-            Href = "https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor?WT.mc_id=DT-MVP-5003987",
-            BlankTarget = true,
+            githubLink.Title = (RenderFragment)(@<Icon Type="github" />);
         }
-    };
+    }
 }

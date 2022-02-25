@@ -25,7 +25,7 @@ namespace PlanningPoker.Client
 
             builder.Services.AddAntDesign();
 
-            builder.Services.Configure<ProSettings>(builder.Configuration.GetSection("ProSettings"));
+            builder.Services.Configure<ProSettings>(builder.Configuration.GetSection("AntSettings"));
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 

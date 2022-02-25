@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlanningPoker.Server", "src
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlanningPoker.Client", "src\Client\PlanningPoker.Client.csproj", "{60EC7946-0E69-4155-BA3C-5FABC974D2B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanningPoker.SharedKernel", "PlanningPoker.SharedKernel\PlanningPoker.SharedKernel.csproj", "{DFD248FD-7CFA-4605-94EE-0F89AF7C9105}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlanningPoker.SharedKernel", "PlanningPoker.SharedKernel\PlanningPoker.SharedKernel.csproj", "{DFD248FD-7CFA-4605-94EE-0F89AF7C9105}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

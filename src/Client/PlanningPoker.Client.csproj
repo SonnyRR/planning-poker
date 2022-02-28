@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\PlanningPoker.SharedKernel\PlanningPoker.SharedKernel.csproj" />
+    <ProjectReference Include="..\SharedKernel\PlanningPoker.SharedKernel.csproj" />
   </ItemGroup>
 
 </Project>

@@ -17,23 +17,43 @@ namespace PlanningPoker.Client
     public static class Program
     {
         public static async Task Main(string[] args)
-        { 
-            var builder = WebAssemblyHostBuilder.CreateDefault(args);
+        {
+            try
+            {
+                var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
-            builder.Logging.AddSerilog(builder.Configuration);
+                builder.Logging.AddSerilog(builder.Configuration);
 
-            builder.RootComponents.Add<App>("#app");
+                builder.RootComponents.Add<App>("#app");
 
-            builder.Services.AddAntDesign();
+                builder.Services.AddAntDesign();
 
-            builder.Services.Configure<ProSettings>(builder.Configuration.GetSection("AntSettings"));
-            builder.Services.Configure<LayoutSettings>(builder.Configuration.GetSection(nameof(LayoutSettings)));
+                builder.Services.Configure<ProSettings>(builder.Configuration.GetSection("AntSettings"));
+                builder.Services.Configure<LayoutSettings>(builder.Configuration.GetSection(nameof(LayoutSettings)));
 
-            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+                builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
-            await builder
-                .Build()
-                .RunAsync();
+                await builder
+                    .Build()
+                    .RunAsync();
+            }
+            catch (Exception ex)
+            {
+                if (Log.Logger == null || Log.Logger.GetType().Name == "SilentLogger")
+                {
+                    Log.Logger = new LoggerConfiguration()
+                        .MinimumLevel.Debug()
+                        .WriteTo.BrowserConsole()
+                        .CreateLogger();
+                }
+
+                Log.Fatal(ex, "Host terminated unexpectedly");
+            }
+            finally
+            {
+                Log.Information("Shut down complete");
+                Log.CloseAndFlush();
+            }
         }
     }
 }

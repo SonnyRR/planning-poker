@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using System;
+
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
 using PlanningPoker.SharedKernel.Extensions;
@@ -11,11 +13,31 @@ namespace PlanningPoker.Server
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args)
-                .UseSerilog((builderContext, loggerConfig) =>
-                    loggerConfig.ConfigureFromSettings(builderContext.Configuration))
-                .Build()
-                .Run();
+            try
+            {
+                CreateHostBuilder(args)
+                    .UseSerilog((builderContext, loggerConfig) =>
+                        loggerConfig.ConfigureFromSettings(builderContext.Configuration))
+                    .Build()
+                    .Run();
+            }
+            catch (Exception ex)
+            {
+                if (Log.Logger == null || Log.Logger.GetType().Name == "SilentLogger")
+                {
+                    Log.Logger = new LoggerConfiguration()
+                        .MinimumLevel.Debug()
+                        .WriteTo.Console()
+                        .CreateLogger();
+                }
+
+                Log.Fatal(ex, "Host terminated unexpectedly");
+            }
+            finally
+            {
+                Log.Information("Shut down complete");
+                Log.CloseAndFlush();
+            }
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

@@ -1,4 +1,6 @@
-﻿using Ardalis.GuardClauses;
+﻿using System.Diagnostics;
+
+using Ardalis.GuardClauses;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -44,11 +46,13 @@ namespace PlanningPoker.SharedKernel.Extensions
         {
             Guard.Against.Null(builder, nameof(builder));
 
-            var logger = new LoggerConfiguration()
-                .ConfigureFromSettings(configuration, configurationSection)
-                .CreateLogger();
+            var loggerConfiguration = new LoggerConfiguration()
+                .ConfigureFromSettings(configuration, configurationSection);
+#if DEBUG
+            loggerConfiguration.Enrich.WithProperty("DebuggerAttached", Debugger.IsAttached);
+#endif
 
-            return builder.AddSerilog(logger);
+            return builder.AddSerilog(loggerConfiguration.CreateLogger());
         }
 
         /// <summary>

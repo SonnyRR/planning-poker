@@ -1,11 +1,17 @@
+
+using System.Collections.Generic;
+using System.Net.Mime;
+
 using CorrelationId;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+using PlanningPoker.Server.Hubs;
 using PlanningPoker.SharedKernel;
 
 using Serilog;
@@ -26,10 +32,18 @@ namespace PlanningPoker.Server
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddSharedKernelServices();
+            services.AddSignalR();
+            services.AddResponseCompression(opts =>
+                opts.MimeTypes = new List<string>(ResponseCompressionDefaults.MimeTypes)
+                {
+                    MediaTypeNames.Application.Octet
+                });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseResponseCompression();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -52,6 +66,7 @@ namespace PlanningPoker.Server
             {
                 endpoints.MapRazorPages();
                 endpoints.MapControllers();
+                endpoints.MapHub<PokerHub>("/poker");
                 endpoints.MapFallbackToFile("index.html");
             });
         }

@@ -50,3 +50,9 @@ ol {
     min-height: 100vh;
   }
 }
+
+.room-creation-container {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}

@@ -1,12 +1,25 @@
 ﻿@page "/"
+
 <div>
-    <h2>Create a new poker table room or join an existing one</h2>
-    <div>
-        <Button 
-            Type="@ButtonType.Primary" 
-            @onclick="@(e => this.NavigationManager.NavigateTo("/create"))">
-                Create
-        </Button>
-        <Button>Join</Button>
-    </div>
-</div> 
+    <Row Align="middle" Type="flex" Justify="center">
+        <Col Span="12">
+        <Title Level="2" Class="centered-text">Create a new poker table room or join an existing one</Title>
+        <Row Justify="center">
+            <Space Align="center">
+                <SpaceItem>
+                    <Button Type="@ButtonType.Primary"
+                            @onclick="@(e => this.NavigationManager.NavigateTo("/create"))">
+                        Create
+                    </Button>
+
+                </SpaceItem>
+                <SpaceItem>
+
+                    <Button>Join</Button>
+                </SpaceItem>
+            </Space>
+
+        </Row>
+        </Col>
+    </Row>
+</div>

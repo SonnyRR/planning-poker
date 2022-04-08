@@ -2,12 +2,9 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-using AntDesign.ProLayout;
-
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
-using PlanningPoker.Client.Models;
 using PlanningPoker.SharedKernel.Extensions;
 
 using Serilog;
@@ -25,11 +22,6 @@ namespace PlanningPoker.Client
                 builder.Logging.AddSerilog(builder.Configuration);
 
                 builder.RootComponents.Add<App>("#app");
-
-                builder.Services.AddAntDesign();
-
-                builder.Services.Configure<ProSettings>(builder.Configuration.GetSection("AntSettings"));
-                builder.Services.Configure<LayoutSettings>(builder.Configuration.GetSection(nameof(LayoutSettings)));
 
                 builder.Services.AddScoped(_ => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 

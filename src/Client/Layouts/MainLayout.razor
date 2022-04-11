@@ -1,0 +1,38 @@
+﻿@using Microsoft.AspNetCore.Components
+@using Radzen.Blazor
+@inherits LayoutComponentBase
+
+<RadzenDialog />
+<RadzenNotification />
+<RadzenTooltip />
+<RadzenContextMenu />
+
+<RadzenLayout>
+    <ChildContent>
+        <RadzenHeader>
+            <ChildContent>
+                <div class="row justify-content-end align-items-center h-100">
+                    <div class="col-6 d-flex">
+                        <RadzenLabel Text="ScrumPoker">
+                        </RadzenLabel>
+                    </div>
+                    <div class="col-6 text-right">
+                    </div>
+                </div>
+            </ChildContent>
+        </RadzenHeader>
+        <RadzenBody>
+            <ChildContent>
+                <RadzenContentContainer Name="main">
+                    @Body
+                </RadzenContentContainer>
+            </ChildContent>
+        </RadzenBody>
+        <RadzenFooter>
+            <ChildContent>
+                <RadzenLabel Text="@FooterCopyrightContent">
+                </RadzenLabel>
+            </ChildContent>
+        </RadzenFooter>
+    </ChildContent>
+</RadzenLayout>

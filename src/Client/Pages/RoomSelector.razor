@@ -6,12 +6,29 @@
             <p class="lead text-center">Join an existing poker table or create a new one:</p>
             <div class="row my-2">
                 <div class="col-lg-6 d-flex justify-content-center">
-                    <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Primary" Text="Create new table" />
+                    <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Primary" Text="Create table" />
                 </div>
                 <div class="col-lg-6 d-flex justify-content-center">
-                    <RadzenButton Icon="casino" ButtonStyle="ButtonStyle.Light" Text="Join a table" />
+                    <RadzenButton Icon="casino" ButtonStyle="ButtonStyle.Light" Text="Join a table" Click="@(() => ShowRoomIdentifierInput = !ShowRoomIdentifierInput)" />
                 </div>
             </div>
+            @if (ShowRoomIdentifierInput)
+            {
+                <RadzenTemplateForm TItem="string" Data=@RoomId Submit=@JoinExistingTable InvalidSubmit=@OnInvalidSubmit>
+                    <div class="row my-3">
+                        <div class="col-lg-9 d-flex justify-content-center">
+                            <RadzenTextBox Name="RoomIdInput" @bind-Value=@RoomId Placeholder="Room code..." Class="w-100" />
+                        </div>
+                        <div class="col-lg-2 d-flex justify-content-center">
+                            <RadzenButton ButtonStyle="ButtonStyle.Primary" Text="Enter" ButtonType="ButtonType.Submit" />
+                        </div>
+                    </div>
+                    <div class="row mx-2">
+                        <RadzenRequiredValidator Component="RoomIdInput" Text="Room code is required." />
+                        <RadzenRegexValidator Component="RoomIdInput" Text="Room code format is not valid." Pattern="\d{5}" />
+                    </div>
+                </RadzenTemplateForm>
+            }
         </RadzenCard>
     </div>
 </div>

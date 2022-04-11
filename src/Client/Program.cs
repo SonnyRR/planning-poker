@@ -7,6 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 
 using PlanningPoker.SharedKernel.Extensions;
 
+using Radzen;
+
 using Serilog;
 
 namespace PlanningPoker.Client
@@ -24,6 +26,10 @@ namespace PlanningPoker.Client
                 builder.RootComponents.Add<App>("#app");
 
                 builder.Services.AddScoped(_ => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+                builder.Services.AddScoped<DialogService>();
+                builder.Services.AddScoped<NotificationService>();
+                builder.Services.AddScoped<TooltipService>();
+                builder.Services.AddScoped<ContextMenuService>();
 
                 await builder
                     .Build()

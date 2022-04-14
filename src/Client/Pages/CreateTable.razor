@@ -1,25 +1,26 @@
 ﻿@page "/create"
+@using PlanningPoker.Client.Models
 
 <div class="container h-100 d-flex align-items-center">
     <div class="col-lg-8 offset-lg-2">
-        @*<RadzenCard>
-            <RadzenTemplateForm TItem="string" Data=@null Submit=@null InvalidSubmit=@null>
+        <RadzenCard>
+            <RadzenTemplateForm TItem="TableMetadata" Data=@null>
                 <RadzenFieldset Text="Create a new table">
                     <div class="row mb-5">
                         <div class="col-md-4">
                             <RadzenLabel Text="Table Name" />
-                            <small style="display: block">(3-10 characters)</small>
+                            <small>(3-10 characters)</small>
                         </div>
                         <div class="col">
-                            <RadzenTextBox style="display: block" Name="FirstName" Class="w-100" />
-                            <RadzenLengthValidator Component="FirstName" Min="3" Text="First name should be at least 3 characters" Style="position: absolute" />
-                            <RadzenLengthValidator Component="FirstName" Max="10" Text="First name should be at most 10 characters" Style="position: absolute" />
+                            <RadzenTextBox style="display: block" Name="TableName" Class="w-100" />
+                            <RadzenLengthValidator Component="TableName" Min="3" Text="placeholder" class="validator"/>
+                            <RadzenLengthValidator Component="TableName" Max="10" Text="placeholder" class="validator" />
                         </div>
                     </div>
                     <div class="row mb-5">
                         <div class="col-md-4">
-                            <RadzenLabel Text="Last Name" />
-                            <small style="display: block">(3-10 characters)</small>
+                            <RadzenLabel Text="Card set" />
+                            <small>(3-10 characters)</small>
                         </div>
                         <div class="col">
                             <RadzenDropDown AllowClear="true" TValue="string" Class="w-100"></RadzenDropDown>
@@ -28,6 +29,6 @@
                     <RadzenButton ButtonType="ButtonType.Submit" Text="Submit"></RadzenButton>
                 </RadzenFieldset>
             </RadzenTemplateForm>
-        </RadzenCard>*@
+        </RadzenCard>
     </div>
 </div>

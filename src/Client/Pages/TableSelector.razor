@@ -6,7 +6,7 @@
             <p class="lead text-center">Join an existing poker table or create a new one:</p>
             <div class="row my-2">
                 <div class="col-lg-5 d-flex justify-content-center">
-                    <RadzenButton class="w-100" Icon="add_circle_outline" ButtonStyle="ButtonStyle.Primary" Text="Create table" />
+                    <RadzenButton class="w-100" Icon="add_circle_outline" ButtonStyle="ButtonStyle.Primary" Text="Create table" Click="OnTableCreationSubmit"/>
                 </div>
                 <div class="col-lg-5 offset-lg-2 d-flex justify-content-center">
                     <RadzenButton class="w-100" Icon="casino" ButtonStyle="ButtonStyle.Light" Text="Join a table" Click="@(() => ShowRoomIdentifierInput = !ShowRoomIdentifierInput)" />

@@ -17,7 +17,7 @@ namespace PlanningPoker.Client.Pages
 
         public bool ShowRoomIdentifierInput { get; set; }
 
-        public string RoomId { get; set; };
+        public string RoomId { get; set; }
 
         public void JoinExistingTable()
         {

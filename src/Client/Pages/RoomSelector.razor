@@ -1,31 +1,33 @@
 ﻿@page "/"
 
-<div class="h-100 d-flex justify-content-center align-items-center">
-    <div class="col-lg-6 col-xl-4">
+<div class="container h-100 d-flex align-items-center">
+    <div class="col-lg-8 offset-lg-2">
         <RadzenCard>
             <p class="lead text-center">Join an existing poker table or create a new one:</p>
             <div class="row my-2">
-                <div class="col-lg-6 d-flex justify-content-center">
-                    <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Primary" Text="Create table" />
+                <div class="col-lg-5 d-flex justify-content-center">
+                    <RadzenButton class="w-100" Icon="add_circle_outline" ButtonStyle="ButtonStyle.Primary" Text="Create table" />
                 </div>
-                <div class="col-lg-6 d-flex justify-content-center">
-                    <RadzenButton Icon="casino" ButtonStyle="ButtonStyle.Light" Text="Join a table" Click="@(() => ShowRoomIdentifierInput = !ShowRoomIdentifierInput)" />
+                <div class="col-lg-5 offset-lg-2 d-flex justify-content-center">
+                    <RadzenButton class="w-100" Icon="casino" ButtonStyle="ButtonStyle.Light" Text="Join a table" Click="@(() => ShowRoomIdentifierInput = !ShowRoomIdentifierInput)" />
                 </div>
             </div>
             @if (ShowRoomIdentifierInput)
             {
-                <RadzenTemplateForm TItem="string" Data=@RoomId Submit=@JoinExistingTable InvalidSubmit=@OnInvalidSubmit>
-                    <div class="row my-3">
+                <RadzenTemplateForm class="my-3" TItem="string" Data=@RoomId Submit=@JoinExistingTable InvalidSubmit=@OnInvalidSubmit>
+                    <div class="row">
                         <div class="col-lg-9 d-flex justify-content-center">
                             <RadzenTextBox Name="RoomIdInput" @bind-Value=@RoomId Placeholder="Room code..." Class="w-100" />
                         </div>
-                        <div class="col-lg-2 d-flex justify-content-center">
-                            <RadzenButton ButtonStyle="ButtonStyle.Primary" Text="Enter" ButtonType="ButtonType.Submit" />
+                        <div class="col-lg-3 d-flex justify-content-center">
+                            <RadzenButton class="w-100" ButtonStyle="ButtonStyle.Primary" Text="Enter" ButtonType="ButtonType.Submit" />
                         </div>
                     </div>
-                    <div class="row mx-2">
-                        <RadzenRequiredValidator Component="RoomIdInput" Text="Room code is required." />
-                        <RadzenRegexValidator Component="RoomIdInput" Text="Room code format is not valid." Pattern="\d{5}" />
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <RadzenRequiredValidator Component="RoomIdInput" Text="Room code is required." />
+                            <RadzenRegexValidator Component="RoomIdInput" Text="Room code format is not valid." Pattern="\d{5}" />
+                        </div>
                     </div>
                 </RadzenTemplateForm>
             }

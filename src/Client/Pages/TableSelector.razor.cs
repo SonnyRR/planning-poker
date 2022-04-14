@@ -7,10 +7,10 @@ using Radzen;
 
 namespace PlanningPoker.Client.Pages
 {
-    public partial class RoomSelector
+    public partial class TableSelector
     {
         [Inject]
-        public ILogger<RoomSelector> Logger { get; set; }
+        public ILogger<TableSelector> Logger { get; set; }
 
         [Inject]
         public NavigationManager NavigationManager { get; set; }

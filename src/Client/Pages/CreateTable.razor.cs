@@ -10,6 +10,6 @@ namespace PlanningPoker.Client.Pages
         [Inject]
         public ILogger<TableSelector> Logger { get; set; }
 
-        public TableMetadata Table { get; set; }
+        public TableMetadata Table { get; set; } = new();
     }
 }

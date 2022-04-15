@@ -1,4 +1,6 @@
-﻿namespace PlanningPoker.Client.Models
+﻿using FluentValidation;
+
+namespace PlanningPoker.Client.Models
 {
     /// <summary>
     /// Represents the information about a given poker table.
@@ -20,5 +22,13 @@
         public string Code { get; set; }
 
         // TODO: Add remaining properties.
+    }
+
+    public class TableMetadataValidator : AbstractValidator<TableMetadata>
+    {
+        public TableMetadataValidator()
+        {
+            RuleFor(tm => tm.Name).NotEmpty();
+        }
     }
 }

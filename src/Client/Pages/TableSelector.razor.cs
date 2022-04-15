@@ -56,6 +56,7 @@ namespace PlanningPoker.Client.Pages
         {
             if (!await LocalStorageService.ContainKeyAsync("username"))
             {
+                this.Logger.LogInformation("Missing username, prompting the user to enter one.");
                 var opts = new DialogOptions
                 {
                     ShowClose = false,
@@ -63,7 +64,7 @@ namespace PlanningPoker.Client.Pages
                     CloseDialogOnOverlayClick = false
                 };
 
-                var userName = await DialogService.OpenAsync<UsernameDialog>("Test title", null, opts);
+                var userName = await DialogService.OpenAsync<UsernameDialog>("Username", null, opts);
                 await this.LocalStorageService.SetItemAsStringAsync("username", userName);
             }
         }

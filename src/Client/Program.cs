@@ -1,14 +1,16 @@
 using System;
 using System.Net.Http;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 using Blazored.LocalStorage;
 
+using FluentValidation;
+
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
+using PlanningPoker.Client.Models;
 using PlanningPoker.SharedKernel.Extensions;
 
 using Radzen;
@@ -34,6 +36,8 @@ namespace PlanningPoker.Client
                 builder.Services.AddScoped<NotificationService>();
                 builder.Services.AddScoped<TooltipService>();
                 builder.Services.AddScoped<ContextMenuService>();
+
+                builder.Services.AddValidatorsFromAssemblyContaining<TableMetadataValidator>();
 
                 builder.Services.AddBlazoredLocalStorage(config =>
                 {

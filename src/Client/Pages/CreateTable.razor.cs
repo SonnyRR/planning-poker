@@ -8,7 +8,7 @@ namespace PlanningPoker.Client.Pages
     public partial class CreateTable
     {
         [Inject]
-        public ILogger<TableSelector> Logger { get; set; }
+        public ILogger<CreateTable> Logger { get; set; }
 
         public TableMetadata Table { get; set; } = new();
     }

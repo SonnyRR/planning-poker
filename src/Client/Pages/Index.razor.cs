@@ -13,10 +13,10 @@ using Radzen;
 
 namespace PlanningPoker.Client.Pages
 {
-    public partial class TableSelector
+    public partial class Index
     {
         [Inject]
-        public ILogger<TableSelector> Logger { get; set; }
+        public ILogger<Index> Logger { get; set; }
 
         [Inject]
         public NavigationManager NavigationManager { get; set; }

@@ -1,6 +1,10 @@
 using System;
 using System.Net.Http;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+
+using Blazored.LocalStorage;
 
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,9 +35,16 @@ namespace PlanningPoker.Client
                 builder.Services.AddScoped<TooltipService>();
                 builder.Services.AddScoped<ContextMenuService>();
 
-                await builder
-                    .Build()
-                    .RunAsync();
+                builder.Services.AddBlazoredLocalStorage(config =>
+                {
+                    config.JsonSerializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase;
+                    config.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+                    config.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+                    config.JsonSerializerOptions.ReadCommentHandling = JsonCommentHandling.Skip;
+                    config.JsonSerializerOptions.WriteIndented = false;
+                });
+
+                await builder.Build().RunAsync();
             }
             catch (Exception ex)
             {

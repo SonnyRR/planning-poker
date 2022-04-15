@@ -1,8 +1,13 @@
 ﻿using System;
 using System.Text.Json;
+using System.Threading.Tasks;
+
+using Blazored.LocalStorage;
 
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Logging;
+
+using PlanningPoker.Client.Components.Dialogs;
 
 using Radzen;
 
@@ -15,6 +20,12 @@ namespace PlanningPoker.Client.Pages
 
         [Inject]
         public NavigationManager NavigationManager { get; set; }
+
+        [Inject]
+        public DialogService DialogService { get; set; }
+
+        [Inject]
+        public ILocalStorageService LocalStorageService { get; set; }
 
         public string RoomId { get; set; }
 
@@ -39,6 +50,22 @@ namespace PlanningPoker.Client.Pages
         void OnTableCreationSubmit()
         {
             this.NavigationManager.NavigateTo("/create");
+        }
+
+        protected override async Task OnInitializedAsync()
+        {
+            if (!await LocalStorageService.ContainKeyAsync("username"))
+            {
+                var opts = new DialogOptions
+                {
+                    ShowClose = false,
+                    CloseDialogOnEsc = false,
+                    CloseDialogOnOverlayClick = false
+                };
+
+                var userName = await DialogService.OpenAsync<UsernameDialog>("Test title", null, opts);
+                await this.LocalStorageService.SetItemAsStringAsync("username", userName);
+            }
         }
     }
 }

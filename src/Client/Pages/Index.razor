@@ -5,10 +5,10 @@
         <RadzenCard>
             <p class="lead text-center">Join an existing poker table or create a new one:</p>
             <div class="row my-2">
-                <div class="col-lg-5 d-flex justify-content-center">
+                <div class="col-lg-5 col-md-12 d-flex justify-content-center">
                     <RadzenButton class="w-100" Icon="add_circle_outline" ButtonStyle="ButtonStyle.Primary" Text="Create table" Click="OnTableCreationSubmit"/>
                 </div>
-                <div class="col-lg-5 offset-lg-2 d-flex justify-content-center">
+                <div class="col-lg-5 col-md-12 mt-3 mt-lg-0 offset-lg-2 d-flex justify-content-center">
                     <RadzenButton class="w-100" Icon="casino" ButtonStyle="ButtonStyle.Light" Text="Join a table" Click="@(() => ShowRoomIdentifierInput = !ShowRoomIdentifierInput)" />
                 </div>
             </div>
@@ -16,10 +16,10 @@
             {
                 <RadzenTemplateForm class="my-3" TItem="string" Data=@RoomId Submit=@JoinExistingTable InvalidSubmit=@OnInvalidSubmit>
                     <div class="row">
-                        <div class="col-lg-9 d-flex justify-content-center">
+                        <div class="col-lg-9 col-md-12 d-flex justify-content-center">
                             <RadzenTextBox Name="RoomIdInput" @bind-Value=@RoomId Placeholder="Room code..." Class="w-100" />
                         </div>
-                        <div class="col-lg-3 d-flex justify-content-center">
+                        <div class="col-lg-3 col-md-12 mt-3 mt-lg-0 d-flex justify-content-center">
                             <RadzenButton class="w-100" ButtonStyle="ButtonStyle.Primary" Text="Enter" ButtonType="ButtonType.Submit" />
                         </div>
                     </div>

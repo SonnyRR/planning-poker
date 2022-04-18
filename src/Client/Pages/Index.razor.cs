@@ -2,6 +2,8 @@
 using System.Text.Json;
 using System.Threading.Tasks;
 
+using Ardalis.GuardClauses;
+
 using Blazored.LocalStorage;
 
 using Microsoft.AspNetCore.Components;
@@ -31,26 +33,13 @@ namespace PlanningPoker.Client.Pages
 
         public bool ShowRoomIdentifierInput { get; set; }
 
-        public void JoinExistingTable()
+        public void JoinExistingTable(string tableId)
         {
-            this.Logger.LogInformation("I am here");
+            Guard.Against.NullOrWhiteSpace(tableId, nameof(tableId));
             //NavigationManager.NavigateTo($"/room/{tableId}");
         }
 
-        void OnInvalidSubmit(FormInvalidSubmitEventArgs args)
-        {
-            if (args is null)
-            {
-                throw new ArgumentNullException(nameof(args));
-            }
-
-            this.Logger.LogError("InvalidSubmit", JsonSerializer.Serialize(args, new JsonSerializerOptions() { WriteIndented = true }));
-        }
-
-        void OnTableCreationSubmit()
-        {
-            this.NavigationManager.NavigateTo("/create");
-        }
+        void OnTableCreationSubmit() => this.NavigationManager.NavigateTo("/create");
 
         protected override async Task OnInitializedAsync()
         {

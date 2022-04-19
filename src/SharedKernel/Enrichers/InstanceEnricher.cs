@@ -13,8 +13,6 @@ namespace PlanningPoker.SharedKernel.Enrichers
         }
 
         public void Enrich(LogEvent logEvent, ILogEventPropertyFactory propertyFactory)
-        {
-            logEvent.AddOrUpdateProperty(propertyFactory.CreateProperty("InstanceId", this.id));
-        }
+            => logEvent.AddOrUpdateProperty(propertyFactory.CreateProperty("InstanceId", this.id));
     }
 }

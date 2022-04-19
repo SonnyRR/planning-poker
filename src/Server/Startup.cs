@@ -54,6 +54,7 @@ namespace PlanningPoker.Server
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
+
             app.UseCorrelationId();
             app.UseSerilogIngestion();
             app.UseSerilogRequestLogging();

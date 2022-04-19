@@ -16,8 +16,7 @@ namespace PlanningPoker.Server
             try
             {
                 CreateHostBuilder(args)
-                    .UseSerilog((builderContext, loggerConfig) =>
-                        loggerConfig.ConfigureFromSettings(builderContext.Configuration))
+                    .UseSerilog((builderContext, loggerConfig) => loggerConfig.ConfigureFromSettings(builderContext.Configuration))
                     .Build()
                     .Run();
             }
@@ -40,8 +39,7 @@ namespace PlanningPoker.Server
             }
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());
+        public static IHostBuilder CreateHostBuilder(string[] args)
+            => Host.CreateDefaultBuilder(args).ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());
     }
 }

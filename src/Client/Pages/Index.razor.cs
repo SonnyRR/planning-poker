@@ -1,15 +1,12 @@
-﻿using System;
-using System.Text.Json;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 using Ardalis.GuardClauses;
-
-using Blazored.LocalStorage;
 
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Logging;
 
 using PlanningPoker.Client.Components.Dialogs;
+using PlanningPoker.Client.Services;
 
 using Radzen;
 
@@ -27,7 +24,7 @@ namespace PlanningPoker.Client.Pages
         public DialogService DialogService { get; set; }
 
         [Inject]
-        public ILocalStorageService LocalStorageService { get; set; }
+        public IPlayerService PlayerService { get; set; }
 
         public string RoomId { get; set; }
 
@@ -39,11 +36,11 @@ namespace PlanningPoker.Client.Pages
             //NavigationManager.NavigateTo($"/room/{tableId}");
         }
 
-        void OnTableCreationSubmit() => this.NavigationManager.NavigateTo("/create");
+        public void OnTableCreationSubmit() => this.NavigationManager.NavigateTo("/create");
 
         protected override async Task OnInitializedAsync()
         {
-            if (!await LocalStorageService.ContainKeyAsync("username"))
+            if (!await this.PlayerService.CheckIfUsernameHasBeenEntered())
             {
                 this.Logger.LogInformation("Missing username, prompting the user to enter one.");
                 var opts = new DialogOptions
@@ -54,7 +51,7 @@ namespace PlanningPoker.Client.Pages
                 };
 
                 var userName = await DialogService.OpenAsync<UsernameDialog>("Username", null, opts);
-                await this.LocalStorageService.SetItemAsStringAsync("username", userName);
+                await this.PlayerService.SaveUsername(userName);
             }
         }
     }

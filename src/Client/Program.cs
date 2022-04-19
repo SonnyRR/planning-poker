@@ -1,20 +1,10 @@
 using System;
-using System.Net.Http;
-using System.Text.Json;
 using System.Threading.Tasks;
 
-using Blazored.LocalStorage;
-
-using FluentValidation;
-
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.Extensions.DependencyInjection;
 
-using PlanningPoker.Client.Models;
-using PlanningPoker.Client.Services;
+using PlanningPoker.Client.Extensions;
 using PlanningPoker.SharedKernel.Extensions;
-
-using Radzen;
 
 using Serilog;
 
@@ -32,23 +22,7 @@ namespace PlanningPoker.Client
 
                 builder.RootComponents.Add<App>("#app");
 
-                builder.Services.AddScoped(_ => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-                builder.Services.AddScoped<DialogService>();
-                builder.Services.AddScoped<NotificationService>();
-                builder.Services.AddScoped<TooltipService>();
-                builder.Services.AddScoped<ContextMenuService>();
-                builder.Services.AddScoped<IPlayerService, PlayerService>();
-
-                builder.Services.AddValidatorsFromAssemblyContaining<TableMetadataValidator>();
-
-                builder.Services.AddBlazoredLocalStorage(config =>
-                {
-                    config.JsonSerializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase;
-                    config.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
-                    config.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
-                    config.JsonSerializerOptions.ReadCommentHandling = JsonCommentHandling.Skip;
-                    config.JsonSerializerOptions.WriteIndented = false;
-                });
+                builder.Services.AddClientLayer();
 
                 await builder.Build().RunAsync();
             }

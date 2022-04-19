@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
 using PlanningPoker.Client.Models;
+using PlanningPoker.Client.Services;
 using PlanningPoker.SharedKernel.Extensions;
 
 using Radzen;
@@ -36,6 +37,7 @@ namespace PlanningPoker.Client
                 builder.Services.AddScoped<NotificationService>();
                 builder.Services.AddScoped<TooltipService>();
                 builder.Services.AddScoped<ContextMenuService>();
+                builder.Services.AddScoped<IPlayerService, PlayerService>();
 
                 builder.Services.AddValidatorsFromAssemblyContaining<TableMetadataValidator>();
 

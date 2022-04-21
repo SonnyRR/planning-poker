@@ -6,9 +6,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 using PlanningPoker.SharedKernel.Enrichers;
 
-namespace PlanningPoker.SharedKernel
+namespace PlanningPoker.SharedKernel.Extensions
 {
-    public static class DependencyInjection
+    public static class IServiceCollectionExtensions
     {
         public static IServiceCollection AddSharedKernelServices(this IServiceCollection services)
         {

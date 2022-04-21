@@ -1,18 +1,15 @@
 
-using System.Collections.Generic;
-using System.Net.Mime;
-
 using CorrelationId;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+using PlanningPoker.Server.Extensions;
 using PlanningPoker.Server.Hubs;
-using PlanningPoker.SharedKernel;
+using PlanningPoker.SharedKernel.Extensions;
 
 using Serilog;
 
@@ -29,15 +26,8 @@ namespace PlanningPoker.Server
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
-            services.AddRazorPages();
             services.AddSharedKernelServices();
-            services.AddSignalR();
-            services.AddResponseCompression(opts =>
-                opts.MimeTypes = new List<string>(ResponseCompressionDefaults.MimeTypes)
-                {
-                    MediaTypeNames.Application.Octet
-                });
+            services.AddApiServices();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

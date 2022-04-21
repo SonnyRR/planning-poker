@@ -6,6 +6,8 @@
     <div class="col-lg-8 offset-lg-2">
         <RadzenCard>
             <RadzenTemplateForm TItem="TableMetadata" Data=@Table>
+                <FluentValidationValidator DisableAssemblyScanning=@true />
+
                 <RadzenFieldset Text="Create a new table">
                     <div class="row mb-5">
                         <div class="col-md-4">
@@ -13,11 +15,10 @@
                             <small>(3-10 characters)</small>
                         </div>
                         <div class="col">
-                            <RadzenTextBox Name="TableName" class="w-100" />
-                            @*<RadzenLengthValidator Component="TableName" Min="3" Text="placeholder" class="validator"/>
-                                <RadzenLengthValidator Component="TableName" Max="10" Text="placeholder" class="validator" />*@
-                            <FluentValidationValidator DisableAssemblyScanning=@true />
-                            <ValidationSummary />
+                            <RadzenTextBox Name="TableName" class="w-100" @bind-Value=@Table.Name />
+                            <div class="rz-message rz-messages-error">
+                                <ValidationMessage For="@(() => Table.Name)"/>
+                            </div>
 
                         </div>
                     </div>
@@ -27,7 +28,16 @@
                             <small>(3-10 characters)</small>
                         </div>
                         <div class="col">
-                            <RadzenDropDown AllowClear="true" TValue="string" Class="w-100"></RadzenDropDown>
+                            <RadzenDropDown 
+                                Class="w-100" 
+                                AllowClear="true"
+                                @bind-Value=@Table.Code
+                                Data=@TestingValues ValueProperty=@nameof(DropdownEntry.B)
+                                TextProperty=@nameof(DropdownEntry.A)>
+                            </RadzenDropDown>
+                            <div class="rz-message rz-messages-error">
+                                <ValidationMessage For="@(() => Table.Code)"/>
+                            </div>
                         </div>
                     </div>
                     <RadzenButton ButtonType="ButtonType.Submit" Text="Submit"></RadzenButton>

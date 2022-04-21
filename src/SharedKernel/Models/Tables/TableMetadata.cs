@@ -11,7 +11,7 @@ namespace PlanningPoker.Client.Models
         {
         }
 
-        public TableMetadata(string name, string code)
+        public TableMetadata(string name, int code)
         {
             this.Name = name;
             this.Code = code;
@@ -19,7 +19,7 @@ namespace PlanningPoker.Client.Models
 
         public string Name { get; set; }
 
-        public string Code { get; set; }
+        public int Code { get; set; }
 
         // TODO: Add remaining properties.
     }
@@ -28,7 +28,8 @@ namespace PlanningPoker.Client.Models
     {
         public TableMetadataValidator()
         {
-            RuleFor(tm => tm.Name).NotEmpty();
+            RuleFor(tm => tm.Name).NotEmpty().MinimumLength(3);
+            RuleFor(tm => tm.Code).NotEmpty();
         }
     }
 }

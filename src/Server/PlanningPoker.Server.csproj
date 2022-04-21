@@ -21,7 +21,9 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\..\PlanningPoker.Persistence\PlanningPoker.Persistence.csproj" />
         <ProjectReference Include="..\Client\PlanningPoker.Client.csproj" />
+        <ProjectReference Include="..\SharedKernel\PlanningPoker.SharedKernel.csproj" />
     </ItemGroup>
 
     <ProjectExtensions>

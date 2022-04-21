@@ -15,8 +15,10 @@ using Microsoft.Extensions.Primitives;
 using OpenIddict.Abstractions;
 using OpenIddict.Server.AspNetCore;
 
+using PlanningPoker.Persistence.Entities;
 using PlanningPoker.Server.Models.View;
 using PlanningPoker.Server.Utilities;
+using PlanningPoker.SharedKernel.Extensions;
 
 using static OpenIddict.Abstractions.OpenIddictConstants;
 
@@ -27,15 +29,15 @@ namespace PlanningPoker.Server.Controllers
         private readonly IOpenIddictApplicationManager _applicationManager;
         private readonly IOpenIddictAuthorizationManager _authorizationManager;
         private readonly IOpenIddictScopeManager _scopeManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<User> _signInManager;
+        private readonly UserManager<User> _userManager;
 
         public AuthorizationController(
             IOpenIddictApplicationManager applicationManager,
             IOpenIddictAuthorizationManager authorizationManager,
             IOpenIddictScopeManager scopeManager,
-            SignInManager<ApplicationUser> signInManager,
-            UserManager<ApplicationUser> userManager)
+            SignInManager<User> signInManager,
+            UserManager<User> userManager)
         {
             _applicationManager = applicationManager;
             _authorizationManager = authorizationManager;
@@ -86,12 +88,12 @@ namespace PlanningPoker.Server.Controllers
                 if (request.HasPrompt(Prompts.None))
                 {
                     return Forbid(
-                        authenticationSchemes: OpenIddictServerAspNetCoreDefaults.AuthenticationScheme,
                         properties: new AuthenticationProperties(new Dictionary<string, string>
                         {
                             [OpenIddictServerAspNetCoreConstants.Properties.Error] = Errors.LoginRequired,
                             [OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] = "The user is not logged in."
-                        }));
+                        }),
+                        authenticationSchemes: OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
                 }
 
                 return Challenge(

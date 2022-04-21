@@ -7,11 +7,10 @@ using Blazored.LocalStorage;
 using FluentValidation;
 
 using Microsoft.Extensions.DependencyInjection;
-
-using PlanningPoker.Client.Models;
 using PlanningPoker.Client.Services;
 
 using Radzen;
+using PlanningPoker.SharedKernel.Models.Tables;
 
 namespace PlanningPoker.Client.Extensions
 {

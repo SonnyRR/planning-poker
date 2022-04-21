@@ -1,4 +1,7 @@
-﻿<RadzenCard>
+﻿@using Blazored.FluentValidation
+@using PlanningPoker.SharedKernel.Models.Tables
+
+<RadzenCard>
     <p class="lead text-center">Join an existing poker table or create a new one:</p>
     <div class="row my-2">
         <div class="col-lg-5 col-md-12 d-flex justify-content-center">
@@ -10,10 +13,13 @@
     </div>
     @if (ShowTableIdentifierInput)
     {
-        <RadzenTemplateForm class="my-3" TItem="string" Data=@TableId Submit=@OnValidSubmitAsync InvalidSubmit=@OnInvalidSubmit>
+        <RadzenTemplateForm class="my-3" TItem=@JoinExistingTableRequest Data=@JoinTableParameters Submit=@OnValidSubmitAsync InvalidSubmit=@OnInvalidSubmit>
+            <FluentValidationValidator DisableAssemblyScanning=@true />
+
             <div class="row">
                 <div class="col-lg-9 col-md-12 d-flex justify-content-center">
-                    <RadzenTextBox Name="RoomIdInput" @bind-Value=@TableId Placeholder="Room code..." Class="w-100" />
+                    <RadzenTextBox Name="RoomIdInput" @bind-Value=@JoinTableParameters.TableCode Placeholder="Table code..." Class="w-100" />
+
                 </div>
                 <div class="col-lg-3 col-md-12 mt-3 mt-lg-0 d-flex justify-content-center">
                     <RadzenButton class="w-100" ButtonStyle="ButtonStyle.Primary" Text="Enter" ButtonType="ButtonType.Submit" />
@@ -21,8 +27,9 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <RadzenRequiredValidator Component="RoomIdInput" Text="Room code is required." />
-                    <RadzenRegexValidator Component="RoomIdInput" Text="Room code format is not valid." Pattern="\d{5}" />
+                    <div class="rz-message rz-messages-error">
+                        <ValidationMessage For="@(() => JoinTableParameters.TableCode)" />
+                    </div>
                 </div>
             </div>
         </RadzenTemplateForm>

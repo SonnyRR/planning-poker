@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 
 using PlanningPoker.Client.Components.Dialogs;
 using PlanningPoker.Client.Services;
+using PlanningPoker.SharedKernel.Models.Tables;
 
 using Radzen;
 
@@ -30,9 +31,9 @@ namespace PlanningPoker.Client.Pages
 
         public bool ShowRoomIdentifierInput { get; set; }
 
-        public void JoinExistingTable(string tableId)
+        public void JoinExistingTable(JoinExistingTableRequest joinTableParameters)
         {
-            Guard.Against.NullOrWhiteSpace(tableId, nameof(tableId));
+            Guard.Against.Null(joinTableParameters, nameof(joinTableParameters));
             //NavigationManager.NavigateTo($"/room/{tableId}");
         }
 

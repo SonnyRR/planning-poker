@@ -6,6 +6,8 @@ using Ardalis.GuardClauses;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Logging;
 
+using PlanningPoker.SharedKernel.Models.Tables;
+
 using Radzen;
 
 namespace PlanningPoker.Client.Components
@@ -23,10 +25,10 @@ namespace PlanningPoker.Client.Components
 
         public bool ShowTableIdentifierInput { get; set; }
 
-        public string TableId { get; set; }
+        public JoinExistingTableRequest JoinTableParameters { get; set; } = new();
 
         [Parameter]
-        public EventCallback<string> TableIdChanged { get; set; }
+        public EventCallback<JoinExistingTableRequest> TableIdChanged { get; set; }
 
         public void OnInvalidSubmit(FormInvalidSubmitEventArgs args)
         {
@@ -41,8 +43,8 @@ namespace PlanningPoker.Client.Components
 
         public async Task OnValidSubmitAsync()
         {
-            this.Logger.LogDebug("Attempting to join table {TableId}", this.TableId);
-            await this.TableIdChanged.InvokeAsync(this.TableId);
+            this.Logger.LogDebug("Attempting to join table {TableId}", this.JoinTableParameters.TableCode);
+            await this.TableIdChanged.InvokeAsync(this.JoinTableParameters);
         }
     }
 }

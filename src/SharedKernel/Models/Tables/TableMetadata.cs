@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace PlanningPoker.Client.Models
+namespace PlanningPoker.SharedKernel.Models.Tables
 {
     /// <summary>
     /// Represents the information about a given poker table.

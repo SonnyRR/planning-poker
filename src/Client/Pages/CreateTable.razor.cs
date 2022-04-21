@@ -2,8 +2,7 @@
 
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Logging;
-
-using PlanningPoker.Client.Models;
+using PlanningPoker.SharedKernel.Models.Tables;
 
 namespace PlanningPoker.Client.Pages
 {

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
@@ -7,8 +7,9 @@ using PlanningPoker.SharedKernel.Extensions;
 
 using Serilog;
 
-namespace PlanningPoker.BFF
+namespace PlanningPoker.OIDC
 {
+
     public static class Program
     {
         public static void Main(string[] args)

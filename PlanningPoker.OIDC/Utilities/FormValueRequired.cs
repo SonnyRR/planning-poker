@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.ActionConstraints;
 using Microsoft.AspNetCore.Routing;
 
-namespace PlanningPoker.Server.Utilities
+namespace PlanningPoker.OIDC.Utilities
 {
     public sealed class FormValueRequiredAttribute : ActionMethodSelectorAttribute
     {

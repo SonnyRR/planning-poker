@@ -2,7 +2,7 @@
 
 using Microsoft.AspNetCore.SignalR;
 
-namespace PlanningPoker.Server.Hubs
+namespace PlanningPoker.BFF.Hubs
 {
     public sealed class PokerHub : Hub
     {

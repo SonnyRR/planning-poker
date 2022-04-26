@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace PlanningPoker.BFF.Models.View
+namespace PlanningPoker.OIDC.Models.View
 {
     public sealed class LogoutViewModel
     {

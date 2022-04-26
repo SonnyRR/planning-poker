@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PlanningPoker.BFF.Models.View
+namespace PlanningPoker.OIDC.Models.View
 {
     public sealed class AuthorizeViewModel
     {

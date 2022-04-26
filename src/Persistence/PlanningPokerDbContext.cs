@@ -7,9 +7,9 @@ using PlanningPoker.Persistence.Extensions;
 
 namespace PlanningPoker.Persistence
 {
-    public sealed class PlanningPokerContext : IdentityDbContext<User, Role, Guid>
+    public sealed class PlanningPokerDbContext : IdentityDbContext<User, Role, Guid>
     {
-        public PlanningPokerContext(DbContextOptions options)
+        public PlanningPokerDbContext(DbContextOptions options)
             : base(options)
         {
         }

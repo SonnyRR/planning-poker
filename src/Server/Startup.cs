@@ -1,3 +1,4 @@
+using System;
 
 using CorrelationId;
 
@@ -7,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+using PlanningPoker.Persistence.Extensions;
 using PlanningPoker.Server.Extensions;
 using PlanningPoker.Server.Hubs;
 using PlanningPoker.SharedKernel.Extensions;
@@ -23,12 +25,6 @@ namespace PlanningPoker.Server
         }
 
         public IConfiguration Configuration { get; }
-
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddSharedKernelServices();
-            services.AddApiServices();
-        }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -60,6 +56,13 @@ namespace PlanningPoker.Server
                 endpoints.MapHub<PokerHub>("/poker");
                 endpoints.MapFallbackToFile("index.html");
             });
+        }
+
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddSharedKernelServices();
+            services.AddApiServices(this.Configuration);
+            services.AddPersistanceServices();
         }
     }
 }

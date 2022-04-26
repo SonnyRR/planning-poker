@@ -26,11 +26,11 @@ namespace PlanningPoker.Server.Controllers
 {
     public class AuthorizationController : Controller
     {
-        private readonly IOpenIddictApplicationManager _applicationManager;
-        private readonly IOpenIddictAuthorizationManager _authorizationManager;
-        private readonly IOpenIddictScopeManager _scopeManager;
-        private readonly SignInManager<User> _signInManager;
-        private readonly UserManager<User> _userManager;
+        private readonly IOpenIddictApplicationManager applicationManager;
+        private readonly IOpenIddictAuthorizationManager authorizationManager;
+        private readonly IOpenIddictScopeManager scopeManager;
+        private readonly SignInManager<User> signInManager;
+        private readonly UserManager<User> userManager;
 
         public AuthorizationController(
             IOpenIddictApplicationManager applicationManager,
@@ -39,11 +39,11 @@ namespace PlanningPoker.Server.Controllers
             SignInManager<User> signInManager,
             UserManager<User> userManager)
         {
-            _applicationManager = applicationManager;
-            _authorizationManager = authorizationManager;
-            _scopeManager = scopeManager;
-            _signInManager = signInManager;
-            _userManager = userManager;
+            this.applicationManager = applicationManager;
+            this.authorizationManager = authorizationManager;
+            this.scopeManager = scopeManager;
+            this.signInManager = signInManager;
+            this.userManager = userManager;
         }
 
         [HttpGet("~/connect/authorize")]
@@ -80,7 +80,7 @@ namespace PlanningPoker.Server.Controllers
             // If a max_age parameter was provided, ensure that the cookie is not too old.
             // If the user principal can't be extracted or the cookie is too old, redirect the user to the login page.
             var result = await HttpContext.AuthenticateAsync(IdentityConstants.ApplicationScheme);
-            if (result == null || !result.Succeeded || (request.MaxAge != null && result.Properties?.IssuedUtc != null &&
+            if (result?.Succeeded != true || (request.MaxAge != null && result.Properties?.IssuedUtc != null &&
                 DateTimeOffset.UtcNow - result.Properties.IssuedUtc > TimeSpan.FromSeconds(request.MaxAge.Value)))
             {
                 // If the client application requested promptless authentication,
@@ -106,62 +106,62 @@ namespace PlanningPoker.Server.Controllers
             }
 
             // Retrieve the profile of the logged in user.
-            var user = await _userManager.GetUserAsync(result.Principal) ??
+            var user = await userManager.GetUserAsync(result.Principal) ??
                 throw new InvalidOperationException("The user details cannot be retrieved.");
 
             // Retrieve the application details from the database.
-            var application = await _applicationManager.FindByClientIdAsync(request.ClientId) ??
+            var application = await applicationManager.FindByClientIdAsync(request.ClientId) ??
                 throw new InvalidOperationException("Details concerning the calling client application cannot be found.");
 
             // Retrieve the permanent authorizations associated with the user and the calling client application.
-            var authorizations = await _authorizationManager.FindAsync(
-                subject: await _userManager.GetUserIdAsync(user),
-                client: await _applicationManager.GetIdAsync(application),
+            var authorizations = await authorizationManager.FindAsync(
+                subject: await userManager.GetUserIdAsync(user),
+                client: await applicationManager.GetIdAsync(application),
                 status: Statuses.Valid,
                 type: AuthorizationTypes.Permanent,
                 scopes: request.GetScopes()).ToListAsync();
 
-            switch (await _applicationManager.GetConsentTypeAsync(application))
+            switch (await applicationManager.GetConsentTypeAsync(application))
             {
                 // If the consent is external (e.g when authorizations are granted by a sysadmin),
                 // immediately return an error if no authorization can be found in the database.
-                case ConsentTypes.External when !authorizations.Any():
+                case ConsentTypes.External when authorizations.Count == 0:
                     return Forbid(
-                        authenticationSchemes: OpenIddictServerAspNetCoreDefaults.AuthenticationScheme,
                         properties: new AuthenticationProperties(new Dictionary<string, string>
                         {
                             [OpenIddictServerAspNetCoreConstants.Properties.Error] = Errors.ConsentRequired,
                             [OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] =
                                 "The logged in user is not allowed to access this client application."
-                        }));
+                        }),
+                        authenticationSchemes: OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
 
                 // If the consent is implicit or if an authorization was found,
                 // return an authorization response without displaying the consent form.
                 case ConsentTypes.Implicit:
-                case ConsentTypes.External when authorizations.Any():
-                case ConsentTypes.Explicit when authorizations.Any() && !request.HasPrompt(Prompts.Consent):
-                    var principal = await _signInManager.CreateUserPrincipalAsync(user);
+                case ConsentTypes.External when authorizations.Count > 0:
+                case ConsentTypes.Explicit when authorizations.Count > 0 && !request.HasPrompt(Prompts.Consent):
+                    var principal = await signInManager.CreateUserPrincipalAsync(user);
 
                     // Note: in this sample, the granted scopes match the requested scope
                     // but you may want to allow the user to uncheck specific scopes.
                     // For that, simply restrict the list of scopes before calling SetScopes.
                     principal.SetScopes(request.GetScopes());
-                    principal.SetResources(await _scopeManager.ListResourcesAsync(principal.GetScopes()).ToListAsync());
+                    principal.SetResources(await scopeManager.ListResourcesAsync(principal.GetScopes()).ToListAsync());
 
                     // Automatically create a permanent authorization to avoid requiring explicit consent
                     // for future authorization or token requests containing the same scopes.
                     var authorization = authorizations.LastOrDefault();
                     if (authorization == null)
                     {
-                        authorization = await _authorizationManager.CreateAsync(
+                        authorization = await authorizationManager.CreateAsync(
                             principal: principal,
-                            subject: await _userManager.GetUserIdAsync(user),
-                            client: await _applicationManager.GetIdAsync(application),
+                            subject: await userManager.GetUserIdAsync(user),
+                            client: await applicationManager.GetIdAsync(application),
                             type: AuthorizationTypes.Permanent,
                             scopes: principal.GetScopes());
                     }
 
-                    principal.SetAuthorizationId(await _authorizationManager.GetIdAsync(authorization));
+                    principal.SetAuthorizationId(await authorizationManager.GetIdAsync(authorization));
 
                     foreach (var claim in principal.Claims)
                     {
@@ -187,7 +187,7 @@ namespace PlanningPoker.Server.Controllers
                 default:
                     return View(new AuthorizeViewModel
                     {
-                        ApplicationName = await _applicationManager.GetDisplayNameAsync(application),
+                        ApplicationName = await applicationManager.GetDisplayNameAsync(application),
                         Scope = request.Scope
                     });
             }
@@ -201,17 +201,17 @@ namespace PlanningPoker.Server.Controllers
                 throw new InvalidOperationException("The OpenID Connect request cannot be retrieved.");
 
             // Retrieve the profile of the logged in user.
-            var user = await _userManager.GetUserAsync(User) ??
+            var user = await userManager.GetUserAsync(User) ??
                 throw new InvalidOperationException("The user details cannot be retrieved.");
 
             // Retrieve the application details from the database.
-            var application = await _applicationManager.FindByClientIdAsync(request.ClientId) ??
+            var application = await applicationManager.FindByClientIdAsync(request.ClientId) ??
                 throw new InvalidOperationException("Details concerning the calling client application cannot be found.");
 
             // Retrieve the permanent authorizations associated with the user and the calling client application.
-            var authorizations = await _authorizationManager.FindAsync(
-                subject: await _userManager.GetUserIdAsync(user),
-                client: await _applicationManager.GetIdAsync(application),
+            var authorizations = await authorizationManager.FindAsync(
+                subject: await userManager.GetUserIdAsync(user),
+                client: await applicationManager.GetIdAsync(application),
                 status: Statuses.Valid,
                 type: AuthorizationTypes.Permanent,
                 scopes: request.GetScopes()).ToListAsync();
@@ -219,40 +219,40 @@ namespace PlanningPoker.Server.Controllers
             // Note: the same check is already made in the other action but is repeated
             // here to ensure a malicious user can't abuse this POST-only endpoint and
             // force it to return a valid response without the external authorization.
-            if (!authorizations.Any() && await _applicationManager.HasConsentTypeAsync(application, ConsentTypes.External))
+            if (authorizations.Count == 0 && await applicationManager.HasConsentTypeAsync(application, ConsentTypes.External))
             {
                 return Forbid(
-                    authenticationSchemes: OpenIddictServerAspNetCoreDefaults.AuthenticationScheme,
                     properties: new AuthenticationProperties(new Dictionary<string, string>
                     {
                         [OpenIddictServerAspNetCoreConstants.Properties.Error] = Errors.ConsentRequired,
                         [OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] =
                             "The logged in user is not allowed to access this client application."
-                    }));
+                    }),
+                    authenticationSchemes: OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
             }
 
-            var principal = await _signInManager.CreateUserPrincipalAsync(user);
+            var principal = await signInManager.CreateUserPrincipalAsync(user);
 
             // Note: in this sample, the granted scopes match the requested scope
             // but you may want to allow the user to uncheck specific scopes.
             // For that, simply restrict the list of scopes before calling SetScopes.
             principal.SetScopes(request.GetScopes());
-            principal.SetResources(await _scopeManager.ListResourcesAsync(principal.GetScopes()).ToListAsync());
+            principal.SetResources(await scopeManager.ListResourcesAsync(principal.GetScopes()).ToListAsync());
 
             // Automatically create a permanent authorization to avoid requiring explicit consent
             // for future authorization or token requests containing the same scopes.
             var authorization = authorizations.LastOrDefault();
             if (authorization == null)
             {
-                authorization = await _authorizationManager.CreateAsync(
+                authorization = await authorizationManager.CreateAsync(
                     principal: principal,
-                    subject: await _userManager.GetUserIdAsync(user),
-                    client: await _applicationManager.GetIdAsync(application),
+                    subject: await userManager.GetUserIdAsync(user),
+                    client: await applicationManager.GetIdAsync(application),
                     type: AuthorizationTypes.Permanent,
                     scopes: principal.GetScopes());
             }
 
-            principal.SetAuthorizationId(await _authorizationManager.GetIdAsync(authorization));
+            principal.SetAuthorizationId(await authorizationManager.GetIdAsync(authorization));
 
             foreach (var claim in principal.Claims)
             {
@@ -278,17 +278,17 @@ namespace PlanningPoker.Server.Controllers
             // Ask ASP.NET Core Identity to delete the local and external cookies created
             // when the user agent is redirected from the external identity provider
             // after a successful authentication flow (e.g Google or Facebook).
-            await _signInManager.SignOutAsync();
+            await signInManager.SignOutAsync();
 
             // Returning a SignOutResult will ask OpenIddict to redirect the user agent
             // to the post_logout_redirect_uri specified by the client application or to
             // the RedirectUri specified in the authentication properties if none was set.
             return SignOut(
-                authenticationSchemes: OpenIddictServerAspNetCoreDefaults.AuthenticationScheme,
                 properties: new AuthenticationProperties
                 {
                     RedirectUri = "/"
-                });
+                },
+                authenticationSchemes: OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
         }
 
         [HttpPost("~/connect/token"), Produces("application/json")]
@@ -306,28 +306,28 @@ namespace PlanningPoker.Server.Controllers
                 // Note: if you want to automatically invalidate the authorization code/refresh token
                 // when the user password/roles change, use the following line instead:
                 // var user = _signInManager.ValidateSecurityStampAsync(info.Principal);
-                var user = await _userManager.GetUserAsync(principal);
+                var user = await userManager.GetUserAsync(principal);
                 if (user == null)
                 {
                     return Forbid(
-                        authenticationSchemes: OpenIddictServerAspNetCoreDefaults.AuthenticationScheme,
                         properties: new AuthenticationProperties(new Dictionary<string, string>
                         {
                             [OpenIddictServerAspNetCoreConstants.Properties.Error] = Errors.InvalidGrant,
                             [OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] = "The token is no longer valid."
-                        }));
+                        }),
+                        authenticationSchemes: OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
                 }
 
                 // Ensure the user is still allowed to sign in.
-                if (!await _signInManager.CanSignInAsync(user))
+                if (!await signInManager.CanSignInAsync(user))
                 {
                     return Forbid(
-                        authenticationSchemes: OpenIddictServerAspNetCoreDefaults.AuthenticationScheme,
                         properties: new AuthenticationProperties(new Dictionary<string, string>
                         {
                             [OpenIddictServerAspNetCoreConstants.Properties.Error] = Errors.InvalidGrant,
                             [OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] = "The user is no longer allowed to sign in."
-                        }));
+                        }),
+                        authenticationSchemes: OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
                 }
 
                 foreach (var claim in principal.Claims)
@@ -342,7 +342,7 @@ namespace PlanningPoker.Server.Controllers
             throw new InvalidOperationException("The specified grant type is not supported.");
         }
 
-        private IEnumerable<string> GetDestinations(Claim claim, ClaimsPrincipal principal)
+        private static IEnumerable<string> GetDestinations(Claim claim, ClaimsPrincipal principal)
         {
             // Note: by default, claims are NOT automatically included in the access and identity tokens.
             // To allow OpenIddict to serialize them, you must attach them a destination, that specifies

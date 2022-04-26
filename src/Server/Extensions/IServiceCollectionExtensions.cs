@@ -6,7 +6,11 @@ using Ardalis.GuardClauses;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+
+using PlanningPoker.Persistence;
+using PlanningPoker.SharedKernel.Models.Configuration;
 
 using Quartz;
 
@@ -16,22 +20,26 @@ namespace PlanningPoker.Server.Extensions
 {
     public static class IServiceCollectionExtensions
     {
-        public static IServiceCollection AddApiServices(this IServiceCollection services)
+        public static IServiceCollection AddApiServices(this IServiceCollection services, IConfiguration configuration)
         {
             Guard.Against.Null(services, nameof(services));
+            Guard.Against.Null(configuration, nameof(configuration));
 
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddSignalR();
+
             services.AddResponseCompression(opts =>
                 opts.MimeTypes = new List<string>(ResponseCompressionDefaults.MimeTypes)
                 {
                     MediaTypeNames.Application.Octet
-                });
+                }
+            );
 
             services.AddQuartz();
             services.AddOpenIdDict();
             services.AddJwtClaims();
+            services.Configure<PlanningPokerOptions>(configuration);
 
             return services;
         }
@@ -46,9 +54,7 @@ namespace PlanningPoker.Server.Extensions
                 {
                     // Configure OpenIddict to use the Entity Framework Core stores and models.
                     // Note: call ReplaceDefaultEntities() to replace the default OpenIddict entities.
-
-                    //options.UseEntityFrameworkCore()
-                    //       .UseDbContext<ApplicationDbContext>();
+                    options.UseEntityFrameworkCore().UseDbContext<PlanningPokerDbContext>();
 
                     // Enable Quartz.NET integration.
                     options.UseQuartz();

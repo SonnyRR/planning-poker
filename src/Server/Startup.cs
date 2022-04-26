@@ -1,4 +1,3 @@
-using System;
 
 using CorrelationId;
 
@@ -41,13 +40,15 @@ namespace PlanningPoker.Server
                 app.UseHsts();
             }
 
+            app.UseHttpsRedirection();
             app.UseCorrelationId();
             app.UseSerilogIngestion();
             app.UseSerilogRequestLogging();
             app.UseBlazorFrameworkFiles();
             app.UseStaticFiles();
-            app.UseHttpsRedirection();
             app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

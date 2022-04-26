@@ -16,11 +16,15 @@ namespace PlanningPoker.Persistence.Extensions
 
             using var serviceProvider = services.BuildServiceProvider();
 
-            var opts = serviceProvider.GetService<IOptions<PlanningPokerOptions>>()?.Value;
-            Guard.Against.Null(opts, nameof(opts));
-            Guard.Against.NullOrEmpty(opts.ConnectionStrings.Main, nameof(opts.ConnectionStrings.Main));
+            var applicationOptions = serviceProvider.GetService<IOptions<PlanningPokerOptions>>()?.Value;
+            Guard.Against.Null(applicationOptions, nameof(applicationOptions));
+            Guard.Against.NullOrEmpty(applicationOptions.ConnectionStrings.Main, nameof(applicationOptions.ConnectionStrings.Main));
 
-            services.AddDbContext<PlanningPokerDbContext>(x => x.UseSqlServer(opts.ConnectionStrings.Main));
+            services.AddDbContext<PlanningPokerDbContext>(options =>
+            {
+                options.UseSqlServer(applicationOptions.ConnectionStrings.Main);
+                options.UseOpenIddict();
+            });
 
             return services;
         }

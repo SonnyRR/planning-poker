@@ -382,6 +382,5 @@ namespace PlanningPoker.Server.Controllers
                     yield break;
             }
         }
-
     }
 }

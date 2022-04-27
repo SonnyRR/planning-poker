@@ -1,4 +1,6 @@
-﻿namespace PlanningPoker.SharedKernel.Models.Configuration
+﻿using System.Collections.Generic;
+
+namespace PlanningPoker.SharedKernel.Models.Configuration
 {
     public sealed class OidcConfiguration
     {
@@ -16,7 +18,7 @@
 
         public bool SaveTokens { get; set; }
 
-        public string[] Scopes { get; set; }
+        public IList<string> Scopes { get; set; } = new List<string>();
 
         public string SignInScheme { get; set; }
     }

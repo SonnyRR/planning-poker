@@ -17,6 +17,16 @@
                         </RadzenLabel>
                     </div>
                     <div class="col-6 text-right">
+                        <h2>testing</h2>
+                        <AuthorizeView>
+                            <Authorized>
+                                Hello!
+                                <button class="nav-link btn btn-link">Log out</button>
+                            </Authorized>
+                            <NotAuthorized>
+                                <a href="authentication/login">Log in</a>
+                            </NotAuthorized>
+                        </AuthorizeView>
                     </div>
                 </div>
             </ChildContent>

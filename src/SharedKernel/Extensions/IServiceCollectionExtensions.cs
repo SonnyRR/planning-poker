@@ -1,4 +1,6 @@
-﻿using Ardalis.GuardClauses;
+﻿using System;
+
+using Ardalis.GuardClauses;
 
 using CorrelationId.DependencyInjection;
 

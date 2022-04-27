@@ -1,9 +1,7 @@
 using System;
 using System.Threading.Tasks;
 
-using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.Extensions.DependencyInjection;
 
 using PlanningPoker.Client.Extensions;
 using PlanningPoker.SharedKernel.Extensions;
@@ -21,14 +19,8 @@ namespace PlanningPoker.Client
                 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
                 builder.Logging.AddSerilog(builder.Configuration);
-
                 builder.RootComponents.Add<App>("#app");
-
-                builder.Services.AddHttpClient("PlanningPoker.Api")
-                    .ConfigureHttpClient(client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
-                    .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
-
-                builder.Services.AddClientLayer();
+                builder.Services.AddClientLayer(builder.HostEnvironment);
 
                 await builder.Build().RunAsync();
             }

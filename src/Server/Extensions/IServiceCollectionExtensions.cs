@@ -56,7 +56,7 @@ namespace PlanningPoker.BFF.Extensions
             Guard.Against.Null(services, nameof(services));
 
             using var serviceProvider = services.BuildServiceProvider();
-            var oidcConfiguration = serviceProvider.GetService<IOptions<OidcConfiguration>>()?.Value;
+            var oidcConfiguration = serviceProvider.GetService<IOptions<PlanningPokerOptions>>()?.Value?.OidcConfiguration;
             Guard.Against.Null(oidcConfiguration, nameof(oidcConfiguration));
 
             services.AddAuthentication(options =>

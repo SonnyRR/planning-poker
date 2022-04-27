@@ -46,8 +46,8 @@ namespace PlanningPoker.Identity.Extensions
             services.AddJwtClaims();
             services.AddAuthentication();
             services.AddAuthorization();
-            services.AddEndpointsApiExplorer();
-            services.AddSwaggerGen();
+            //services.AddEndpointsApiExplorer();
+            //services.AddSwaggerGen();
 
             return services;
         }

@@ -37,8 +37,4 @@
       <ProjectReference Include="..\SharedKernel\PlanningPoker.SharedKernel.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Pages\" />
-    </ItemGroup>
-
 </Project>

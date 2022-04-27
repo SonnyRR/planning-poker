@@ -1,4 +1,6 @@
-﻿using Serilog.Core;
+﻿using System;
+
+using Serilog.Core;
 using Serilog.Events;
 
 namespace PlanningPoker.SharedKernel.Enrichers

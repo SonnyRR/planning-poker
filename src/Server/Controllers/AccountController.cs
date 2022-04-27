@@ -19,8 +19,8 @@ namespace PlanningPoker.BFF.Controllers
             });
         }
 
-        [ValidateAntiForgeryToken]
-        [Authorize]
+		[ValidateAntiForgeryToken]
+		[Authorize]
         [HttpPost("Logout")]
         public IActionResult Logout()
         {

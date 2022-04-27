@@ -4,12 +4,12 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:47389",
-      "sslPort": 44371
+      "applicationUrl": "http://localhost:5215",
+      "sslPort": 7215
     }
   },
   "profiles": {
-    "PlanningPoker.OIDC": {
+    "PlanningPoker.Identity - Development": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

@@ -7,7 +7,7 @@ using PlanningPoker.SharedKernel.Extensions;
 
 using Serilog;
 
-namespace PlanningPoker.OIDC
+namespace PlanningPoker.Identity
 {
 
     public static class Program

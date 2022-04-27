@@ -6,12 +6,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-using PlanningPoker.OIDC.Extensions;
+using PlanningPoker.Identity.Extensions;
 using PlanningPoker.SharedKernel.Extensions;
 
 using Serilog;
 
-namespace PlanningPoker.OIDC
+namespace PlanningPoker.Identity
 {
     public class Startup
     {

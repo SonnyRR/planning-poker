@@ -14,7 +14,7 @@ using PlanningPoker.Persistence.Entities;
 
 using static OpenIddict.Abstractions.OpenIddictConstants;
 
-namespace PlanningPoker.OIDC.Controllers
+namespace PlanningPoker.Identity.Controllers
 {
     public class UserInfoController : Controller
     {

@@ -5,7 +5,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace PlanningPoker.OIDC.Controllers
+namespace PlanningPoker.Identity.Controllers
 {
     [ApiController]
     [Route("[controller]")]

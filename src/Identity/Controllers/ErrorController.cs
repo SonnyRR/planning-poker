@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 
-using PlanningPoker.OIDC.Models.View;
+using PlanningPoker.Identity.Models.View;
 
-namespace PlanningPoker.OIDC.Controllers;
+namespace PlanningPoker.Identity.Controllers;
 
 public class ErrorController : Controller
 {

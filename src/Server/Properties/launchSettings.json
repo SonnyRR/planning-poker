@@ -24,7 +24,7 @@
         "ASPNETCORE_ENVIRONMENT": "Production"
       }
     },
-    "PlanningPoker.Server - Development": {
+    "PlanningPoker.BFF - Development": {
       "commandName": "Project",
       "launchBrowser": true,
       "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}",
@@ -34,7 +34,7 @@
       }
     },
 
-    "PlanningPoker.Server - Production": {
+    "PlanningPoker.BFF - Production": {
       "commandName": "Project",
       "launchBrowser": true,
       "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}",

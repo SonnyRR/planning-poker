@@ -6,6 +6,7 @@
 
     <ItemGroup>
         <PackageReference Include="Destructurama.Attributed" Version="3.0.0" />
+        <PackageReference Include="IdentityModel.AspNetCore" Version="4.2.0" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="6.0.4" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="6.0.4" />
         <PackageReference Include="NetEscapades.AspNetCore.SecurityHeaders" Version="0.16.1" />
@@ -27,10 +28,6 @@
         <ProjectReference Include="..\Client\PlanningPoker.Client.csproj" />
         <ProjectReference Include="..\Persistence\PlanningPoker.Persistence.csproj" />
         <ProjectReference Include="..\SharedKernel\PlanningPoker.SharedKernel.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Controllers\" />
     </ItemGroup>
 
     <ProjectExtensions>

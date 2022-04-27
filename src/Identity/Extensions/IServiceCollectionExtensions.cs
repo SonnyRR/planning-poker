@@ -1,27 +1,23 @@
-﻿using System.Collections.Generic;
-using System.Net.Mime;
-
-using Ardalis.GuardClauses;
-
+﻿using Ardalis.GuardClauses;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
 using PlanningPoker.Identity.Extensions;
+using PlanningPoker.Identity.Workers;
 using PlanningPoker.Persistence;
 using PlanningPoker.Persistence.Entities;
 using PlanningPoker.Persistence.Extensions;
 using PlanningPoker.SharedKernel.Models.Configuration;
-
 using Quartz;
-
+using System.Collections.Generic;
+using System.Net.Mime;
 using static OpenIddict.Abstractions.OpenIddictConstants;
 
 namespace PlanningPoker.Identity.Extensions
 {
-    public static class IServiceCollectionExtensions
+	public static class IServiceCollectionExtensions
     {
         public static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration configuration)
         {
@@ -46,8 +42,10 @@ namespace PlanningPoker.Identity.Extensions
             services.AddJwtClaims();
             services.AddAuthentication();
             services.AddAuthorization();
-            //services.AddEndpointsApiExplorer();
-            //services.AddSwaggerGen();
+			//services.AddEndpointsApiExplorer();
+			//services.AddSwaggerGen();
+
+			services.AddHostedService<ApplicationRegistrator>();
 
             return services;
         }

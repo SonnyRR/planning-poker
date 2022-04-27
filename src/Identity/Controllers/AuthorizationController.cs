@@ -46,7 +46,7 @@ public class AuthorizationController : Controller
         this.userManager = userManager;
     }
 
-    [HttpGet("~/connect/authorize")]
+    //[HttpGet("~/connect/authorize")]
     [HttpPost("~/connect/authorize")]
     [IgnoreAntiforgeryToken]
     public async Task<IActionResult> Authorize()

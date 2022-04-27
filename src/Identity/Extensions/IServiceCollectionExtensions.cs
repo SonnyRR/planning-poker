@@ -11,6 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 using PlanningPoker.Identity.Extensions;
 using PlanningPoker.Persistence;
+using PlanningPoker.Persistence.Entities;
+using PlanningPoker.Persistence.Extensions;
+using PlanningPoker.SharedKernel.Models.Configuration;
 
 using Quartz;
 
@@ -20,11 +23,14 @@ namespace PlanningPoker.Identity.Extensions
 {
     public static class IServiceCollectionExtensions
     {
-        public static IServiceCollection AddApiServices(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration configuration)
         {
             Guard.Against.Null(services, nameof(services));
             Guard.Against.Null(configuration, nameof(configuration));
 
+            services.Configure<PlanningPokerOptions>(configuration);
+            services.AddPersistanceServices();
+            services.AddIdentityConfiguration();
             services.AddControllersWithViews();
             services.AddRazorPages();
 
@@ -42,7 +48,7 @@ namespace PlanningPoker.Identity.Extensions
             services.AddAuthorization();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
-            
+
             return services;
         }
 
@@ -143,6 +149,18 @@ namespace PlanningPoker.Identity.Extensions
                 // For more information, visit https://aka.ms/aspaccountconf.
                 options.SignIn.RequireConfirmedAccount = false;
             });
+
+            return services;
+        }
+
+        public static IServiceCollection AddIdentityConfiguration(this IServiceCollection services)
+        {
+            Guard.Against.Null(services, nameof(services));
+
+            services.AddIdentity<User, Role>()
+                .AddEntityFrameworkStores<PlanningPokerDbContext>()
+                .AddDefaultTokenProviders()
+                .AddDefaultUI();
 
             return services;
         }

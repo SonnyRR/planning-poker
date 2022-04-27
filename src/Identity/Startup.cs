@@ -30,8 +30,10 @@ namespace PlanningPoker.Identity
             {
                 app.UseDeveloperExceptionPage();
                 app.UseWebAssemblyDebugging();
-                app.UseSwagger();
-                app.UseSwaggerUI();
+
+                // TODO: Conflicting API routes, need to fix them before enabling swagger.
+                //app.UseSwagger();
+                //app.UseSwaggerUI();
             }
             else
             {
@@ -59,7 +61,7 @@ namespace PlanningPoker.Identity
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSharedKernelServices();
-            services.AddApiServices(this.Configuration);
+            services.AddIdentityServices(this.Configuration);
         }
     }
 }

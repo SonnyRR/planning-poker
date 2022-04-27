@@ -64,7 +64,6 @@ namespace PlanningPoker.BFF
         {
             services.AddSharedKernelServices();
             services.AddApiServices(this.Configuration);
-            services.AddPersistanceServices();
         }
 
         private static HeaderPolicyCollection GetSecurityHeaderPolicy(bool isDev, string idpHost)

@@ -30,9 +30,6 @@ namespace PlanningPoker.BFF.Extensions
             Guard.Against.Null(configuration, nameof(configuration));
 
             services.Configure<PlanningPokerOptions>(configuration);
-            services.AddControllersWithViews(options => options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()));
-            services.AddRazorPages();
-            services.AddSignalR();
             services.AddHttpClient();
             services.AddOptions();
 
@@ -47,6 +44,9 @@ namespace PlanningPoker.BFF.Extensions
             services.AddReverseProxyConfig(configuration);
             services.AddAuthentication();
             services.AddAuthorization();
+            services.AddSignalR();
+            services.AddRazorPages();
+            services.AddControllersWithViews(options => options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()));
 
             return services;
         }

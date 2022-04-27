@@ -37,7 +37,7 @@ namespace PlanningPoker.Client.Extensions
 			services.AddScoped<ContextMenuService>();
 			services.AddScoped<IPlayerService, PlayerService>();
 			services.TryAddSingleton<AuthenticationStateProvider, HostAuthenticationStateProvider>();
-			//services.TryAddSingleton(sp => (HostAuthenticationStateProvider)sp.GetRequiredService<AuthenticationStateProvider>());
+			services.TryAddSingleton(sp => (HostAuthenticationStateProvider)sp.GetRequiredService<AuthenticationStateProvider>());
 			services.AddTransient<AuthorizedHandler>();
 			services.AddValidatorsFromAssemblyContaining<TableMetadataValidator>();
 

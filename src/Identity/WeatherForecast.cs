@@ -1,6 +1,6 @@
 using System;
 
-namespace PlanningPoker.OIDC
+namespace PlanningPoker.Identity
 {
     public class WeatherForecast
     {

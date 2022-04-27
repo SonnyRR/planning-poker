@@ -15,14 +15,14 @@ using Microsoft.Extensions.Primitives;
 using OpenIddict.Abstractions;
 using OpenIddict.Server.AspNetCore;
 
-using PlanningPoker.OIDC.Models.View;
-using PlanningPoker.OIDC.Utilities;
+using PlanningPoker.Identity.Models.View;
+using PlanningPoker.Identity.Utilities;
 using PlanningPoker.Persistence.Entities;
 using PlanningPoker.SharedKernel.Extensions;
 
 using static OpenIddict.Abstractions.OpenIddictConstants;
 
-namespace PlanningPoker.OIDC.Controllers;
+namespace PlanningPoker.Identity.Controllers;
 
 public class AuthorizationController : Controller
 {

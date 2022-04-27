@@ -9,13 +9,14 @@ using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
+using PlanningPoker.Identity.Extensions;
 using PlanningPoker.Persistence;
 
 using Quartz;
 
 using static OpenIddict.Abstractions.OpenIddictConstants;
 
-namespace PlanningPoker.OIDC.Extensions
+namespace PlanningPoker.Identity.Extensions
 {
     public static class IServiceCollectionExtensions
     {

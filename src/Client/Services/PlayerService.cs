@@ -24,17 +24,17 @@ namespace PlanningPoker.Client.Services
         /// <param name="localStorageService">The local storage service.</param>
         /// <param name="logger">Logger.</param>
         /// <exception cref="System.ArgumentNullException"></exception>
-        public PlayerService(ILocalStorageService localStorageService, ILogger<PlayerService> logger)
+        public PlayerService(ILogger<PlayerService> logger)
         {
-            Guard.Against.Null(localStorageService, nameof(localStorageService));
+            //Guard.Against.Null(localStorageService, nameof(localStorageService));
             Guard.Against.Null(logger, nameof(logger));
 
-            this.localStorageService = localStorageService;
+            //this.localStorageService = localStorageService;
             this.logger = logger;
         }
 
-        public ValueTask<bool> CheckIfUsernameHasBeenEntered(CancellationToken? cancellationToken = null)
-            => this.localStorageService.ContainKeyAsync(USERNAME_KEY, cancellationToken);
+		public ValueTask<bool> CheckIfUsernameHasBeenEntered(CancellationToken? cancellationToken = null)
+			=> ValueTask.FromResult(true);//this.localStorageService.ContainKeyAsync(USERNAME_KEY, cancellationToken);
 
         public ValueTask SaveUsername(string userName, CancellationToken? cancellationToken = null)
         {

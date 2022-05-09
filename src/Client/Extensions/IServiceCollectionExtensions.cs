@@ -41,14 +41,14 @@ namespace PlanningPoker.Client.Extensions
 			services.AddTransient<AuthorizedHandler>();
 			services.AddValidatorsFromAssemblyContaining<TableMetadataValidator>();
 
-			services.AddBlazoredLocalStorage(config =>
-			{
-				config.JsonSerializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase;
-				config.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
-				config.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
-				config.JsonSerializerOptions.ReadCommentHandling = JsonCommentHandling.Skip;
-				config.JsonSerializerOptions.WriteIndented = false;
-			});
+			//services.AddBlazoredLocalStorage(config =>
+			//{
+			//	config.JsonSerializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase;
+			//	config.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+			//	config.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+			//	config.JsonSerializerOptions.ReadCommentHandling = JsonCommentHandling.Skip;
+			//	config.JsonSerializerOptions.WriteIndented = false;
+			//});
 
 			services.AddHttpClient("default", client =>
 			{

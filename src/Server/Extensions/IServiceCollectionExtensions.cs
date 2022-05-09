@@ -28,6 +28,7 @@ namespace PlanningPoker.BFF.Extensions
 			Guard.Against.Null(configuration, nameof(configuration));
 
 			services.Configure<PlanningPokerOptions>(configuration);
+			services.AddAntiforgeryConfiguration();
 			services.AddHttpClient();
 			services.AddOptions();
 
@@ -38,7 +39,6 @@ namespace PlanningPoker.BFF.Extensions
 				}
 			);
 
-			services.AddAntiforgeryConfiguration();
 			services.AddReverseProxyConfiguration(configuration);
 			services.AddAuthentication();
 			services.AddAuthorization();

@@ -55,7 +55,7 @@ namespace PlanningPoker.BFF
                 endpoints.MapControllers();
                 endpoints.MapReverseProxy();
                 endpoints.MapHub<PokerHub>("/poker");
-                endpoints.MapFallbackToFile("index.html");
+                endpoints.MapFallbackToFile("/_Host");
             });
         }
 

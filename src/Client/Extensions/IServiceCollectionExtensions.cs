@@ -13,7 +13,6 @@ using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Mime;
-using System.Text.Json;
 
 namespace PlanningPoker.Client.Extensions
 {
@@ -41,14 +40,7 @@ namespace PlanningPoker.Client.Extensions
 			services.AddTransient<AuthorizedHandler>();
 			services.AddValidatorsFromAssemblyContaining<TableMetadataValidator>();
 
-			//services.AddBlazoredLocalStorage(config =>
-			//{
-			//	config.JsonSerializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase;
-			//	config.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
-			//	config.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
-			//	config.JsonSerializerOptions.ReadCommentHandling = JsonCommentHandling.Skip;
-			//	config.JsonSerializerOptions.WriteIndented = false;
-			//});
+			services.AddBlazoredLocalStorage();
 
 			services.AddHttpClient("default", client =>
 			{
@@ -60,7 +52,8 @@ namespace PlanningPoker.Client.Extensions
 			{
 				client.BaseAddress = new Uri(environment.BaseAddress);
 				client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(MediaTypeNames.Application.Json));
-			}).AddHttpMessageHandler<AuthorizedHandler>();
+			})
+			.AddHttpMessageHandler<AuthorizedHandler>();
 
 			services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("default"));
 

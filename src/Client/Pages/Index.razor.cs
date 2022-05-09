@@ -41,19 +41,19 @@ namespace PlanningPoker.Client.Pages
 
         protected override async Task OnInitializedAsync()
         {
-            if (!await this.PlayerService.CheckIfUsernameHasBeenEntered())
-            {
-                this.Logger.LogInformation("Missing username, prompting the user to enter one.");
-                var opts = new DialogOptions
-                {
-                    ShowClose = false,
-                    CloseDialogOnEsc = false,
-                    CloseDialogOnOverlayClick = false
-                };
+            //if (!await this.PlayerService.CheckIfUsernameHasBeenEntered())
+            //{
+            //    this.Logger.LogInformation("Missing username, prompting the user to enter one.");
+            //    var opts = new DialogOptions
+            //    {
+            //        ShowClose = false,
+            //        CloseDialogOnEsc = false,
+            //        CloseDialogOnOverlayClick = false
+            //    };
 
-                var userName = await DialogService.OpenAsync<UsernameDialog>("Username", null, opts);
-                await this.PlayerService.SaveUsername(userName);
-            }
+            //    var userName = await DialogService.OpenAsync<UsernameDialog>("Username", null, opts);
+            //    await this.PlayerService.SaveUsername(userName);
+            //}
         }
     }
 }

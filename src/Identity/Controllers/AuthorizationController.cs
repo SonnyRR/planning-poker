@@ -183,7 +183,7 @@ public class AuthorizationController : Controller
             default:
                 return this.View(new AuthorizeViewModel
                 {
-                    ApplicationName = await applicationManager.GetDisplayNameAsync(application),
+                    ApplicationName = await this.applicationManager.GetDisplayNameAsync(application),
                     Scope = request.Scope
                 });
         }
@@ -195,7 +195,7 @@ public class AuthorizationController : Controller
     {
         var request = this.HttpContext.GetOpenIddictServerRequest() ??
             throw new InvalidOperationException("The OpenID Connect request cannot be retrieved.");
-
+		
         // Retrieve the profile of the logged in user.
         var user = await this.userManager.GetUserAsync(this.User) ??
             throw new InvalidOperationException("The user details cannot be retrieved.");
@@ -227,7 +227,7 @@ public class AuthorizationController : Controller
                 authenticationSchemes: OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
         }
 
-        var principal = await signInManager.CreateUserPrincipalAsync(user);
+        var principal = await this.signInManager.CreateUserPrincipalAsync(user);
 
         // Note: in this sample, the granted scopes match the requested scope
         // but you may want to allow the user to uncheck specific scopes.
@@ -296,7 +296,7 @@ public class AuthorizationController : Controller
         if (request.IsAuthorizationCodeGrantType() || request.IsRefreshTokenGrantType())
         {
             // Retrieve the claims principal stored in the authorization code/device code/refresh token.
-            var principal = (await HttpContext.AuthenticateAsync(OpenIddictServerAspNetCoreDefaults.AuthenticationScheme)).Principal;
+            var principal = (await this.HttpContext.AuthenticateAsync(OpenIddictServerAspNetCoreDefaults.AuthenticationScheme)).Principal;
 
             // Retrieve the user profile corresponding to the authorization code/refresh token.
             // Note: if you want to automatically invalidate the authorization code/refresh token
@@ -315,7 +315,7 @@ public class AuthorizationController : Controller
             }
 
             // Ensure the user is still allowed to sign in.
-            if (!await signInManager.CanSignInAsync(user))
+            if (!await this.signInManager.CanSignInAsync(user))
             {
                 return this.Forbid(
                     properties: new AuthenticationProperties(new Dictionary<string, string>

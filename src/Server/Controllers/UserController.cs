@@ -46,8 +46,7 @@ namespace PlanningPoker.BFF.Controllers
             if (claimsPrincipal.Claims.Any())
             {
                 var claims = new List<ClaimValue>();
-                var nameClaims = claimsPrincipal.FindAll(userInfo.NameClaimType);
-                foreach (var claim in nameClaims)
+                foreach (var claim in claimsPrincipal.FindAll(userInfo.NameClaimType))
                 {
                     claims.Add(new ClaimValue(userInfo.NameClaimType, claim.Value));
                 }

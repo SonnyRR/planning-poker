@@ -135,17 +135,17 @@ namespace PlanningPoker.Identity.Extensions
             // which saves you from doing the mapping in your authorization controller.
             services.Configure<IdentityOptions>(options =>
             {
-                options.ClaimsIdentity.UserNameClaimType = Claims.Name;
-                options.ClaimsIdentity.UserIdClaimType = Claims.Subject;
-                options.ClaimsIdentity.RoleClaimType = Claims.Role;
-                options.ClaimsIdentity.EmailClaimType = Claims.Email;
+				options.ClaimsIdentity.UserNameClaimType = Claims.Name;
+				options.ClaimsIdentity.UserIdClaimType = Claims.Subject;
+				options.ClaimsIdentity.RoleClaimType = Claims.Role;
+				options.ClaimsIdentity.EmailClaimType = Claims.Email;
 
-                // Note: to require account confirmation before login,
-                // register an email sender service (IEmailSender) and
-                // set options.SignIn.RequireConfirmedAccount to true.
-                //
-                // For more information, visit https://aka.ms/aspaccountconf.
-                options.SignIn.RequireConfirmedAccount = false;
+				// Note: to require account confirmation before login,
+				// register an email sender service (IEmailSender) and
+				// set options.SignIn.RequireConfirmedAccount to true.
+				//
+				// For more information, visit https://aka.ms/aspaccountconf.
+				options.SignIn.RequireConfirmedAccount = false;
             });
 
             return services;

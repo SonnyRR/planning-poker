@@ -8,18 +8,17 @@ using Microsoft.Extensions.Hosting;
 
 using PlanningPoker.BFF.Extensions;
 using PlanningPoker.BFF.Hubs;
-using PlanningPoker.Persistence.Extensions;
 using PlanningPoker.SharedKernel.Extensions;
 
 using Serilog;
 
 namespace PlanningPoker.BFF
 {
-    public class Startup
+	public class Startup
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            this.Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }

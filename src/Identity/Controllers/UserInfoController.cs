@@ -29,10 +29,10 @@ namespace PlanningPoker.Identity.Controllers
         [HttpGet("~/connect/userinfo"), HttpPost("~/connect/userinfo"), Produces("application/json")]
         public async Task<IActionResult> Userinfo()
         {
-            var user = await userManager.GetUserAsync(User);
+            var user = await this.userManager.GetUserAsync(this.User);
             if (user == null)
             {
-                return Challenge(
+                return this.Challenge(
                     properties: new AuthenticationProperties(new Dictionary<string, string?>
                     {
                         [OpenIddictServerAspNetCoreConstants.Properties.Error] = Errors.InvalidToken,
@@ -45,30 +45,30 @@ namespace PlanningPoker.Identity.Controllers
             var claims = new Dictionary<string, object>(StringComparer.Ordinal)
             {
                 // Note: the "sub" claim is a mandatory claim and must be included in the JSON response.
-                [Claims.Subject] = await userManager.GetUserIdAsync(user)
+                [Claims.Subject] = await this.userManager.GetUserIdAsync(user)
             };
 
-            if (User.HasScope(Scopes.Email))
+            if (this.User.HasScope(Scopes.Email))
             {
-                claims[Claims.Email] = await userManager.GetEmailAsync(user);
-                claims[Claims.EmailVerified] = await userManager.IsEmailConfirmedAsync(user);
+                claims[Claims.Email] = await this.userManager.GetEmailAsync(user);
+                claims[Claims.EmailVerified] = await this.userManager.IsEmailConfirmedAsync(user);
             }
 
-            if (User.HasScope(Scopes.Phone))
+            if (this.User.HasScope(Scopes.Phone))
             {
-                claims[Claims.PhoneNumber] = await userManager.GetPhoneNumberAsync(user);
-                claims[Claims.PhoneNumberVerified] = await userManager.IsPhoneNumberConfirmedAsync(user);
+                claims[Claims.PhoneNumber] = await this.userManager.GetPhoneNumberAsync(user);
+                claims[Claims.PhoneNumberVerified] = await this.userManager.IsPhoneNumberConfirmedAsync(user);
             }
 
-            if (User.HasScope(Scopes.Roles))
+            if (this.User.HasScope(Scopes.Roles))
             {
-                claims[Claims.Role] = await userManager.GetRolesAsync(user);
+                claims[Claims.Role] = await this.userManager.GetRolesAsync(user);
             }
 
             // Note: the complete list of standard claims supported by the OpenID Connect specification
             // can be found here: http://openid.net/specs/openid-connect-core-1_0.html#StandardClaims
 
-            return Ok(claims);
+            return this.Ok(claims);
         }
     }
 }

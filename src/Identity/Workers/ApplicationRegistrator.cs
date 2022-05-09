@@ -1,13 +1,12 @@
 ﻿namespace PlanningPoker.Identity.Workers
 {
+	using Microsoft.Extensions.DependencyInjection;
 	using Microsoft.Extensions.Hosting;
 	using OpenIddict.Abstractions;
-	using static OpenIddict.Abstractions.OpenIddictConstants;
-	using System.Globalization;
-	using System.Threading.Tasks;
-	using System.Threading;
 	using System;
-	using Microsoft.Extensions.DependencyInjection;
+	using System.Threading;
+	using System.Threading.Tasks;
+	using static OpenIddict.Abstractions.OpenIddictConstants;
 
 	public class ApplicationRegistrator : IHostedService
 	{
@@ -30,23 +29,6 @@
 		{
 			var manager = provider.GetRequiredService<IOpenIddictApplicationManager>();
 
-			// API
-			//if (await manager.FindByClientIdAsync("resource_server_1") == null)
-			//{
-			//	var descriptor = new OpenIddictApplicationDescriptor
-			//	{
-			//		ClientId = "resource_server_1",
-			//		ClientSecret = "846B62D0-DEF9-4215-A99D-86E6B8DAB342",
-			//		Permissions =
-			//			{
-			//				Permissions.Endpoints.Introspection
-			//			}
-			//	};
-
-			//	await manager.CreateAsync(descriptor);
-			//}
-
-			// Blazor Hosted
 			if (await manager.FindByClientIdAsync("376f1a49-e253-4b77-b5be-b52a8fff8446") is null)
 			{
 				await manager.CreateAsync(new OpenIddictApplicationDescriptor
@@ -78,28 +60,6 @@
 					Requirements =
 						{
 							Requirements.Features.ProofKeyForCodeExchange
-						}
-				});
-			}
-		}
-
-		private static async Task RegisterScopesAsync(IServiceProvider provider)
-		{
-			var manager = provider.GetRequiredService<IOpenIddictScopeManager>();
-
-			if (await manager.FindByNameAsync("api1") is null)
-			{
-				await manager.CreateAsync(new OpenIddictScopeDescriptor
-				{
-					DisplayName = "Dantooine API access",
-					DisplayNames =
-						{
-							[CultureInfo.GetCultureInfo("fr-FR")] = "Accès à l'API de démo"
-						},
-					Name = "api1",
-					Resources =
-						{
-							"resource_server_1"
 						}
 				});
 			}

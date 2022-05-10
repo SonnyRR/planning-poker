@@ -1,27 +1,48 @@
-﻿using Ardalis.GuardClauses;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.ResponseCompression;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
-using PlanningPoker.BFF.Extensions;
-using PlanningPoker.SharedKernel.Models.Configuration;
-using System.Collections.Generic;
-using System.Net.Http.Headers;
-using System.Net.Mime;
-using Yarp.ReverseProxy.Transforms;
-using static OpenIddict.Abstractions.OpenIddictConstants;
-
-namespace PlanningPoker.BFF.Extensions
+﻿namespace PlanningPoker.BFF.Extensions
 {
+	using Ardalis.GuardClauses;
+
+	using BFF.Extensions;
+
+	using Microsoft.AspNetCore.Authentication;
+	using Microsoft.AspNetCore.Authentication.Cookies;
+	using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+	using Microsoft.AspNetCore.Builder;
+	using Microsoft.AspNetCore.Http;
+	using Microsoft.AspNetCore.Mvc;
+	using Microsoft.AspNetCore.ResponseCompression;
+	using Microsoft.Extensions.Configuration;
+	using Microsoft.Extensions.DependencyInjection;
+	using Microsoft.Extensions.Options;
+	using Microsoft.IdentityModel.Tokens;
+
+	using SharedKernel.Models.Configuration;
+
+	using System.Collections.Generic;
+	using System.Net.Http.Headers;
+	using System.Net.Mime;
+
+	using Yarp.ReverseProxy.Transforms;
+
+	using static OpenIddict.Abstractions.OpenIddictConstants;
+
 	public static class IServiceCollectionExtensions
 	{
+		public static IServiceCollection AddAntiforgeryConfiguration(this IServiceCollection services)
+		{
+			Guard.Against.Null(services, nameof(services));
+
+			services.AddAntiforgery(options =>
+			{
+				options.HeaderName = "X-XSRF-TOKEN";
+				options.Cookie.Name = "__Host-X-XSRF-TOKEN";
+				options.Cookie.SameSite = SameSiteMode.Strict;
+				options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+			});
+
+			return services;
+		}
+
 		public static IServiceCollection AddApiServices(this IServiceCollection services, IConfiguration configuration)
 		{
 			Guard.Against.Null(services, nameof(services));
@@ -99,21 +120,6 @@ namespace PlanningPoker.BFF.Extensions
 				builder.AddAuthenticationSchemes(CookieAuthenticationDefaults.AuthenticationScheme);
 				builder.RequireAuthenticatedUser();
 			}));
-
-			return services;
-		}
-
-		public static IServiceCollection AddAntiforgeryConfiguration(this IServiceCollection services)
-		{
-			Guard.Against.Null(services, nameof(services));
-
-			services.AddAntiforgery(options =>
-			{
-				options.HeaderName = "X-XSRF-TOKEN";
-				options.Cookie.Name = "__Host-X-XSRF-TOKEN";
-				options.Cookie.SameSite = SameSiteMode.Strict;
-				options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-			});
 
 			return services;
 		}

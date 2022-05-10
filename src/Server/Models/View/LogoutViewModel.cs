@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
-
-namespace PlanningPoker.BFF.Models.View
+﻿namespace PlanningPoker.BFF.Models.View
 {
-    public sealed class LogoutViewModel
-    {
-        [BindNever]
-        public string RequestId { get; set; }
-    }
+	using Microsoft.AspNetCore.Mvc.ModelBinding;
+
+	public sealed class LogoutViewModel
+	{
+		[BindNever]
+		public string RequestId { get; set; }
+	}
 }

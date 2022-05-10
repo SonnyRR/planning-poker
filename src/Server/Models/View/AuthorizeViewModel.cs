@@ -1,8 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace PlanningPoker.BFF.Models.View
+﻿namespace PlanningPoker.BFF.Models.View
 {
-    public sealed class AuthorizeViewModel
+	using System.ComponentModel.DataAnnotations;
+
+	public sealed class AuthorizeViewModel
     {
         [Display(Name = "Application")]
         public string ApplicationName { get; set; }

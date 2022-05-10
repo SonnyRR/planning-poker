@@ -1,27 +1,27 @@
-﻿using System.Threading.Tasks;
-
-using Microsoft.AspNetCore.SignalR;
-
-namespace PlanningPoker.BFF.Hubs
+﻿namespace PlanningPoker.BFF.Hubs
 {
-    public sealed class PokerHub : Hub
+	using Microsoft.AspNetCore.SignalR;
+
+	using System.Threading.Tasks;
+
+	public sealed class PokerHub : Hub
     {
         public async Task AddToTable(string tableName)
         {
-            await Groups.AddToGroupAsync(Context.ConnectionId, tableName);
+            await this.Groups.AddToGroupAsync(this.Context.ConnectionId, tableName);
 
-            await Clients
+            await this.Clients
                 .Group(tableName)
-                .SendAsync("AddedToTable", $"{Context.ConnectionId} has joined the group {tableName}.");
+                .SendAsync("AddedToTable", $"{this.Context.ConnectionId} has joined the group {tableName}.");
         }
 
         public async Task RemoveFromTable(string tableName)
         {
-            await Groups.RemoveFromGroupAsync(Context.ConnectionId, tableName);
+            await this.Groups.RemoveFromGroupAsync(this.Context.ConnectionId, tableName);
 
-            await Clients
+            await this.Clients
                 .Group(tableName)
-                .SendAsync("Send", $"{Context.ConnectionId} has left the group {tableName}.");
+                .SendAsync("Send", $"{this.Context.ConnectionId} has left the group {tableName}.");
         }
     }
 }

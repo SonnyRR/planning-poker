@@ -1,19 +1,19 @@
-﻿using Microsoft.AspNetCore.Components;
-
-using Radzen;
-
-namespace PlanningPoker.Client.Components.Dialogs
+﻿namespace PlanningPoker.Client.Components.Dialogs
 {
-    public partial class UsernameDialog
-    {
-        [Inject]
-        public DialogService DialogService { get; set; }
+	using Microsoft.AspNetCore.Components;
 
-        public string Username { get; set; }
+	using Radzen;
 
-        public void OnSubmit()
-        {
-            this.DialogService.Close(this.Username);
-        }
-    }
+	public partial class UsernameDialog
+	{
+		[Inject]
+		public DialogService DialogService { get; set; }
+
+		public string Username { get; set; }
+
+		public void OnSubmit()
+		{
+			this.DialogService.Close(this.Username);
+		}
+	}
 }

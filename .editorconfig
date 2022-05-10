@@ -4,13 +4,15 @@ dotnet_style_qualification_for_property = false:warning
 dotnet_style_qualification_for_method = false:warning
 dotnet_style_qualification_for_event = false:warning
 dotnet_style_require_accessibility_modifiers = never:warning
+dotnet_sort_system_directives_first = true:warning
+dotnet_separate_import_directive_groups = true:warning
 
 csharp_style_expression_bodied_methods = true:silent
 csharp_style_expression_bodied_properties = true:warning
 csharp_style_expression_bodied_indexers = true:warning
 csharp_style_expression_bodied_accessors = true:warning
 csharp_indent_labels = one_less_than_current
-csharp_using_directive_placement = inside_namespace:silent
+csharp_using_directive_placement = inside_namespace:suggestion
 csharp_prefer_simple_using_statement = true:suggestion
 csharp_prefer_braces = true:silent
 csharp_style_namespace_declarations = block_scoped:silent
@@ -83,6 +85,7 @@ dotnet_naming_symbols.non_field_members.applicable_accessibilities = public, int
 dotnet_naming_symbols.non_field_members.required_modifiers = 
 dotnet_naming_symbols.constants.applicable_kinds = field, local
 dotnet_naming_symbols.constants.required_modifiers = const
+
 # Naming styles
 
 dotnet_naming_style.begins_with_i.required_prefix = I

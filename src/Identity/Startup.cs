@@ -1,67 +1,67 @@
-﻿using CorrelationId;
-
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-
-using PlanningPoker.Identity.Extensions;
-using PlanningPoker.SharedKernel.Extensions;
-
-using Serilog;
-
-namespace PlanningPoker.Identity
+﻿namespace PlanningPoker.Identity
 {
-    public class Startup
-    {
-        public Startup(IConfiguration configuration)
-        {
-            this.Configuration = configuration;
-        }
+	using CorrelationId;
 
-        public IConfiguration Configuration { get; }
+	using Microsoft.AspNetCore.Builder;
+	using Microsoft.AspNetCore.Hosting;
+	using Microsoft.Extensions.Configuration;
+	using Microsoft.Extensions.DependencyInjection;
+	using Microsoft.Extensions.Hosting;
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            app.UseResponseCompression();
+	using PlanningPoker.Identity.Extensions;
+	using PlanningPoker.SharedKernel.Extensions;
 
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseWebAssemblyDebugging();
+	using Serilog;
 
-                // TODO: Conflicting API routes, need to fix them before enabling swagger.
-                //app.UseSwagger();
-                //app.UseSwaggerUI();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Error");
-                app.UseHsts();
-            }
+	public class Startup
+	{
+		public Startup(IConfiguration configuration)
+		{
+			this.Configuration = configuration;
+		}
 
-            app.UseHttpsRedirection();
-            app.UseCorrelationId();
-            app.UseSerilogIngestion();
-            app.UseSerilogRequestLogging();
-            app.UseStaticFiles();
-            app.UseRouting();
-            app.UseAuthentication();
-            app.UseAuthorization();
+		public IConfiguration Configuration { get; }
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-                endpoints.MapDefaultControllerRoute();
-                endpoints.MapRazorPages();
-            });
-        }
+		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+		{
+			app.UseResponseCompression();
 
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddSharedKernelServices();
-            services.AddIdentityServices(this.Configuration);
-        }
-    }
+			if (env.IsDevelopment())
+			{
+				app.UseDeveloperExceptionPage();
+				app.UseWebAssemblyDebugging();
+
+				// TODO: Conflicting API routes, need to fix them before enabling swagger.
+				//app.UseSwagger();
+				//app.UseSwaggerUI();
+			}
+			else
+			{
+				app.UseExceptionHandler("/Error");
+				app.UseHsts();
+			}
+
+			app.UseHttpsRedirection();
+			app.UseCorrelationId();
+			app.UseSerilogIngestion();
+			app.UseSerilogRequestLogging();
+			app.UseStaticFiles();
+			app.UseRouting();
+			app.UseAuthentication();
+			app.UseAuthorization();
+
+			app.UseEndpoints(endpoints =>
+			{
+				endpoints.MapControllers();
+				endpoints.MapDefaultControllerRoute();
+				endpoints.MapRazorPages();
+			});
+		}
+
+		public void ConfigureServices(IServiceCollection services)
+		{
+			services.AddSharedKernelServices();
+			services.AddIdentityServices(this.Configuration);
+		}
+	}
 }

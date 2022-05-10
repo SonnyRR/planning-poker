@@ -1,41 +1,41 @@
-﻿using System;
-
-using Microsoft.AspNetCore.Mvc.Abstractions;
-using Microsoft.AspNetCore.Mvc.ActionConstraints;
-using Microsoft.AspNetCore.Routing;
-
-namespace PlanningPoker.Identity.Utilities
+﻿namespace PlanningPoker.Identity.Utilities
 {
-    public sealed class FormValueRequiredAttribute : ActionMethodSelectorAttribute
-    {
-        private readonly string _name;
+	using Microsoft.AspNetCore.Mvc.Abstractions;
+	using Microsoft.AspNetCore.Mvc.ActionConstraints;
+	using Microsoft.AspNetCore.Routing;
 
-        public FormValueRequiredAttribute(string name)
-        {
-            _name = name;
-        }
+	using System;
 
-        public override bool IsValidForRequest(RouteContext routeContext, ActionDescriptor action)
-        {
-            if (string.Equals(routeContext.HttpContext.Request.Method, "GET", StringComparison.OrdinalIgnoreCase) ||
-                string.Equals(routeContext.HttpContext.Request.Method, "HEAD", StringComparison.OrdinalIgnoreCase) ||
-                string.Equals(routeContext.HttpContext.Request.Method, "DELETE", StringComparison.OrdinalIgnoreCase) ||
-                string.Equals(routeContext.HttpContext.Request.Method, "TRACE", StringComparison.OrdinalIgnoreCase))
-            {
-                return false;
-            }
+	public sealed class FormValueRequiredAttribute : ActionMethodSelectorAttribute
+	{
+		private readonly string name;
 
-            if (string.IsNullOrEmpty(routeContext.HttpContext.Request.ContentType))
-            {
-                return false;
-            }
+		public FormValueRequiredAttribute(string name)
+		{
+			this.name = name;
+		}
 
-            if (!routeContext.HttpContext.Request.ContentType.StartsWith("application/x-www-form-urlencoded", StringComparison.OrdinalIgnoreCase))
-            {
-                return false;
-            }
+		public override bool IsValidForRequest(RouteContext routeContext, ActionDescriptor action)
+		{
+			if (string.Equals(routeContext.HttpContext.Request.Method, "GET", StringComparison.OrdinalIgnoreCase) ||
+				string.Equals(routeContext.HttpContext.Request.Method, "HEAD", StringComparison.OrdinalIgnoreCase) ||
+				string.Equals(routeContext.HttpContext.Request.Method, "DELETE", StringComparison.OrdinalIgnoreCase) ||
+				string.Equals(routeContext.HttpContext.Request.Method, "TRACE", StringComparison.OrdinalIgnoreCase))
+			{
+				return false;
+			}
 
-            return !string.IsNullOrEmpty(routeContext.HttpContext.Request.Form[_name]);
-        }
-    }
+			if (string.IsNullOrEmpty(routeContext.HttpContext.Request.ContentType))
+			{
+				return false;
+			}
+
+			if (!routeContext.HttpContext.Request.ContentType.StartsWith("application/x-www-form-urlencoded", StringComparison.OrdinalIgnoreCase))
+			{
+				return false;
+			}
+
+			return !string.IsNullOrEmpty(routeContext.HttpContext.Request.Form[this.name]);
+		}
+	}
 }

@@ -1,9 +1,9 @@
 ﻿namespace PlanningPoker.Persistence.Entities
 {
-    public interface IAuditableEntity
-    {
-        DateTimeOffset CreatedOn { get; set; }
+	public interface IAuditableEntity
+	{
+		DateTimeOffset CreatedOn { get; set; }
 
-        DateTimeOffset? ModifiedOn { get; set; }
-    }
+		DateTimeOffset? ModifiedOn { get; set; }
+	}
 }

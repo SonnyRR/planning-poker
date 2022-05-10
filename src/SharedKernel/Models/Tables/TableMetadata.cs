@@ -1,35 +1,34 @@
-﻿using FluentValidation;
-
-namespace PlanningPoker.SharedKernel.Models.Tables
+﻿namespace PlanningPoker.SharedKernel.Models.Tables
 {
-    /// <summary>
-    /// Represents the information about a given poker table.
-    /// </summary>
-    public sealed class TableMetadata
-    {
-        public TableMetadata()
-        {
-        }
+	using FluentValidation;
 
-        public TableMetadata(string name, int code)
-        {
-            this.Name = name;
-            this.Code = code;
-        }
+	/// <summary>
+	/// Represents the information about a given poker table.
+	/// </summary>
+	public sealed class TableMetadata
+	{
+		public TableMetadata()
+		{
+		}
 
-        public string Name { get; set; }
+		public TableMetadata(string name, int code)
+		{
+			this.Name = name;
+			this.Code = code;
+		}
 
-        public int Code { get; set; }
+		public int Code { get; set; }
 
-        // TODO: Add remaining properties.
-    }
+		public string Name { get; set; }
+		// TODO: Add remaining properties.
+	}
 
-    public class TableMetadataValidator : AbstractValidator<TableMetadata>
-    {
-        public TableMetadataValidator()
-        {
-            RuleFor(tm => tm.Name).NotEmpty().MinimumLength(3);
-            RuleFor(tm => tm.Code).NotEmpty();
-        }
-    }
+	public class TableMetadataValidator : AbstractValidator<TableMetadata>
+	{
+		public TableMetadataValidator()
+		{
+			this.RuleFor(tm => tm.Name).NotEmpty().MinimumLength(3);
+			this.RuleFor(tm => tm.Code).NotEmpty();
+		}
+	}
 }

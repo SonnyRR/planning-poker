@@ -1,13 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace PlanningPoker.Identity.Models.View
+﻿namespace PlanningPoker.Identity.Models.View
 {
-    public sealed class AuthorizeViewModel
-    {
-        [Display(Name = "Application")]
-        public string ApplicationName { get; set; }
+	using System.ComponentModel.DataAnnotations;
 
-        [Display(Name = "Scope")]
-        public string Scope { get; set; }
-    }
+	public sealed class AuthorizeViewModel
+	{
+		[Display(Name = "Application")]
+		public string ApplicationName { get; set; }
+
+		[Display(Name = "Scope")]
+		public string Scope { get; set; }
+	}
 }

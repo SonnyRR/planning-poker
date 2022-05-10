@@ -1,17 +1,17 @@
-﻿using System.Collections.Generic;
-
-namespace PlanningPoker.SharedKernel.Models.Authorization
+﻿namespace PlanningPoker.SharedKernel.Models.Authorization
 {
-    public class UserInfo
-    {
-        public static readonly UserInfo Anonymous = new();
+	using System.Collections.Generic;
 
-        public ICollection<ClaimValue> Claims { get; set; } = new List<ClaimValue>();
+	public class UserInfo
+	{
+		public static readonly UserInfo Anonymous = new();
 
-        public bool IsAuthenticated { get; set; }
+		public ICollection<ClaimValue> Claims { get; set; } = new List<ClaimValue>();
 
-        public string NameClaimType { get; set; }
+		public bool IsAuthenticated { get; set; }
 
-        public string RoleClaimType { get; set; }
-    }
+		public string NameClaimType { get; set; }
+
+		public string RoleClaimType { get; set; }
+	}
 }

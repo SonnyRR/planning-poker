@@ -2,10 +2,13 @@
 {
 	using Microsoft.Extensions.DependencyInjection;
 	using Microsoft.Extensions.Hosting;
+
 	using OpenIddict.Abstractions;
+
 	using System;
 	using System.Threading;
 	using System.Threading.Tasks;
+
 	using static OpenIddict.Abstractions.OpenIddictConstants;
 
 	public class ApplicationRegistrator : IHostedService

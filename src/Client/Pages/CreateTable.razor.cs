@@ -1,30 +1,31 @@
-﻿using System.Collections.Generic;
-
-using Microsoft.AspNetCore.Components;
-using Microsoft.Extensions.Logging;
-using PlanningPoker.SharedKernel.Models.Tables;
-
-namespace PlanningPoker.Client.Pages
+﻿namespace PlanningPoker.Client.Pages
 {
-    public class DropdownEntry
-    {
-        public string A { get; set; }
+	using Microsoft.AspNetCore.Components;
+	using Microsoft.Extensions.Logging;
 
-        public int B { get; set; }
-    }
+	using SharedKernel.Models.Tables;
 
-    public partial class CreateTable
-    {
-        [Inject]
-        public ILogger<CreateTable> Logger { get; set; }
+	using System.Collections.Generic;
 
-        public TableMetadata Table { get; set; } = new();
+	public partial class CreateTable
+	{
+		[Inject]
+		public ILogger<CreateTable> Logger { get; set; }
 
-        public IEnumerable<DropdownEntry> TestingValues { get; } = new[]
-        {
-            new DropdownEntry { A = "A", B = 1 },
-            new DropdownEntry { A = "B", B = 2 },
-            new DropdownEntry { A = "C", B = 3 },
-        };
-    }
+		public TableMetadata Table { get; set; } = new();
+
+		public IEnumerable<DropdownEntry> TestingValues { get; } = new[]
+		{
+			new DropdownEntry { A = "A", B = 1 },
+			new DropdownEntry { A = "B", B = 2 },
+			new DropdownEntry { A = "C", B = 3 },
+		};
+	}
+
+	public class DropdownEntry
+	{
+		public string A { get; set; }
+
+		public int B { get; set; }
+	}
 }

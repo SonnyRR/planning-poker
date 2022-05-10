@@ -1,29 +1,22 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-
-namespace PlanningPoker.Identity.Controllers;
-
-public class HomeController : Controller
+namespace PlanningPoker.Identity.Controllers
 {
-    private readonly ILogger<HomeController> _logger;
+	using Microsoft.AspNetCore.Mvc;
 
-    public HomeController(ILogger<HomeController> logger)
-    {
-        _logger = logger;
-    }
+	public class HomeController : Controller
+	{
+		public IActionResult Error()
+		{
+			return this.View();
+		}
 
-    public IActionResult Index()
-    {
-        return this.View();
-    }
+		public IActionResult Index()
+		{
+			return this.View();
+		}
 
-    public IActionResult Privacy()
-    {
-        return this.View();
-    }
-
-    public IActionResult Error()
-    {
-        return this.View();
-    }
+		public IActionResult Privacy()
+		{
+			return this.View();
+		}
+	}
 }

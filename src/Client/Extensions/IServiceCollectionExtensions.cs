@@ -1,22 +1,30 @@
-﻿using Ardalis.GuardClauses;
-using Blazored.LocalStorage;
-using FluentValidation;
-using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using PlanningPoker.Client.Authorization;
-using PlanningPoker.Client.Services;
-using PlanningPoker.SharedKernel.Models.Tables;
-using Radzen;
-using System;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Net.Mime;
-using System.Text.Json;
-
-namespace PlanningPoker.Client.Extensions
+﻿namespace PlanningPoker.Client.Extensions
 {
+	using Ardalis.GuardClauses;
+
+	using Authorization;
+
+	using Blazored.LocalStorage;
+
+	using FluentValidation;
+
+	using Microsoft.AspNetCore.Components.Authorization;
+	using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+	using Microsoft.Extensions.DependencyInjection;
+	using Microsoft.Extensions.DependencyInjection.Extensions;
+
+	using Radzen;
+
+	using Services;
+
+	using SharedKernel.Models.Tables;
+
+	using System;
+	using System.Net.Http;
+	using System.Net.Http.Headers;
+	using System.Net.Mime;
+	using System.Text.Json;
+
 	public static class IServiceCollectionExtensions
 	{
 		/// <summary>

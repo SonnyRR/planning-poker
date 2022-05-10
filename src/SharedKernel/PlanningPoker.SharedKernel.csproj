@@ -16,8 +16,4 @@
         <PackageReference Include="Serilog.Settings.Configuration" Version="3.3.0" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Models\Game\" />
-    </ItemGroup>
-
 </Project>

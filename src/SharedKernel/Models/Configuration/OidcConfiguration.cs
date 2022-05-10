@@ -1,25 +1,25 @@
-﻿using System.Collections.Generic;
-
-namespace PlanningPoker.SharedKernel.Models.Configuration
+﻿namespace PlanningPoker.SharedKernel.Models.Configuration
 {
-    public sealed class OidcConfiguration
-    {
-        public string Authority { get; set; }
+	using System.Collections.Generic;
 
-        public string ClientId { get; set; }
+	public sealed class OidcConfiguration
+	{
+		public string Authority { get; set; }
 
-        public string ClientSecret { get; set; }
+		public string ClientId { get; set; }
 
-        public bool GetClaimsFromUserInfoEndpoint { get; set; }
+		public string ClientSecret { get; set; }
 
-        public bool RequireHttpsMetadata { get; set; }
+		public bool GetClaimsFromUserInfoEndpoint { get; set; }
 
-        public string ResponseType { get; set; }
+		public bool RequireHttpsMetadata { get; set; }
 
-        public bool SaveTokens { get; set; }
+		public string ResponseType { get; set; }
 
-        public IList<string> Scopes { get; set; } = new List<string>();
+		public bool SaveTokens { get; set; }
 
-        public string SignInScheme { get; set; }
-    }
+		public IList<string> Scopes { get; set; } = new List<string>();
+
+		public string SignInScheme { get; set; }
+	}
 }

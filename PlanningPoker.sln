@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlanningPoker.Persistence",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlanningPoker.Identity", "src\Identity\PlanningPoker.Identity.csproj", "{F417EF16-4F1E-468B-9FE8-98A68B0EC8F1}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlanningPoker.WebAPI", "src\WebAPI\PlanningPoker.WebAPI.csproj", "{B3A961F8-C059-42C7-9217-AA0BAEC96849}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -95,6 +97,18 @@ Global
 		{F417EF16-4F1E-468B-9FE8-98A68B0EC8F1}.Release|x64.Build.0 = Release|Any CPU
 		{F417EF16-4F1E-468B-9FE8-98A68B0EC8F1}.Release|x86.ActiveCfg = Release|Any CPU
 		{F417EF16-4F1E-468B-9FE8-98A68B0EC8F1}.Release|x86.Build.0 = Release|Any CPU
+		{B3A961F8-C059-42C7-9217-AA0BAEC96849}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3A961F8-C059-42C7-9217-AA0BAEC96849}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3A961F8-C059-42C7-9217-AA0BAEC96849}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B3A961F8-C059-42C7-9217-AA0BAEC96849}.Debug|x64.Build.0 = Debug|Any CPU
+		{B3A961F8-C059-42C7-9217-AA0BAEC96849}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B3A961F8-C059-42C7-9217-AA0BAEC96849}.Debug|x86.Build.0 = Debug|Any CPU
+		{B3A961F8-C059-42C7-9217-AA0BAEC96849}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3A961F8-C059-42C7-9217-AA0BAEC96849}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3A961F8-C059-42C7-9217-AA0BAEC96849}.Release|x64.ActiveCfg = Release|Any CPU
+		{B3A961F8-C059-42C7-9217-AA0BAEC96849}.Release|x64.Build.0 = Release|Any CPU
+		{B3A961F8-C059-42C7-9217-AA0BAEC96849}.Release|x86.ActiveCfg = Release|Any CPU
+		{B3A961F8-C059-42C7-9217-AA0BAEC96849}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

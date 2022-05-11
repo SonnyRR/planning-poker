@@ -2,20 +2,22 @@
 {
 	using Ardalis.GuardClauses;
 
+	using Identity.Extensions;
+	using Identity.Workers;
+
 	using Microsoft.AspNetCore.Builder;
 	using Microsoft.AspNetCore.Identity;
 	using Microsoft.AspNetCore.ResponseCompression;
 	using Microsoft.Extensions.Configuration;
 	using Microsoft.Extensions.DependencyInjection;
 
-	using Identity.Extensions;
-	using Identity.Workers;
 	using Persistence;
 	using Persistence.Entities;
 	using Persistence.Extensions;
-	using SharedKernel.Models.Configuration;
 
 	using Quartz;
+
+	using SharedKernel.Models.Configuration;
 
 	using System.Collections.Generic;
 	using System.Net.Mime;

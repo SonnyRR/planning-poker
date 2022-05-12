@@ -46,10 +46,7 @@
 			app.UseAuthentication();
 			app.UseAuthorization();
 
-			app.UseEndpoints(endpoints =>
-			{
-				endpoints.MapDefaultControllerRoute();
-			});
+			app.UseEndpoints(endpoints => endpoints.MapDefaultControllerRoute());
 		}
 
 		public void ConfigureServices(IServiceCollection services)

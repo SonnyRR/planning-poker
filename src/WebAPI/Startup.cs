@@ -10,6 +10,7 @@
 
 	using PlanningPoker.SharedKernel.Extensions;
 	using PlanningPoker.WebAPI.Extensions;
+	using PlanningPoker.WebAPI.Hubs;
 
 	using Serilog;
 
@@ -46,7 +47,11 @@
 			app.UseAuthentication();
 			app.UseAuthorization();
 
-			app.UseEndpoints(endpoints => endpoints.MapDefaultControllerRoute());
+			app.UseEndpoints(endpoints =>
+			{
+				endpoints.MapDefaultControllerRoute();
+				endpoints.MapHub<PokerHub>("/poker");
+			});
 		}
 
 		public void ConfigureServices(IServiceCollection services)

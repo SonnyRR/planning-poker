@@ -9,7 +9,6 @@ namespace PlanningPoker.BFF
 	using Microsoft.Extensions.Hosting;
 
 	using PlanningPoker.BFF.Extensions;
-	using PlanningPoker.BFF.Hubs;
 	using PlanningPoker.SharedKernel.Extensions;
 
 	using Serilog;
@@ -54,7 +53,6 @@ namespace PlanningPoker.BFF
 				endpoints.MapRazorPages();
 				endpoints.MapControllers();
 				endpoints.MapReverseProxy();
-				endpoints.MapHub<PokerHub>("/poker");
 				endpoints.MapFallbackToFile("/_Host");
 			});
 		}

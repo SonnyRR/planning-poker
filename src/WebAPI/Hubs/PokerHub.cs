@@ -1,4 +1,4 @@
-﻿namespace PlanningPoker.BFF.Hubs
+﻿namespace PlanningPoker.WebAPI.Hubs
 {
 	using Microsoft.AspNetCore.SignalR;
 

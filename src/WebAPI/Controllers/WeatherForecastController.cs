@@ -4,9 +4,7 @@ namespace PlanningPoker.WebAPI.Controllers
 
 	using System.Collections.Generic;
 
-	[ApiController]
-	[Route("/api/[controller]")]
-	public class WeatherForecastController : ControllerBase
+	public class WeatherForecastController : BasePokerController
 	{
 		private static readonly string[] Summaries = new[]
 		{

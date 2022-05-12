@@ -82,7 +82,7 @@ namespace PlanningPoker.BFF
 					builder.AddImgSrc().Self().From("data:");
 					builder.AddFormAction().Self().From(idpHost);
 					builder.AddFontSrc().Self();
-					builder.AddStyleSrc().Self();
+					builder.AddStyleSrc().Self().UnsafeInline();
 					builder.AddBaseUri().Self();
 					builder.AddFrameAncestors().None();
 

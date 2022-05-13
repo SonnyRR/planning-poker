@@ -77,7 +77,7 @@
 			if (authorizations.Count == 0 && await this.applicationManager.HasConsentTypeAsync(application, ConsentTypes.External))
 			{
 				return this.Forbid(
-					properties: new AuthenticationProperties(new Dictionary<string, string?>
+					properties: new AuthenticationProperties(new Dictionary<string, string>
 					{
 						[OpenIddictServerAspNetCoreConstants.Properties.Error] = Errors.ConsentRequired,
 						[OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] =
@@ -160,7 +160,7 @@
 				if (request.HasPrompt(Prompts.None))
 				{
 					return this.Forbid(
-						properties: new AuthenticationProperties(new Dictionary<string, string?>
+						properties: new AuthenticationProperties(new Dictionary<string, string>
 						{
 							[OpenIddictServerAspNetCoreConstants.Properties.Error] = Errors.LoginRequired,
 							[OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] = "The user is not logged in."
@@ -199,7 +199,7 @@
 				// immediately return an error if no authorization can be found in the database.
 				case ConsentTypes.External when !authorizations.Any():
 					return this.Forbid(
-						properties: new AuthenticationProperties(new Dictionary<string, string?>
+						properties: new AuthenticationProperties(new Dictionary<string, string>
 						{
 							[OpenIddictServerAspNetCoreConstants.Properties.Error] = Errors.ConsentRequired,
 							[OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] =
@@ -247,7 +247,7 @@
 				case ConsentTypes.Explicit when request.HasPrompt(Prompts.None):
 				case ConsentTypes.Systematic when request.HasPrompt(Prompts.None):
 					return this.Forbid(
-						properties: new AuthenticationProperties(new Dictionary<string, string?>
+						properties: new AuthenticationProperties(new Dictionary<string, string>
 						{
 							[OpenIddictServerAspNetCoreConstants.Properties.Error] = Errors.ConsentRequired,
 							[OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] =

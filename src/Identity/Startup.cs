@@ -30,10 +30,6 @@
 			{
 				app.UseDeveloperExceptionPage();
 				app.UseWebAssemblyDebugging();
-
-				// TODO: Conflicting API routes, need to fix them before enabling swagger.
-				//app.UseSwagger();
-				//app.UseSwaggerUI();
 			}
 			else
 			{

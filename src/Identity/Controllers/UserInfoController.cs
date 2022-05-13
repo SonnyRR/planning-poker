@@ -34,7 +34,7 @@
 			if (user == null)
 			{
 				return this.Challenge(
-					properties: new AuthenticationProperties(new Dictionary<string, string?>
+					properties: new AuthenticationProperties(new Dictionary<string, string>
 					{
 						[OpenIddictServerAspNetCoreConstants.Properties.Error] = Errors.InvalidToken,
 						[OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] =

@@ -58,18 +58,15 @@
 
 			services.AddQuartz();
 			services.AddOpenIdDict();
-			services.AddJwtClaims();
+			services.AddIdentityOptions();
 			services.AddAuthentication();
 			services.AddAuthorization();
-			//services.AddEndpointsApiExplorer();
-			//services.AddSwaggerGen();
-
 			services.AddHostedService<ApplicationRegistrator>();
 
 			return services;
 		}
 
-		public static IServiceCollection AddJwtClaims(this IServiceCollection services)
+		public static IServiceCollection AddIdentityOptions(this IServiceCollection services)
 		{
 			Guard.Against.Null(services, nameof(services));
 
@@ -89,6 +86,8 @@
 				//
 				// For more information, visit https://aka.ms/aspaccountconf.
 				options.SignIn.RequireConfirmedAccount = false;
+
+				options.User.RequireUniqueEmail = true;
 			});
 
 			return services;

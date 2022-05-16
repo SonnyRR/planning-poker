@@ -8,6 +8,8 @@
 
 		public ICollection<ClaimValue> Claims { get; set; } = new List<ClaimValue>();
 
+		public string EmailClaimType { get; set; }
+
 		public bool IsAuthenticated { get; set; }
 
 		public string NameClaimType { get; set; }

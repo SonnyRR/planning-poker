@@ -45,12 +45,20 @@
 				userInfo.RoleClaimType = JwtClaimTypes.Role;
 			}
 
+			userInfo.EmailClaimType = JwtClaimTypes.Email;
+
 			if (claimsPrincipal.Claims.Any())
 			{
 				var claims = new List<ClaimValue>();
+
 				foreach (var claim in claimsPrincipal.FindAll(userInfo.NameClaimType))
 				{
 					claims.Add(new ClaimValue(userInfo.NameClaimType, claim.Value));
+				}
+
+				foreach (var claim in claimsPrincipal.FindAll(userInfo.EmailClaimType))
+				{
+					claims.Add(new ClaimValue(userInfo.EmailClaimType, claim.Value));
 				}
 
 				// Uncomment this code if you want to send additional claims to the client.
@@ -58,7 +66,6 @@
 				//{
 				//    claims.Add(new ClaimValue(claim.Type, claim.Value));
 				//}
-
 				userInfo.Claims = claims;
 			}
 

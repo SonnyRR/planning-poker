@@ -16,6 +16,8 @@
 	using Microsoft.Extensions.Options;
 	using Microsoft.IdentityModel.Tokens;
 
+	using PlanningPoker.BFF.Utilities;
+
 	using SharedKernel.Models.Configuration;
 
 	using System.Collections.Generic;
@@ -66,6 +68,7 @@
 			services.AddSignalR();
 			services.AddRazorPages();
 			services.AddControllersWithViews(options => options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()));
+			services.AddTransient<IClaimsTransformation, ClaimsTransformer>();
 
 			return services;
 		}

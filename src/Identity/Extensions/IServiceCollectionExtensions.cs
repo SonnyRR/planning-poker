@@ -15,6 +15,8 @@
 	using Persistence.Entities;
 	using Persistence.Extensions;
 
+	using PlanningPoker.Identity.Models.Options;
+
 	using Quartz;
 
 	using SharedKernel.Models.Configuration;
@@ -44,6 +46,8 @@
 			Guard.Against.Null(configuration, nameof(configuration));
 
 			services.Configure<PlanningPokerOptions>(configuration);
+			services.Configure<ClientMetadata>("Blazor", configuration.GetSection("Applications:Blazor"));
+			services.Configure<ClientMetadata>("Api", configuration.GetSection("Applications:Api"));
 			services.AddPersistanceServices();
 			services.AddIdentityConfiguration();
 			services.AddControllersWithViews();

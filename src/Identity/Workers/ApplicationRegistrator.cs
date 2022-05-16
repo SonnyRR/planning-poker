@@ -2,10 +2,14 @@
 {
 	using Microsoft.Extensions.DependencyInjection;
 	using Microsoft.Extensions.Hosting;
+	using Microsoft.Extensions.Options;
 
 	using OpenIddict.Abstractions;
 
+	using PlanningPoker.Identity.Models.Options;
+
 	using System;
+	using System.Linq;
 	using System.Threading;
 	using System.Threading.Tasks;
 
@@ -14,40 +18,43 @@
 	public class ApplicationRegistrator : IHostedService
 	{
 		private readonly IServiceProvider serviceProvider;
+		private ClientMetadata apiClientOptions;
+		private IOpenIddictApplicationManager applicationManager;
+		private ClientMetadata blazorClientOptions;
+		private IOpenIddictScopeManager scopeManager;
 
 		public ApplicationRegistrator(IServiceProvider serviceProvider)
-			=> this.serviceProvider = serviceProvider;
+		{
+			this.serviceProvider = serviceProvider;
+		}
 
 		public async Task StartAsync(CancellationToken cancellationToken)
 		{
 			using var scope = this.serviceProvider.CreateScope();
 
-			await RegisterApplicationsAsync(scope.ServiceProvider);
-			await RegisterScopesAsync(scope.ServiceProvider);
+			this.applicationManager = scope.ServiceProvider.GetRequiredService<IOpenIddictApplicationManager>();
+			this.scopeManager = scope.ServiceProvider.GetRequiredService<IOpenIddictScopeManager>();
+
+			var clientMetadataOptions = scope.ServiceProvider.GetRequiredService<IOptionsSnapshot<ClientMetadata>>();
+			this.blazorClientOptions = clientMetadataOptions.Get("Blazor");
+			this.apiClientOptions = clientMetadataOptions.Get("Api");
+
+			await this.RegisterApplicationsAsync();
+			await this.RegisterScopesAsync();
 		}
 
 		public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
 
-		private static async Task RegisterApplicationsAsync(IServiceProvider provider)
+		private async Task RegisterApplicationsAsync()
 		{
-			var manager = provider.GetRequiredService<IOpenIddictApplicationManager>();
-
-			if (await manager.FindByClientIdAsync("376f1a49-e253-4b77-b5be-b52a8fff8446") is null)
+			if (await this.applicationManager.FindByClientIdAsync(this.blazorClientOptions.ClientId) is null)
 			{
-				await manager.CreateAsync(new OpenIddictApplicationDescriptor
+				var descriptor = new OpenIddictApplicationDescriptor
 				{
-					ClientId = "376f1a49-e253-4b77-b5be-b52a8fff8446",
+					ClientId = this.blazorClientOptions.ClientId,
 					ConsentType = ConsentTypes.Explicit,
-					DisplayName = "Blazor code PKCE",
-					PostLogoutRedirectUris =
-					{
-						new Uri("https://localhost:5002/signout-callback-oidc")
-					},
-					RedirectUris =
-					{
-						new Uri("https://localhost:5002/signin-oidc")
-					},
-					ClientSecret = "74f009d6-4600-4985-9027-c23fd047ffd5",
+					DisplayName = this.blazorClientOptions.DisplayName,
+					ClientSecret = this.blazorClientOptions.ClientSecret,
 					Permissions =
 					{
 						Permissions.Endpoints.Authorization,
@@ -63,38 +70,48 @@
 					{
 						Requirements.Features.ProofKeyForCodeExchange
 					}
-				});
+				};
+
+				foreach (var uri in this.blazorClientOptions.PostLogoutRedirectUris.Select(a => new Uri(a)))
+				{
+					descriptor.PostLogoutRedirectUris.Add(uri);
+				}
+
+				foreach (var uri in this.blazorClientOptions.RedirectUris.Select(a => new Uri(a)))
+				{
+					descriptor.RedirectUris.Add(uri);
+				}
+
+				await this.applicationManager.CreateAsync(descriptor);
 			}
 
-			if (await manager.FindByClientIdAsync("c257f553-8ce4-4225-8447-c9b7aa81f465") == null)
+			if (await this.applicationManager.FindByClientIdAsync(this.apiClientOptions.ClientId) is null)
 			{
 				var descriptor = new OpenIddictApplicationDescriptor
 				{
-					ClientId = "c257f553-8ce4-4225-8447-c9b7aa81f465",
-					ClientSecret = "e60339d0-2a1b-4d22-8878-b0c8ba95f30e",
+					ClientId = this.apiClientOptions.ClientId,
+					ClientSecret = this.apiClientOptions.ClientSecret,
 					Permissions =
 					{
 						Permissions.Endpoints.Introspection
 					}
 				};
 
-				await manager.CreateAsync(descriptor);
+				await this.applicationManager.CreateAsync(descriptor);
 			}
 		}
 
-		static async Task RegisterScopesAsync(IServiceProvider provider)
+		private async Task RegisterScopesAsync()
 		{
-			var manager = provider.GetRequiredService<IOpenIddictScopeManager>();
-
-			if (await manager.FindByNameAsync("planning-poker-api") is null)
+			if (await this.scopeManager.FindByNameAsync(this.apiClientOptions.Name) is null)
 			{
-				await manager.CreateAsync(new OpenIddictScopeDescriptor
+				await this.scopeManager.CreateAsync(new OpenIddictScopeDescriptor
 				{
-					DisplayName = "Planning Poker API access.",
-					Name = "planning-poker-api",
+					DisplayName = this.apiClientOptions.DisplayName,
+					Name = this.apiClientOptions.Name,
 					Resources =
 					{
-						"c257f553-8ce4-4225-8447-c9b7aa81f465"
+						this.apiClientOptions.ClientId
 					}
 				});
 			}

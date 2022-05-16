@@ -27,7 +27,7 @@ class Build : NukeBuild
 	readonly Configuration Configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
 
 	[Solution] readonly Solution Solution;
-	
+
 #pragma warning disable IDE0051 // Remove unused private members
 #pragma warning disable RCS1213 // Remove unused member declaration.
 	[GitRepository] readonly GitRepository GitRepository;

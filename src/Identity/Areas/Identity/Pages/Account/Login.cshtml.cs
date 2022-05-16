@@ -109,9 +109,13 @@ namespace PlanningPoker.Identity.Areas.Identity.Pages.Account
 
 			if (this.ModelState.IsValid)
 			{
+				var existingUser = await (this.Input.Email.Contains("@")
+					? this.signInManager.UserManager.FindByEmailAsync(this.Input.Email)
+					: this.signInManager.UserManager.FindByNameAsync(this.Input.Email));
+
 				// This doesn't count login failures towards account lockout
 				// To enable password failures to trigger account lockout, set lockoutOnFailure: true
-				var result = await this.signInManager.PasswordSignInAsync(this.Input.Email, this.Input.Password, this.Input.RememberMe, lockoutOnFailure: false);
+				var result = await this.signInManager.PasswordSignInAsync(existingUser?.UserName ?? string.Empty, this.Input.Password, this.Input.RememberMe, lockoutOnFailure: false);
 				if (result.Succeeded)
 				{
 					this.logger.LogInformation("User logged in.");

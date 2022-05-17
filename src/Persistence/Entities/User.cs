@@ -7,5 +7,7 @@
 		public DateTimeOffset? DeletedOn { get; set; }
 
 		public bool IsDeleted { get; set; }
+
+		public IList<Table> Tables { get; set; } = new List<Table>();
 	}
 }

@@ -19,6 +19,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\Core\PlanningPoker.Core.csproj" />
 		<ProjectReference Include="..\SharedKernel\PlanningPoker.SharedKernel.csproj" />
 	</ItemGroup>
 

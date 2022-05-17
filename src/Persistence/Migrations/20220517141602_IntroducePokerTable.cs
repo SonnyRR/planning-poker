@@ -15,7 +15,7 @@ namespace PlanningPoker.Persistence.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     DeckType = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Name = table.Column<int>(type: "int", maxLength: 150, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     CreatedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     ModifiedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true)
                 },

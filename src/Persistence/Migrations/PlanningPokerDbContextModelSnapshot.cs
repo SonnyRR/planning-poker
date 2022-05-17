@@ -382,10 +382,11 @@ namespace PlanningPoker.Persistence.Migrations
                     b.Property<DateTimeOffset?>("ModifiedOn")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<int>("Name")
+                    b.Property<string>("Name")
+                        .IsRequired()
                         .HasMaxLength(150)
                         .IsUnicode(true)
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(150)");
 
                     b.HasKey("Id");
 

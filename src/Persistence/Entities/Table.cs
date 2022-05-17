@@ -10,6 +10,16 @@
 	/// </summary>
 	public sealed class Table : BaseEntity<Guid>
 	{
+		public Table()
+		{
+		}
+
+		public Table(DeckType deckType, string name)
+		{
+			this.DeckType = deckType;
+			this.Name = name;
+		}
+
 		/// <summary>
 		/// The card deck type.
 		/// </summary>
@@ -18,7 +28,7 @@
 		/// <summary>
 		/// Name of the table.
 		/// </summary>
-		public int Name { get; set; }
+		public string Name { get; set; }
 
 		/// <summary>
 		/// The card players.

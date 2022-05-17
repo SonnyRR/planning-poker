@@ -12,7 +12,7 @@ using PlanningPoker.Persistence;
 namespace PlanningPoker.Persistence.Migrations
 {
     [DbContext(typeof(PlanningPokerDbContext))]
-    [Migration("20220517104531_IntroducePokerTable")]
+    [Migration("20220517141602_IntroducePokerTable")]
     partial class IntroducePokerTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -384,10 +384,11 @@ namespace PlanningPoker.Persistence.Migrations
                     b.Property<DateTimeOffset?>("ModifiedOn")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<int>("Name")
+                    b.Property<string>("Name")
+                        .IsRequired()
                         .HasMaxLength(150)
                         .IsUnicode(true)
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(150)");
 
                     b.HasKey("Id");
 

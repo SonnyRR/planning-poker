@@ -13,12 +13,15 @@
 		{
 		}
 
+		public DbSet<Table> Tables { get; set; }
+
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
 			// Necessary for Identity models configuration.
 			base.OnModelCreating(builder);
 
 			builder.RemoveIdentityTablesPrefix();
+			builder.ApplyConfigurationsFromAssembly(this.GetType().Assembly);
 		}
 	}
 }

@@ -40,10 +40,9 @@
 		/// <summary>
 		/// Updates an existing poker table by it's unique identifier.
 		/// </summary>
-		/// <param name="id">The unique identifier value.</param>
 		/// <param name="tableMetadata">Table metadata.</param>
 		/// <param name="ct">The cancellation token.</param>
 		/// <returns>Instance of <see cref="Table"/>.</returns>
-		Task<Table> UpdateAsync(Guid id, TableMetadata tableMetadata, CancellationToken ct = default);
+		Task<Table> UpdateAsync(TableMetadata tableMetadata, CancellationToken ct = default);
 	}
 }

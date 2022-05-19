@@ -56,14 +56,17 @@
 			return table;
 		}
 
-		public async Task<Table> UpdateAsync(Guid id, TableMetadata tableMetadata, CancellationToken ct = default)
+		public async Task<Table> UpdateAsync(TableMetadata tableMetadata, CancellationToken ct = default)
 		{
-			var tableToUpdate = await this.dbContext.Tables.SingleOrDefaultAsync(t => t.Id == id, ct);
+			if (tableMetadata is null || !tableMetadata.Id.HasValue)
+				return null;
+
+			var tableToUpdate = await this.dbContext.Tables.SingleOrDefaultAsync(t => t.Id == tableMetadata.Id.Value, ct);
 
 			if (tableToUpdate is null)
 			{
 				// TODO: Extract constant.
-				this.logger.LogError("Table with id '{id}' not found.", id);
+				this.logger.LogError("Table with id '{id}' not found.", tableMetadata.Id.Value);
 				return null;
 			}
 

@@ -9,6 +9,8 @@ namespace PlanningPoker.WebAPI
 
 	using System;
 
+
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 	public static class Program
 	{
 		public static IHostBuilder CreateHostBuilder(string[] args)
@@ -42,4 +44,5 @@ namespace PlanningPoker.WebAPI
 			}
 		}
 	}
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }

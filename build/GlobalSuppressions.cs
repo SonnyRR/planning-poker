@@ -12,3 +12,4 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("Usage", "CA2211:Non-constant fields should not be visible", Justification = "Not required in the NUKE build project.", Scope = "module")]
 [assembly: SuppressMessage("Minor Code Smell", "S1104:Fields should not have public accessibility", Justification = "Not required in the NUKE build project.", Scope = "module")]
 [assembly: SuppressMessage("Style", "IDE0053:Use expression body for lambda expressions", Justification = "Not required in the NUKE build project.", Scope = "module")]
+[assembly: SuppressMessage("Major Code Smell", "S1144:Unused private types or members should be removed", Justification = "Not required in the NUKE build project.", Scope = "module")]

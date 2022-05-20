@@ -2,7 +2,7 @@
 {
 	using System.ComponentModel.DataAnnotations;
 
-	public class BaseEntity<TKey> : IAuditableEntity
+	public abstract class BaseEntity<TKey> : IAuditableEntity
 		where TKey : struct, IComparable<TKey>, IEquatable<TKey>
 	{
 		public DateTimeOffset CreatedOn { get; set; }

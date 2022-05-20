@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -8,5 +8,27 @@
     <ProjectReference Include="..\Persistence\PlanningPoker.Persistence.csproj" />
     <ProjectReference Include="..\SharedKernel\PlanningPoker.SharedKernel.csproj" />
   </ItemGroup>
+
+  <!--dotnet msbuild -t:Mapster-->
+  <Target Name="Mapster" AfterTargets="AfterBuild">
+    <Exec WorkingDirectory="$(ProjectDir)" Command="dotnet tool restore" />
+    <Exec WorkingDirectory="$(ProjectDir)" Command="dotnet mapster model -a &quot;$(TargetDir)$(ProjectName).dll&quot; -o ../SharedKernel/Models -n PlanningPoker.SharedKernel.Models" />
+    <Exec WorkingDirectory="$(ProjectDir)" Command="dotnet mapster extension -a &quot;$(TargetDir)$(ProjectName).dll&quot;" />
+    <Exec WorkingDirectory="$(ProjectDir)" Command="dotnet mapster mapper -a ../SharedKernel/bin/Debug/net6.0/PlanningPoker.SharedKernel.dll" />
+  </Target>
+
+  <ItemGroup>
+    <Generated Include="**\*.g.cs" />
+    <Generated Include="..\SharedKernel\**\*.g.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Mapster" Version="7.3.0" />
+  </ItemGroup>
+
+  <!--dotnet msbuild -t:CleanGenerated-->
+  <Target Name="CleanGenerated">
+    <Delete Files="@(Generated)" />
+  </Target>
 
 </Project>

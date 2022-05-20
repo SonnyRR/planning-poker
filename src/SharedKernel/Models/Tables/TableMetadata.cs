@@ -20,7 +20,6 @@
 		public int Code { get; set; }
 
 		public string Name { get; set; }
-		// TODO: Add remaining properties.
 	}
 
 	public class TableMetadataValidator : AbstractValidator<TableMetadata>

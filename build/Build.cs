@@ -69,4 +69,16 @@ class Build : NukeBuild
 				.SetInformationalVersion(this.GitVersion.InformationalVersion)
 				.EnableNoRestore());
 		});
+
+	Target CleanAutogenetedDtos => _ => _
+		.Executes(() =>
+		{
+			DotNetMSBuild(s => s.AddTargets("CleanGenerated"));
+		});
+
+	Target GenerateDtos => _ => _
+		.Executes(() =>
+		{
+			DotNetMSBuild(s => s.AddTargets("Mapster"));
+		});
 }

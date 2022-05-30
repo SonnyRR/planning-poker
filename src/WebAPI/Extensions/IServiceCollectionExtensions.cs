@@ -9,7 +9,8 @@
 	using Microsoft.Extensions.Options;
 	using Microsoft.OpenApi.Models;
 	using OpenIddict.Validation.AspNetCore;
-
+	using PlanningPoker.Core.Services;
+	using PlanningPoker.Persistence.Extensions;
 	using PlanningPoker.SharedKernel.Models.Configuration;
 	using System;
 	using System.Collections.Generic;
@@ -45,6 +46,8 @@
 
 			services.AddSwagger();
 			services.AddSignalR();
+			services.AddPersistanceServices();
+			services.AddTransient<ITableService, TableService>();
 
 			return services;
 		}
@@ -115,7 +118,7 @@
 						Url = new Uri("https://github.com/SonnyRR/planning-poker/blob/master/LICENSE")
 					}
 				});
-				
+
 				var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
 				options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 			});

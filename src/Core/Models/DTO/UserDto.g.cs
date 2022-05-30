@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using PlanningPoker.SharedKernel.Models;
+using PlanningPoker.Core.Models.DTO;
 
-namespace PlanningPoker.SharedKernel.Models
+namespace PlanningPoker.Core.Models.DTO
 {
     public partial class UserDto
     {

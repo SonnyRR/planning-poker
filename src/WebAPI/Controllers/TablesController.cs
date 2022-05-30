@@ -1,11 +1,12 @@
 ﻿namespace PlanningPoker.WebAPI.Controllers
 {
+	using Mapster;
 	using Microsoft.AspNetCore.Authorization;
 	using Microsoft.AspNetCore.Mvc;
-
+	using PlanningPoker.Core.Mapping;
 	using PlanningPoker.Core.Models.Binding;
+	using PlanningPoker.Core.Models.DTO;
 	using PlanningPoker.Core.Services;
-
 	using System;
 	using System.Threading;
 	using System.Threading.Tasks;
@@ -32,15 +33,16 @@
 		/// <param name="ct">Cancellation token.</param>
 		/// <returns></returns>
 		[HttpGet(ID_ROUTE_PARAM)]
-		public async Task<object> Get([FromRoute] Guid id, CancellationToken ct)
-			=> await this.tableService.GetByIdAsync(id, ct);
+		[AllowAnonymous]
+		public async Task<TableDto> Get([FromRoute] Guid id, CancellationToken ct)
+			=> (await this.tableService.GetByIdAsync(id, ct)).AdaptToDto();
 
 		/// <summary>
 		/// Creates a new poker table.
 		/// </summary>
 		/// <param name="tableMetadata">The table metadata.</param>
 		/// <param name="ct">Cancellation token.</param>
-		/// <returns></returns>
+		/// <returns>An instance of <see cref="TableMetadata"/>.</returns>
 		[HttpPost]
 		public async Task<object> Create([FromBody] TableMetadata tableMetadata, CancellationToken ct)
 			=> await this.tableService.CreateAsync(tableMetadata, ct);

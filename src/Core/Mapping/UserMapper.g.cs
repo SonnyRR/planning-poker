@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Mapster;
-using PlanningPoker.Core.Models.DTO;
 using PlanningPoker.Persistence.Entities;
+using PlanningPoker.SharedKernel.Models.Generated;
 
 namespace PlanningPoker.Core.Mapping
 {
@@ -9,7 +9,7 @@ namespace PlanningPoker.Core.Mapping
     {
         private static TypeAdapterConfig TypeAdapterConfig1;
         
-        public static User AdaptToUser(this UserDto p1)
+        public static User AdaptToUser(this UserModel p1)
         {
             return p1 == null ? null : new User()
             {
@@ -18,7 +18,7 @@ namespace PlanningPoker.Core.Mapping
                 UserName = p1.UserName
             };
         }
-        public static User AdaptTo(this UserDto p5, User p6)
+        public static User AdaptTo(this UserModel p5, User p6)
         {
             if (p5 == null)
             {
@@ -32,22 +32,22 @@ namespace PlanningPoker.Core.Mapping
             return result;
             
         }
-        public static UserDto AdaptToDto(this User p11)
+        public static UserModel AdaptToModel(this User p11)
         {
-            return p11 == null ? null : new UserDto()
+            return p11 == null ? null : new UserModel()
             {
                 Tables = funcMain7(p11.Tables),
                 Id = p11.Id,
                 UserName = p11.UserName
             };
         }
-        public static UserDto AdaptTo(this User p15, UserDto p16)
+        public static UserModel AdaptTo(this User p15, UserModel p16)
         {
             if (p15 == null)
             {
                 return null;
             }
-            UserDto result = p16 ?? new UserDto();
+            UserModel result = p16 ?? new UserModel();
             
             result.Tables = funcMain10(p15.Tables, result.Tables);
             result.Id = p15.Id;
@@ -56,7 +56,7 @@ namespace PlanningPoker.Core.Mapping
             
         }
         
-        private static IList<Table> funcMain1(IList<TableDto> p2)
+        private static IList<Table> funcMain1(IList<TableModel> p2)
         {
             if (p2 == null)
             {
@@ -71,7 +71,7 @@ namespace PlanningPoker.Core.Mapping
             
             while (i < len)
             {
-                TableDto item = p2[i];
+                TableModel item = p2[i];
                 list.Add(funcMain2(item));
                 i++;
             }
@@ -79,7 +79,7 @@ namespace PlanningPoker.Core.Mapping
             
         }
         
-        private static IList<Table> funcMain4(IList<TableDto> p7, IList<Table> p8)
+        private static IList<Table> funcMain4(IList<TableModel> p7, IList<Table> p8)
         {
             if (p7 == null)
             {
@@ -94,7 +94,7 @@ namespace PlanningPoker.Core.Mapping
             
             while (i < len)
             {
-                TableDto item = p7[i];
+                TableModel item = p7[i];
                 list.Add(funcMain5(item));
                 i++;
             }
@@ -102,15 +102,15 @@ namespace PlanningPoker.Core.Mapping
             
         }
         
-        private static IList<TableDto> funcMain7(IList<Table> p12)
+        private static IList<TableModel> funcMain7(IList<Table> p12)
         {
             if (p12 == null)
             {
                 return null;
             }
-            IList<TableDto> result = new List<TableDto>(p12.Count);
+            IList<TableModel> result = new List<TableModel>(p12.Count);
             
-            ICollection<TableDto> list = result;
+            ICollection<TableModel> list = result;
             
             int i = 0;
             int len = p12.Count;
@@ -125,15 +125,15 @@ namespace PlanningPoker.Core.Mapping
             
         }
         
-        private static IList<TableDto> funcMain10(IList<Table> p17, IList<TableDto> p18)
+        private static IList<TableModel> funcMain10(IList<Table> p17, IList<TableModel> p18)
         {
             if (p17 == null)
             {
                 return null;
             }
-            IList<TableDto> result = new List<TableDto>(p17.Count);
+            IList<TableModel> result = new List<TableModel>(p17.Count);
             
-            ICollection<TableDto> list = result;
+            ICollection<TableModel> list = result;
             
             int i = 0;
             int len = p17.Count;
@@ -148,7 +148,7 @@ namespace PlanningPoker.Core.Mapping
             
         }
         
-        private static Table funcMain2(TableDto p3)
+        private static Table funcMain2(TableModel p3)
         {
             return p3 == null ? null : new Table()
             {
@@ -161,7 +161,7 @@ namespace PlanningPoker.Core.Mapping
             };
         }
         
-        private static Table funcMain5(TableDto p9)
+        private static Table funcMain5(TableModel p9)
         {
             return p9 == null ? null : new Table()
             {
@@ -174,9 +174,9 @@ namespace PlanningPoker.Core.Mapping
             };
         }
         
-        private static TableDto funcMain8(Table p13)
+        private static TableModel funcMain8(Table p13)
         {
-            return p13 == null ? null : new TableDto()
+            return p13 == null ? null : new TableModel()
             {
                 DeckType = p13.DeckType,
                 Name = p13.Name,
@@ -187,9 +187,9 @@ namespace PlanningPoker.Core.Mapping
             };
         }
         
-        private static TableDto funcMain11(Table p19)
+        private static TableModel funcMain11(Table p19)
         {
-            return p19 == null ? null : new TableDto()
+            return p19 == null ? null : new TableModel()
             {
                 DeckType = p19.DeckType,
                 Name = p19.Name,
@@ -200,7 +200,7 @@ namespace PlanningPoker.Core.Mapping
             };
         }
         
-        private static ICollection<User> funcMain3(ICollection<UserDto> p4)
+        private static ICollection<User> funcMain3(ICollection<UserModel> p4)
         {
             if (p4 == null)
             {
@@ -208,18 +208,18 @@ namespace PlanningPoker.Core.Mapping
             }
             ICollection<User> result = new List<User>(p4.Count);
             
-            IEnumerator<UserDto> enumerator = p4.GetEnumerator();
+            IEnumerator<UserModel> enumerator = p4.GetEnumerator();
             
             while (enumerator.MoveNext())
             {
-                UserDto item = enumerator.Current;
-                result.Add(TypeAdapterConfig1.GetMapFunction<UserDto, User>().Invoke(item));
+                UserModel item = enumerator.Current;
+                result.Add(TypeAdapterConfig1.GetMapFunction<UserModel, User>().Invoke(item));
             }
             return result;
             
         }
         
-        private static ICollection<User> funcMain6(ICollection<UserDto> p10)
+        private static ICollection<User> funcMain6(ICollection<UserModel> p10)
         {
             if (p10 == null)
             {
@@ -227,50 +227,50 @@ namespace PlanningPoker.Core.Mapping
             }
             ICollection<User> result = new List<User>(p10.Count);
             
-            IEnumerator<UserDto> enumerator = p10.GetEnumerator();
+            IEnumerator<UserModel> enumerator = p10.GetEnumerator();
             
             while (enumerator.MoveNext())
             {
-                UserDto item = enumerator.Current;
-                result.Add(TypeAdapterConfig1.GetMapFunction<UserDto, User>().Invoke(item));
+                UserModel item = enumerator.Current;
+                result.Add(TypeAdapterConfig1.GetMapFunction<UserModel, User>().Invoke(item));
             }
             return result;
             
         }
         
-        private static ICollection<UserDto> funcMain9(ICollection<User> p14)
+        private static ICollection<UserModel> funcMain9(ICollection<User> p14)
         {
             if (p14 == null)
             {
                 return null;
             }
-            ICollection<UserDto> result = new List<UserDto>(p14.Count);
+            ICollection<UserModel> result = new List<UserModel>(p14.Count);
             
             IEnumerator<User> enumerator = p14.GetEnumerator();
             
             while (enumerator.MoveNext())
             {
                 User item = enumerator.Current;
-                result.Add(TypeAdapterConfig1.GetMapFunction<User, UserDto>().Invoke(item));
+                result.Add(TypeAdapterConfig1.GetMapFunction<User, UserModel>().Invoke(item));
             }
             return result;
             
         }
         
-        private static ICollection<UserDto> funcMain12(ICollection<User> p20)
+        private static ICollection<UserModel> funcMain12(ICollection<User> p20)
         {
             if (p20 == null)
             {
                 return null;
             }
-            ICollection<UserDto> result = new List<UserDto>(p20.Count);
+            ICollection<UserModel> result = new List<UserModel>(p20.Count);
             
             IEnumerator<User> enumerator = p20.GetEnumerator();
             
             while (enumerator.MoveNext())
             {
                 User item = enumerator.Current;
-                result.Add(TypeAdapterConfig1.GetMapFunction<User, UserDto>().Invoke(item));
+                result.Add(TypeAdapterConfig1.GetMapFunction<User, UserModel>().Invoke(item));
             }
             return result;
             

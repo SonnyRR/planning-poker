@@ -17,7 +17,7 @@
 				.Where(t => typeof(BaseEntity<Guid>).IsAssignableFrom(t) && !t.IsInterface)
 				.ToArray();
 
-			config.AdaptTwoWays("[name]Dto")
+			config.AdaptTwoWays("[name]Model")
 				.ForTypes(types)
 				.ForType<User>(cfg =>
 				{

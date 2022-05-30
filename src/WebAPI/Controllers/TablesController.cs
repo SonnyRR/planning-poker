@@ -1,12 +1,11 @@
 ﻿namespace PlanningPoker.WebAPI.Controllers
 {
-	using Mapster;
 	using Microsoft.AspNetCore.Authorization;
 	using Microsoft.AspNetCore.Mvc;
-	using PlanningPoker.Core.Mapping;
 	using PlanningPoker.Core.Models.Binding;
-	using PlanningPoker.Core.Models.DTO;
 	using PlanningPoker.Core.Services;
+	using PlanningPoker.Core.Mapping;
+	using PlanningPoker.SharedKernel.Models.Generated;
 	using System;
 	using System.Threading;
 	using System.Threading.Tasks;
@@ -34,8 +33,8 @@
 		/// <returns></returns>
 		[HttpGet(ID_ROUTE_PARAM)]
 		[AllowAnonymous]
-		public async Task<TableDto> Get([FromRoute] Guid id, CancellationToken ct)
-			=> (await this.tableService.GetByIdAsync(id, ct)).AdaptToDto();
+		public async Task<TableModel> Get([FromRoute] Guid id, CancellationToken ct)
+			=> (await this.tableService.GetByIdAsync(id, ct)).AdaptToModel();
 
 		/// <summary>
 		/// Creates a new poker table.

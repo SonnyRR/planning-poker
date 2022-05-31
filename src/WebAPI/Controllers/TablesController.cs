@@ -2,9 +2,9 @@
 {
 	using Microsoft.AspNetCore.Authorization;
 	using Microsoft.AspNetCore.Mvc;
+	using PlanningPoker.Core.Mapping;
 	using PlanningPoker.Core.Models.Binding;
 	using PlanningPoker.Core.Services;
-	using PlanningPoker.Core.Mapping;
 	using PlanningPoker.SharedKernel.Models.Generated;
 	using System;
 	using System.Threading;
@@ -30,9 +30,8 @@
 		/// </summary>
 		/// <param name="id">The unique identifier of the table.</param>
 		/// <param name="ct">Cancellation token.</param>
-		/// <returns></returns>
+		/// <returns>An instance of <see cref="TableModel"/>.</returns>
 		[HttpGet(ID_ROUTE_PARAM)]
-		[AllowAnonymous]
 		public async Task<TableModel> Get([FromRoute] Guid id, CancellationToken ct)
 			=> (await this.tableService.GetByIdAsync(id, ct)).AdaptToModel();
 
@@ -43,25 +42,25 @@
 		/// <param name="ct">Cancellation token.</param>
 		/// <returns>An instance of <see cref="TableMetadata"/>.</returns>
 		[HttpPost]
-		public async Task<object> Create([FromBody] TableMetadata tableMetadata, CancellationToken ct)
-			=> await this.tableService.CreateAsync(tableMetadata, ct);
+		public async Task<TableModel> Create([FromBody] TableMetadata tableMetadata, CancellationToken ct)
+			=> (await this.tableService.CreateAsync(tableMetadata, ct)).AdaptToModel();
 
 		/// <summary>
 		/// Updates an existing poker table.
 		/// </summary>
 		/// <param name="tableMetadata">The table metadata.</param>
 		/// <param name="ct">Cancellation token.</param>
-		/// <returns></returns>
+		/// <returns>An instance of <see cref="TableModel"/>.</returns>
 		[HttpPut]
-		public async Task<object> Update([FromBody] TableMetadata tableMetadata, CancellationToken ct)
-			=> await this.tableService.UpdateAsync(tableMetadata, ct);
+		public async Task<TableModel> Update([FromBody] TableMetadata tableMetadata, CancellationToken ct)
+			=> (await this.tableService.UpdateAsync(tableMetadata, ct)).AdaptToModel();
 
 		/// <summary>
 		/// Deletes an existing poker table.
 		/// </summary>
 		/// <param name="id">The unique identifier of the table.</param>
 		/// <param name="ct">Cancellation token.</param>
-		/// <returns></returns>
+		/// <returns>A <see cref="bool"/> flag, indicating if the table was successfully deleted.</returns>
 		[HttpDelete(ID_ROUTE_PARAM)]
 		public async Task<bool> Delete([FromRoute] Guid id, CancellationToken ct)
 			=> await this.tableService.DeleteAsync(id, ct);

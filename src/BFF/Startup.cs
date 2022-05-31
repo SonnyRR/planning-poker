@@ -37,7 +37,7 @@ namespace PlanningPoker.BFF
 				//app.UseHsts();
 			}
 
-			app.UseSecurityHeaders(GetSecurityHeaderPolicy(env.IsDevelopment(), "https://localhost:5001"));
+			app.UseSecurityHeaders(GetSecurityHeaderPolicy(env.IsDevelopment(), "https://localhost:7215"));
 			app.UseHttpsRedirection();
 			app.UseCorrelationId();
 			app.UseSerilogIngestion();

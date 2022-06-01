@@ -1,11 +1,11 @@
 ﻿@page "/create"
 @using Blazored.FluentValidation
-@using PlanningPoker.SharedKernel.Models.Tables
+@using PlanningPoker.SharedKernel.Models.Binding
 
 <div class="container h-100 d-flex align-items-center">
     <div class="col-lg-8 offset-lg-2">
         <RadzenCard>
-            <RadzenTemplateForm TItem="TableMetadata" Data=@Table>
+            <RadzenTemplateForm TItem="TableBindingModel" Data=@Table>
                 <FluentValidationValidator DisableAssemblyScanning=@true />
 
                 <RadzenFieldset Text="Create a new table">

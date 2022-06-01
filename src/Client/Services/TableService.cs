@@ -1,7 +1,7 @@
 ﻿namespace PlanningPoker.Client.Services
 {
+	using PlanningPoker.SharedKernel.Models.Binding;
 	using PlanningPoker.SharedKernel.Models.Generated;
-	using PlanningPoker.SharedKernel.Models.Tables;
 	using System;
 	using System.Net.Http;
 	using System.Threading.Tasks;
@@ -13,12 +13,12 @@
 		{
 		}
 
-		public Task<TableModel> CreateAsync(TableMetadata metadata) => throw new NotImplementedException();
+		public Task<TableModel> CreateAsync(TableBindingModel metadata) => throw new NotImplementedException();
 
 		public Task<bool> DeleteAsync(Guid id) => throw new NotImplementedException();
 
 		public Task<TableModel> GetByIdAsync(Guid id) => base.GetAsync<TableModel>($"/api/tables/{id}");
 
-		public Task<TableModel> ModifyAsync(TableMetadata metadata) => throw new NotImplementedException();
+		public Task<TableModel> ModifyAsync(TableBindingModel metadata) => throw new NotImplementedException();
 	}
 }

@@ -3,7 +3,7 @@
 	using Microsoft.AspNetCore.Components;
 	using Microsoft.Extensions.Logging;
 	using PlanningPoker.Client.Services;
-	using SharedKernel.Models.Tables;
+	using PlanningPoker.SharedKernel.Models.Binding;
 	using System;
 	using System.Collections.Generic;
 	using System.Threading.Tasks;
@@ -16,7 +16,7 @@
 		[Inject]
 		public ITableService TableService { get; init; }
 
-		public TableMetadata Table { get; set; } = new();
+		public TableBindingModel Table { get; set; } = new();
 
 		public IEnumerable<DropdownEntry> TestingValues { get; } = new[]
 		{
@@ -27,8 +27,7 @@
 
 		protected override async Task OnInitializedAsync()
 		{
-			base.OnInitializedAsync();
-			var a = await this.TableService.GetByIdAsync(Guid.Parse("C2599A2F-F634-487A-9F7B-57DCC6927AF4"));
+			await base.OnInitializedAsync();
 		}
 	}
 

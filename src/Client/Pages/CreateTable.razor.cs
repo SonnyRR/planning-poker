@@ -7,9 +7,11 @@
 	using PlanningPoker.SharedKernel.Extensions;
 	using PlanningPoker.SharedKernel.Models.Binding;
 	using PlanningPoker.SharedKernel.Models.Decks;
+	using Radzen;
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
+	using System.Text.Json;
 	using System.Threading.Tasks;
 
 	public partial class CreateTable
@@ -22,14 +24,23 @@
 
 		public TableBindingModel Table { get; set; } = new();
 
-		public static IEnumerable<DropDownEntry<int>> DeckTypeEntries { get; } = Enum
+		public static IEnumerable<DropDownEntry<DeckType>> DeckTypeEntries { get; } = Enum
 			.GetValues<DeckType>()
-			.Select(e => new DropDownEntry<int>(e.GetEnumDisplayName(), (int)e));
+			.Select(e => new DropDownEntry<DeckType>(e.GetEnumDisplayName(), e));
 
-		protected override async Task OnInitializedAsync()
+		public async Task OnSubmit(TableBindingModel bindingModel)
 		{
-			await base.OnInitializedAsync();
-			var a = await this.TableService.GetByIdAsync(Guid.Parse("C2599A2F-F634-487A-9F7B-57DCC6927AF4"));
+			await this.TableService.CreateAsync(bindingModel);
+			this.Logger.LogInformation("Valid Submit");
+		}
+
+		/// <summary>
+		/// Handles invalid form submits.
+		/// </summary>
+		/// <param name="args"></param>
+		public void OnInvalidSubmit(FormInvalidSubmitEventArgs args)
+		{
+			this.Logger.LogInformation("Invalid Submit", JsonSerializer.Serialize(args, new JsonSerializerOptions() { WriteIndented = true }));
 		}
 	}
 }

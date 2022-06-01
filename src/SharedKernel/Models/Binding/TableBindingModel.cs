@@ -2,6 +2,7 @@
 {
 	using FluentValidation;
 	using PlanningPoker.SharedKernel.Models.Decks;
+	using System;
 
 	/// <summary>
 	/// Represents the information for creating or updating an existing poker table.
@@ -12,16 +13,25 @@
 		{
 		}
 
-		public TableBindingModel(string name, int code)
+		public TableBindingModel(string name, DeckType deckType)
 		{
 			this.Name = name;
-			this.Code = code;
+			this.DeckType = deckType;
 		}
 
-		public int Code { get; set; }
-
+		/// <summary>
+		/// The card deck type.
+		/// </summary>
 		public DeckType DeckType { get; set; }
 
+		/// <summary>
+		/// The table's unique identifier.
+		/// </summary>
+		public Guid? Id { get; set; }
+
+		/// <summary>
+		/// The name of the poker table.
+		/// </summary>
 		public string Name { get; set; }
 	}
 
@@ -33,7 +43,7 @@
 		public TableBindingModelValidator()
 		{
 			this.RuleFor(tm => tm.Name).NotEmpty().MinimumLength(3);
-			this.RuleFor(tm => tm.Code).NotEmpty();
+			this.RuleFor(tm => tm.DeckType).NotEmpty();
 		}
 	}
 }

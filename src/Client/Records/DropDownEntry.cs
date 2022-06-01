@@ -12,8 +12,14 @@
 			this.Value = value;
 		}
 
+		/// <summary>
+		/// The display name used in the input field.
+		/// </summary>
 		public string DisplayName { get; }
 
+		/// <summary>
+		/// The backing field value.
+		/// </summary>
 		public TValue Value { get; }
 	}
 }

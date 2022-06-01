@@ -1,11 +1,14 @@
 ﻿namespace PlanningPoker.Client.Services
 {
 	using Ardalis.GuardClauses;
-	using System;
 	using System.Net.Http;
+	using System.Net.Http.Json;
+
+	using System.Net.Mime;
 	using System.Text.Json;
 	using System.Threading;
 	using System.Threading.Tasks;
+	using static Constants;
 
 	public abstract class BaseHttpService
 	{
@@ -19,19 +22,55 @@
 		{
 			Guard.Against.Null(httpClientFactory, nameof(httpClientFactory));
 
-			this.httpClient = httpClientFactory.CreateClient("authorized");
+			this.httpClient = httpClientFactory.CreateClient(authorized ? Http.AUTHORIZED_CLIENT_ID : Http.UNAUTHORIZED_CLIENT_ID);
 		}
 
-		protected async Task<TModel> GetAsync<TModel>(string? uri, CancellationToken ct = default)
+		protected async Task DeleteAsync(string uri, CancellationToken ct = default)
 		{
-			var response = await this.httpClient.GetAsync(uri, ct);
-			var content = await response.Content.ReadAsStreamAsync(ct);
-			if (response.IsSuccessStatusCode)
+			var response = await this.httpClient.DeleteAsync(uri, ct);
+			response.EnsureSuccessStatusCode();
+		}
+
+		protected Task<TRes> GetAsync<TRes>(string uri, CancellationToken ct = default) =>
+			this.httpClient.GetFromJsonAsync<TRes>(uri, this.jsonSerializerOptions, ct);
+
+		protected async Task PostAsync<TPayload>(string uri, TPayload payload, CancellationToken ct = default)
+		{
+			using var response = await this.httpClient.PostAsJsonAsync(uri, payload, ct);
+			response.EnsureSuccessStatusCode();
+		}
+
+		protected async Task<TRes> PostAsync<TPayload, TRes>(string uri, TPayload payload, CancellationToken ct = default)
+		{
+			using var response = await this.httpClient.PostAsJsonAsync(uri, payload, ct);
+			response.EnsureSuccessStatusCode();
+
+			return await this.ParseHttpResponseContentAsync<TRes>(response, ct);
+		}
+
+		protected async Task PutAsync<TPayload>(string uri, TPayload payload, CancellationToken ct = default)
+		{
+			using var response = await this.httpClient.PutAsJsonAsync(uri, payload, ct);
+			response.EnsureSuccessStatusCode();
+		}
+
+		protected async Task<TRes> PutAsync<TPayload, TRes>(string uri, TPayload payload, CancellationToken ct = default)
+		{
+			using var response = await this.httpClient.PutAsJsonAsync(uri, payload, ct);
+			response.EnsureSuccessStatusCode();
+
+			return await this.ParseHttpResponseContentAsync<TRes>(response, ct);
+		}
+
+		private async Task<TModel> ParseHttpResponseContentAsync<TModel>(HttpResponseMessage response, CancellationToken ct = default)
+		{
+			TModel model = default;
+			if (response.Content is not null && response.Content.Headers.ContentType?.MediaType == MediaTypeNames.Application.Json)
 			{
-				return await JsonSerializer.DeserializeAsync<TModel>(content, this.jsonSerializerOptions, ct);
+				model = await response.Content.ReadFromJsonAsync<TModel>(this.jsonSerializerOptions, ct);
 			}
 
-			throw new ApplicationException();
+			return model;
 		}
 	}
 }

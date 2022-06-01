@@ -7,7 +7,7 @@
 <div class="container h-100 d-flex align-items-center">
     <div class="col-lg-8 offset-lg-2">
         <RadzenCard>
-            <RadzenTemplateForm TItem="TableBindingModel" Data=@Table>
+            <RadzenTemplateForm TItem="TableBindingModel" Data=@Table Submit=@OnSubmit InvalidSubmit=@OnInvalidSubmit>
                 <FluentValidationValidator DisableAssemblyScanning=@true />
 
                 <RadzenFieldset Text="Create a new table">
@@ -34,8 +34,8 @@
                                             AllowClear="true"
                                             @bind-Value=@Table.DeckType
                                             Data=@DeckTypeEntries
-                                            ValueProperty=@nameof(DropDownEntry<int>.Value)
-                                            TextProperty=@nameof(DropDownEntry<int>.DisplayName)>
+                                            ValueProperty=@nameof(DropDownEntry<DeckType>.Value)
+                                            TextProperty=@nameof(DropDownEntry<DeckType>.DisplayName)>
                             </RadzenDropDown>
                             <div class="rz-message rz-messages-error">
                                 <ValidationMessage For="@(() => Table.DeckType)" />

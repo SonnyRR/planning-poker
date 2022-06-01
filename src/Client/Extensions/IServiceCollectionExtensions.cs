@@ -17,13 +17,12 @@
 
 	using Services;
 
-	using SharedKernel.Models.Tables;
-
 	using System;
 	using System.Net.Http;
 	using System.Net.Http.Headers;
 	using System.Net.Mime;
 	using System.Text.Json;
+	using static Constants;
 
 	public static class IServiceCollectionExtensions
 	{
@@ -59,13 +58,13 @@
 				config.JsonSerializerOptions.WriteIndented = false;
 			});
 
-			services.AddHttpClient("default", client =>
+			services.AddHttpClient(Http.UNAUTHORIZED_CLIENT_ID, client =>
 			{
 				client.BaseAddress = new Uri(environment.BaseAddress);
 				client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(MediaTypeNames.Application.Json));
 			});
 
-			services.AddHttpClient("authorized", client =>
+			services.AddHttpClient(Http.AUTHORIZED_CLIENT_ID, client =>
 			{
 				client.BaseAddress = new Uri(environment.BaseAddress);
 				client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(MediaTypeNames.Application.Json));

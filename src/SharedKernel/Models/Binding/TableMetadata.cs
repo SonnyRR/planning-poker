@@ -1,6 +1,7 @@
 ﻿namespace PlanningPoker.SharedKernel.Models.Binding
 {
 	using FluentValidation;
+	using PlanningPoker.SharedKernel.Models.Decks;
 
 	/// <summary>
 	/// Represents the information for creating or updating an existing poker table.
@@ -18,6 +19,8 @@
 		}
 
 		public int Code { get; set; }
+
+		public DeckType DeckType { get; set; }
 
 		public string Name { get; set; }
 	}

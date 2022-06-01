@@ -1,13 +1,19 @@
 ﻿namespace PlanningPoker.SharedKernel.Models.Decks
 {
-    /// <summary>
-    /// Represets a type of card deck.
-    /// </summary>
-    public enum DeckType
-    {
-        Fibonacci = 1,
-        FibonacciUnsure,
-        FibonacciCoffee,
-        Size
-    }
+	using System.ComponentModel.DataAnnotations;
+
+	/// <summary>
+	/// Represets a type of card deck.
+	/// </summary>
+	public enum DeckType
+	{
+		Fibonacci = 1,
+
+		[Display(Name = "Fibonacci Unsure")]
+		FibonacciUnsure,
+
+		[Display(Name = "Fibonacci Coffee")]
+		FibonacciCoffee,
+		Size
+	}
 }

@@ -1,6 +1,7 @@
 ﻿@page "/create"
 @using Blazored.FluentValidation
 @using PlanningPoker.SharedKernel.Models.Binding
+@using PlanningPoker.SharedKernel.Models.Decks
 
 <div class="container h-100 d-flex align-items-center">
     <div class="col-lg-8 offset-lg-2">
@@ -17,7 +18,7 @@
                         <div class="col">
                             <RadzenTextBox Name="TableName" class="w-100" @bind-Value=@Table.Name />
                             <div class="rz-message rz-messages-error">
-                                <ValidationMessage For="@(() => Table.Name)"/>
+                                <ValidationMessage For="@(() => Table.Name)" />
                             </div>
 
                         </div>
@@ -28,15 +29,15 @@
                             <small>(3-10 characters)</small>
                         </div>
                         <div class="col">
-                            <RadzenDropDown 
-                                Class="w-100" 
-                                AllowClear="true"
-                                @bind-Value=@Table.Code
-                                Data=@TestingValues ValueProperty=@nameof(DropdownEntry.B)
-                                TextProperty=@nameof(DropdownEntry.A)>
+                            <RadzenDropDown Class="w-100"
+                                            AllowClear="true"
+                                            @bind-Value=@Table.DeckType
+                                            Data=@DeckTypeEntries
+                                            ValueProperty=@nameof(DropDownEntry<int>.Value)
+                                            TextProperty=@nameof(DropDownEntry<int>.DisplayName)>
                             </RadzenDropDown>
                             <div class="rz-message rz-messages-error">
-                                <ValidationMessage For="@(() => Table.Code)"/>
+                                <ValidationMessage For="@(() => Table.DeckType)" />
                             </div>
                         </div>
                     </div>

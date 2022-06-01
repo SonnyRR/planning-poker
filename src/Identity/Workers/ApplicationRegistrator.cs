@@ -64,7 +64,8 @@
 						Permissions.ResponseTypes.Code,
 						Permissions.Scopes.Email,
 						Permissions.Scopes.Profile,
-						Permissions.Scopes.Roles
+						Permissions.Scopes.Roles,
+						Permissions.Prefixes.Scope + this.apiClientOptions.Name
 					},
 					Requirements =
 					{

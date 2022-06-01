@@ -66,6 +66,7 @@
 				//{
 				//    claims.Add(new ClaimValue(claim.Type, claim.Value));
 				//}
+
 				userInfo.Claims = claims;
 			}
 

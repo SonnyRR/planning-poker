@@ -44,6 +44,7 @@
 			services.AddScoped<TooltipService>();
 			services.AddScoped<ContextMenuService>();
 			services.AddScoped<IPlayerService, PlayerService>();
+			services.AddScoped<ITableService, TableService>();
 			services.TryAddSingleton<AuthenticationStateProvider, HostAuthenticationStateProvider>();
 			services.TryAddSingleton(sp => (HostAuthenticationStateProvider)sp.GetRequiredService<AuthenticationStateProvider>());
 			services.AddTransient<AuthorizedHandler>();
@@ -64,7 +65,7 @@
 				client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(MediaTypeNames.Application.Json));
 			});
 
-			services.AddHttpClient("authorizedClient", client =>
+			services.AddHttpClient("authorized", client =>
 			{
 				client.BaseAddress = new Uri(environment.BaseAddress);
 				client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(MediaTypeNames.Application.Json));

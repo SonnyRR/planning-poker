@@ -1,8 +1,7 @@
 ﻿namespace PlanningPoker.Core.Services
 {
-	using PlanningPoker.Core.Models.Binding;
 	using PlanningPoker.Persistence.Entities;
-	using PlanningPoker.SharedKernel.Models.Decks;
+	using PlanningPoker.SharedKernel.Models.Binding;
 
 	using System;
 	using System.Threading;
@@ -16,10 +15,10 @@
 		/// <summary>
 		/// Creates a new poker table.
 		/// </summary>
-		/// <param name="tableMetadata">Table metadata.</param>
+		/// <param name="bindingModel">Table metadata.</param>
 		/// <param name="ct">The cancellation token.</param>
 		/// <returns>Instance of <see cref="Table"/>.</returns>
-		Task<Table> CreateAsync(TableMetadata tableMetadata, CancellationToken ct = default);
+		Task<Table> CreateAsync(TableBindingModel bindingModel, CancellationToken ct = default);
 
 		/// <summary>
 		/// Retrieves an existing poker table by it's unique identifier.
@@ -40,9 +39,9 @@
 		/// <summary>
 		/// Updates an existing poker table by it's unique identifier.
 		/// </summary>
-		/// <param name="tableMetadata">Table metadata.</param>
+		/// <param name="bindingModel">Table metadata.</param>
 		/// <param name="ct">The cancellation token.</param>
 		/// <returns>Instance of <see cref="Table"/>.</returns>
-		Task<Table> UpdateAsync(TableMetadata tableMetadata, CancellationToken ct = default);
+		Task<Table> UpdateAsync(TableBindingModel bindingModel, CancellationToken ct = default);
 	}
 }

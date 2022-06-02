@@ -9,7 +9,7 @@
 	using Microsoft.Extensions.Options;
 	using Microsoft.OpenApi.Models;
 	using OpenIddict.Validation.AspNetCore;
-	using PlanningPoker.Core.Services;
+	using PlanningPoker.Core.Extensions;
 	using PlanningPoker.Persistence.Extensions;
 	using PlanningPoker.SharedKernel.Models.Configuration;
 	using System;
@@ -47,7 +47,8 @@
 			services.AddSwagger();
 			services.AddSignalR();
 			services.AddPersistanceServices();
-			services.AddTransient<ITableService, TableService>();
+			services.AddHttpContextAccessor();
+			services.AddCoreServices();
 
 			return services;
 		}

@@ -3,8 +3,8 @@
 	using Microsoft.AspNetCore.Authorization;
 	using Microsoft.AspNetCore.Mvc;
 	using PlanningPoker.Core.Mapping;
-	using PlanningPoker.Core.Models.Binding;
 	using PlanningPoker.Core.Services;
+	using PlanningPoker.SharedKernel.Models.Binding;
 	using PlanningPoker.SharedKernel.Models.Generated;
 	using System;
 	using System.Threading;
@@ -40,9 +40,9 @@
 		/// </summary>
 		/// <param name="tableMetadata">The table metadata.</param>
 		/// <param name="ct">Cancellation token.</param>
-		/// <returns>An instance of <see cref="TableMetadata"/>.</returns>
+		/// <returns>An instance of <see cref="TableBindingModel"/>.</returns>
 		[HttpPost]
-		public async Task<TableModel> Create([FromBody] TableMetadata tableMetadata, CancellationToken ct)
+		public async Task<TableModel> Create([FromBody] TableBindingModel tableMetadata, CancellationToken ct)
 			=> (await this.tableService.CreateAsync(tableMetadata, ct)).AdaptToModel();
 
 		/// <summary>
@@ -52,7 +52,7 @@
 		/// <param name="ct">Cancellation token.</param>
 		/// <returns>An instance of <see cref="TableModel"/>.</returns>
 		[HttpPut]
-		public async Task<TableModel> Update([FromBody] TableMetadata tableMetadata, CancellationToken ct)
+		public async Task<TableModel> Update([FromBody] TableBindingModel tableMetadata, CancellationToken ct)
 			=> (await this.tableService.UpdateAsync(tableMetadata, ct)).AdaptToModel();
 
 		/// <summary>

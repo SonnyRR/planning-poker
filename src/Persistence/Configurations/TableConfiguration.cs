@@ -22,6 +22,12 @@
 			builder
 				.HasMany(t => t.Players)
 				.WithMany(p => p.Tables);
+
+			builder
+				.HasOne(t => t.Owner)
+				.WithMany()
+				.HasForeignKey(t => t.OwnerId)
+				.OnDelete(DeleteBehavior.NoAction);
 		}
 	}
 }

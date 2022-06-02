@@ -14,10 +14,11 @@
 		{
 		}
 
-		public Table(DeckType deckType, string name)
+		public Table(DeckType deckType, string name, Guid ownerId)
 		{
 			this.DeckType = deckType;
 			this.Name = name;
+			this.OwnerId = ownerId;
 		}
 
 		/// <summary>
@@ -29,6 +30,16 @@
 		/// Name of the table.
 		/// </summary>
 		public string Name { get; set; }
+
+		/// <summary>
+		/// The table's owner.
+		/// </summary>
+		public User Owner { get; set; }
+
+		/// <summary>
+		/// The tables' owner unique identifier.
+		/// </summary>
+		public Guid OwnerId { get; set; }
 
 		/// <summary>
 		/// The card players.

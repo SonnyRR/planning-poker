@@ -30,8 +30,7 @@
 
 		public async Task<Table> CreateAsync(TableBindingModel bindingModel, CancellationToken ct = default)
 		{
-			var table = new Table(bindingModel.DeckType, bindingModel.Name);
-			var userId = this.currentUserService.UserId;
+			var table = new Table(bindingModel.DeckType, bindingModel.Name, this.currentUserService.UserId);
 			await this.dbContext.Tables.AddAsync(table, ct);
 			await this.dbContext.SaveChangesAsync(ct);
 

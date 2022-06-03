@@ -1,9 +1,11 @@
 ﻿namespace PlanningPoker.Client.Pages
 {
+	using Fluxor;
 	using Microsoft.AspNetCore.Components;
 	using Microsoft.Extensions.Logging;
 	using PlanningPoker.Client.Records;
 	using PlanningPoker.Client.Services;
+	using PlanningPoker.Client.Store.PokerTableUseCase;
 	using PlanningPoker.SharedKernel.Extensions;
 	using PlanningPoker.SharedKernel.Models.Binding;
 	using PlanningPoker.SharedKernel.Models.Decks;
@@ -21,6 +23,9 @@
 			.Select(e => new DropDownEntry<DeckType>(e.GetEnumDisplayName(), e));
 
 		[Inject]
+		public IDispatcher Dispatcher { get; set; }
+
+		[Inject]
 		public ILogger<CreateTable> Logger { get; set; }
 
 		[Inject]
@@ -31,19 +36,28 @@
 		[Inject]
 		public ITableService TableService { get; init; }
 
+		[Inject]
+		public IState<PokerTableState> TableState { get; set; }
+
 		/// <summary>
 		/// Handles invalid form submits.
 		/// </summary>
-		/// <param name="args"></param>
+		/// <param name="args">The invalid submit event arguments.</param>
 		public void OnInvalidSubmit(FormInvalidSubmitEventArgs args)
 		{
 			this.Logger.LogInformation("Invalid Submit", JsonSerializer.Serialize(args, new JsonSerializerOptions() { WriteIndented = true }));
 		}
 
+		/// <summary>
+		/// Handles valid form submits.
+		/// </summary>
+		/// <param name="bindingModel">The binding model.</param>
 		public async Task OnSubmit(TableBindingModel bindingModel)
 		{
 			this.Logger.LogInformation("Valid Submit");
 			var table = await this.TableService.CreateAsync(bindingModel);
+			this.Dispatcher.Dispatch(new PokerTableSetAction(table));
+
 			this.NavigationManager.NavigateTo($"/table/{table.Id}");
 		}
 	}

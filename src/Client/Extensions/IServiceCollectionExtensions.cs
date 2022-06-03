@@ -7,7 +7,7 @@
 	using Blazored.LocalStorage;
 
 	using FluentValidation;
-
+	using Fluxor;
 	using Microsoft.AspNetCore.Components.Authorization;
 	using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 	using Microsoft.Extensions.DependencyInjection;
@@ -72,6 +72,7 @@
 			.AddHttpMessageHandler<AuthorizedHandler>();
 
 			services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("default"));
+			services.AddFluxor(options => options.ScanAssemblies(typeof(Program).Assembly).UseReduxDevTools());
 
 			return services;
 		}

@@ -8,7 +8,7 @@
 
 	public static class EnumExtensions
 	{
-		private static readonly Lazy<Dictionary<Type, MemberInfo[]>> cache = new Lazy<Dictionary<Type, MemberInfo[]>>();
+		private static readonly Lazy<Dictionary<Type, MemberInfo[]>> cache = new();
 
 		/// <summary>
 		/// Retrieves all display names for a given enumeration."/>

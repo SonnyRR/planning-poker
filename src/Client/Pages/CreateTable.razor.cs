@@ -16,23 +16,20 @@
 
 	public partial class CreateTable
 	{
-		[Inject]
-		public ILogger<CreateTable> Logger { get; set; }
-
-		[Inject]
-		public ITableService TableService { get; init; }
-
-		public TableBindingModel Table { get; set; } = new();
-
 		public static IEnumerable<DropDownEntry<DeckType>> DeckTypeEntries { get; } = Enum
 			.GetValues<DeckType>()
 			.Select(e => new DropDownEntry<DeckType>(e.GetEnumDisplayName(), e));
 
-		public async Task OnSubmit(TableBindingModel bindingModel)
-		{
-			await this.TableService.CreateAsync(bindingModel);
-			this.Logger.LogInformation("Valid Submit");
-		}
+		[Inject]
+		public ILogger<CreateTable> Logger { get; set; }
+
+		[Inject]
+		public NavigationManager NavigationManager { get; set; }
+
+		public TableBindingModel Table { get; set; } = new();
+
+		[Inject]
+		public ITableService TableService { get; init; }
 
 		/// <summary>
 		/// Handles invalid form submits.
@@ -41,6 +38,13 @@
 		public void OnInvalidSubmit(FormInvalidSubmitEventArgs args)
 		{
 			this.Logger.LogInformation("Invalid Submit", JsonSerializer.Serialize(args, new JsonSerializerOptions() { WriteIndented = true }));
+		}
+
+		public async Task OnSubmit(TableBindingModel bindingModel)
+		{
+			this.Logger.LogInformation("Valid Submit");
+			var table = await this.TableService.CreateAsync(bindingModel);
+			this.NavigationManager.NavigateTo($"/table/{table.Id}");
 		}
 	}
 }

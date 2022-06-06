@@ -154,6 +154,8 @@ namespace PlanningPoker.Core.Mapping
             {
                 DeckType = p3.DeckType,
                 Name = p3.Name,
+                Owner = TypeAdapterConfig1.GetMapFunction<UserModel, User>().Invoke(p3.Owner),
+                OwnerId = p3.OwnerId,
                 Players = funcMain3(p3.Players),
                 CreatedOn = p3.CreatedOn,
                 Id = p3.Id,
@@ -167,6 +169,8 @@ namespace PlanningPoker.Core.Mapping
             {
                 DeckType = p9.DeckType,
                 Name = p9.Name,
+                Owner = TypeAdapterConfig1.GetMapFunction<UserModel, User>().Invoke(p9.Owner),
+                OwnerId = p9.OwnerId,
                 Players = funcMain6(p9.Players),
                 CreatedOn = p9.CreatedOn,
                 Id = p9.Id,
@@ -180,6 +184,8 @@ namespace PlanningPoker.Core.Mapping
             {
                 DeckType = p13.DeckType,
                 Name = p13.Name,
+                Owner = TypeAdapterConfig1.GetMapFunction<User, UserModel>().Invoke(p13.Owner),
+                OwnerId = p13.OwnerId,
                 Players = funcMain9(p13.Players),
                 CreatedOn = p13.CreatedOn,
                 Id = p13.Id,
@@ -193,6 +199,8 @@ namespace PlanningPoker.Core.Mapping
             {
                 DeckType = p19.DeckType,
                 Name = p19.Name,
+                Owner = TypeAdapterConfig1.GetMapFunction<User, UserModel>().Invoke(p19.Owner),
+                OwnerId = p19.OwnerId,
                 Players = funcMain12(p19.Players),
                 CreatedOn = p19.CreatedOn,
                 Id = p19.Id,

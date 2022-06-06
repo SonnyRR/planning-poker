@@ -1,6 +1,9 @@
 ﻿@page "/table/{id:guid}"
 <PageTitle>Index</PageTitle>
 
+<p>
+    @TableState.Value.Table.Name
+</p>
 <div class="form-group">
     <label>
         User:

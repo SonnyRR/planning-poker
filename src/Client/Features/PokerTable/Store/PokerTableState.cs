@@ -1,4 +1,4 @@
-﻿namespace PlanningPoker.Client.Store.PokerTableUseCase
+﻿namespace PlanningPoker.Client.Features.PokerTable.Store
 {
 	using PlanningPoker.SharedKernel.Models.Generated;
 

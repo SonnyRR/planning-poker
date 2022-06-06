@@ -13,18 +13,41 @@
 				IsLoading = false
 			};
 
+		[ReducerMethod(typeof(PokerTableSetInitializedAction))]
+		public static PokerTableState OnSetInitialized(PokerTableState state)
+			=> state with
+			{
+				IsInitialized = true
+			};
+
 		[ReducerMethod(typeof(PokerTableSetLoadingAction))]
 		public static PokerTableState OnSetLoading(PokerTableState state)
 			=> state with
 			{
 				IsLoading = true
 			};
-
-		[ReducerMethod(typeof(PokerTableSetInitializedAction))]
-		public static PokerTableState OnSetInitialized(PokerTableState state)
+		[ReducerMethod(typeof(PokerTableSubmitAction))]
+		public static PokerTableSubmissionState OnSubmit(PokerTableSubmissionState state)
 			=> state with
 			{
-				IsInitialized = true
+				Submitting = true
+			};
+
+		[ReducerMethod(typeof(PokerTableSuccessfulSubmitAction))]
+		public static PokerTableSubmissionState OnSubmitSuccess(PokerTableSubmissionState state)
+			=> state with
+			{
+				Submitting = false,
+				Submitted = true
+			};
+
+		[ReducerMethod]
+		public static PokerTableSubmissionState OnSubmitSuccess(PokerTableSubmissionState state, PokerTableUnsuccessfulSubmitAction action)
+			=> state with
+			{
+				Submitting = false,
+				Submitted = true,
+				ErrorMessage = action.ErrorMessage
 			};
 	}
 }

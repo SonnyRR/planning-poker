@@ -18,15 +18,15 @@
 		}
 
 		public Task<TableModel> CreateAsync(TableBindingModel bindingModel, CancellationToken ct = default)
-			=> base.PostAsync<TableBindingModel, TableModel>(ROUTE, bindingModel, ct);
+			=> this.PostAsync<TableBindingModel, TableModel>(ROUTE, bindingModel, ct);
 
 		public Task DeleteAsync(Guid id, CancellationToken ct = default)
-			=> base.DeleteAsync($"{ROUTE}/{id}", ct);
+			=> this.DeleteAsync($"{ROUTE}/{id}", ct);
 
 		public Task<TableModel> GetByIdAsync(Guid id, CancellationToken ct = default)
-			=> base.GetAsync<TableModel>($"{ROUTE}/{id}", ct);
+			=> this.GetAsync<TableModel>($"{ROUTE}/{id}", ct);
 
 		public Task ModifyAsync(TableBindingModel bindingModel, CancellationToken ct = default)
-			=> base.PostAsync(ROUTE, bindingModel, ct);
+			=> this.PostAsync(ROUTE, bindingModel, ct);
 	}
 }

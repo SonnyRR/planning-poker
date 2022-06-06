@@ -12,6 +12,7 @@
 * ASP.NET Core WebAPI
 * ASP.NET Identity Core
 * NUKE Automated Build System
+* Fluxor
 * Mapster
 * OpenIddict
 * Quartz.NET

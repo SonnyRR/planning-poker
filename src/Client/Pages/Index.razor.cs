@@ -32,7 +32,6 @@
 		public void JoinExistingTable(JoinExistingTableRequest joinTableParameters)
 		{
 			Guard.Against.Null(joinTableParameters, nameof(joinTableParameters));
-			//NavigationManager.NavigateTo($"/room/{tableId}");
 		}
 
 		public void OnTableCreationSubmit() => this.NavigationManager.NavigateTo("/create");

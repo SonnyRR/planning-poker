@@ -70,7 +70,7 @@
 			}
 		}
 
-		private void StateHasChanged(object sender, EventArgs args) 
+		private void StateHasChanged(object sender, EventArgs args)
 			=> this.InvokeAsync(this.StateHasChanged);
 	}
 }

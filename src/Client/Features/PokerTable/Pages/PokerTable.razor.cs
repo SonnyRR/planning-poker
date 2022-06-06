@@ -4,6 +4,7 @@
 	using Microsoft.AspNetCore.Components;
 	using Microsoft.AspNetCore.SignalR.Client;
 	using PlanningPoker.Client.Features.PokerTable.Store;
+	using PlanningPoker.Client.Features.PokerTable.Store.Actions;
 	using System;
 	using System.Collections.Generic;
 	using System.Threading.Tasks;
@@ -26,6 +27,9 @@
 		[Inject]
 		public IState<PokerTableState> TableState { get; set; }
 
+		[Inject]
+		public IDispatcher Dispatcher { get; set; }
+
 		public async ValueTask DisposeAsync()
 		{
 			this.TableState.StateChanged -= this.StateHasChanged;
@@ -39,6 +43,10 @@
 		protected override async Task OnInitializedAsync()
 		{
 			this.TableState.StateChanged += this.StateHasChanged;
+			if (this.Id != this.TableState.Value.Table.Id)
+			{
+				this.Dispatcher.Dispatch(new PokerTableLoadAction(this.Id));
+			}
 
 			this.hubConnection = new HubConnectionBuilder()
 				.WithUrl(this.NavigationManager.ToAbsoluteUri("/poker"))

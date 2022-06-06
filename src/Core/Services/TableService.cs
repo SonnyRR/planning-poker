@@ -7,6 +7,7 @@
 	using PlanningPoker.Persistence.Entities;
 	using PlanningPoker.SharedKernel.Models.Binding;
 	using System;
+	using System.Linq;
 	using System.Threading;
 	using System.Threading.Tasks;
 
@@ -26,6 +27,25 @@
 			this.dbContext = dbContext;
 			this.logger = logger;
 			this.currentUserService = currentUserService;
+		}
+
+		public async Task<Table> AddPlayerToTable(Guid playerId, Guid tableId, CancellationToken ct = default)
+		{
+			var user = await this.dbContext.Users.SingleOrDefaultAsync(u => u.Id == playerId, ct);
+			Table table = default;
+
+			if (user is not null)
+			{
+				table = await this.GetByIdAsync(tableId);
+
+				if (table is not null && !table.Players.Any(p => p.Id == user.Id))
+				{
+					table.Players.Add(user);
+					await this.dbContext.SaveChangesAsync(ct);
+				}
+			}
+
+			return table;
 		}
 
 		public async Task<Table> CreateAsync(TableBindingModel bindingModel, CancellationToken ct = default)
@@ -51,6 +71,18 @@
 			{
 				this.logger.LogError("Table with id '{id}' not found.", id);
 				return null;
+			}
+
+			return table;
+		}
+
+		public async Task<Table> RemovePlayerFromTable(Guid playerId, Guid tableId, CancellationToken ct = default)
+		{
+			var table = await this.GetByIdAsync(tableId, ct);
+			if (table is not null)
+			{
+				table.Players.Remove(new User { Id = playerId });
+				await this.dbContext.SaveChangesAsync(ct);
 			}
 
 			return table;

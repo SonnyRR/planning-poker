@@ -15,191 +15,209 @@ namespace PlanningPoker.Core.Mapping
             {
                 DeckType = p1.DeckType,
                 Name = p1.Name,
-                Players = funcMain1(p1.Players),
+                Owner = funcMain1(p1.Owner),
+                OwnerId = p1.OwnerId,
+                Players = funcMain3(p1.Players),
                 CreatedOn = p1.CreatedOn,
                 Id = p1.Id,
                 ModifiedOn = p1.ModifiedOn
             };
         }
-        public static Table AdaptTo(this TableModel p5, Table p6)
-        {
-            if (p5 == null)
-            {
-                return null;
-            }
-            Table result = p6 ?? new Table();
-            
-            result.DeckType = p5.DeckType;
-            result.Name = p5.Name;
-            result.Players = funcMain4(p5.Players, result.Players);
-            result.CreatedOn = p5.CreatedOn;
-            result.Id = p5.Id;
-            result.ModifiedOn = p5.ModifiedOn;
-            return result;
-            
-        }
-        public static TableModel AdaptToModel(this Table p11)
-        {
-            return p11 == null ? null : new TableModel()
-            {
-                DeckType = p11.DeckType,
-                Name = p11.Name,
-                Players = funcMain7(p11.Players),
-                CreatedOn = p11.CreatedOn,
-                Id = p11.Id,
-                ModifiedOn = p11.ModifiedOn
-            };
-        }
-        public static TableModel AdaptTo(this Table p15, TableModel p16)
-        {
-            if (p15 == null)
-            {
-                return null;
-            }
-            TableModel result = p16 ?? new TableModel();
-            
-            result.DeckType = p15.DeckType;
-            result.Name = p15.Name;
-            result.Players = funcMain10(p15.Players, result.Players);
-            result.CreatedOn = p15.CreatedOn;
-            result.Id = p15.Id;
-            result.ModifiedOn = p15.ModifiedOn;
-            return result;
-            
-        }
-        
-        private static ICollection<User> funcMain1(ICollection<UserModel> p2)
-        {
-            if (p2 == null)
-            {
-                return null;
-            }
-            ICollection<User> result = new List<User>(p2.Count);
-            
-            IEnumerator<UserModel> enumerator = p2.GetEnumerator();
-            
-            while (enumerator.MoveNext())
-            {
-                UserModel item = enumerator.Current;
-                result.Add(funcMain2(item));
-            }
-            return result;
-            
-        }
-        
-        private static ICollection<User> funcMain4(ICollection<UserModel> p7, ICollection<User> p8)
+        public static Table AdaptTo(this TableModel p7, Table p8)
         {
             if (p7 == null)
             {
                 return null;
             }
-            ICollection<User> result = new List<User>(p7.Count);
+            Table result = p8 ?? new Table();
             
-            IEnumerator<UserModel> enumerator = p7.GetEnumerator();
-            
-            while (enumerator.MoveNext())
-            {
-                UserModel item = enumerator.Current;
-                result.Add(funcMain5(item));
-            }
+            result.DeckType = p7.DeckType;
+            result.Name = p7.Name;
+            result.Owner = funcMain6(p7.Owner, result.Owner);
+            result.OwnerId = p7.OwnerId;
+            result.Players = funcMain8(p7.Players, result.Players);
+            result.CreatedOn = p7.CreatedOn;
+            result.Id = p7.Id;
+            result.ModifiedOn = p7.ModifiedOn;
             return result;
             
         }
-        
-        private static ICollection<UserModel> funcMain7(ICollection<User> p12)
+        public static TableModel AdaptToModel(this Table p17)
         {
-            if (p12 == null)
+            return p17 == null ? null : new TableModel()
+            {
+                DeckType = p17.DeckType,
+                Name = p17.Name,
+                Owner = funcMain11(p17.Owner),
+                OwnerId = p17.OwnerId,
+                Players = funcMain13(p17.Players),
+                CreatedOn = p17.CreatedOn,
+                Id = p17.Id,
+                ModifiedOn = p17.ModifiedOn
+            };
+        }
+        public static TableModel AdaptTo(this Table p23, TableModel p24)
+        {
+            if (p23 == null)
             {
                 return null;
             }
-            ICollection<UserModel> result = new List<UserModel>(p12.Count);
+            TableModel result = p24 ?? new TableModel();
             
-            IEnumerator<User> enumerator = p12.GetEnumerator();
-            
-            while (enumerator.MoveNext())
-            {
-                User item = enumerator.Current;
-                result.Add(funcMain8(item));
-            }
+            result.DeckType = p23.DeckType;
+            result.Name = p23.Name;
+            result.Owner = funcMain16(p23.Owner, result.Owner);
+            result.OwnerId = p23.OwnerId;
+            result.Players = funcMain18(p23.Players, result.Players);
+            result.CreatedOn = p23.CreatedOn;
+            result.Id = p23.Id;
+            result.ModifiedOn = p23.ModifiedOn;
             return result;
             
         }
         
-        private static ICollection<UserModel> funcMain10(ICollection<User> p17, ICollection<UserModel> p18)
+        private static User funcMain1(UserModel p2)
         {
-            if (p17 == null)
+            return p2 == null ? null : new User()
             {
-                return null;
-            }
-            ICollection<UserModel> result = new List<UserModel>(p17.Count);
-            
-            IEnumerator<User> enumerator = p17.GetEnumerator();
-            
-            while (enumerator.MoveNext())
-            {
-                User item = enumerator.Current;
-                result.Add(funcMain11(item));
-            }
-            return result;
-            
-        }
-        
-        private static User funcMain2(UserModel p3)
-        {
-            return p3 == null ? null : new User()
-            {
-                Tables = funcMain3(p3.Tables),
-                Id = p3.Id,
-                UserName = p3.UserName
+                Tables = funcMain2(p2.Tables),
+                Id = p2.Id,
+                UserName = p2.UserName
             };
         }
         
-        private static User funcMain5(UserModel p9)
-        {
-            return p9 == null ? null : new User()
-            {
-                Tables = funcMain6(p9.Tables),
-                Id = p9.Id,
-                UserName = p9.UserName
-            };
-        }
-        
-        private static UserModel funcMain8(User p13)
-        {
-            return p13 == null ? null : new UserModel()
-            {
-                Tables = funcMain9(p13.Tables),
-                Id = p13.Id,
-                UserName = p13.UserName
-            };
-        }
-        
-        private static UserModel funcMain11(User p19)
-        {
-            return p19 == null ? null : new UserModel()
-            {
-                Tables = funcMain12(p19.Tables),
-                Id = p19.Id,
-                UserName = p19.UserName
-            };
-        }
-        
-        private static IList<Table> funcMain3(IList<TableModel> p4)
+        private static ICollection<User> funcMain3(ICollection<UserModel> p4)
         {
             if (p4 == null)
             {
                 return null;
             }
-            IList<Table> result = new List<Table>(p4.Count);
+            ICollection<User> result = new List<User>(p4.Count);
+            
+            IEnumerator<UserModel> enumerator = p4.GetEnumerator();
+            
+            while (enumerator.MoveNext())
+            {
+                UserModel item = enumerator.Current;
+                result.Add(funcMain4(item));
+            }
+            return result;
+            
+        }
+        
+        private static User funcMain6(UserModel p9, User p10)
+        {
+            if (p9 == null)
+            {
+                return null;
+            }
+            User result = p10 ?? new User();
+            
+            result.Tables = funcMain7(p9.Tables, result.Tables);
+            result.Id = p9.Id;
+            result.UserName = p9.UserName;
+            return result;
+            
+        }
+        
+        private static ICollection<User> funcMain8(ICollection<UserModel> p13, ICollection<User> p14)
+        {
+            if (p13 == null)
+            {
+                return null;
+            }
+            ICollection<User> result = new List<User>(p13.Count);
+            
+            IEnumerator<UserModel> enumerator = p13.GetEnumerator();
+            
+            while (enumerator.MoveNext())
+            {
+                UserModel item = enumerator.Current;
+                result.Add(funcMain9(item));
+            }
+            return result;
+            
+        }
+        
+        private static UserModel funcMain11(User p18)
+        {
+            return p18 == null ? null : new UserModel()
+            {
+                Tables = funcMain12(p18.Tables),
+                Id = p18.Id,
+                UserName = p18.UserName
+            };
+        }
+        
+        private static ICollection<UserModel> funcMain13(ICollection<User> p20)
+        {
+            if (p20 == null)
+            {
+                return null;
+            }
+            ICollection<UserModel> result = new List<UserModel>(p20.Count);
+            
+            IEnumerator<User> enumerator = p20.GetEnumerator();
+            
+            while (enumerator.MoveNext())
+            {
+                User item = enumerator.Current;
+                result.Add(funcMain14(item));
+            }
+            return result;
+            
+        }
+        
+        private static UserModel funcMain16(User p25, UserModel p26)
+        {
+            if (p25 == null)
+            {
+                return null;
+            }
+            UserModel result = p26 ?? new UserModel();
+            
+            result.Tables = funcMain17(p25.Tables, result.Tables);
+            result.Id = p25.Id;
+            result.UserName = p25.UserName;
+            return result;
+            
+        }
+        
+        private static ICollection<UserModel> funcMain18(ICollection<User> p29, ICollection<UserModel> p30)
+        {
+            if (p29 == null)
+            {
+                return null;
+            }
+            ICollection<UserModel> result = new List<UserModel>(p29.Count);
+            
+            IEnumerator<User> enumerator = p29.GetEnumerator();
+            
+            while (enumerator.MoveNext())
+            {
+                User item = enumerator.Current;
+                result.Add(funcMain19(item));
+            }
+            return result;
+            
+        }
+        
+        private static IList<Table> funcMain2(IList<TableModel> p3)
+        {
+            if (p3 == null)
+            {
+                return null;
+            }
+            IList<Table> result = new List<Table>(p3.Count);
             
             ICollection<Table> list = result;
             
             int i = 0;
-            int len = p4.Count;
+            int len = p3.Count;
             
             while (i < len)
             {
-                TableModel item = p4[i];
+                TableModel item = p3[i];
                 list.Add(TypeAdapterConfig1.GetMapFunction<TableModel, Table>().Invoke(item));
                 i++;
             }
@@ -207,22 +225,32 @@ namespace PlanningPoker.Core.Mapping
             
         }
         
-        private static IList<Table> funcMain6(IList<TableModel> p10)
+        private static User funcMain4(UserModel p5)
         {
-            if (p10 == null)
+            return p5 == null ? null : new User()
+            {
+                Tables = funcMain5(p5.Tables),
+                Id = p5.Id,
+                UserName = p5.UserName
+            };
+        }
+        
+        private static IList<Table> funcMain7(IList<TableModel> p11, IList<Table> p12)
+        {
+            if (p11 == null)
             {
                 return null;
             }
-            IList<Table> result = new List<Table>(p10.Count);
+            IList<Table> result = new List<Table>(p11.Count);
             
             ICollection<Table> list = result;
             
             int i = 0;
-            int len = p10.Count;
+            int len = p11.Count;
             
             while (i < len)
             {
-                TableModel item = p10[i];
+                TableModel item = p11[i];
                 list.Add(TypeAdapterConfig1.GetMapFunction<TableModel, Table>().Invoke(item));
                 i++;
             }
@@ -230,22 +258,32 @@ namespace PlanningPoker.Core.Mapping
             
         }
         
-        private static IList<TableModel> funcMain9(IList<Table> p14)
+        private static User funcMain9(UserModel p15)
         {
-            if (p14 == null)
+            return p15 == null ? null : new User()
+            {
+                Tables = funcMain10(p15.Tables),
+                Id = p15.Id,
+                UserName = p15.UserName
+            };
+        }
+        
+        private static IList<TableModel> funcMain12(IList<Table> p19)
+        {
+            if (p19 == null)
             {
                 return null;
             }
-            IList<TableModel> result = new List<TableModel>(p14.Count);
+            IList<TableModel> result = new List<TableModel>(p19.Count);
             
             ICollection<TableModel> list = result;
             
             int i = 0;
-            int len = p14.Count;
+            int len = p19.Count;
             
             while (i < len)
             {
-                Table item = p14[i];
+                Table item = p19[i];
                 list.Add(TypeAdapterConfig1.GetMapFunction<Table, TableModel>().Invoke(item));
                 i++;
             }
@@ -253,22 +291,134 @@ namespace PlanningPoker.Core.Mapping
             
         }
         
-        private static IList<TableModel> funcMain12(IList<Table> p20)
+        private static UserModel funcMain14(User p21)
         {
-            if (p20 == null)
+            return p21 == null ? null : new UserModel()
+            {
+                Tables = funcMain15(p21.Tables),
+                Id = p21.Id,
+                UserName = p21.UserName
+            };
+        }
+        
+        private static IList<TableModel> funcMain17(IList<Table> p27, IList<TableModel> p28)
+        {
+            if (p27 == null)
             {
                 return null;
             }
-            IList<TableModel> result = new List<TableModel>(p20.Count);
+            IList<TableModel> result = new List<TableModel>(p27.Count);
             
             ICollection<TableModel> list = result;
             
             int i = 0;
-            int len = p20.Count;
+            int len = p27.Count;
             
             while (i < len)
             {
-                Table item = p20[i];
+                Table item = p27[i];
+                list.Add(TypeAdapterConfig1.GetMapFunction<Table, TableModel>().Invoke(item));
+                i++;
+            }
+            return result;
+            
+        }
+        
+        private static UserModel funcMain19(User p31)
+        {
+            return p31 == null ? null : new UserModel()
+            {
+                Tables = funcMain20(p31.Tables),
+                Id = p31.Id,
+                UserName = p31.UserName
+            };
+        }
+        
+        private static IList<Table> funcMain5(IList<TableModel> p6)
+        {
+            if (p6 == null)
+            {
+                return null;
+            }
+            IList<Table> result = new List<Table>(p6.Count);
+            
+            ICollection<Table> list = result;
+            
+            int i = 0;
+            int len = p6.Count;
+            
+            while (i < len)
+            {
+                TableModel item = p6[i];
+                list.Add(TypeAdapterConfig1.GetMapFunction<TableModel, Table>().Invoke(item));
+                i++;
+            }
+            return result;
+            
+        }
+        
+        private static IList<Table> funcMain10(IList<TableModel> p16)
+        {
+            if (p16 == null)
+            {
+                return null;
+            }
+            IList<Table> result = new List<Table>(p16.Count);
+            
+            ICollection<Table> list = result;
+            
+            int i = 0;
+            int len = p16.Count;
+            
+            while (i < len)
+            {
+                TableModel item = p16[i];
+                list.Add(TypeAdapterConfig1.GetMapFunction<TableModel, Table>().Invoke(item));
+                i++;
+            }
+            return result;
+            
+        }
+        
+        private static IList<TableModel> funcMain15(IList<Table> p22)
+        {
+            if (p22 == null)
+            {
+                return null;
+            }
+            IList<TableModel> result = new List<TableModel>(p22.Count);
+            
+            ICollection<TableModel> list = result;
+            
+            int i = 0;
+            int len = p22.Count;
+            
+            while (i < len)
+            {
+                Table item = p22[i];
+                list.Add(TypeAdapterConfig1.GetMapFunction<Table, TableModel>().Invoke(item));
+                i++;
+            }
+            return result;
+            
+        }
+        
+        private static IList<TableModel> funcMain20(IList<Table> p32)
+        {
+            if (p32 == null)
+            {
+                return null;
+            }
+            IList<TableModel> result = new List<TableModel>(p32.Count);
+            
+            ICollection<TableModel> list = result;
+            
+            int i = 0;
+            int len = p32.Count;
+            
+            while (i < len)
+            {
+                Table item = p32[i];
                 list.Add(TypeAdapterConfig1.GetMapFunction<Table, TableModel>().Invoke(item));
                 i++;
             }

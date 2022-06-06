@@ -4,6 +4,7 @@
 	using Microsoft.AspNetCore.Components;
 	using Microsoft.Extensions.Logging;
 	using PlanningPoker.Client.Features.PokerTable.Store;
+	using PlanningPoker.Client.Features.PokerTable.Store.Actions;
 	using PlanningPoker.Client.Records;
 	using PlanningPoker.Client.Services;
 	using PlanningPoker.SharedKernel.Extensions;

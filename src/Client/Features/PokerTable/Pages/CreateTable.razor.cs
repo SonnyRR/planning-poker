@@ -6,7 +6,6 @@
 	using PlanningPoker.Client.Features.PokerTable.Store;
 	using PlanningPoker.Client.Features.PokerTable.Store.Actions;
 	using PlanningPoker.Client.Records;
-	using PlanningPoker.Client.Services;
 	using PlanningPoker.SharedKernel.Extensions;
 	using PlanningPoker.SharedKernel.Models.Binding;
 	using PlanningPoker.SharedKernel.Models.Decks;
@@ -15,9 +14,8 @@
 	using System.Collections.Generic;
 	using System.Linq;
 	using System.Text.Json;
-	using System.Threading.Tasks;
 
-	public partial class CreateTable
+	public partial class CreateTable : IDisposable
 	{
 		public static IEnumerable<DropDownEntry<DeckType>> DeckTypeEntries { get; } = Enum
 			.GetValues<DeckType>()
@@ -35,10 +33,9 @@
 		public TableBindingModel Table { get; set; } = new();
 
 		[Inject]
-		public ITableService TableService { get; init; }
-
-		[Inject]
 		public IState<PokerTableState> TableState { get; set; }
+
+		public void Dispose() => this.TableState.StateChanged -= this.StateHasChanged;
 
 		/// <summary>
 		/// Handles invalid form submits.
@@ -46,20 +43,30 @@
 		/// <param name="args">The invalid submit event arguments.</param>
 		public void OnInvalidSubmit(FormInvalidSubmitEventArgs args)
 		{
-			this.Logger.LogInformation("Invalid Submit", JsonSerializer.Serialize(args, new JsonSerializerOptions() { WriteIndented = true }));
+			var json = JsonSerializer.Serialize(args, new JsonSerializerOptions() { WriteIndented = true });
+			this.Logger.LogInformation("Invalid Submit", json);
+			this.Dispatcher.Dispatch(new PokerTableUnsuccessfulSubmitAction(json));
 		}
 
 		/// <summary>
 		/// Handles valid form submits.
 		/// </summary>
 		/// <param name="bindingModel">The binding model.</param>
-		public async Task OnSubmit(TableBindingModel bindingModel)
+		public void OnSubmit(TableBindingModel bindingModel)
 		{
 			this.Logger.LogInformation("Valid Submit");
-			var table = await this.TableService.CreateAsync(bindingModel);
-			this.Dispatcher.Dispatch(new PokerTableSetAction(table));
+			this.Dispatcher.Dispatch(new PokerTableSubmitAction(bindingModel));
+		}
 
-			this.NavigationManager.NavigateTo($"/table/{table.Id}");
+		protected override void OnInitialized()
+		{
+			base.OnInitialized();
+			this.TableState.StateChanged += this.StateHasChanged;
+		}
+
+		private void StateHasChanged(object sender, EventArgs e)
+		{
+			this.NavigationManager.NavigateTo($"/table/{this.TableState.Value.Table.Id}");
 		}
 	}
 }

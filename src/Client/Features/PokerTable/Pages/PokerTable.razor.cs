@@ -16,6 +16,9 @@
 		private string messageInput;
 		private string userInput;
 
+		[Inject]
+		public IDispatcher Dispatcher { get; set; }
+
 		[Parameter]
 		public Guid Id { get; set; }
 
@@ -26,9 +29,6 @@
 
 		[Inject]
 		public IState<PokerTableState> TableState { get; set; }
-
-		[Inject]
-		public IDispatcher Dispatcher { get; set; }
 
 		public async ValueTask DisposeAsync()
 		{
@@ -70,6 +70,7 @@
 			}
 		}
 
-		private void StateHasChanged(object sender, EventArgs args) => this.InvokeAsync(this.StateHasChanged);
+		private void StateHasChanged(object sender, EventArgs args) 
+			=> this.InvokeAsync(this.StateHasChanged);
 	}
 }

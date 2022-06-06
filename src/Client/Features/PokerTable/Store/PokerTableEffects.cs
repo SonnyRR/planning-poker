@@ -13,6 +13,20 @@
 			=> this.tableService = tableService;
 
 		[EffectMethod]
+		public async Task CreateTable(PokerTableSubmitAction action, IDispatcher dispatcher)
+		{
+			var table = await this.tableService.CreateAsync(action.BindingModel);
+			if (table is not null)
+			{
+				dispatcher.Dispatch(new PokerTableSuccessfulSubmitAction());
+				dispatcher.Dispatch(new PokerTableSetAction(table));
+				return;
+			}
+
+			dispatcher.Dispatch(new PokerTableUnsuccessfulSubmitAction("Server error."));
+		}
+
+		[EffectMethod]
 		public async Task LoadTable(PokerTableLoadAction action, IDispatcher dispatcher)
 		{
 			dispatcher.Dispatch(new PokerTableSetLoadingAction());

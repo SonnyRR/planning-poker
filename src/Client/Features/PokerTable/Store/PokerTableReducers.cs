@@ -1,10 +1,10 @@
-﻿namespace PlanningPoker.Client.Store.PokerTableUseCase
+﻿namespace PlanningPoker.Client.Features.PokerTable.Store
 {
 	using Fluxor;
 
 	public static class PokerTableReducers
 	{
-		[ReducerMethod()]
+		[ReducerMethod]
 		public static PokerTableState OnSet(PokerTableState state, PokerTableSetAction action)
 			=> state with
 			{

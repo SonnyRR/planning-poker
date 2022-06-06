@@ -1,11 +1,11 @@
-﻿namespace PlanningPoker.Client.Pages
+﻿namespace PlanningPoker.Client.Features.PokerTable.Pages
 {
 	using Fluxor;
 	using Microsoft.AspNetCore.Components;
 	using Microsoft.Extensions.Logging;
+	using PlanningPoker.Client.Features.PokerTable.Store;
 	using PlanningPoker.Client.Records;
 	using PlanningPoker.Client.Services;
-	using PlanningPoker.Client.Store.PokerTableUseCase;
 	using PlanningPoker.SharedKernel.Extensions;
 	using PlanningPoker.SharedKernel.Models.Binding;
 	using PlanningPoker.SharedKernel.Models.Decks;

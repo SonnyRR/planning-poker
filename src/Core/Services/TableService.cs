@@ -38,7 +38,7 @@
 		}
 
 		public async Task<bool> DeleteAsync(Guid id, CancellationToken ct = default)
-		{ 
+		{
 			this.dbContext.Tables.Remove(new() { Id = id });
 			return Convert.ToBoolean(await this.dbContext.SaveChangesAsync(ct));
 		}

@@ -29,6 +29,7 @@ namespace PlanningPoker.BFF
 			if (env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();
+				app.UseRouteDebugger("/tools/route-debugger");
 				app.UseWebAssemblyDebugging();
 			}
 			else
@@ -39,11 +40,11 @@ namespace PlanningPoker.BFF
 
 			app.UseSecurityHeaders(GetSecurityHeaderPolicy(env.IsDevelopment(), "https://localhost:7215"));
 			app.UseHttpsRedirection();
+			app.UseBlazorFrameworkFiles();
+			app.UseStaticFiles();
 			app.UseCorrelationId();
 			app.UseSerilogIngestion();
 			app.UseSerilogRequestLogging();
-			app.UseBlazorFrameworkFiles();
-			app.UseStaticFiles();
 			app.UseRouting();
 			app.UseAuthentication();
 			app.UseAuthorization();
@@ -53,7 +54,7 @@ namespace PlanningPoker.BFF
 				endpoints.MapRazorPages();
 				endpoints.MapControllers();
 				endpoints.MapReverseProxy();
-				endpoints.MapFallbackToFile("/_Host");
+				endpoints.MapFallbackToPage("/_Host");
 			});
 		}
 

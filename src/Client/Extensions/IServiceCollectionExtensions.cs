@@ -42,7 +42,6 @@
 			services.AddScoped<NotificationService>();
 			services.AddScoped<TooltipService>();
 			services.AddScoped<ContextMenuService>();
-			services.AddScoped<IPlayerService, PlayerService>();
 			services.AddScoped<ITableService, TableService>();
 			services.TryAddSingleton<AuthenticationStateProvider, HostAuthenticationStateProvider>();
 			services.TryAddSingleton(sp => (HostAuthenticationStateProvider)sp.GetRequiredService<AuthenticationStateProvider>());
@@ -72,7 +71,23 @@
 			.AddHttpMessageHandler<AuthorizedHandler>();
 
 			services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("default"));
-			services.AddFluxor(options => options.ScanAssemblies(typeof(Program).Assembly).UseReduxDevTools());
+			services.AddFluxor(options =>
+			{
+				options.ScanAssemblies(typeof(Program).Assembly);
+
+				if (environment.IsDevelopment())
+				{
+					options.UseReduxDevTools(x =>
+					{
+						x.Name = "Planning Poker";
+						x.UseSystemTextJson(sp => new()
+						{
+							PropertyNameCaseInsensitive = true
+						});
+						x.EnableStackTrace();
+					});
+				}
+			});
 
 			return services;
 		}

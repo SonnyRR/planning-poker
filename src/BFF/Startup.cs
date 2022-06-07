@@ -34,6 +34,7 @@ namespace PlanningPoker.BFF
 			else
 			{
 				app.UseExceptionHandler("/Error");
+				app.UseHsts();
 			}
 
 			app.UseSecurityHeaders(GetSecurityHeaderPolicy(env.IsDevelopment(), "https://localhost:7215"));

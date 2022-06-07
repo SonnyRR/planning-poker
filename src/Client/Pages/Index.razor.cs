@@ -2,8 +2,6 @@
 {
 	using Ardalis.GuardClauses;
 
-	using Client.Services;
-
 	using Microsoft.AspNetCore.Components;
 	using Microsoft.Extensions.Logging;
 
@@ -21,9 +19,6 @@
 
 		[Inject]
 		public NavigationManager NavigationManager { get; set; }
-
-		[Inject]
-		public IPlayerService PlayerService { get; set; }
 
 		public string RoomId { get; set; }
 

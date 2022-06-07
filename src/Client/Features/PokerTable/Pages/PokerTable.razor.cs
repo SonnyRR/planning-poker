@@ -3,13 +3,13 @@
 	using Fluxor;
 	using Microsoft.AspNetCore.Components;
 	using Microsoft.AspNetCore.SignalR.Client;
-	using PlanningPoker.Client.Features.PokerTable.Store;
-	using PlanningPoker.Client.Features.PokerTable.Store.Actions;
+	using Microsoft.Extensions.Logging;
+	using Store;
 	using System;
 	using System.Collections.Generic;
 	using System.Threading.Tasks;
 
-	public sealed partial class PokerTable : IAsyncDisposable
+	public partial class PokerTable : IAsyncDisposable
 	{
 		private readonly List<string> messages = new();
 		private HubConnection hubConnection;
@@ -30,6 +30,9 @@
 		[Inject]
 		public IState<PokerTableState> TableState { get; set; }
 
+		[Inject]
+		public ILogger<PokerTable> Logger { get; set; }
+
 		public async ValueTask DisposeAsync()
 		{
 			this.TableState.StateChanged -= this.StateHasChanged;
@@ -43,10 +46,12 @@
 		protected override async Task OnInitializedAsync()
 		{
 			this.TableState.StateChanged += this.StateHasChanged;
-			if (this.Id != this.TableState.Value.Table.Id)
-			{
-				this.Dispatcher.Dispatch(new PokerTableLoadAction(this.Id));
-			}
+			this.Logger.LogInformation("WORKING");
+
+			//if (this.Id != this.TableState.Value.Table.Id)
+			//{
+			//	this.Dispatcher.Dispatch(new PokerTableLoadAction(this.Id));
+			//}
 
 			this.hubConnection = new HubConnectionBuilder()
 				.WithUrl(this.NavigationManager.ToAbsoluteUri("/poker"))
@@ -60,6 +65,8 @@
 			});
 
 			await this.hubConnection.StartAsync();
+
+			//await this.hubConnection.SendAsync("AddToTable", this.Id);
 		}
 
 		private async Task Send()

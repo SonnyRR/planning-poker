@@ -36,7 +36,7 @@
 
 			if (user is not null)
 			{
-				table = await this.GetByIdAsync(tableId);
+				table = await this.GetByIdAsync(tableId, ct);
 
 				if (table is not null && !table.Players.Any(p => p.Id == user.Id))
 				{

@@ -4,6 +4,7 @@
 	using Microsoft.AspNetCore.Components;
 	using Microsoft.AspNetCore.SignalR.Client;
 	using Microsoft.Extensions.Logging;
+	using PlanningPoker.Client.Features.PokerTable.Store.Actions;
 	using Store;
 	using System;
 	using System.Collections.Generic;
@@ -25,13 +26,16 @@
 		public bool IsConnected => this.hubConnection?.State == HubConnectionState.Connected;
 
 		[Inject]
+		public ILogger<PokerTable> Logger { get; set; }
+
+		[Inject]
 		public NavigationManager NavigationManager { get; set; }
 
 		[Inject]
 		public IState<PokerTableState> TableState { get; set; }
 
 		[Inject]
-		public ILogger<PokerTable> Logger { get; set; }
+		private IActionSubscriber ActionSubscriber { get; set; }
 
 		public async ValueTask DisposeAsync()
 		{
@@ -48,10 +52,10 @@
 			this.TableState.StateChanged += this.StateHasChanged;
 			this.Logger.LogInformation("WORKING");
 
-			//if (this.Id != this.TableState.Value.Table.Id)
-			//{
-			//	this.Dispatcher.Dispatch(new PokerTableLoadAction(this.Id));
-			//}
+			if (this.Id != this.TableState.Value.Table.Id)
+			{
+				this.Dispatcher.Dispatch(new PokerTableLoadAction(this.Id));
+			}
 
 			this.hubConnection = new HubConnectionBuilder()
 				.WithUrl(this.NavigationManager.ToAbsoluteUri("/poker"))

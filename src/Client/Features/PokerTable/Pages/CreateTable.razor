@@ -18,7 +18,7 @@
                             <small>(3-10 characters)</small>
                         </div>
                         <div class="col">
-                            <RadzenTextBox Name="TableName" class="w-100" @bind-Value=@Table.Name />
+                            <RadzenTextBox Name="TableName" Placeholder="Name..." class="w-100" @bind-Value=@Table.Name />
                             <div class="rz-message rz-messages-error">
                                 <ValidationMessage For="@(() => Table.Name)" />
                             </div>
@@ -32,7 +32,7 @@
                         </div>
                         <div class="col">
                             <RadzenDropDown Class="w-100"
-                                            AllowClear="true"
+                                            Placeholder="Deck type..."
                                             @bind-Value=@Table.DeckType
                                             Data=@DeckTypeEntries
                                             ValueProperty=@nameof(DropDownEntry<DeckType>.Value)

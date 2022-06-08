@@ -1,1 +1,15 @@
 ﻿@import '../../_content/Radzen.Blazor/css/software.css';
+
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    --sk-color: #598087;
+}

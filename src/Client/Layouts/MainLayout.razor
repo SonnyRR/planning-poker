@@ -12,7 +12,7 @@
             <ChildContent>
                 <div class="row align-items-center h-100">
                     <div class="col-3 d-flex">
-                        <img src="images/logo.svg" width="184" height="55"/>
+                        <img class="logo" src="images/logo.svg" width="184" height="55" @onclick="@(() => NavigationManager.NavigateTo("/"))" />
                     </div>
                     <div class="col-3 offset-6">
                         <LoginControl />

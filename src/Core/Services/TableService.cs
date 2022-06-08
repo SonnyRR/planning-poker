@@ -31,18 +31,12 @@
 
 		public async Task<Table> AddPlayerToTable(Guid playerId, Guid tableId, CancellationToken ct = default)
 		{
-			var user = await this.dbContext.Users.SingleOrDefaultAsync(u => u.Id == playerId, ct);
-			Table table = default;
+			Table table = await this.GetByIdAsync(tableId, ct);
 
-			if (user is not null)
+			if (table is not null && !table.Players.Any(p => p.Id == playerId))
 			{
-				table = await this.GetByIdAsync(tableId, ct);
-
-				if (table is not null && !table.Players.Any(p => p.Id == user.Id))
-				{
-					table.Players.Add(user);
-					await this.dbContext.SaveChangesAsync(ct);
-				}
+				table.Players.Add(new User { Id = playerId });
+				await this.dbContext.SaveChangesAsync(ct);
 			}
 
 			return table;

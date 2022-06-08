@@ -6,6 +6,7 @@
 	using System;
 	using System.Threading;
 	using System.Threading.Tasks;
+	using static SharedKernel.Constants.Hubs;
 
 	/// <summary>
 	/// SignalR hub for interacting with poker tables.
@@ -38,7 +39,7 @@
 				await this.Groups.AddToGroupAsync(this.Context.ConnectionId, table.Id.ToString(), ct);
 				await this.Clients
 					.Group(table.Id.ToString())
-					.SendAsync("AddedToTable", $"{this.Context.ConnectionId} has joined the group {table.Name}.", cancellationToken: ct);
+					.SendAsync(ADDED_TO_TABLE_FUNC, $"{this.Context.ConnectionId} has joined the group {table.Name}.", cancellationToken: ct);
 			}
 		}
 

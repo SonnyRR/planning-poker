@@ -6,5 +6,10 @@
 		{
 			public const string PRIMARY = "#598087";
 		}
+
+		public static class Hubs
+		{
+			public const string ADDED_TO_TABLE_FUNC = "AddedToTable";
+		}
 	}
 }

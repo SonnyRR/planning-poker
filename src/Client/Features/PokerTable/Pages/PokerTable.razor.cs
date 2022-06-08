@@ -9,6 +9,7 @@
 	using System;
 	using System.Collections.Generic;
 	using System.Threading.Tasks;
+	using static SharedKernel.Constants.Hubs;
 
 	public partial class PokerTable : IAsyncDisposable
 	{
@@ -34,9 +35,6 @@
 		[Inject]
 		public IState<PokerTableState> TableState { get; set; }
 
-		[Inject]
-		private IActionSubscriber ActionSubscriber { get; set; }
-
 		public async ValueTask DisposeAsync()
 		{
 			this.TableState.StateChanged -= this.StateHasChanged;
@@ -50,27 +48,13 @@
 		protected override async Task OnInitializedAsync()
 		{
 			this.TableState.StateChanged += this.StateHasChanged;
-			this.Logger.LogInformation("WORKING");
 
-			if (this.Id != this.TableState.Value.Table.Id)
-			{
-				this.Dispatcher.Dispatch(new PokerTableLoadAction(this.Id));
-			}
-
-			this.hubConnection = new HubConnectionBuilder()
-				.WithUrl(this.NavigationManager.ToAbsoluteUri("/poker"))
-				.Build();
-
-			this.hubConnection.On<string>("AddedToTable", (name) =>
-			{
-				var encodedMsg = $"User has been added to: {name}";
-				this.messages.Add(encodedMsg);
-				this.StateHasChanged();
-			});
+			this.LoadTableIfMissing();
+			this.BuildHubConnection();
+			this.RegisterHubMethodHandlers();
 
 			await this.hubConnection.StartAsync();
-
-			//await this.hubConnection.SendAsync("AddToTable", this.Id);
+			await this.hubConnection.SendAsync("AddToTable", this.Id);
 		}
 
 		private async Task Send()
@@ -83,5 +67,39 @@
 
 		private void StateHasChanged(object sender, EventArgs args)
 			=> this.InvokeAsync(this.StateHasChanged);
+
+		/// <summary>
+		/// Loads a given poker table by ID if it wasn't loaded before.
+		/// </summary>
+		private void LoadTableIfMissing()
+		{
+			if (this.Id != this.TableState.Value.Table.Id)
+			{
+				this.Dispatcher.Dispatch(new PokerTableLoadAction(this.Id));
+			}
+		}
+
+		/// <summary>
+		/// Builds a SignalR hub connection.
+		/// </summary>
+		private void BuildHubConnection()
+		{
+			this.hubConnection = new HubConnectionBuilder()
+				.WithUrl(this.NavigationManager.ToAbsoluteUri("/poker"))
+				.Build();
+		}
+
+		/// <summary>
+		/// Registers handlers for hub methods.
+		/// </summary>
+		private void RegisterHubMethodHandlers()
+		{
+			this.hubConnection.On<string>(ADDED_TO_TABLE_FUNC, (name) =>
+			{
+				var encodedMsg = $"User has been added to: {name}";
+				this.messages.Add(encodedMsg);
+				this.StateHasChanged();
+			});
+		}
 	}
 }

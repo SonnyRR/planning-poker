@@ -1,18 +1,16 @@
 ﻿namespace PlanningPoker.WebAPI
 {
 	using CorrelationId;
-
 	using Microsoft.AspNetCore.Builder;
 	using Microsoft.AspNetCore.Hosting;
 	using Microsoft.Extensions.Configuration;
 	using Microsoft.Extensions.DependencyInjection;
 	using Microsoft.Extensions.Hosting;
-
 	using PlanningPoker.SharedKernel.Extensions;
 	using PlanningPoker.WebAPI.Extensions;
 	using PlanningPoker.WebAPI.Hubs;
-
 	using Serilog;
+	using static SharedKernel.Constants.Hubs;
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
@@ -52,7 +50,7 @@
 			app.UseEndpoints(endpoints =>
 			{
 				endpoints.MapDefaultControllerRoute();
-				endpoints.MapHub<PokerHub>("/poker");
+				endpoints.MapHub<PokerHub>(POKER_HUB_URI);
 			});
 		}
 

@@ -12,6 +12,7 @@
 	using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 	using Microsoft.Extensions.DependencyInjection;
 	using Microsoft.Extensions.DependencyInjection.Extensions;
+	using PlanningPoker.Client.Clients;
 	using PlanningPoker.SharedKernel.Models.Binding;
 	using Radzen;
 
@@ -88,6 +89,8 @@
 					});
 				}
 			});
+
+			services.AddScoped<IPokerSignalRClient, PokerHubClient>();
 
 			return services;
 		}

@@ -1,5 +1,6 @@
 ﻿namespace PlanningPoker.SharedKernel.Interfaces
 {
+	using PlanningPoker.SharedKernel.Models.Tables;
 	using System;
 	using System.Threading.Tasks;
 
@@ -20,7 +21,7 @@
 		/// <summary>
 		/// Sends a new message that a player has voted on a work item.
 		/// </summary>
-		/// <param name="val">The estimation value.</param>
-		Task VoteCasted(int val);
+		/// <param name="vote">The player's vote</param>
+		Task VoteCasted(PlayerVote vote);
 	}
 }

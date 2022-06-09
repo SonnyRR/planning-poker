@@ -2,6 +2,7 @@
 {
 	using Microsoft.AspNetCore.Components;
 	using Microsoft.AspNetCore.SignalR.Client;
+	using PlanningPoker.SharedKernel.Models.Tables;
 	using System;
 	using System.Threading.Tasks;
 	using static SharedKernel.Constants.Hubs;
@@ -34,7 +35,7 @@
 			}
 		}
 
-		public void OnVoteCasted(Action<int> handler)
+		public void OnVoteCasted(Action<PlayerVote> handler)
 		{
 			if (!this.HasStarted)
 			{
@@ -45,7 +46,7 @@
 		public async Task RemovedFromTable(Guid tableId)
 			=> await this.HubConnection.SendAsync(nameof(RemovedFromTable), tableId);
 
-		public async Task VoteCasted(int val)
-			=> await this.HubConnection.SendAsync(nameof(VoteCasted), val);
+		public async Task VoteCasted(PlayerVote vote)
+			=> await this.HubConnection.SendAsync(nameof(VoteCasted), vote);
 	}
 }

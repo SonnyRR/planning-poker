@@ -1,6 +1,7 @@
 ﻿namespace PlanningPoker.Client.Clients
 {
 	using PlanningPoker.SharedKernel.Interfaces;
+	using PlanningPoker.SharedKernel.Models.Tables;
 	using System;
 
 	/// <summary>
@@ -24,6 +25,6 @@
 		/// Registers a handler that is called whenever a player has voted succesfully.
 		/// </summary>
 		/// <param name="handler">The handler delegate.</param>
-		void OnVoteCasted(Action<int> handler);
+		void OnVoteCasted(Action<PlayerVote> handler);
 	}
 }

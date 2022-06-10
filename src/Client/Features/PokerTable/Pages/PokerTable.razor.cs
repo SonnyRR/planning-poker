@@ -8,16 +8,16 @@
 	using PlanningPoker.SharedKernel.Models.Tables;
 	using Store;
 	using System;
-	using System.Collections.Generic;
 	using System.Threading.Tasks;
 
 	public partial class PokerTable : IDisposable
 	{
-		private readonly List<string> messages = new();
+		private bool isTablePresent;
 		private string messageInput;
 		private string userInput;
 
-		private bool isTablePresent;
+		[Inject]
+		public IActionSubscriber ActionSubscriber { get; set; }
 
 		[Inject]
 		public IDispatcher Dispatcher { get; set; }
@@ -34,13 +34,11 @@
 		[Inject]
 		public IState<PokerTableState> TableState { get; set; }
 
-		[Inject]
-		public IActionSubscriber ActionSubscriber { get; set; }
-
 		public void Dispose()
 		{
 			this.TableState.StateChanged -= this.StateHasChanged;
 			this.ActionSubscriber.UnsubscribeFromAllActions(this);
+			GC.SuppressFinalize(this);
 		}
 
 		public async Task Vote()
@@ -53,10 +51,11 @@
 			this.TableState.StateChanged += this.StateHasChanged;
 			this.isTablePresent = this.Id == this.TableState.Value.Table.Id;
 
+			this.LoadTableIfMissing();
+
 			this.RegisterHubMethodHandlers();
 			await this.PokerClient.Start();
 
-			this.LoadTableIfMissing();
 			await this.JoinPokerTable();
 		}
 
@@ -64,6 +63,7 @@
 		{
 			if (this.isTablePresent)
 			{
+				this.Logger.LogWarning("Table is present in store, attempting to add user.");
 				await this.PokerClient.AddedToTable(this.TableState.Value.Table.Id);
 				return;
 			}
@@ -72,6 +72,7 @@
 			{
 				if (action.Table is not null && action.Table.Id != Guid.Empty)
 				{
+					this.Logger.LogDebug("Table was missing from store and loaded explicitly, attempting to add user.");
 					await this.PokerClient.AddedToTable(this.TableState.Value.Table.Id);
 					return;
 				}
@@ -79,6 +80,7 @@
 				this.Logger.LogWarning("Cannot join poker table with ID: '{id}'", this.Id);
 			});
 		}
+
 		/// <summary>
 		/// Loads a given poker table by ID if it wasn't loaded before.
 		/// </summary>
@@ -86,6 +88,7 @@
 		{
 			if (!this.isTablePresent)
 			{
+				this.Logger.LogDebug("Table is not present in the store, attemting to load: '{id}'.", this.Id);
 				this.Dispatcher.Dispatch(new PokerTableLoadAction(this.Id));
 			}
 		}

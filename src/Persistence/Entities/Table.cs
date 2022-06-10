@@ -44,6 +44,6 @@
 		/// <summary>
 		/// The card players.
 		/// </summary>
-		public ICollection<User> Players { get; set; } = new List<User>();
+		public List<User> Players { get; set; } = new List<User>();
 	}
 }

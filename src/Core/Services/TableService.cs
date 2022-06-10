@@ -35,7 +35,8 @@
 
 			if (table is not null && !table.Players.Any(p => p.Id == playerId))
 			{
-				table.Players.Add(new User { Id = playerId });
+				var user = await this.dbContext.Users.SingleOrDefaultAsync(u => u.Id == playerId);
+				table.Players.Add(user);
 				await this.dbContext.SaveChangesAsync(ct);
 			}
 
@@ -59,7 +60,10 @@
 
 		public async Task<Table> GetByIdAsync(Guid id, CancellationToken ct = default)
 		{
-			var table = await this.dbContext.Tables.SingleOrDefaultAsync(t => t.Id == id, ct);
+			var table = await this.dbContext
+				.Tables
+				.Include(t => t.Players)
+				.SingleOrDefaultAsync(t => t.Id == id, ct);
 
 			if (table is null)
 			{

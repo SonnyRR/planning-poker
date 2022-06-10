@@ -7,7 +7,6 @@
 	using PlanningPoker.SharedKernel.Interfaces;
 	using PlanningPoker.SharedKernel.Models.Tables;
 	using System;
-	using System.Threading;
 	using System.Threading.Tasks;
 	using static OpenIddict.Abstractions.OpenIddictConstants;
 
@@ -34,16 +33,15 @@
 		/// Adds a user to specified table.
 		/// </summary>
 		/// <param name="tableId">The table unique identifier.</param>
-		/// <param name="ct">The cancellation token.</param>
 		[HubMethodName(nameof(IPokerClient.AddedToTable))]
-		public async Task AddToTableAsync(Guid tableId, CancellationToken ct = default)
+		public async Task AddToTableAsync(Guid tableId)
 		{
-			var table = await this.tableService.AddPlayerToTable(Guid.Parse(this.UserId), tableId, ct);
+			var table = await this.tableService.AddPlayerToTable(Guid.Parse(this.UserId), tableId);
 
 			if (table is not null)
 			{
-				await this.Groups.AddToGroupAsync(this.Context.ConnectionId, table.Id.ToString(), ct);
-				this.logger.LogInformation("User {username} has been added to group & table: {tableId}.", this.UserId, tableId);
+				await this.Groups.AddToGroupAsync(this.Context.ConnectionId, table.Id.ToString());
+				this.logger.LogInformation("User {username} has been added to group & table: {tableId}.", this.UserId);
 			}
 		}
 

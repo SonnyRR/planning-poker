@@ -11,7 +11,7 @@ namespace PlanningPoker.SharedKernel.Models.Generated
         public string Name { get; set; }
         public UserModel Owner { get; set; }
         public Guid OwnerId { get; set; }
-        public ICollection<UserModel> Players { get; set; }
+        public List<UserModel> Players { get; set; }
         public DateTimeOffset CreatedOn { get; set; }
         public Guid Id { get; set; }
         public DateTimeOffset? ModifiedOn { get; set; }

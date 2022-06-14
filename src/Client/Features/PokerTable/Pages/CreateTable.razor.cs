@@ -14,6 +14,7 @@
 	using System.Collections.Generic;
 	using System.Linq;
 	using System.Text.Json;
+	using static Constants;
 
 	public partial class CreateTable : IDisposable
 	{
@@ -70,7 +71,7 @@
 
 		private void StateHasChanged(object sender, EventArgs e)
 		{
-			this.NavigationManager.NavigateTo($"/table/{this.TableState.Value.Table.Id}");
+			this.NavigationManager.NavigateTo($"{Routes.TABLE_PREFIX}/{this.TableState.Value.Table.Id}");
 		}
 	}
 }

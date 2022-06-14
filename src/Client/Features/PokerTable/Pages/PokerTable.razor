@@ -1,5 +1,6 @@
-﻿@page "/table/{id:guid}"
+﻿@attribute [Microsoft.AspNetCore.Components.RouteAttribute(Routes.TABLE)]
 @using static SharedKernel.Constants.Colors;
+@using static Constants
 
 <div class="h-100">
     <SpinLoader IsLoading="TableState.Value.IsLoading">

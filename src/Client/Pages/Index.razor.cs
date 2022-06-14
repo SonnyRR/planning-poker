@@ -6,6 +6,7 @@
 	using Radzen;
 
 	using SharedKernel.Models.Tables;
+	using static Constants;
 
 	public partial class Index
 	{
@@ -25,9 +26,9 @@
 		public void JoinExistingTable(JoinExistingTableRequest joinTableParameters)
 		{
 			Guard.Against.Null(joinTableParameters, nameof(joinTableParameters));
-			this.NavigationManager.NavigateTo($"/table/{joinTableParameters.Code}");
+			this.NavigationManager.NavigateTo($"{Routes.TABLE_PREFIX}/{joinTableParameters.Code}");
 		}
 
-		public void OnTableCreationSubmit() => this.NavigationManager.NavigateTo("/create");
+		public void OnTableCreationSubmit() => this.NavigationManager.NavigateTo(Routes.CREATE_TABLE);
 	}
 }

@@ -1,5 +1,6 @@
 ﻿namespace PlanningPoker.Persistence.Entities
 {
+	using System;
 	using System.ComponentModel.DataAnnotations;
 
 	public abstract class BaseEntity<TKey> : IAuditableEntity

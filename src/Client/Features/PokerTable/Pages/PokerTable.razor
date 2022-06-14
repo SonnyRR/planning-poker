@@ -6,7 +6,7 @@
     <SpinLoader IsLoading="TableState.Value.IsLoading">
         <LoadingTemplate>
             <div class="w-100 h-100 d-flex align-items-center">
-                <Grid Center=@true Color=@PRIMARY/>
+                <Grid Center=@true Color=@PRIMARY />
             </div>
         </LoadingTemplate>
         <ContentTemplate>
@@ -26,7 +26,19 @@
                 </label>
             </div>
             <button @onclick="Vote" disabled="@(!this.PokerClient.IsConnected)">Send</button>
-            <button @onclick="Leave" disabled="@(this.TableState.Value.Table == null)">Leave</button>
+            <button @onclick="Leave" disabled="@(this.TableState.Value.Table.Id == Guid.Empty)">Leave</button>
+
+            @foreach (var player in TableState.Value.Table.Players)
+            {
+                <RadzenCard class="m-3" style="height: 128px; width:256px">
+                    <div class="d-flex justify-content-center">
+                        <div class="col-md-12" align="center">
+                            <h3>@player.UserName</h3>
+                            <h2>?</h2>
+                        </div>
+                    </div>
+                </RadzenCard>
+            }
         </ContentTemplate>
     </SpinLoader>
 </div>

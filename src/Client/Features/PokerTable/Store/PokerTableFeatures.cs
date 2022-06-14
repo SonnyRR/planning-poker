@@ -14,6 +14,11 @@
 	{
 		public override string GetName() => nameof(PokerTableState);
 
-		protected override PokerTableState GetInitialState() => new() { Table = new() };
+		protected override PokerTableState GetInitialState()
+			=> new()
+			{
+				IsLoading = true,
+				Table = new()
+			};
 	}
 }

@@ -18,14 +18,23 @@
 	{
 		private readonly ILogger<PokerHub> logger;
 		private readonly ITableService tableService;
+		private readonly ICurrentUserService currentUserService;
 
 		/// <summary>
 		/// Contructs a SignalR hub for managing poker tables.
 		/// </summary>
 		/// <param name="tableService">An instance of <see cref="ITableService"/>.</param>
+		/// <param name="currentUserService">The current user service.</param>
 		/// <param name="logger">An instance of <see cref="ILogger{PokerHub}"/>.</param>
-		public PokerHub(ITableService tableService, ILogger<PokerHub> logger)
-			=> (this.tableService, this.logger) = (tableService, logger);
+		public PokerHub(
+			ITableService tableService,
+			ICurrentUserService currentUserService,
+			ILogger<PokerHub> logger)
+		{
+			this.tableService = tableService;
+			this.currentUserService = currentUserService;
+			this.logger = logger;
+		}
 
 		private string UserId => this.Context.User.FindFirst(Claims.Subject)?.Value;
 
@@ -63,6 +72,7 @@
 		[HubMethodName(nameof(IPokerClient.VoteCasted))]
 		public async Task VoteAsync(PlayerVote vote)
 		{
+			vote.PlayerId = this.currentUserService.UserId;
 			await this.Clients.Group(vote.TableId.ToString()).VoteCasted(vote);
 		}
 	}

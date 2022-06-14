@@ -10,5 +10,7 @@
 		public int Estimation { get; init; }
 
 		public Guid TableId { get; set; }
+
+		public Guid PlayerId { get; set; }
 	}
 }

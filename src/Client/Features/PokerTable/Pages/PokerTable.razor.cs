@@ -8,6 +8,7 @@
 	using PlanningPoker.SharedKernel.Models.Tables;
 	using Store;
 	using System;
+	using System.Linq;
 	using System.Threading.Tasks;
 
 	public partial class PokerTable : IDisposable
@@ -117,7 +118,9 @@
 
 			this.PokerClient.OnVoteCasted((vote) =>
 			{
-				this.Logger.LogInformation("Voted: {vote} in table {id}", vote.Estimation, vote.TableId);
+				this.Logger.LogInformation("{player} voted: {vote} in table {id}", vote.PlayerId, vote.Estimation, vote.TableId);
+				var player = this.TableState.Value.Table.Players.SingleOrDefault(p => p.Id == vote.PlayerId);
+				this.Logger.LogInformation(player.UserName);
 				this.StateHasChanged();
 			});
 		}

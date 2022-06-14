@@ -36,8 +36,7 @@
 
 		public void Dispose()
 		{
-			this.TableState.StateChanged -= this.StateHasChanged;
-			this.ActionSubscriber.UnsubscribeFromAllActions(this);
+			this.Dispose(true);
 			GC.SuppressFinalize(this);
 		}
 
@@ -46,6 +45,14 @@
 			await this.PokerClient.VoteCasted(new PlayerVote { Estimation = 3, TableId = this.Id });
 		}
 
+		protected virtual void Dispose(bool disposing)
+		{
+			if (disposing)
+			{
+				this.TableState.StateChanged -= this.StateHasChanged;
+				this.ActionSubscriber.UnsubscribeFromAllActions(this);
+			}
+		}
 		protected override async Task OnInitializedAsync()
 		{
 			this.TableState.StateChanged += this.StateHasChanged;
@@ -98,10 +105,7 @@
 		/// </summary>
 		private void RegisterHubMethodHandlers()
 		{
-			this.PokerClient.OnAddedToTable(id =>
-			{
-				this.Logger.LogError("Successfully joined tabe: {id}.", id);
-			});
+			this.PokerClient.OnAddedToTable(id => this.Logger.LogError("Successfully joined tabe: {id}.", id));
 
 			this.PokerClient.OnVoteCasted((vote) =>
 			{

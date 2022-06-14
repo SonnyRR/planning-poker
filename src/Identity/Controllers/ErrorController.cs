@@ -25,5 +25,4 @@
 			return this.View(model);
 		}
 	}
-
 }

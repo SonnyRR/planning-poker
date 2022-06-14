@@ -7,3 +7,5 @@ using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("Style", "IDE0065:Misplaced using directive", Justification = "Auto generated code.", Scope = "namespace", Target = "~N:PlanningPoker.Persistence.Migrations")]
 [assembly: SuppressMessage("Style", "IDE0065:Misplaced using directive", Justification = "Auto generated code.", Scope = "namespace", Target = "~N:Microsoft.EntityFrameworkCore.Migrations")]
+[assembly: SuppressMessage("Style", "IDE0053:Use expression body for lambda expressions", Justification = "Auto generated code.", Scope = "namespace", Target = "~N:PlanningPoker.Persistence.Migrations")]
+[assembly: SuppressMessage("Major Code Smell", "S4581:\"new Guid()\" should not be used", Justification = "Auto generated code.", Scope = "namespace", Target = "~M:PlanningPoker.Persistence.Migrations")]

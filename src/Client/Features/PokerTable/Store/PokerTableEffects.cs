@@ -33,5 +33,12 @@
 			var table = await this.tableService.GetByIdAsync(action.Id);
 			dispatcher.Dispatch(new PokerTableSetAction(table));
 		}
+
+		[EffectMethod]
+		public async Task LeaveTable(PokerTableLeaveAction action, IDispatcher dispatcher)
+		{
+			await this.tableService.LeaveAsync(action.Id);
+			dispatcher.Dispatch(new PokerTableSetAction(null));
+		}
 	}
 }

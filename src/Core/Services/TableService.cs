@@ -74,12 +74,16 @@
 			return table;
 		}
 
+		public Task<Table> LeaveTableAsync(Guid tableId, CancellationToken ct = default)
+			=> this.RemovePlayerFromTable(this.currentUserService.UserId, tableId, ct);
+
 		public async Task<Table> RemovePlayerFromTable(Guid playerId, Guid tableId, CancellationToken ct = default)
 		{
 			var table = await this.GetByIdAsync(tableId, ct);
 			if (table is not null)
 			{
-				table.Players.Remove(new User { Id = playerId });
+				var playerToRemove = table.Players.SingleOrDefault(p => p.Id == playerId);
+				table.Players.Remove(playerToRemove);
 				await this.dbContext.SaveChangesAsync(ct);
 			}
 

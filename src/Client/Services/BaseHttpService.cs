@@ -40,6 +40,12 @@
 			response.EnsureSuccessStatusCode();
 		}
 
+		protected async Task PostAsync(string uri, HttpContent content = null, CancellationToken ct = default)
+		{
+			using var response = await this.httpClient.PostAsync(uri, content, ct);
+			response.EnsureSuccessStatusCode();
+		}
+
 		protected async Task<TRes> PostAsync<TPayload, TRes>(string uri, TPayload payload, CancellationToken ct = default)
 		{
 			using var response = await this.httpClient.PostAsJsonAsync(uri, payload, ct);

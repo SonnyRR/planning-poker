@@ -35,6 +35,13 @@
 		Task<TableModel> GetByIdAsync(Guid id, CancellationToken ct = default);
 
 		/// <summary>
+		/// Leaves an existing poker table.
+		/// </summary>
+		/// <param name="id">The table's unique identifier value.</param>
+		/// <param name="ct">The cancellation token.</param>
+		Task LeaveAsync(Guid id, CancellationToken ct = default);
+
+		/// <summary>
 		/// Modifies an existing poker table.
 		/// </summary>
 		/// <param name="bindingModel">The binding model.</param>

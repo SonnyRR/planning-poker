@@ -26,6 +26,9 @@
 		public Task<TableModel> GetByIdAsync(Guid id, CancellationToken ct = default)
 			=> this.GetAsync<TableModel>($"{ROUTE}/{id}", ct);
 
+		public Task LeaveAsync(Guid id, CancellationToken ct = default)
+			=> this.PostAsync($"{ROUTE}/{id}/leave", ct);
+
 		public Task ModifyAsync(TableBindingModel bindingModel, CancellationToken ct = default)
 			=> this.PostAsync(ROUTE, bindingModel, ct);
 	}

@@ -45,4 +45,11 @@
 
 		public string ErrorMessage { get; init; }
 	}
+
+	public class PokerTableLeaveAction
+	{
+		public Guid Id { get; set; }
+
+		public PokerTableLeaveAction(Guid id) => this.Id = id;
+	}
 }

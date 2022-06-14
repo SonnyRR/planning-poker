@@ -40,10 +40,17 @@
 			GC.SuppressFinalize(this);
 		}
 
+		/// <summary>
+		/// Dispatches an action with the player's vote.
+		/// </summary>
 		public async Task Vote()
-		{
-			await this.PokerClient.VoteCasted(new PlayerVote { Estimation = 3, TableId = this.Id });
-		}
+			=> await this.PokerClient.VoteCasted(new PlayerVote { Estimation = 3, TableId = this.Id });
+
+		/// <summary>
+		/// Leaves the current poker table.
+		/// </summary>
+		public async Task Leave()
+			=> await this.PokerClient.RemovedFromTable(this.TableState.Value.Table.Id);
 
 		protected virtual void Dispose(bool disposing)
 		{
@@ -53,6 +60,7 @@
 				this.ActionSubscriber.UnsubscribeFromAllActions(this);
 			}
 		}
+
 		protected override async Task OnInitializedAsync()
 		{
 			this.TableState.StateChanged += this.StateHasChanged;

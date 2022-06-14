@@ -67,7 +67,7 @@
 
 			try
 			{
-				this.logger.LogInformation("Attempting to fetch user from: '{0}' base url.", this.client.BaseAddress.ToString());
+				this.logger.LogInformation("Attempting to fetch user from: '{baseAddress}' base url.", this.client.BaseAddress.ToString());
 				user = await this.client.GetFromJsonAsync<UserInfo>("api/User");
 			}
 			catch (Exception exc)

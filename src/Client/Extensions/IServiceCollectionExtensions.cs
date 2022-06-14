@@ -81,7 +81,7 @@
 					options.UseReduxDevTools(x =>
 					{
 						x.Name = "Planning Poker";
-						x.UseSystemTextJson(sp => new()
+						x.UseSystemTextJson(_ => new()
 						{
 							PropertyNameCaseInsensitive = true
 						});

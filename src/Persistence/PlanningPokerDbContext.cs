@@ -5,6 +5,10 @@
 
 	using PlanningPoker.Persistence.Entities;
 	using PlanningPoker.Persistence.Extensions;
+	using System;
+	using System.Linq;
+	using System.Threading;
+	using System.Threading.Tasks;
 
 	public sealed class PlanningPokerDbContext : IdentityDbContext<User, Role, Guid>
 	{

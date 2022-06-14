@@ -1,6 +1,8 @@
 ﻿namespace PlanningPoker.Persistence.Entities
 {
 	using Microsoft.AspNetCore.Identity;
+	using System;
+	using System.Collections.Generic;
 
 	public sealed class User : IdentityUser<Guid>, IDeletableEntity
 	{

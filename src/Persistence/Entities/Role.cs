@@ -1,6 +1,7 @@
 ﻿namespace PlanningPoker.Persistence.Entities
 {
 	using Microsoft.AspNetCore.Identity;
+	using System;
 
 	public sealed class Role : IdentityRole<Guid>, IAuditableEntity, IDeletableEntity
 	{

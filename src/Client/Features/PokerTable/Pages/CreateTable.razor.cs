@@ -35,7 +35,11 @@
 		[Inject]
 		public IState<PokerTableState> TableState { get; set; }
 
-		public void Dispose() => this.TableState.StateChanged -= this.StateHasChanged;
+		public void Dispose()
+		{
+			this.TableState.StateChanged -= this.StateHasChanged;
+			GC.SuppressFinalize(this);
+		}
 
 		/// <summary>
 		/// Handles invalid form submits.

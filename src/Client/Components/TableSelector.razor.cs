@@ -1,14 +1,11 @@
 ﻿namespace PlanningPoker.Client.Components
 {
 	using Ardalis.GuardClauses;
-
 	using Microsoft.AspNetCore.Components;
 	using Microsoft.Extensions.Logging;
-
 	using PlanningPoker.SharedKernel.Models.Tables;
 
 	using Radzen;
-
 	using System.Text.Json;
 	using System.Threading.Tasks;
 
@@ -22,6 +19,9 @@
 		[Inject]
 		public ILogger<TableSelector> Logger { get; set; }
 
+		[Inject]
+		public NavigationManager NavigationManager { get; set; }
+
 		[Parameter]
 		public EventCallback OnTableCreationCallback { get; set; }
 
@@ -29,21 +29,19 @@
 
 		[Parameter]
 		public EventCallback<JoinExistingTableRequest> TableIdChanged { get; set; }
-
-		public void OnInvalidSubmit(FormInvalidSubmitEventArgs args)
-		{
-			Guard.Against.Null(args, nameof(args));
-			this.Logger.LogError("Invalid Form Submit", JsonSerializer.Serialize(args, new JsonSerializerOptions() { WriteIndented = true }));
-		}
-
 		public async Task OnTableCreationSubmit()
 		{
 			await this.OnTableCreationCallback.InvokeAsync();
 		}
 
-		public async Task OnValidSubmitAsync()
+		public void OnTableJoinInvalidSubmit(FormInvalidSubmitEventArgs args)
 		{
-			this.Logger.LogDebug("Attempting to join table {TableId}", this.JoinTableParameters.TableCode);
+			Guard.Against.Null(args, nameof(args));
+			this.Logger.LogError("Invalid Form Submit", JsonSerializer.Serialize(args, new JsonSerializerOptions() { WriteIndented = true }));
+		}
+		public async Task OnTableJoinValidSubmitAsync()
+		{
+			this.Logger.LogDebug("Attempting to join table {TableId}", this.JoinTableParameters.Code);
 			await this.TableIdChanged.InvokeAsync(this.JoinTableParameters);
 		}
 	}

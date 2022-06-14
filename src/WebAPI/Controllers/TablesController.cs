@@ -64,5 +64,15 @@
 		[HttpDelete(ID_ROUTE_PARAM)]
 		public async Task<bool> Delete([FromRoute] Guid id, CancellationToken ct)
 			=> await this.tableService.DeleteAsync(id, ct);
+
+		/// <summary>
+		/// Removes the currently signed-in player from an existing table.
+		/// </summary>
+		/// <param name="id">The table's unique identifier value.</param>
+		/// <param name="ct">The cancellation token.</param>
+		/// <returns>An instance of <see cref="TableModel"/>.</returns>
+		[HttpPost($"{ID_ROUTE_PARAM}/leave")]
+		public async Task<TableModel> LeaveAsync([FromRoute] Guid id, CancellationToken ct)
+			=> (await this.tableService.LeaveTableAsync(id, ct)).AdaptToModel();
 	}
 }

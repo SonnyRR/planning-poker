@@ -48,11 +48,12 @@
 		/// <summary>
 		/// Removes a user from a specified table.
 		/// </summary>
-		/// <param name="tableName">The table name.</param>
+		/// <param name="tableId">The table's unique identifier.</param>
 		[HubMethodName(nameof(IPokerClient.RemovedFromTable))]
-		public async Task RemoveFromTableAsync(string tableName)
+		public async Task RemoveFromTableAsync(Guid tableId)
 		{
-			await this.Groups.RemoveFromGroupAsync(this.Context.ConnectionId, tableName);
+			await this.Groups.RemoveFromGroupAsync(this.Context.ConnectionId, tableId.ToString());
+			await this.tableService.RemovePlayerFromTable(Guid.Parse(this.UserId), tableId);
 		}
 
 		/// <summary>

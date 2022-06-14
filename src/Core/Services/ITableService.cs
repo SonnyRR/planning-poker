@@ -44,6 +44,7 @@
 		/// <param name="ct">The cancellation token.</param>
 		/// <returns>Instance of <see cref="Table"/> or <see cref="null"/> if it does not exist.</returns>
 		Task<Table> GetByIdAsync(Guid id, CancellationToken ct = default);
+
 		/// <summary>
 		/// Removes a player from an existing poker table by their unique identifiers.
 		/// </summary>
@@ -60,5 +61,13 @@
 		/// <param name="ct">The cancellation token.</param>
 		/// <returns>Instance of <see cref="Table"/>.</returns>
 		Task<Table> UpdateAsync(TableBindingModel bindingModel, CancellationToken ct = default);
+
+		/// <summary>
+		/// Removes the currently signed-in player from an existing table.
+		/// </summary>
+		/// <param name="tableId">The table's unique identifier.</param>
+		/// <param name="ct">The cancellation token.</param>
+		/// <returns>An instance of <see cref="Table"/>.</returns>
+		Task<Table> LeaveTableAsync(Guid tableId, CancellationToken ct = default);
 	}
 }

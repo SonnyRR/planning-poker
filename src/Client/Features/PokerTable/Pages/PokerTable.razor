@@ -26,6 +26,7 @@
                 </label>
             </div>
             <button @onclick="Vote" disabled="@(!this.PokerClient.IsConnected)">Send</button>
+            <button @onclick="Leave" disabled="@(this.TableState.Value.Table == null)">Leave</button>
         </ContentTemplate>
     </SpinLoader>
 </div>

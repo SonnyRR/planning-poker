@@ -1,13 +1,5 @@
 ﻿{
   "$schema": "https://json.schemastore.org/launchsettings.json",
-  "iisSettings": {
-    "windowsAuthentication": false,
-    "anonymousAuthentication": true,
-    "iisExpress": {
-      "applicationUrl": "http://localhost:5215",
-      "sslPort": 7215
-    }
-  },
   "profiles": {
     "PlanningPoker.Identity - Development": {
       "commandName": "Project",

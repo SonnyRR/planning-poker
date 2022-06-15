@@ -3,7 +3,7 @@
 @using static Constants
 
 <div class="h-100">
-    <SpinLoader IsLoading="TableState.Value.IsLoading">
+    <SpinLoader IsLoading="TableState.Value.IsLoading || TableState.Value.Table is null">
         <LoadingTemplate>
             <div class="w-100 h-100 d-flex align-items-center">
                 <Grid Center=@true Color=@PRIMARY />
@@ -13,20 +13,9 @@
             <p>
                 @TableState.Value.Table.Name
             </p>
-            <div class="form-group">
-                <label>
-                    User:
-                    <input @bind="userInput" />
-                </label>
-            </div>
-            <div class="form-group">
-                <label>
-                    Message:
-                    <input @bind="messageInput" size="50" />
-                </label>
-            </div>
+
             <button @onclick="Vote" disabled="@(!this.PokerClient.IsConnected)">Send</button>
-            <button @onclick="Leave" disabled="@(this.TableState.Value.Table.Id == Guid.Empty)">Leave</button>
+            <button @onclick="Leave" disabled="@(this.TableState.Value.IsLoading)">Leave</button>
 
             @foreach (var player in TableState.Value.Table.Players)
             {

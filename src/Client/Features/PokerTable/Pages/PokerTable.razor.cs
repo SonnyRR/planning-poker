@@ -8,15 +8,10 @@
 	using PlanningPoker.SharedKernel.Models.Tables;
 	using Store;
 	using System;
-	using System.Linq;
 	using System.Threading.Tasks;
 
 	public partial class PokerTable : IDisposable
 	{
-		private bool isTablePresent;
-		private string messageInput;
-		private string userInput;
-
 		[Inject]
 		public IActionSubscriber ActionSubscriber { get; set; }
 
@@ -65,21 +60,19 @@
 		protected override async Task OnInitializedAsync()
 		{
 			this.TableState.StateChanged += this.StateHasChanged;
-			this.isTablePresent = this.Id == this.TableState.Value.Table.Id;
-
-			this.LoadTableIfMissing();
 
 			this.RegisterHubMethodHandlers();
 			await this.PokerClient.Start();
 
+			this.LoadTableIfMissing();
 			await this.JoinPokerTable();
 		}
 
 		private async Task JoinPokerTable()
 		{
-			if (this.isTablePresent)
+			if (!this.TableState.Value.IsLoading)
 			{
-				this.Logger.LogWarning("Table is present in store, attempting to add user.");
+				this.Logger.LogWarning("Table is present in the store, attempting to add player.");
 				await this.PokerClient.AddedToTable(this.TableState.Value.Table.Id);
 				return;
 			}
@@ -102,7 +95,7 @@
 		/// </summary>
 		private void LoadTableIfMissing()
 		{
-			if (!this.isTablePresent)
+			if (this.TableState.Value.Table is null)
 			{
 				this.Logger.LogDebug("Table is not present in the store, attemting to load: '{id}'.", this.Id);
 				this.Dispatcher.Dispatch(new PokerTableLoadAction(this.Id));
@@ -119,8 +112,6 @@
 			this.PokerClient.OnVoteCasted((vote) =>
 			{
 				this.Logger.LogInformation("{player} voted: {vote} in table {id}", vote.PlayerId, vote.Estimation, vote.TableId);
-				var player = this.TableState.Value.Table.Players.SingleOrDefault(p => p.Id == vote.PlayerId);
-				this.Logger.LogInformation(player.UserName);
 				this.StateHasChanged();
 			});
 		}

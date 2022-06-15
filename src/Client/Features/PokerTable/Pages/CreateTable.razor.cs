@@ -38,7 +38,7 @@
 
 		public void Dispose()
 		{
-			this.TableState.StateChanged -= this.StateHasChanged;
+			this.Dispose(true);
 			GC.SuppressFinalize(this);
 		}
 
@@ -50,7 +50,7 @@
 		{
 			var json = JsonSerializer.Serialize(args, new JsonSerializerOptions() { WriteIndented = true });
 			this.Logger.LogInformation("Invalid Submit", json);
-			this.Dispatcher.Dispatch(new PokerTableUnsuccessfulSubmitAction(json));
+			this.Dispatcher.Dispatch(new PokerTableUnsuccessfulCreationAction(json));
 		}
 
 		/// <summary>
@@ -60,7 +60,15 @@
 		public void OnSubmit(TableBindingModel bindingModel)
 		{
 			this.Logger.LogInformation("Valid Submit");
-			this.Dispatcher.Dispatch(new PokerTableSubmitAction(bindingModel));
+			this.Dispatcher.Dispatch(new PokerTableCreationAction(bindingModel));
+		}
+
+		protected virtual void Dispose(bool disposing)
+		{
+			if (disposing)
+			{
+				this.TableState.StateChanged -= this.StateHasChanged;
+			}
 		}
 
 		protected override void OnInitialized()
@@ -71,7 +79,10 @@
 
 		private void StateHasChanged(object sender, EventArgs e)
 		{
-			this.NavigationManager.NavigateTo($"{Routes.TABLE_PREFIX}/{this.TableState.Value.Table.Id}");
+			if (!this.TableState.Value.IsLoading)
+			{
+				this.NavigationManager.NavigateTo($"{Routes.TABLE_PREFIX}/{this.TableState.Value.Table.Id}");
+			}
 		}
 	}
 }

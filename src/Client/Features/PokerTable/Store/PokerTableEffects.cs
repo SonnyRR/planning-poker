@@ -13,21 +13,24 @@
 			=> this.tableService = tableService;
 
 		[EffectMethod]
-		public async Task CreateTable(PokerTableSubmitAction action, IDispatcher dispatcher)
+		public async Task Create(PokerTableCreationAction action, IDispatcher dispatcher)
 		{
+			dispatcher.Dispatch(new PokerTableSetLoadingAction());
+
 			var table = await this.tableService.CreateAsync(action.BindingModel);
 			if (table is not null)
 			{
-				dispatcher.Dispatch(new PokerTableSuccessfulSubmitAction());
+				dispatcher.Dispatch(new PokerTableSuccessfulCreationAction());
 				dispatcher.Dispatch(new PokerTableSetAction(table));
 				return;
 			}
 
-			dispatcher.Dispatch(new PokerTableUnsuccessfulSubmitAction("Server error."));
+			dispatcher.Dispatch(new PokerTableSetLoadingAction(false));
+			dispatcher.Dispatch(new PokerTableUnsuccessfulCreationAction("Server error."));
 		}
 
 		[EffectMethod]
-		public async Task LoadTable(PokerTableLoadAction action, IDispatcher dispatcher)
+		public async Task Load(PokerTableLoadAction action, IDispatcher dispatcher)
 		{
 			dispatcher.Dispatch(new PokerTableSetLoadingAction());
 			var table = await this.tableService.GetByIdAsync(action.Id);
@@ -35,7 +38,7 @@
 		}
 
 		[EffectMethod]
-		public async Task LeaveTable(PokerTableLeaveAction action, IDispatcher dispatcher)
+		public async Task Leave(PokerTableLeaveAction action, IDispatcher dispatcher)
 		{
 			await this.tableService.LeaveAsync(action.Id);
 			dispatcher.Dispatch(new PokerTableSetAction(null));

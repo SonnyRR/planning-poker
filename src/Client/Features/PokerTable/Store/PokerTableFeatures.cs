@@ -2,11 +2,11 @@
 {
 	using Fluxor;
 
-	public class PokerTableCreateFeature : Feature<PokerTableSubmissionState>
+	public class PokerTableCreateFeature : Feature<PokerTableCreationState>
 	{
-		public override string GetName() => nameof(PokerTableSubmissionState);
+		public override string GetName() => nameof(PokerTableCreationState);
 
-		protected override PokerTableSubmissionState GetInitialState()
+		protected override PokerTableCreationState GetInitialState()
 			=> new();
 	}
 
@@ -15,10 +15,6 @@
 		public override string GetName() => nameof(PokerTableState);
 
 		protected override PokerTableState GetInitialState()
-			=> new()
-			{
-				IsLoading = true,
-				Table = new()
-			};
+			=> new();
 	}
 }

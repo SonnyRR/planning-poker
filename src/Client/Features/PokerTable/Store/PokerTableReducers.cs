@@ -2,9 +2,17 @@
 {
 	using Actions;
 	using Fluxor;
+	using System;
 
 	public static class PokerTableReducers
 	{
+		[ReducerMethod(typeof(PokerTableCreationAction))]
+		public static PokerTableCreationState OnCreation(PokerTableCreationState state)
+			=> state with
+			{
+				Submitting = true
+			};
+
 		[ReducerMethod]
 		public static PokerTableState OnSet(PokerTableState state, PokerTableSetAction action)
 			=> state with
@@ -13,6 +21,7 @@
 				IsLoading = false
 			};
 
+		[Obsolete]
 		[ReducerMethod(typeof(PokerTableSetInitializedAction))]
 		public static PokerTableState OnSetInitialized(PokerTableState state)
 			=> state with
@@ -26,15 +35,9 @@
 			{
 				IsLoading = true
 			};
-		[ReducerMethod(typeof(PokerTableSubmitAction))]
-		public static PokerTableSubmissionState OnSubmit(PokerTableSubmissionState state)
-			=> state with
-			{
-				Submitting = true
-			};
 
-		[ReducerMethod(typeof(PokerTableSuccessfulSubmitAction))]
-		public static PokerTableSubmissionState OnSubmitSuccess(PokerTableSubmissionState state)
+		[ReducerMethod(typeof(PokerTableSuccessfulCreationAction))]
+		public static PokerTableCreationState OnSuccessfulCreation(PokerTableCreationState state)
 			=> state with
 			{
 				Submitting = false,
@@ -42,7 +45,8 @@
 			};
 
 		[ReducerMethod]
-		public static PokerTableSubmissionState OnSubmitSuccess(PokerTableSubmissionState state, PokerTableUnsuccessfulSubmitAction action)
+		public static PokerTableCreationState OnUnsuccessfulCreation(
+			PokerTableCreationState state, PokerTableUnsuccessfulCreationAction action)
 			=> state with
 			{
 				Submitting = false,

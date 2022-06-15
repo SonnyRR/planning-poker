@@ -27,6 +27,7 @@
 		/// The SignalR Hub connection.
 		/// </summary>
 		protected HubConnection HubConnection { get; }
+
 		/// <summary>
 		/// Disposes the connection.
 		/// </summary>

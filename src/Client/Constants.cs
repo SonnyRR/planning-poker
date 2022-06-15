@@ -14,6 +14,9 @@
 			public const string UNAUTHORIZED_CLIENT_ID = "default";
 		}
 
+		/// <summary>
+		/// Constants related to Blazor pages.
+		/// </summary>
 		public static class Routes
 		{
 			public const string INDEX = "/";

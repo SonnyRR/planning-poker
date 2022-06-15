@@ -11,7 +11,7 @@
 		public TableModel Table { get; init; }
 	}
 
-	public record PokerTableSubmissionState
+	public record PokerTableCreationState
 	{
 		public bool Submitting { get; init; }
 

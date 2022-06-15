@@ -4,6 +4,21 @@
 	using PlanningPoker.SharedKernel.Models.Generated;
 	using System;
 
+	public class PokerTableCreationAction
+	{
+		public PokerTableCreationAction(TableBindingModel bindingModel)
+			=> this.BindingModel = bindingModel;
+
+		public TableBindingModel BindingModel { get; init; }
+	}
+
+	public class PokerTableLeaveAction
+	{
+		public PokerTableLeaveAction(Guid id) => this.Id = id;
+
+		public Guid Id { get; set; }
+	}
+
 	public class PokerTableLoadAction
 	{
 		public PokerTableLoadAction(Guid id) => this.Id = id;
@@ -24,32 +39,20 @@
 
 	public class PokerTableSetLoadingAction
 	{
+		public PokerTableSetLoadingAction(bool flag = true) => this.Flag = flag;
+
+		public bool Flag { get; init; }
 	}
 
-	public class PokerTableSubmitAction
-	{
-		public PokerTableSubmitAction(TableBindingModel bindingModel)
-			=> this.BindingModel = bindingModel;
-
-		public TableBindingModel BindingModel { get; init; }
-	}
-
-	public class PokerTableSuccessfulSubmitAction
+	public class PokerTableSuccessfulCreationAction
 	{
 	}
 
-	public class PokerTableUnsuccessfulSubmitAction
+	public class PokerTableUnsuccessfulCreationAction
 	{
-		public PokerTableUnsuccessfulSubmitAction(string errorMessage)
+		public PokerTableUnsuccessfulCreationAction(string errorMessage)
 			=> this.ErrorMessage = errorMessage;
 
 		public string ErrorMessage { get; init; }
-	}
-
-	public class PokerTableLeaveAction
-	{
-		public Guid Id { get; set; }
-
-		public PokerTableLeaveAction(Guid id) => this.Id = id;
 	}
 }

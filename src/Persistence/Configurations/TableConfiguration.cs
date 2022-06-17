@@ -21,7 +21,8 @@
 
 			builder
 				.HasMany(t => t.Players)
-				.WithMany(p => p.Tables);
+				.WithMany(p => p.Tables)
+				.UsingEntity(j => j.ToTable("PlayerTables"));
 
 			builder
 				.HasOne(t => t.Owner)

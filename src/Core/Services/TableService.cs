@@ -35,7 +35,7 @@
 
 			if (table is not null && !table.Players.Any(p => p.Id == playerId))
 			{
-				var user = await this.dbContext.Users.SingleOrDefaultAsync(u => u.Id == playerId);
+				var user = await this.dbContext.Users.SingleOrDefaultAsync(u => u.Id == playerId, ct);
 				table.Players.Add(user);
 				await this.dbContext.SaveChangesAsync(ct);
 			}

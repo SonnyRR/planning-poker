@@ -12,196 +12,506 @@ namespace PlanningPoker.Core.Mapping
             {
                 DeckType = p1.DeckType,
                 Name = p1.Name,
-                Owner = p1.Owner == null ? null : new User()
-                {
-                    Id = p1.Owner.Id,
-                    UserName = p1.Owner.UserName
-                },
+                Owner = funcMain1(p1.Owner),
                 OwnerId = p1.OwnerId,
-                Players = funcMain1(p1.Players),
+                Players = funcMain3(p1.Players),
                 CreatedOn = p1.CreatedOn,
                 Id = p1.Id,
                 ModifiedOn = p1.ModifiedOn
             };
         }
-        public static Table AdaptTo(this TableModel p3, Table p4)
-        {
-            if (p3 == null)
-            {
-                return null;
-            }
-            Table result = p4 ?? new Table();
-            
-            result.DeckType = p3.DeckType;
-            result.Name = p3.Name;
-            result.Owner = funcMain2(p3.Owner, result.Owner);
-            result.OwnerId = p3.OwnerId;
-            result.Players = funcMain3(p3.Players, result.Players);
-            result.CreatedOn = p3.CreatedOn;
-            result.Id = p3.Id;
-            result.ModifiedOn = p3.ModifiedOn;
-            return result;
-            
-        }
-        public static TableModel AdaptToModel(this Table p9)
-        {
-            return p9 == null ? null : new TableModel()
-            {
-                DeckType = p9.DeckType,
-                Name = p9.Name,
-                Owner = p9.Owner == null ? null : new UserModel()
-                {
-                    Id = p9.Owner.Id,
-                    UserName = p9.Owner.UserName
-                },
-                OwnerId = p9.OwnerId,
-                Players = funcMain4(p9.Players),
-                CreatedOn = p9.CreatedOn,
-                Id = p9.Id,
-                ModifiedOn = p9.ModifiedOn
-            };
-        }
-        public static TableModel AdaptTo(this Table p11, TableModel p12)
-        {
-            if (p11 == null)
-            {
-                return null;
-            }
-            TableModel result = p12 ?? new TableModel();
-            
-            result.DeckType = p11.DeckType;
-            result.Name = p11.Name;
-            result.Owner = funcMain5(p11.Owner, result.Owner);
-            result.OwnerId = p11.OwnerId;
-            result.Players = funcMain6(p11.Players, result.Players);
-            result.CreatedOn = p11.CreatedOn;
-            result.Id = p11.Id;
-            result.ModifiedOn = p11.ModifiedOn;
-            return result;
-            
-        }
-        
-        private static List<User> funcMain1(List<UserModel> p2)
-        {
-            if (p2 == null)
-            {
-                return null;
-            }
-            List<User> result = new List<User>(p2.Count);
-            
-            int i = 0;
-            int len = p2.Count;
-            
-            while (i < len)
-            {
-                UserModel item = p2[i];
-                result.Add(item == null ? null : new User()
-                {
-                    Id = item.Id,
-                    UserName = item.UserName
-                });
-                i++;
-            }
-            return result;
-            
-        }
-        
-        private static User funcMain2(UserModel p5, User p6)
-        {
-            if (p5 == null)
-            {
-                return null;
-            }
-            User result = p6 ?? new User();
-            
-            result.Id = p5.Id;
-            result.UserName = p5.UserName;
-            return result;
-            
-        }
-        
-        private static List<User> funcMain3(List<UserModel> p7, List<User> p8)
+        public static Table AdaptTo(this TableModel p7, Table p8)
         {
             if (p7 == null)
             {
                 return null;
             }
-            List<User> result = new List<User>(p7.Count);
+            Table result = p8 ?? new Table();
             
-            int i = 0;
-            int len = p7.Count;
-            
-            while (i < len)
-            {
-                UserModel item = p7[i];
-                result.Add(item == null ? null : new User()
-                {
-                    Id = item.Id,
-                    UserName = item.UserName
-                });
-                i++;
-            }
+            result.DeckType = p7.DeckType;
+            result.Name = p7.Name;
+            result.Owner = funcMain6(p7.Owner, result.Owner);
+            result.OwnerId = p7.OwnerId;
+            result.Players = funcMain8(p7.Players, result.Players);
+            result.CreatedOn = p7.CreatedOn;
+            result.Id = p7.Id;
+            result.ModifiedOn = p7.ModifiedOn;
             return result;
             
         }
-        
-        private static List<UserModel> funcMain4(List<User> p10)
+        public static TableModel AdaptToModel(this Table p17)
         {
-            if (p10 == null)
+            return p17 == null ? null : new TableModel()
+            {
+                DeckType = p17.DeckType,
+                Name = p17.Name,
+                Owner = funcMain11(p17.Owner),
+                OwnerId = p17.OwnerId,
+                Players = funcMain13(p17.Players),
+                CreatedOn = p17.CreatedOn,
+                Id = p17.Id,
+                ModifiedOn = p17.ModifiedOn
+            };
+        }
+        public static TableModel AdaptTo(this Table p23, TableModel p24)
+        {
+            if (p23 == null)
             {
                 return null;
             }
-            List<UserModel> result = new List<UserModel>(p10.Count);
+            TableModel result = p24 ?? new TableModel();
+            
+            result.DeckType = p23.DeckType;
+            result.Name = p23.Name;
+            result.Owner = funcMain16(p23.Owner, result.Owner);
+            result.OwnerId = p23.OwnerId;
+            result.Players = funcMain18(p23.Players, result.Players);
+            result.CreatedOn = p23.CreatedOn;
+            result.Id = p23.Id;
+            result.ModifiedOn = p23.ModifiedOn;
+            return result;
+            
+        }
+        
+        private static User funcMain1(UserModel p2)
+        {
+            return p2 == null ? null : new User()
+            {
+                Tables = funcMain2(p2.Tables),
+                Id = p2.Id,
+                UserName = p2.UserName
+            };
+        }
+        
+        private static IList<User> funcMain3(IList<UserModel> p4)
+        {
+            if (p4 == null)
+            {
+                return null;
+            }
+            IList<User> result = new List<User>(p4.Count);
+            
+            ICollection<User> list = result;
             
             int i = 0;
-            int len = p10.Count;
+            int len = p4.Count;
             
             while (i < len)
             {
-                User item = p10[i];
-                result.Add(item == null ? null : new UserModel()
-                {
-                    Id = item.Id,
-                    UserName = item.UserName
-                });
+                UserModel item = p4[i];
+                list.Add(funcMain4(item));
                 i++;
             }
             return result;
             
         }
         
-        private static UserModel funcMain5(User p13, UserModel p14)
+        private static User funcMain6(UserModel p9, User p10)
+        {
+            if (p9 == null)
+            {
+                return null;
+            }
+            User result = p10 ?? new User();
+            
+            result.Tables = funcMain7(p9.Tables, result.Tables);
+            result.Id = p9.Id;
+            result.UserName = p9.UserName;
+            return result;
+            
+        }
+        
+        private static IList<User> funcMain8(IList<UserModel> p13, IList<User> p14)
         {
             if (p13 == null)
             {
                 return null;
             }
-            UserModel result = p14 ?? new UserModel();
+            IList<User> result = new List<User>(p13.Count);
             
-            result.Id = p13.Id;
-            result.UserName = p13.UserName;
+            ICollection<User> list = result;
+            
+            int i = 0;
+            int len = p13.Count;
+            
+            while (i < len)
+            {
+                UserModel item = p13[i];
+                list.Add(funcMain9(item));
+                i++;
+            }
             return result;
             
         }
         
-        private static List<UserModel> funcMain6(List<User> p15, List<UserModel> p16)
+        private static UserModel funcMain11(User p18)
         {
-            if (p15 == null)
+            return p18 == null ? null : new UserModel()
+            {
+                Tables = funcMain12(p18.Tables),
+                Id = p18.Id,
+                UserName = p18.UserName
+            };
+        }
+        
+        private static IList<UserModel> funcMain13(IList<User> p20)
+        {
+            if (p20 == null)
             {
                 return null;
             }
-            List<UserModel> result = new List<UserModel>(p15.Count);
+            IList<UserModel> result = new List<UserModel>(p20.Count);
+            
+            ICollection<UserModel> list = result;
             
             int i = 0;
-            int len = p15.Count;
+            int len = p20.Count;
             
             while (i < len)
             {
-                User item = p15[i];
-                result.Add(item == null ? null : new UserModel()
+                User item = p20[i];
+                list.Add(funcMain14(item));
+                i++;
+            }
+            return result;
+            
+        }
+        
+        private static UserModel funcMain16(User p25, UserModel p26)
+        {
+            if (p25 == null)
+            {
+                return null;
+            }
+            UserModel result = p26 ?? new UserModel();
+            
+            result.Tables = funcMain17(p25.Tables, result.Tables);
+            result.Id = p25.Id;
+            result.UserName = p25.UserName;
+            return result;
+            
+        }
+        
+        private static IList<UserModel> funcMain18(IList<User> p29, IList<UserModel> p30)
+        {
+            if (p29 == null)
+            {
+                return null;
+            }
+            IList<UserModel> result = new List<UserModel>(p29.Count);
+            
+            ICollection<UserModel> list = result;
+            
+            int i = 0;
+            int len = p29.Count;
+            
+            while (i < len)
+            {
+                User item = p29[i];
+                list.Add(funcMain19(item));
+                i++;
+            }
+            return result;
+            
+        }
+        
+        private static IList<Table> funcMain2(IList<TableModel> p3)
+        {
+            if (p3 == null)
+            {
+                return null;
+            }
+            IList<Table> result = new List<Table>(p3.Count);
+            
+            ICollection<Table> list = result;
+            
+            int i = 0;
+            int len = p3.Count;
+            
+            while (i < len)
+            {
+                TableModel item = p3[i];
+                list.Add(item == null ? null : new Table()
                 {
+                    DeckType = item.DeckType,
+                    Name = item.Name,
+                    Owner = null,
+                    OwnerId = item.OwnerId,
+                    Players = null,
+                    CreatedOn = item.CreatedOn,
                     Id = item.Id,
-                    UserName = item.UserName
+                    ModifiedOn = item.ModifiedOn
+                });
+                i++;
+            }
+            return result;
+            
+        }
+        
+        private static User funcMain4(UserModel p5)
+        {
+            return p5 == null ? null : new User()
+            {
+                Tables = funcMain5(p5.Tables),
+                Id = p5.Id,
+                UserName = p5.UserName
+            };
+        }
+        
+        private static IList<Table> funcMain7(IList<TableModel> p11, IList<Table> p12)
+        {
+            if (p11 == null)
+            {
+                return null;
+            }
+            IList<Table> result = new List<Table>(p11.Count);
+            
+            ICollection<Table> list = result;
+            
+            int i = 0;
+            int len = p11.Count;
+            
+            while (i < len)
+            {
+                TableModel item = p11[i];
+                list.Add(item == null ? null : new Table()
+                {
+                    DeckType = item.DeckType,
+                    Name = item.Name,
+                    Owner = null,
+                    OwnerId = item.OwnerId,
+                    Players = null,
+                    CreatedOn = item.CreatedOn,
+                    Id = item.Id,
+                    ModifiedOn = item.ModifiedOn
+                });
+                i++;
+            }
+            return result;
+            
+        }
+        
+        private static User funcMain9(UserModel p15)
+        {
+            return p15 == null ? null : new User()
+            {
+                Tables = funcMain10(p15.Tables),
+                Id = p15.Id,
+                UserName = p15.UserName
+            };
+        }
+        
+        private static IList<TableModel> funcMain12(IList<Table> p19)
+        {
+            if (p19 == null)
+            {
+                return null;
+            }
+            IList<TableModel> result = new List<TableModel>(p19.Count);
+            
+            ICollection<TableModel> list = result;
+            
+            int i = 0;
+            int len = p19.Count;
+            
+            while (i < len)
+            {
+                Table item = p19[i];
+                list.Add(item == null ? null : new TableModel()
+                {
+                    DeckType = item.DeckType,
+                    Name = item.Name,
+                    Owner = null,
+                    OwnerId = item.OwnerId,
+                    Players = null,
+                    CreatedOn = item.CreatedOn,
+                    Id = item.Id,
+                    ModifiedOn = item.ModifiedOn
+                });
+                i++;
+            }
+            return result;
+            
+        }
+        
+        private static UserModel funcMain14(User p21)
+        {
+            return p21 == null ? null : new UserModel()
+            {
+                Tables = funcMain15(p21.Tables),
+                Id = p21.Id,
+                UserName = p21.UserName
+            };
+        }
+        
+        private static IList<TableModel> funcMain17(IList<Table> p27, IList<TableModel> p28)
+        {
+            if (p27 == null)
+            {
+                return null;
+            }
+            IList<TableModel> result = new List<TableModel>(p27.Count);
+            
+            ICollection<TableModel> list = result;
+            
+            int i = 0;
+            int len = p27.Count;
+            
+            while (i < len)
+            {
+                Table item = p27[i];
+                list.Add(item == null ? null : new TableModel()
+                {
+                    DeckType = item.DeckType,
+                    Name = item.Name,
+                    Owner = null,
+                    OwnerId = item.OwnerId,
+                    Players = null,
+                    CreatedOn = item.CreatedOn,
+                    Id = item.Id,
+                    ModifiedOn = item.ModifiedOn
+                });
+                i++;
+            }
+            return result;
+            
+        }
+        
+        private static UserModel funcMain19(User p31)
+        {
+            return p31 == null ? null : new UserModel()
+            {
+                Tables = funcMain20(p31.Tables),
+                Id = p31.Id,
+                UserName = p31.UserName
+            };
+        }
+        
+        private static IList<Table> funcMain5(IList<TableModel> p6)
+        {
+            if (p6 == null)
+            {
+                return null;
+            }
+            IList<Table> result = new List<Table>(p6.Count);
+            
+            ICollection<Table> list = result;
+            
+            int i = 0;
+            int len = p6.Count;
+            
+            while (i < len)
+            {
+                TableModel item = p6[i];
+                list.Add(item == null ? null : new Table()
+                {
+                    DeckType = item.DeckType,
+                    Name = item.Name,
+                    Owner = null,
+                    OwnerId = item.OwnerId,
+                    Players = null,
+                    CreatedOn = item.CreatedOn,
+                    Id = item.Id,
+                    ModifiedOn = item.ModifiedOn
+                });
+                i++;
+            }
+            return result;
+            
+        }
+        
+        private static IList<Table> funcMain10(IList<TableModel> p16)
+        {
+            if (p16 == null)
+            {
+                return null;
+            }
+            IList<Table> result = new List<Table>(p16.Count);
+            
+            ICollection<Table> list = result;
+            
+            int i = 0;
+            int len = p16.Count;
+            
+            while (i < len)
+            {
+                TableModel item = p16[i];
+                list.Add(item == null ? null : new Table()
+                {
+                    DeckType = item.DeckType,
+                    Name = item.Name,
+                    Owner = null,
+                    OwnerId = item.OwnerId,
+                    Players = null,
+                    CreatedOn = item.CreatedOn,
+                    Id = item.Id,
+                    ModifiedOn = item.ModifiedOn
+                });
+                i++;
+            }
+            return result;
+            
+        }
+        
+        private static IList<TableModel> funcMain15(IList<Table> p22)
+        {
+            if (p22 == null)
+            {
+                return null;
+            }
+            IList<TableModel> result = new List<TableModel>(p22.Count);
+            
+            ICollection<TableModel> list = result;
+            
+            int i = 0;
+            int len = p22.Count;
+            
+            while (i < len)
+            {
+                Table item = p22[i];
+                list.Add(item == null ? null : new TableModel()
+                {
+                    DeckType = item.DeckType,
+                    Name = item.Name,
+                    Owner = null,
+                    OwnerId = item.OwnerId,
+                    Players = null,
+                    CreatedOn = item.CreatedOn,
+                    Id = item.Id,
+                    ModifiedOn = item.ModifiedOn
+                });
+                i++;
+            }
+            return result;
+            
+        }
+        
+        private static IList<TableModel> funcMain20(IList<Table> p32)
+        {
+            if (p32 == null)
+            {
+                return null;
+            }
+            IList<TableModel> result = new List<TableModel>(p32.Count);
+            
+            ICollection<TableModel> list = result;
+            
+            int i = 0;
+            int len = p32.Count;
+            
+            while (i < len)
+            {
+                Table item = p32[i];
+                list.Add(item == null ? null : new TableModel()
+                {
+                    DeckType = item.DeckType,
+                    Name = item.Name,
+                    Owner = null,
+                    OwnerId = item.OwnerId,
+                    Players = null,
+                    CreatedOn = item.CreatedOn,
+                    Id = item.Id,
+                    ModifiedOn = item.ModifiedOn
                 });
                 i++;
             }

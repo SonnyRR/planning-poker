@@ -45,7 +45,10 @@
 
 		public async Task<Table> CreateAsync(TableBindingModel bindingModel, CancellationToken ct = default)
 		{
-			var table = new Table(bindingModel.DeckType, bindingModel.Name, this.currentUserService.UserId);
+			var user = await this.dbContext.Users.FindAsync(this.currentUserService.UserId);
+			var table = new Table(bindingModel.DeckType, bindingModel.Name, user.Id);
+			table.Players.Add(user);
+
 			await this.dbContext.Tables.AddAsync(table, ct);
 			await this.dbContext.SaveChangesAsync(ct);
 

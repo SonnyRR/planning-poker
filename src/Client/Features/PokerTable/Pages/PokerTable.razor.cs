@@ -9,6 +9,7 @@
 	using Store;
 	using System;
 	using System.Threading.Tasks;
+	using static Constants;
 
 	public partial class PokerTable : IDisposable
 	{
@@ -30,6 +31,9 @@
 		[Inject]
 		public IState<PokerTableState> TableState { get; set; }
 
+		[Inject]
+		public NavigationManager NavigationManager { get; set; }
+
 		public void Dispose()
 		{
 			this.Dispose(true);
@@ -46,7 +50,10 @@
 		/// Leaves the current poker table.
 		/// </summary>
 		public async Task Leave()
-			=> await this.PokerClient.RemovedFromTable(this.TableState.Value.Table.Id);
+		{
+			await this.PokerClient.RemovedFromTable(this.TableState.Value.Table.Id);
+			this.NavigationManager.NavigateTo(Routes.INDEX);
+		}
 
 		protected virtual void Dispose(bool disposing)
 		{

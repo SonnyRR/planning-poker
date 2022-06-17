@@ -36,7 +36,8 @@
 					cfg.Ignore(e => e.PhoneNumberConfirmed);
 					cfg.Ignore(e => e.SecurityStamp);
 					cfg.Ignore(e => e.TwoFactorEnabled);
-				});
+				})
+				.MaxDepth(3);
 
 			config.GenerateMapper("[name]Mapper")
 				.ForTypes(types)

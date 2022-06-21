@@ -1,5 +1,27 @@
 ﻿div.player {
-    height: 150px;
+    height: 8rem;
+    width: 5rem;
     border: 3px solid var(--info);
-    border-radius: 10px;
+    border-radius: 7px;
+}
+
+div.card-rotation {
+    animation: rotateAnimation 2s linear 1;
+}
+
+div.card-backround {
+    background: linear-gradient(45deg,#3993ff 12%,transparent 0,transparent 88%,#3993ff 0),linear-gradient(135deg,transparent 37%,#1a7bf2 0,#1a7bf2 63%,transparent 0),linear-gradient(45deg,transparent 37%,#3993ff 0,#3993ff 63%,transparent 0),#74b3ff;
+    background-size: 48px 48px;
+}
+
+@keyframes cardRotation {
+    from {
+        transform: rotateY(0deg);
+    }
+
+    to {
+        transform: rotateY(180deg);
+        background: unset;
+        background-size: unset;
+    }
 }

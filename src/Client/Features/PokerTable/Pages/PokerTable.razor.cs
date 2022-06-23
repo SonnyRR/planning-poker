@@ -102,7 +102,7 @@
 		/// </summary>
 		private void LoadTableIfMissing()
 		{
-			if (this.TableState.Value.Table is null)
+			if (this.TableState.Value.Table?.Id != this.Id)
 			{
 				this.Logger.LogDebug("Table is not present in the store, attemting to load: '{id}'.", this.Id);
 				this.Dispatcher.Dispatch(new PokerTableLoadAction(this.Id));

@@ -36,6 +36,9 @@
 		[Inject]
 		public IState<PokerTableState> TableState { get; set; }
 
+		[Inject]
+		public IState<PokerTableCreationState> TableCreationState { get; set; }
+
 		public void Dispose()
 		{
 			this.Dispose(true);

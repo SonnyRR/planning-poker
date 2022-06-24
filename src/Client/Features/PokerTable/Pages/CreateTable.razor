@@ -4,49 +4,59 @@
 @using PlanningPoker.SharedKernel.Models.Binding
 @using PlanningPoker.SharedKernel.Models.Decks
 @using static Constants
+@using static SharedKernel.Constants.Colors
 
 <PageTitle>Create a new table</PageTitle>
-<div class="container h-100 d-flex align-items-center">
-    <div class="col-lg-8 offset-lg-2">
-        <RadzenCard>
-            <RadzenTemplateForm TItem="TableBindingModel" Data=@Table Submit=@OnSubmit InvalidSubmit=@OnInvalidSubmit>
-                <FluentValidationValidator DisableAssemblyScanning=@true />
+<SpinLoader IsLoading="TableCreationState.Value.Submitting">
+    <LoadingTemplate>
+        <div class="w-100 h-100 d-flex align-items-center">
+            <Grid Center=@true Color=@PRIMARY />
+        </div>
+    </LoadingTemplate>
+    <ContentTemplate>
+        <div class="container h-100 d-flex align-items-center">
+            <div class="col-lg-8 offset-lg-2">
+                <RadzenCard>
+                    <RadzenTemplateForm TItem="TableBindingModel" Data=@Table Submit=@OnSubmit InvalidSubmit=@OnInvalidSubmit>
+                        <FluentValidationValidator DisableAssemblyScanning=@true />
 
-                <RadzenFieldset Text="Create a new table">
-                    <div class="row mb-5">
-                        <div class="col-md-4">
-                            <RadzenLabel Text="Table Name" />
-                            <small>(3-10 characters)</small>
-                        </div>
-                        <div class="col">
-                            <RadzenTextBox Name="TableName" Placeholder="Name..." class="w-100" @bind-Value=@Table.Name />
-                            <div class="rz-message rz-messages-error">
-                                <ValidationMessage For="@(() => Table.Name)" />
-                            </div>
+                        <RadzenFieldset Text="Create a new table">
+                            <div class="row mb-5">
+                                <div class="col-md-4">
+                                    <RadzenLabel Text="Table Name" />
+                                    <small>(3-10 characters)</small>
+                                </div>
+                                <div class="col">
+                                    <RadzenTextBox Name="TableName" Placeholder="Name..." class="w-100" @bind-Value=@Table.Name />
+                                    <div class="rz-message rz-messages-error">
+                                        <ValidationMessage For="@(() => Table.Name)" />
+                                    </div>
 
-                        </div>
-                    </div>
-                    <div class="row mb-5">
-                        <div class="col-md-4">
-                            <RadzenLabel Text="Card set" />
-                            <small>(3-10 characters)</small>
-                        </div>
-                        <div class="col">
-                            <RadzenDropDown Class="w-100"
-                                            Placeholder="Deck type..."
-                                            @bind-Value=@Table.DeckType
-                                            Data=@DeckTypeEntries
-                                            ValueProperty=@nameof(DropDownEntry<DeckType>.Value)
-                                            TextProperty=@nameof(DropDownEntry<DeckType>.DisplayName)>
-                            </RadzenDropDown>
-                            <div class="rz-message rz-messages-error">
-                                <ValidationMessage For="@(() => Table.DeckType)" />
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <RadzenButton ButtonType="ButtonType.Submit" Text="Submit"></RadzenButton>
-                </RadzenFieldset>
-            </RadzenTemplateForm>
-        </RadzenCard>
-    </div>
-</div>
+                            <div class="row mb-5">
+                                <div class="col-md-4">
+                                    <RadzenLabel Text="Card set" />
+                                    <small>(3-10 characters)</small>
+                                </div>
+                                <div class="col">
+                                    <RadzenDropDown Class="w-100"
+                                                    Placeholder="Deck type..."
+                                                    @bind-Value=@Table.DeckType
+                                                    Data=@DeckTypeEntries
+                                                    ValueProperty=@nameof(DropDownEntry<DeckType>.Value)
+                                                    TextProperty=@nameof(DropDownEntry<DeckType>.DisplayName)>
+                                    </RadzenDropDown>
+                                    <div class="rz-message rz-messages-error">
+                                        <ValidationMessage For="@(() => Table.DeckType)" />
+                                    </div>
+                                </div>
+                            </div>
+                            <RadzenButton ButtonType="ButtonType.Submit" Text="Submit"></RadzenButton>
+                        </RadzenFieldset>
+                    </RadzenTemplateForm>
+                </RadzenCard>
+            </div>
+        </div>
+    </ContentTemplate>
+</SpinLoader>

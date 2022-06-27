@@ -1,25 +1,44 @@
 ﻿div.player {
     height: 8rem;
     width: 5rem;
-    border: 3px solid var(--info);
     border-radius: 7px;
 }
 
-div.card-rotation {
-    animation: rotateAnimation 2s linear 1;
+div.plain-card {
+    background: #e8e9ea;
+    border: unset;
 }
 
-div.card-backround {
-    background: linear-gradient(45deg,#3993ff 12%,transparent 0,transparent 88%,#3993ff 0),linear-gradient(135deg,transparent 37%,#1a7bf2 0,#1a7bf2 63%,transparent 0),linear-gradient(45deg,transparent 37%,#3993ff 0,#3993ff 63%,transparent 0),#74b3ff;
+div.voted-card,
+div.result-card {
+    border: 3px solid var(--primary);
     background-size: 48px 48px;
 }
 
+div.voted-card {
+    background: linear-gradient(45deg,#3993ff 12%,transparent 0,transparent 88%,#3993ff 0),linear-gradient(135deg,transparent 37%,#1a7bf2 0,#1a7bf2 63%,transparent 0),linear-gradient(45deg,transparent 37%,#3993ff 0,#3993ff 63%,transparent 0),#74b3ff;
+}
+
+div.result-card {
+    background: unset;
+}
+
+div.card-rotation {
+    animation: cardRotation 1s linear 1;
+}
+
 @keyframes cardRotation {
-    from {
+    0% {
         transform: rotateY(0deg);
     }
 
-    to {
+
+    75% {
+        background: unset;
+        background-size: unset;
+    }
+
+    100% {
         transform: rotateY(180deg);
         background: unset;
         background-size: unset;

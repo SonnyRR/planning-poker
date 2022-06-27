@@ -1,5 +1,9 @@
 ﻿namespace PlanningPoker.Client
 {
+	using System;
+	using System.Collections.Generic;
+	using System.Collections.Immutable;
+
 	/// <summary>
 	/// Global constans for this assembly.
 	/// </summary>
@@ -23,6 +27,24 @@
 			public const string TABLE = $"{TABLE_PREFIX}/{{id:guid}}";
 			public const string TABLE_PREFIX = "/table";
 			public const string CREATE_TABLE = $"{TABLE_PREFIX}/create";
+		}
+
+		/// <summary>
+		/// Constants related to poker voting cards.
+		/// </summary>
+		public static class Cards
+		{
+			public static readonly Lazy<IImmutableDictionary<CardStates, string>> CARD_STYLES = new(() =>
+			{
+				return new Dictionary<CardStates, string>
+				{
+					{ CardStates.Pending, "p-1 mx-auto player plain-card" },
+					{ CardStates.Voted, "p-1 mx-auto player voted-card" },
+					{ CardStates.Revealing, "p-1 mx-auto player voted-card card-rotation" },
+					{ CardStates.Revealed, "p-1 mx-auto player result-card" }
+				}
+				.ToImmutableDictionary();
+			});
 		}
 	}
 }

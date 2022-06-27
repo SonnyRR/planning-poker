@@ -1,8 +1,21 @@
 ﻿<div class="col-md-2 text-center">
-    <div class="player p-1 mx-auto">
-        <div class="h-100 d-flex justify-content-center">
-            <h1 class="my-auto">?</h1>
+    <div class="@Styles" @onclick=@RevealCard @onanimationend="e => RemoveAnimation()">
+        <div class=" h-100 d-flex justify-content-center">
+
+            @if (Vote.HasValue)
+            {
+                <h1 class="my-auto">
+                    @*@(IsVoteRevealed ? Vote : "?")*@
+                    @if(IsVoteRevealed)
+                    {
+                        @(Vote);
+                    }
+                </h1>
+            }
         </div>
     </div>
     <h3>Username</h3>
+    <RadzenButton Text="Vote" Click=@SetVoted />
+    <RadzenButton Text="Reset" Click=@Reset />
+
 </div>

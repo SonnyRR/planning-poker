@@ -26,10 +26,11 @@
 
                     <div class="h-100">
                         <Player></Player>
+                        <Card></Card>
                     </div>
                     <button @onclick="Vote" disabled="@(!this.PokerClient.IsConnected)">Send</button>
 
-                    @foreach (var player in TableState.Value.Table.Players)
+                    @*@foreach (var player in TableState.Value.Table.Players)
                     {
                         <RadzenCard class="m-3" style="height: 128px; width:256px">
                             <div class="d-flex justify-content-center">
@@ -39,7 +40,7 @@
                                 </div>
                             </div>
                         </RadzenCard>
-                    }
+                    }*@
                 </RadzenCard>
             </div>
         </ContentTemplate>

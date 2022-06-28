@@ -13,24 +13,45 @@
 
 	public partial class PokerTable : IDisposable
 	{
+		/// <summary>
+		/// The fluxor action subscriber.
+		/// </summary>
 		[Inject]
 		public IActionSubscriber ActionSubscriber { get; set; }
 
+		/// <summary>
+		/// The fluxor action dispatcher.
+		/// </summary>
 		[Inject]
 		public IDispatcher Dispatcher { get; set; }
 
+		/// <summary>
+		/// The unique identifier of the poker table.
+		/// </summary>
 		[Parameter]
 		public Guid Id { get; set; }
 
+		/// <summary>
+		/// The logger for this component.
+		/// </summary>
 		[Inject]
 		public ILogger<PokerTable> Logger { get; set; }
 
+		/// <summary>
+		/// The SignalR client for interacting with poker tables.
+		/// </summary>
 		[Inject]
 		public IPokerSignalRClient PokerClient { get; set; }
 
+		/// <summary>
+		/// The poker table's state.
+		/// </summary>
 		[Inject]
 		public IState<PokerTableState> TableState { get; set; }
 
+		/// <summary>
+		/// The route navigation manager.
+		/// </summary>
 		[Inject]
 		public NavigationManager NavigationManager { get; set; }
 
@@ -75,6 +96,9 @@
 			await this.JoinPokerTable();
 		}
 
+		/// <summary>
+		/// Attempts to join the current user to the current poker table.
+		/// </summary>
 		private async Task JoinPokerTable()
 		{
 			if (!this.TableState.Value.IsLoading)

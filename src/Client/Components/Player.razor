@@ -1,4 +1,4 @@
-﻿<div class="col-md-2 text-center">
+﻿<div class="text-center p-2">
     <div class="@Styles" @onclick=@RevealCard @onanimationend="e => RemoveAnimation()">
         <div class=" h-100 d-flex justify-content-center">
             @if (IsVoteRevealed)
@@ -9,8 +9,7 @@
             }
         </div>
     </div>
-    <h3>Username</h3>
+    <h3>@(PlayerName ?? "N/A")</h3>
     <RadzenButton Text="Vote" Click=@SetVoted />
     <RadzenButton Text="Reset" Click=@Reset />
-
 </div>

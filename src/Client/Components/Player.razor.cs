@@ -7,23 +7,20 @@
 
 	public partial class Player
 	{
+		public bool IsVoteRevealed { get; private set; }
+
 		[Inject]
 		public ILogger<Player> Logger { get; set; }
 
 		[Parameter]
-		public string PlayerName { get; set; }
-
-		[Parameter]
 		public Guid PlayerId { get; set; }
 
-		public int? Vote { get; private set; }
-
-		public bool IsVoteRevealed { get; private set; }
+		[Parameter]
+		public string PlayerName { get; set; }
 
 		public string Styles { get; private set; }
 
-		public void RevealCard()
-			=> this.Styles = CARD_STYLES.Value[CardStates.Revealing];
+		public int? Vote { get; private set; }
 
 		public void RemoveAnimation()
 		{
@@ -32,14 +29,20 @@
 			this.IsVoteRevealed = true;
 		}
 
+		public void Reset()
+		{
+			this.Styles = CARD_STYLES.Value[CardStates.Pending];
+			this.IsVoteRevealed = false;
+		}
+
+		public void RevealCard()
+			=> this.Styles = CARD_STYLES.Value[CardStates.Revealing];
+
 		public void SetVoted()
 		{
 			this.Styles = CARD_STYLES.Value[CardStates.Voted];
 			this.Vote = 3;
 		}
-
-		public void Reset()
-			=> this.Styles = CARD_STYLES.Value[CardStates.Pending];
 
 		protected override void OnInitialized()
 		{

@@ -1,15 +1,10 @@
 ﻿<div class="col-md-2 text-center">
     <div class="@Styles" @onclick=@RevealCard @onanimationend="e => RemoveAnimation()">
         <div class=" h-100 d-flex justify-content-center">
-
-            @if (Vote.HasValue)
+            @if (IsVoteRevealed)
             {
                 <h1 class="my-auto">
-                    @*@(IsVoteRevealed ? Vote : "?")*@
-                    @if(IsVoteRevealed)
-                    {
-                        @(Vote);
-                    }
+                    @(Vote)
                 </h1>
             }
         </div>

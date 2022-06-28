@@ -5,22 +5,28 @@
 }
 
 div.plain-card {
-    background: #e8e9ea;
+    background: var(--light);
     border: unset;
 }
 
 div.voted-card,
 div.result-card {
-    border: 3px solid var(--primary);
-    background-size: 48px 48px;
+    border: 3px solid var(--blue);
 }
 
 div.voted-card {
     background: linear-gradient(45deg,#3993ff 12%,transparent 0,transparent 88%,#3993ff 0),linear-gradient(135deg,transparent 37%,#1a7bf2 0,#1a7bf2 63%,transparent 0),linear-gradient(45deg,transparent 37%,#3993ff 0,#3993ff 63%,transparent 0),#74b3ff;
+    background-size: 48px 48px;
 }
+
 
 div.result-card {
     background: unset;
+}
+
+div.voted-card div h1,
+div.result-card div h1 {
+    color: var(--blue);
 }
 
 div.card-rotation {

@@ -1,0 +1,10 @@
+﻿div.playing-card {
+    height: 6rem;
+    width: 3.5rem;
+    border-radius: 4px;
+    border: 3px solid var(--orange);
+}
+
+    div.playing-card h2 {
+        color: var(--orange);
+    }

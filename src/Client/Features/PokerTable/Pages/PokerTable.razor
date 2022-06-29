@@ -24,7 +24,7 @@
                     </div>
                     <hr />
 
-                    <div class="h-80 d-flex flex-wrap">
+                    <div class="d-flex flex-wrap">
                         @foreach (var player in TableState.Value.Table.Players)
                         {
                             <Player PlayerId=@player.Id PlayerName=@player.UserName></Player>

@@ -24,10 +24,10 @@ div.result-card {
     background: unset;
 }
 
-div.voted-card div h1,
-div.result-card div h1 {
-    color: var(--blue);
-}
+    div.voted-card div h1,
+    div.result-card div h1 {
+        color: var(--blue);
+    }
 
 div.card-rotation {
     animation: cardRotation 1s linear 1;
@@ -49,4 +49,13 @@ div.card-rotation {
         background: unset;
         background-size: unset;
     }
+}
+
+.username {
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+div.main-wrapper {
+   width: 10%;
 }

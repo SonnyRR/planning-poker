@@ -12,24 +12,29 @@
         <ContentTemplate>
             <div class="container h-100">
                 <RadzenCard class="h-100">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <h1>
-                            @TableState.Value.Table.Name
-                        </h1>
-                        <RadzenButton Click=@Leave
-                                      Text="Leave"
-                                      Icon="logout"
-                                      ButtonStyle="ButtonStyle.Danger"
-                                      Disabled=@(this.TableState.Value.IsLoading) />
+                    <div class="table-information">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h1 class="table-name">
+                                @TableState.Value.Table.Name
+                            </h1>
+                            <RadzenButton Click=@Leave
+                                          Text="Leave"
+                                          Icon="logout"
+                                          ButtonStyle="ButtonStyle.Danger"
+                                          Disabled=@(this.TableState.Value.IsLoading) />
+                        </div>
                     </div>
                     <hr />
-
-                    <div class="d-flex flex-wrap">
-                        @foreach (var player in TableState.Value.Table.Players)
-                        {
-                            <Player PlayerId=@player.Id PlayerName=@player.UserName></Player>
-                        }
-                        @*<Card></Card>*@
+                    <div class="player-list">
+                        <div class="d-flex">
+                            @foreach (var player in TableState.Value.Table.Players)
+                            {
+                                <Player PlayerId=@player.Id PlayerName=@player.UserName></Player>
+                            }
+                        </div>
+                    </div>
+                    <div class="row">
+                        <Card></Card>
                     </div>
                 </RadzenCard>
             </div>

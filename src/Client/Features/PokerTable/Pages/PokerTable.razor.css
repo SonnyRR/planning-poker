@@ -1,5 +1,5 @@
-﻿h1 {
-    margin: unset
+﻿h1.table-name {
+    margin-bottom: unset;
 }
 
 div.main-control {
@@ -7,4 +7,16 @@ div.main-control {
     width: 500px;
     border: 3px solid var(--info);
     border-radius: 30px;
+}
+
+div.table-information {
+    height: 10%;
+}
+
+div.player-list {
+    height: 35%;
+}
+
+hr {
+    margin: 0.5rem 0;
 }

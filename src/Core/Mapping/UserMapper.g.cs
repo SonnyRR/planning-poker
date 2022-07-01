@@ -149,7 +149,17 @@ namespace PlanningPoker.Core.Mapping
         {
             return p3 == null ? null : new Table()
             {
-                DeckType = p3.DeckType,
+                Deck = p3.Deck == null ? null : new Deck()
+                {
+                    Type = p3.Deck.Type,
+                    Cards = null,
+                    DeletedOn = p3.Deck.DeletedOn,
+                    IsDeleted = p3.Deck.IsDeleted,
+                    CreatedOn = p3.Deck.CreatedOn,
+                    Id = p3.Deck.Id,
+                    ModifiedOn = p3.Deck.ModifiedOn
+                },
+                DeckId = p3.DeckId,
                 Name = p3.Name,
                 Owner = p3.Owner == null ? null : new User()
                 {
@@ -169,7 +179,17 @@ namespace PlanningPoker.Core.Mapping
         {
             return p9 == null ? null : new Table()
             {
-                DeckType = p9.DeckType,
+                Deck = p9.Deck == null ? null : new Deck()
+                {
+                    Type = p9.Deck.Type,
+                    Cards = null,
+                    DeletedOn = p9.Deck.DeletedOn,
+                    IsDeleted = p9.Deck.IsDeleted,
+                    CreatedOn = p9.Deck.CreatedOn,
+                    Id = p9.Deck.Id,
+                    ModifiedOn = p9.Deck.ModifiedOn
+                },
+                DeckId = p9.DeckId,
                 Name = p9.Name,
                 Owner = p9.Owner == null ? null : new User()
                 {
@@ -189,7 +209,17 @@ namespace PlanningPoker.Core.Mapping
         {
             return p13 == null ? null : new TableModel()
             {
-                DeckType = p13.DeckType,
+                Deck = p13.Deck == null ? null : new DeckModel()
+                {
+                    Type = p13.Deck.Type,
+                    Cards = null,
+                    DeletedOn = p13.Deck.DeletedOn,
+                    IsDeleted = p13.Deck.IsDeleted,
+                    CreatedOn = p13.Deck.CreatedOn,
+                    Id = p13.Deck.Id,
+                    ModifiedOn = p13.Deck.ModifiedOn
+                },
+                DeckId = p13.DeckId,
                 Name = p13.Name,
                 Owner = p13.Owner == null ? null : new UserModel()
                 {
@@ -209,7 +239,17 @@ namespace PlanningPoker.Core.Mapping
         {
             return p19 == null ? null : new TableModel()
             {
-                DeckType = p19.DeckType,
+                Deck = p19.Deck == null ? null : new DeckModel()
+                {
+                    Type = p19.Deck.Type,
+                    Cards = null,
+                    DeletedOn = p19.Deck.DeletedOn,
+                    IsDeleted = p19.Deck.IsDeleted,
+                    CreatedOn = p19.Deck.CreatedOn,
+                    Id = p19.Deck.Id,
+                    ModifiedOn = p19.Deck.ModifiedOn
+                },
+                DeckId = p19.DeckId,
                 Name = p19.Name,
                 Owner = p19.Owner == null ? null : new UserModel()
                 {

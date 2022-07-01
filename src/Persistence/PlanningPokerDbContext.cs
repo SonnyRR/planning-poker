@@ -17,8 +17,13 @@
 		{
 		}
 
-		public DbSet<Table> Tables { get; set; }
+		public DbSet<Card> Cards { get; set; }
 
+		public DbSet<DeckCard> DeckCards { get; set; }
+
+		public DbSet<Deck> Decks { get; set; }
+
+		public DbSet<Table> Tables { get; set; }
 		public override int SaveChanges() => this.SaveChanges(true);
 
 		public override int SaveChanges(bool acceptAllChangesOnSuccess)

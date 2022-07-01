@@ -18,7 +18,10 @@
 				.ToArray();
 
 			config.AdaptTwoWays("[name]Model")
-				.ForTypes(types)
+				//.ForTypes(types)
+				.ForType<Table>()
+				.ForType<Card>(cfg => cfg.Ignore(e => e.DeckCards))
+				.ForType<Deck>(cfg => cfg.Ignore(e => e.DeckCards))
 				.ForType<User>(cfg =>
 				{
 					cfg.Ignore(e => e.AccessFailedCount);

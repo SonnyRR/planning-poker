@@ -15,9 +15,10 @@
 				.IsRequired()
 				.HasMaxLength(150);
 
-			builder
-				.Property(t => t.DeckType)
-				.HasConversion<string>();
+			builder.HasOne(t => t.Deck)
+				.WithMany()
+				.HasForeignKey(t => t.DeckId)
+				.IsRequired();
 
 			builder
 				.HasMany(t => t.Players)

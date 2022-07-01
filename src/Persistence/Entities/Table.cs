@@ -1,7 +1,5 @@
 ﻿namespace PlanningPoker.Persistence.Entities
 {
-	using PlanningPoker.SharedKernel.Models.Decks;
-
 	using System;
 	using System.Collections.Generic;
 
@@ -14,17 +12,22 @@
 		{
 		}
 
-		public Table(DeckType deckType, string name, Guid ownerId)
+		public Table(Deck deck, string name, Guid ownerId)
 		{
-			this.DeckType = deckType;
+			this.Deck = deck;
 			this.Name = name;
 			this.OwnerId = ownerId;
 		}
 
 		/// <summary>
-		/// The card deck type.
+		/// The card deck.
 		/// </summary>
-		public DeckType DeckType { get; set; }
+		public Deck Deck { get; set; }
+
+		/// <summary>
+		/// The card deck's unique identifier.
+		/// </summary>
+		public Guid DeckId { get; set; }
 
 		/// <summary>
 		/// Name of the table.

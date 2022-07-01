@@ -4,14 +4,13 @@ using PlanningPoker.SharedKernel.Models.Generated;
 
 namespace PlanningPoker.SharedKernel.Models.Generated
 {
-    public partial class TableModel
+    public partial class CardModel
     {
-        public DeckModel Deck { get; set; }
-        public Guid DeckId { get; set; }
-        public string Name { get; set; }
-        public UserModel Owner { get; set; }
-        public Guid OwnerId { get; set; }
-        public IList<UserModel> Players { get; set; }
+        public char UnicodeValue { get; set; }
+        public int Value { get; set; }
+        public List<DeckModel> Decks { get; set; }
+        public DateTimeOffset? DeletedOn { get; set; }
+        public bool IsDeleted { get; set; }
         public DateTimeOffset CreatedOn { get; set; }
         public Guid Id { get; set; }
         public DateTimeOffset? ModifiedOn { get; set; }

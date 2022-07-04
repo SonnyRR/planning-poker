@@ -46,7 +46,12 @@
 		public async Task<Table> CreateAsync(TableBindingModel bindingModel, CancellationToken ct = default)
 		{
 			var user = await this.dbContext.Users.FindAsync(this.currentUserService.UserId);
-			var table = new Table(null, bindingModel.Name, user.Id);
+			var deck = await this.dbContext
+				.Decks
+				.Select(d => new { d.Id, d.Type })
+				.SingleOrDefaultAsync(d => d.Type == bindingModel.DeckType);
+
+			var table = new Table(deck.Id, bindingModel.Name, user.Id);
 			table.Players.Add(user);
 
 			await this.dbContext.Tables.AddAsync(table, ct);

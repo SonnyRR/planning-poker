@@ -12,9 +12,9 @@
 		{
 		}
 
-		public Table(Deck deck, string name, Guid ownerId)
+		public Table(Guid deckId, string name, Guid ownerId)
 		{
-			this.Deck = deck;
+			this.DeckId = deckId;
 			this.Name = name;
 			this.OwnerId = ownerId;
 		}

@@ -71,6 +71,8 @@
 			var table = await this.dbContext
 				.Tables
 				.Include(t => t.Players)
+				.Include(t => t.Deck)
+					.ThenInclude(d => d.Cards)
 				.SingleOrDefaultAsync(t => t.Id == id, ct);
 
 			if (table is null)

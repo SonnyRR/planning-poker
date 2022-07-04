@@ -6,5 +6,8 @@
 	{
 		[Parameter]
 		public int UnicodeValue { get; set; }
+
+		[Parameter]
+		public int Value { get; set; }
 	}
 }

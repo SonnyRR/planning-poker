@@ -34,7 +34,10 @@
                         </div>
                     </div>
                     <div class="row">
-                        <Card></Card>
+                        @foreach(var card in TableState.Value.Table.Deck.Cards)
+                        {
+                            <Card UnicodeValue="card.Value" ></Card>
+                        }
                     </div>
                 </RadzenCard>
             </div>

@@ -5,6 +5,7 @@
 	using PlanningPoker.Persistence.Entities;
 	using PlanningPoker.SharedKernel.Models.Decks;
 	using System;
+	using static Constants;
 
 	public sealed class DeckConfiguration : IEntityTypeConfiguration<Deck>
 	{
@@ -45,7 +46,62 @@
 						{
 							new DeckCard
 							{
-								CardId = Guid.Parse("92242626-dbf5-4888-8876-66cb9d088e02"),
+								CardId = C0_ID,
+								DeckId = Guid.Parse("6df8d39e-267d-4396-9e41-fa969fe3e9d9")
+							},
+							new DeckCard
+							{
+								CardId = C1_ID,
+								DeckId = Guid.Parse("6df8d39e-267d-4396-9e41-fa969fe3e9d9")
+							},
+							new DeckCard
+							{
+								CardId = C2_ID,
+								DeckId = Guid.Parse("6df8d39e-267d-4396-9e41-fa969fe3e9d9")
+							},
+							new DeckCard
+							{
+								CardId = C3_ID,
+								DeckId = Guid.Parse("6df8d39e-267d-4396-9e41-fa969fe3e9d9")
+							},
+							new DeckCard
+							{
+								CardId = C5_ID,
+								DeckId = Guid.Parse("6df8d39e-267d-4396-9e41-fa969fe3e9d9")
+							},
+							new DeckCard
+							{
+								CardId = C8_ID,
+								DeckId = Guid.Parse("6df8d39e-267d-4396-9e41-fa969fe3e9d9")
+							},
+							new DeckCard
+							{
+								CardId = C13_ID,
+								DeckId = Guid.Parse("6df8d39e-267d-4396-9e41-fa969fe3e9d9")
+							},
+							new DeckCard
+							{
+								CardId = C21_ID,
+								DeckId = Guid.Parse("6df8d39e-267d-4396-9e41-fa969fe3e9d9")
+							},
+							new DeckCard
+							{
+								CardId = C34_ID,
+								DeckId = Guid.Parse("6df8d39e-267d-4396-9e41-fa969fe3e9d9")
+							},
+							new DeckCard
+							{
+								CardId = C55_ID,
+								DeckId = Guid.Parse("6df8d39e-267d-4396-9e41-fa969fe3e9d9")
+							},
+							new DeckCard
+							{
+								CardId = C89_ID,
+								DeckId = Guid.Parse("6df8d39e-267d-4396-9e41-fa969fe3e9d9")
+							},
+							new DeckCard
+							{
+								CardId = CQ_ID,
 								DeckId = Guid.Parse("6df8d39e-267d-4396-9e41-fa969fe3e9d9")
 							}
 						});

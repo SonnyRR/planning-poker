@@ -34,9 +34,9 @@
                         </div>
                     </div>
                     <div class="row">
-                        @foreach(var card in TableState.Value.Table.Deck.Cards)
+                        @foreach(var card in TableState.Value.Table.Deck.Cards.OrderBy(c => c.Value))
                         {
-                            <Card UnicodeValue="card.Value" ></Card>
+                            <Card UnicodeValue=@card.UnicodeValue></Card>
                         }
                     </div>
                 </RadzenCard>

@@ -9,7 +9,7 @@
 		{
 		}
 
-		public Card(int value, char unicodeValue)
+		public Card(float value, string unicodeValue)
 		{
 			this.Value = value;
 			this.UnicodeValue = unicodeValue;
@@ -18,12 +18,12 @@
 		/// <summary>
 		/// The unicode value of the card.
 		/// </summary>
-		public char UnicodeValue { get; set; }
+		public string UnicodeValue { get; set; }
 
 		/// <summary>
 		/// The numeric value of the card.
 		/// </summary>
-		public int Value { get; set; }
+		public float Value { get; set; }
 
 		public List<Deck> Decks { get; set; }
 

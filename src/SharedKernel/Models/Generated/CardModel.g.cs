@@ -6,8 +6,8 @@ namespace PlanningPoker.SharedKernel.Models.Generated
 {
     public partial class CardModel
     {
-        public char UnicodeValue { get; set; }
-        public int Value { get; set; }
+        public string UnicodeValue { get; set; }
+        public float Value { get; set; }
         public List<DeckModel> Decks { get; set; }
         public DateTimeOffset? DeletedOn { get; set; }
         public bool IsDeleted { get; set; }

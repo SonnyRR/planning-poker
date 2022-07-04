@@ -14,6 +14,9 @@
 				.HasConversion<string>()
 				.IsRequired();
 
+			builder.HasIndex(d => d.Type)
+				.IsUnique();
+
 			builder.HasData(new[]
 {
 				new Deck
@@ -26,7 +29,7 @@
 
 			builder.HasMany(d => d.Cards)
 				.WithMany(c => c.Decks)
-				.UsingEntity<Entities.DeckCard>(
+				.UsingEntity<DeckCard>(
 					e => e
 						.HasOne(x => x.Card)
 						.WithMany(e => e.DeckCards)
@@ -40,7 +43,7 @@
 						e.HasKey(x => (new { x.CardId, x.DeckId }));
 						e.HasData(new[]
 						{
-							new Entities.DeckCard
+							new DeckCard
 							{
 								CardId = Guid.Parse("92242626-dbf5-4888-8876-66cb9d088e02"),
 								DeckId = Guid.Parse("6df8d39e-267d-4396-9e41-fa969fe3e9d9")

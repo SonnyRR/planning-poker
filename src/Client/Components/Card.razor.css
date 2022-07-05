@@ -16,3 +16,7 @@
 div.main-wrapper {
     width: 7%;
 }
+
+div.main-wrapper:hover {
+    cursor: pointer;
+}

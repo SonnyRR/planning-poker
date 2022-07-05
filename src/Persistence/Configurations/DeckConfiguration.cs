@@ -19,7 +19,7 @@
 				.IsUnique();
 
 			builder.HasData(new[]
-{
+			{
 				new Deck
 				{
 					Id = Guid.Parse("6df8d39e-267d-4396-9e41-fa969fe3e9d9"),

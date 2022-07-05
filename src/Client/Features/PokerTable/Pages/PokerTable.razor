@@ -33,7 +33,7 @@
                             }
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="d-flex justify-content-center">
                         @foreach(var card in TableState.Value.Table.Deck.Cards.OrderBy(c => c.Value))
                         {
                             <Card UnicodeValue=@card.UnicodeValue></Card>

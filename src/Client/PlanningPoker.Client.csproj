@@ -17,7 +17,7 @@
     <PackageReference Include="Radzen.Blazor" Version="3.20.0" />
     <PackageReference Include="Serilog.Exceptions" Version="8.3.0" />
     <PackageReference Include="Serilog.Sinks.BrowserConsole" Version="1.0.0" />
-    <PackageReference Include="Serilog.Sinks.BrowserHttp" Version="1.0.0-dev-00021" />
+    <PackageReference Include="Serilog.Sinks.BrowserHttp" Version="1.0.0-dev-00032" />
     <PackageReference Include="System.Net.Http.Json" Version="6.0.0" />
   </ItemGroup>
   

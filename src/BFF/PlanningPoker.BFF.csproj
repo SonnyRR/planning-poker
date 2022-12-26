@@ -13,7 +13,7 @@
         <PackageReference Include="NetEscapades.AspNetCore.SecurityHeaders" Version="0.17.0" />
         <PackageReference Include="OpenIddict.AspNetCore" Version="3.1.1" />
         <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="3.1.1" />
-        <PackageReference Include="OpenIddict.Quartz" Version="3.1.1" />
+        <PackageReference Include="OpenIddict.Quartz" Version="4.0.0" />
         <PackageReference Include="Quartz.Extensions.Hosting" Version="3.5.0" />
         <PackageReference Include="Serilog.AspNetCore" Version="6.1.0" />
         <PackageReference Include="Serilog.AspNetCore.Ingestion" Version="1.0.0-dev-00032" />

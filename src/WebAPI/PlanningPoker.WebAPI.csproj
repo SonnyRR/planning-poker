@@ -7,7 +7,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Destructurama.Attributed" Version="3.0.0" />
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
 		<PackageReference Include="Serilog.AspNetCore" Version="6.1.0" />
 		<PackageReference Include="Serilog.AspNetCore.Ingestion" Version="1.0.0-dev-00032" />
 		<PackageReference Include="Serilog.Enrichers.CorrelationId" Version="3.0.1" />

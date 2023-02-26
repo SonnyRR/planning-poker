@@ -13,14 +13,17 @@ namespace PlanningPoker.WebAPI
 	public static class Program
 	{
 		public static IHostBuilder CreateHostBuilder(string[] args)
-			=> Host.CreateDefaultBuilder(args).ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());
+			=> Host
+				.CreateDefaultBuilder(args)
+				.ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());
 
 		public static void Main(string[] args)
 		{
 			try
 			{
 				CreateHostBuilder(args)
-					.UseSerilog((builderContext, loggerConfig) => loggerConfig.ConfigureFromSettings(builderContext.Configuration))
+					.UseSerilog((builderContext, loggerConfig) 
+						=> loggerConfig.ConfigureFromSettings(builderContext.Configuration))
 					.Build()
 					.Run();
 			}

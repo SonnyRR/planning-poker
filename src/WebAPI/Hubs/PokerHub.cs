@@ -3,9 +3,9 @@
 	using Microsoft.AspNetCore.Authorization;
 	using Microsoft.AspNetCore.SignalR;
 	using Microsoft.Extensions.Logging;
-	using PlanningPoker.Core.Services;
-	using PlanningPoker.SharedKernel.Interfaces;
-	using PlanningPoker.SharedKernel.Models.Tables;
+	using Core.Services;
+	using SharedKernel.Interfaces;
+	using SharedKernel.Models.Tables;
 	using System;
 	using System.Threading.Tasks;
 	using static OpenIddict.Abstractions.OpenIddictConstants;
@@ -21,7 +21,7 @@
 		private readonly ICurrentUserService currentUserService;
 
 		/// <summary>
-		/// Contructs a SignalR hub for managing poker tables.
+		/// Constructs a SignalR hub for managing poker tables.
 		/// </summary>
 		/// <param name="tableService">An instance of <see cref="ITableService"/>.</param>
 		/// <param name="currentUserService">The current user service.</param>

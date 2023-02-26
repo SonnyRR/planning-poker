@@ -11,7 +11,7 @@
 	using OpenIddict.Validation.AspNetCore;
 	using PlanningPoker.Core.Extensions;
 	using PlanningPoker.Persistence.Extensions;
-	using PlanningPoker.SharedKernel.Models.Configuration;
+	using SharedKernel.Models.Configuration;
 	using System;
 	using System.Collections.Generic;
 	using System.IO;

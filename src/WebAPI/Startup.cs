@@ -7,19 +7,14 @@
 	using Microsoft.Extensions.DependencyInjection;
 	using Microsoft.Extensions.Hosting;
 	using PlanningPoker.SharedKernel.Extensions;
-	using PlanningPoker.WebAPI.Extensions;
-	using PlanningPoker.WebAPI.Hubs;
+	using Extensions;
+	using Hubs;
 	using Serilog;
 	using static SharedKernel.Constants.Hubs;
 
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-
 	public class Startup
 	{
-		public Startup(IConfiguration configuration)
-		{
-			this.Configuration = configuration;
-		}
+		public Startup(IConfiguration configuration) => this.Configuration = configuration;
 
 		public IConfiguration Configuration { get; }
 
@@ -60,5 +55,4 @@
 			services.AddApiServices(this.Configuration);
 		}
 	}
-#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }

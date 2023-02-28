@@ -16,7 +16,7 @@
         <PackageReference Include="Destructurama.Attributed" Version="3.0.0" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="7.0.3" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="7.0.3" />
-        <PackageReference Include="OpenIddict.AspNetCore" Version="4.0.0" />
+        <PackageReference Include="OpenIddict.AspNetCore" Version="4.1.0" />
         <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="4.0.0" />
         <PackageReference Include="OpenIddict.Quartz" Version="4.0.0" />
         <PackageReference Include="Quartz.Extensions.Hosting" Version="3.6.2" />

@@ -9,7 +9,7 @@
 	using static OpenIddict.Abstractions.OpenIddictConstants;
 
 	/// <summary>
-	/// Transforms WS Federation claim types to OpenIddict ones.
+	/// Transforms WS Federation claim types to OpenIDdict ones.
 	/// </summary>
 	public sealed class ClaimsTransformer : IClaimsTransformation
 	{

@@ -19,7 +19,8 @@
 			try
 			{
 				CreateHostBuilder(args)
-					.UseSerilog((builderContext, loggerConfig) => loggerConfig.ConfigureFromSettings(builderContext.Configuration))
+					.UseSerilog((builderContext, loggerConfig) => 
+						loggerConfig.ConfigureFromSettings(builderContext.Configuration))
 					.Build()
 					.Run();
 			}

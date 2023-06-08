@@ -1,4 +1,6 @@
+using System;
 using System.Linq;
+using _build;
 using JetBrains.Annotations;
 using Nuke.Common;
 using Nuke.Common.CI;
@@ -29,11 +31,16 @@ class Build : NukeBuild
 
 	[GitVersion(Framework = "net6.0", UpdateBuildNumber = true)] readonly GitVersion GitVersion;
 
+	[Parameter("The environment. Possible values: Development, Staging, Production")]
+	readonly string AspNetCoreEnvironment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
 	AbsolutePath SourceDirectory => RootDirectory / "src";
 	AbsolutePath TestsDirectory => RootDirectory / "tests";
 	AbsolutePath ArtifactsDirectory => RootDirectory / "artifacts";
 	AbsolutePath CoreAssemblyDirectory => this.SourceDirectory / "Core";
 	AbsolutePath SharedKernelAssemblyDirectory => this.SourceDirectory / "SharedKernel";
+	AbsolutePath PersistenceAssemblyDirectory => this.SourceDirectory / "Persistence";
+	AbsolutePath WebApiAssemblyDirectory => this.SourceDirectory / "WebAPI";
 
 	Target Clean => _ => _
 		.Before(this.Restore)
@@ -106,4 +113,16 @@ class Build : NukeBuild
 				DirectoryExistsPolicy.Merge);
 			generatedFilesDir.DeleteDirectory();
 		});
+
+	Target ApplyMigrations => _ => _
+		.OnlyWhenStatic(this.IsLocalEnvironment)
+		.Executes(() =>
+			DotNet($@"ef database update -s ""{this.WebApiAssemblyDirectory}""", this.PersistenceAssemblyDirectory));
+
+	Target DropDatabase => _ => _
+		.OnlyWhenStatic(this.IsLocalEnvironment)
+		.Executes(() =>
+			DotNet($@"ef database drop -s ""{this.WebApiAssemblyDirectory}""", this.PersistenceAssemblyDirectory));
+
+	bool IsLocalEnvironment() => IsLocalBuild && this.AspNetCoreEnvironment == Environments.Development;
 }

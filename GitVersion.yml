@@ -12,5 +12,5 @@ branches:
     increment: Inherit
     mode: ContinuousDeployment
 ignore:
-  sha: []
-merge-message-formats: {}
+  sha: [ ]
+merge-message-formats: { }

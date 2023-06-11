@@ -20,5 +20,5 @@
             <Link>config\GitVersion.yml</Link>
         </Content>
     </ItemGroup>
-    
+
 </Project>

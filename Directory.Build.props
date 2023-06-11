@@ -3,7 +3,7 @@
 <!-- Please keep this file and keep it in the same directory as package.json. 
 This ensures that the WorkingDirectory of the build command in src.Client.csproj is correctly located to the current directory.  -->
 <Project>
-  <PropertyGroup Label="BasePath">
-    <SolutionDir Condition="'$(SolutionDir)'==''">$(MSBuildThisFileDirectory)</SolutionDir>
-  </PropertyGroup>
+    <PropertyGroup Label="BasePath">
+        <SolutionDir Condition="'$(SolutionDir)'==''">$(MSBuildThisFileDirectory)</SolutionDir>
+    </PropertyGroup>
 </Project>

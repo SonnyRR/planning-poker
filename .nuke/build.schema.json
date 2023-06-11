@@ -8,7 +8,7 @@
       "properties": {
         "AspNetCoreEnvironment": {
           "type": "string",
-          "description": "The environment"
+          "description": "The environment. Possible values: Development, Staging, Production"
         },
         "Configuration": {
           "type": "string",

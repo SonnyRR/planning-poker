@@ -48,10 +48,10 @@
 			var user = await this.dbContext.Users.FindAsync(this.currentUserService.UserId);
 			var deck = await this.dbContext
 				.Decks
-				.Select(d => new { d.Id, d.Type })
-				.SingleOrDefaultAsync(d => d.Type == bindingModel.DeckType);
+                .Include(d => d.Cards)
+				.SingleOrDefaultAsync(d => d.Type == bindingModel.DeckType, cancellationToken: ct);
 
-			var table = new Table(deck.Id, bindingModel.Name, user.Id);
+			var table = new Table(bindingModel.Name, deck, user.Id);
 			table.Players.Add(user);
 
 			await this.dbContext.Tables.AddAsync(table, ct);

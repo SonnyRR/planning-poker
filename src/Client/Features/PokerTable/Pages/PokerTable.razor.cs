@@ -1,153 +1,154 @@
 ﻿namespace PlanningPoker.Client.Features.PokerTable.Pages
 {
-	using Fluxor;
-	using Microsoft.AspNetCore.Components;
-	using Microsoft.Extensions.Logging;
-	using PlanningPoker.Client.Clients;
-	using PlanningPoker.Client.Features.PokerTable.Store.Actions;
-	using PlanningPoker.SharedKernel.Models.Tables;
-	using Store;
-	using System;
-	using System.Threading.Tasks;
-	using static Constants;
+    using System;
+    using System.Threading.Tasks;
+    using Clients;
+    using Fluxor;
+    using Microsoft.AspNetCore.Components;
+    using Microsoft.Extensions.Logging;
+    using SharedKernel.Models.Tables;
+    using Store;
+    using Store.Actions;
+    using static Constants;
 
-	public partial class PokerTable : IDisposable
-	{
-		/// <summary>
-		/// The fluxor action subscriber.
-		/// </summary>
-		[Inject]
-		public IActionSubscriber ActionSubscriber { get; set; }
+    public partial class PokerTable : IDisposable
+    {
+        /// <summary>
+        /// The fluxor action subscriber.
+        /// </summary>
+        [Inject]
+        public IActionSubscriber ActionSubscriber { get; set; }
 
-		/// <summary>
-		/// The fluxor action dispatcher.
-		/// </summary>
-		[Inject]
-		public IDispatcher Dispatcher { get; set; }
+        /// <summary>
+        /// The fluxor action dispatcher.
+        /// </summary>
+        [Inject]
+        public IDispatcher Dispatcher { get; set; }
 
-		/// <summary>
-		/// The unique identifier of the poker table.
-		/// </summary>
-		[Parameter]
-		public Guid Id { get; set; }
+        /// <summary>
+        /// The unique identifier of the poker table.
+        /// </summary>
+        [Parameter]
+        public Guid Id { get; set; }
 
-		/// <summary>
-		/// The logger for this component.
-		/// </summary>
-		[Inject]
-		public ILogger<PokerTable> Logger { get; set; }
+        /// <summary>
+        /// The logger for this component.
+        /// </summary>
+        [Inject]
+        public ILogger<PokerTable> Logger { get; set; }
 
-		/// <summary>
-		/// The SignalR client for interacting with poker tables.
-		/// </summary>
-		[Inject]
-		public IPokerSignalRClient PokerClient { get; set; }
+        /// <summary>
+        /// The SignalR client for interacting with poker tables.
+        /// </summary>
+        [Inject]
+        public IPokerSignalRClient PokerClient { get; set; }
 
-		/// <summary>
-		/// The poker table's state.
-		/// </summary>
-		[Inject]
-		public IState<PokerTableState> TableState { get; set; }
+        /// <summary>
+        /// The poker table's state.
+        /// </summary>
+        [Inject]
+        public IState<PokerTableState> TableState { get; set; }
 
-		/// <summary>
-		/// The route navigation manager.
-		/// </summary>
-		[Inject]
-		public NavigationManager NavigationManager { get; set; }
+        /// <summary>
+        /// The route navigation manager.
+        /// </summary>
+        [Inject]
+        public NavigationManager NavigationManager { get; set; }
 
-		public void Dispose()
-		{
-			this.Dispose(true);
-			GC.SuppressFinalize(this);
-		}
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
-		/// <summary>
-		/// Dispatches an action with the player's vote.
-		/// </summary>
-		public async Task Vote()
-			=> await this.PokerClient.VoteCasted(new PlayerVote { Estimation = 3, TableId = this.Id });
+        /// <summary>
+        /// Dispatches an action with the player's vote.
+        /// </summary>
+        public async Task Vote()
+            => await this.PokerClient.VoteCasted(new PlayerVote { Estimation = 3, TableId = this.Id });
 
-		/// <summary>
-		/// Leaves the current poker table.
-		/// </summary>
-		public async Task Leave()
-		{
-			await this.PokerClient.RemovedFromTable(this.TableState.Value.Table.Id);
-			this.NavigationManager.NavigateTo(Routes.INDEX);
-		}
+        /// <summary>
+        /// Leaves the current poker table.
+        /// </summary>
+        public async Task Leave()
+        {
+            await this.PokerClient.RemovedFromTable(this.TableState.Value.Table.Id);
+            this.NavigationManager.NavigateTo(Routes.INDEX);
+        }
 
-		protected virtual void Dispose(bool disposing)
-		{
-			if (disposing)
-			{
-				this.TableState.StateChanged -= this.StateHasChanged;
-				this.ActionSubscriber.UnsubscribeFromAllActions(this);
-			}
-		}
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposing)
+                return;
 
-		protected override async Task OnInitializedAsync()
-		{
-			this.TableState.StateChanged += this.StateHasChanged;
+            this.TableState.StateChanged -= this.StateHasChanged;
+            this.ActionSubscriber.UnsubscribeFromAllActions(this);
+        }
 
-			this.RegisterHubMethodHandlers();
-			await this.PokerClient.Start();
+        protected override async Task OnInitializedAsync()
+        {
+            this.TableState.StateChanged += this.StateHasChanged;
 
-			this.LoadTableIfMissing();
-			await this.JoinPokerTable();
-		}
+            this.RegisterHubMethodHandlers();
+            await this.PokerClient.Start();
 
-		/// <summary>
-		/// Attempts to join the current user to the current poker table.
-		/// </summary>
-		private async Task JoinPokerTable()
-		{
-			if (!this.TableState.Value.IsLoading)
-			{
-				this.Logger.LogWarning("Table is present in the store, attempting to add player.");
-				await this.PokerClient.AddedToTable(this.TableState.Value.Table.Id);
-				return;
-			}
+            this.LoadTableIfMissing();
+            await this.JoinPokerTable();
+        }
 
-			this.ActionSubscriber.SubscribeToAction<PokerTableSetAction>(this, async action =>
-			{
-				if (action.Table is not null && action.Table.Id != Guid.Empty)
-				{
-					this.Logger.LogDebug("Table was missing from store and loaded explicitly, attempting to add user.");
-					await this.PokerClient.AddedToTable(this.TableState.Value.Table.Id);
-					return;
-				}
+        /// <summary>
+        /// Attempts to join the current user to the current poker table.
+        /// </summary>
+        private async Task JoinPokerTable()
+        {
+            if (!this.TableState.Value.IsLoading)
+            {
+                this.Logger.LogDebug("Table is present in the store, attempting to add player.");
+                await this.PokerClient.AddedToTable(this.TableState.Value.Table.Id);
+                return;
+            }
 
-				this.Logger.LogWarning("Cannot join poker table with ID: '{id}'", this.Id);
-			});
-		}
+            this.ActionSubscriber.SubscribeToAction<PokerTableSetAction>(this, async action =>
+            {
+                if (action.Table is not null && action.Table.Id != Guid.Empty)
+                {
+                    this.Logger.LogDebug("Table was missing from store and loaded explicitly, attempting to add user.");
+                    await this.PokerClient.AddedToTable(this.TableState.Value.Table.Id);
+                    return;
+                }
 
-		/// <summary>
-		/// Loads a given poker table by ID if it wasn't loaded before.
-		/// </summary>
-		private void LoadTableIfMissing()
-		{
-			if (this.TableState.Value.Table?.Id != this.Id)
-			{
-				this.Logger.LogDebug("Table is not present in the store, attemting to load: '{id}'.", this.Id);
-				this.Dispatcher.Dispatch(new PokerTableLoadAction(this.Id));
-			}
-		}
+                this.Logger.LogWarning("Cannot join poker table with ID: '{id}'", this.Id);
+            });
+        }
 
-		/// <summary>
-		/// Registers handlers for hub methods.
-		/// </summary>
-		private void RegisterHubMethodHandlers()
-		{
-			this.PokerClient.OnAddedToTable(id => this.Logger.LogError("Successfully joined tabe: {id}.", id));
+        /// <summary>
+        /// Loads a given poker table by ID if it wasn't loaded before.
+        /// </summary>
+        private void LoadTableIfMissing()
+        {
+            if (this.TableState.Value.Table?.Id == this.Id)
+                return;
 
-			this.PokerClient.OnVoteCasted((vote) =>
-			{
-				this.Logger.LogInformation("{player} voted: {vote} in table {id}", vote.PlayerId, vote.Estimation, vote.TableId);
-				this.StateHasChanged();
-			});
-		}
+            this.Logger.LogDebug("Table is not present in the store, attempting to load: '{id}'.", this.Id);
+            this.Dispatcher.Dispatch(new PokerTableLoadAction(this.Id));
+        }
 
-		private void StateHasChanged(object sender, EventArgs args)
-			=> this.InvokeAsync(this.StateHasChanged);
-	}
+        /// <summary>
+        /// Registers handlers for hub methods.
+        /// </summary>
+        private void RegisterHubMethodHandlers()
+        {
+            this.PokerClient.OnAddedToTable(id => this.Logger.LogError("Successfully joined tabe: {id}.", id));
+
+            this.PokerClient.OnVoteCasted((vote) =>
+            {
+                this.Logger.LogInformation("{player} voted: {vote} in table {id}", vote.PlayerId, vote.Estimation,
+                    vote.TableId);
+                this.StateHasChanged();
+            });
+        }
+
+        private void StateHasChanged(object sender, EventArgs args)
+            => this.InvokeAsync(this.StateHasChanged);
+    }
 }

@@ -1,4 +1,4 @@
-﻿@attribute [Microsoft.AspNetCore.Components.RouteAttribute(Routes.TABLE)]
+﻿@attribute [Route(Routes.TABLE)]
 @using static SharedKernel.Constants.Colors;
 @using static Constants
 
@@ -21,7 +21,7 @@
                                           Text="Leave"
                                           Icon="logout"
                                           ButtonStyle="ButtonStyle.Danger"
-                                          Disabled=@(this.TableState.Value.IsLoading) />
+                                          Disabled=@(TableState.Value.IsLoading) />
                         </div>
                     </div>
                     <hr />

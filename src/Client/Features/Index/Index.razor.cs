@@ -1,12 +1,11 @@
-﻿namespace PlanningPoker.Client.Pages
+﻿namespace PlanningPoker.Client.Features.Index
 {
-	using Ardalis.GuardClauses;
-	using Microsoft.AspNetCore.Components;
-	using Microsoft.Extensions.Logging;
-	using Radzen;
-
-	using SharedKernel.Models.Tables;
-	using static Constants;
+    using Ardalis.GuardClauses;
+    using Microsoft.AspNetCore.Components;
+    using Microsoft.Extensions.Logging;
+    using Radzen;
+    using SharedKernel.Models.Tables;
+    using static Constants;
 
 	public partial class Index
 	{

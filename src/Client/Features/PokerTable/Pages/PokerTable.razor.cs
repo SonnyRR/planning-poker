@@ -108,6 +108,7 @@
                 return;
             }
 
+            // ReSharper disable once AsyncVoidLambda
             this.ActionSubscriber.SubscribeToAction<PokerTableSetAction>(this, async action =>
             {
                 if (action.Table is not null && action.Table.Id != Guid.Empty)
@@ -138,12 +139,13 @@
         /// </summary>
         private void RegisterHubMethodHandlers()
         {
-            this.PokerClient.OnAddedToTable(id => this.Logger.LogError("Successfully joined tabe: {id}.", id));
+            this.PokerClient.OnAddedToTable(id => this.Logger.LogDebug("Successfully joined table: {id}.", id));
 
             this.PokerClient.OnVoteCasted((vote) =>
             {
-                this.Logger.LogInformation("{player} voted: {vote} in table {id}", vote.PlayerId, vote.Estimation,
-                    vote.TableId);
+                this.Logger.LogInformation(
+                    "{player} voted: {vote} in table {id}", vote.PlayerId, vote.Estimation, vote.TableId);
+                
                 this.StateHasChanged();
             });
         }

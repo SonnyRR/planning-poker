@@ -1,0 +1,94 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "PlanningPoker.WebAPI - DEV",
+        "type": "coreclr",
+        "request": "launch",
+        "preLaunchTask": "build",
+        "cwd": "${workspaceFolder}/src/WebAPI",
+        "program": "/bin/Debug/net7.0/PlanningPoker.WebAPI.dll",
+        "args": [],
+        "stopAtEntry": false,
+        "logging": {
+          "moduleLoad": false
+        },
+        "serverReadyAction": {
+          "action": "openExternally",
+          "pattern": "\\bNow listening on:\\s+(https?://\\S+)",
+          "uriFormat": "%s/swagger"
+        },
+        "launchSettingsProfile": "PlanningPoker.WebAPI - Development",
+        "env": {
+          "ASPNETCORE_ENVIRONMENT": "Development"
+        }
+      },
+      {
+        "name": "PlanningPoker.BFF - DEV",
+        "type": "coreclr",
+        "request": "launch",
+        "preLaunchTask": "build",
+        "cwd": "${workspaceFolder}/src/BFF",
+        "program": "/bin/Debug/net7.0/PlanningPoker.BFF.dll",
+        "args": [],
+        "stopAtEntry": false,
+        "logging": {
+          "moduleLoad": false
+        },
+        "serverReadyAction": {
+          "action": "openExternally",
+          "pattern": "\\bNow listening on:\\s+(https?://\\S+)",
+          "uriFormat": "%s/swagger"
+        },
+        "launchSettingsProfile": "PlanningPoker.BFF - Development",
+        "env": {
+          "ASPNETCORE_ENVIRONMENT": "Development"
+        }
+      },
+      {
+        "name": "PlanningPoker.Client - DEV",
+        "type": "blazorwasm",
+        "request": "launch",
+        "preLaunchTask": "build",
+        "cwd": "${workspaceFolder}/src/Client",
+        "program": "/bin/Debug/net7.0/PlanningPoker.Client.dll",
+        "dotNetConfig": {
+          "logging": {
+            "moduleLoad": false
+          }
+        },
+        "env": {
+          "ASPNETCORE_ENVIRONMENT": "Development"
+        },
+        "browser": "edge",
+        "url": "https://localhost:5004"
+      },
+      {
+        "name": "PlanningPoker.Identity - DEV",
+        "type": "coreclr",
+        "request": "launch",
+        "preLaunchTask": "build",
+        "cwd": "${workspaceFolder}/src/Identity",
+        "program": "/bin/Debug/net7.0/PlanningPoker.Identity.dll",
+        "args": [],
+        "stopAtEntry": false,
+        "logging": {
+          "moduleLoad": false
+        },
+        "serverReadyAction": {
+          "action": "openExternally",
+          "pattern": "\\bNow listening on:\\s+(https?://\\S+)",          
+        },
+        "launchSettingsProfile": "PlanningPoker.Identity - Development",
+        "env": {
+          "ASPNETCORE_ENVIRONMENT": "Development"
+        },
+        "sourceFileMap": {
+          "/Views": "${workspaceFolder}/Views"
+        }
+      }
+    ]
+}

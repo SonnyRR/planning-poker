@@ -11,6 +11,7 @@
 		{
 			public const string ADDED_TO_TABLE_FUNC = "AddedToTable";
 			public const string POKER_HUB_URI = "/poker";
+            public const string USER_GROUP_PREFIX = "g_";
 		}
 	}
 }

@@ -18,11 +18,11 @@
 
 			var applicationOptions = serviceProvider.GetService<IOptions<PlanningPokerOptions>>()?.Value;
 			Guard.Against.Null(applicationOptions, nameof(applicationOptions));
-			Guard.Against.NullOrEmpty(applicationOptions.ConnectionStrings.Main, nameof(applicationOptions.ConnectionStrings.Main));
+			Guard.Against.NullOrEmpty(applicationOptions.ConnectionStrings.Database, nameof(applicationOptions.ConnectionStrings.Database));
 
 			services.AddDbContext<PlanningPokerDbContext>(options =>
 			{
-				options.UseSqlServer(applicationOptions.ConnectionStrings.Main);
+				// options.UseSqlServer(applicationOptions.ConnectionStrings.Database);
 				options.UseOpenIddict();
 			});
 

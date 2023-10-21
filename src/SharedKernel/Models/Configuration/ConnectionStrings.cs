@@ -5,6 +5,6 @@
 	public sealed class ConnectionStrings
     {
         [Required]
-        public string Main { get; init; }
+        public string Database { get; init; }
     }
 }

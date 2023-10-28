@@ -22,7 +22,7 @@
 
 			services.AddDbContext<PlanningPokerDbContext>(options =>
 			{
-				// options.UseSqlServer(applicationOptions.ConnectionStrings.Database);
+				options.UseSqlServer(applicationOptions.ConnectionStrings.Database);
 				options.UseOpenIddict();
 			});
 

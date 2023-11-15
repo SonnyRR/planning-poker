@@ -1,52 +1,53 @@
 ﻿namespace PlanningPoker.Client.Clients
 {
-	using Microsoft.AspNetCore.Components;
-	using Microsoft.AspNetCore.SignalR.Client;
-	using PlanningPoker.SharedKernel.Models.Tables;
-	using System;
-	using System.Threading.Tasks;
-	using static SharedKernel.Constants.Hubs;
+    using Microsoft.AspNetCore.Components;
+    using Microsoft.AspNetCore.SignalR.Client;
+    using PlanningPoker.SharedKernel.Interfaces;
+    using PlanningPoker.SharedKernel.Models.Tables;
+    using System;
+    using System.Threading.Tasks;
+    using static SharedKernel.Constants.Hubs;
 
-	/// <inheritdoc cref="BaseSignalRClient"/>
-	/// <inheritdoc cref="IPokerSignalRClient"/>
-	public class PokerHubClient : BaseSignalRClient, IPokerSignalRClient
-	{
-		public PokerHubClient(NavigationManager navigationManager)
-			: base(navigationManager, POKER_HUB_URI)
-		{
-		}
+    /// <inheritdoc cref="BaseSignalRClient"/>
+    /// <inheritdoc cref="IBlazorPokerClient"/>
+    public class PokerHubClient : BaseSignalRClient, IBlazorPokerClient
+    {
+        public PokerHubClient(NavigationManager navigationManager)
+            : base(navigationManager, POKER_HUB_URI)
+        {
+        }
 
-		public async Task AddedToTable(Guid tableId)
-			=> await this.HubConnection.SendAsync(nameof(AddedToTable), tableId);
+        public Task AddToTableAsync(Guid tableId)
+            => this.HubConnection.SendAsync(nameof(IPokerClient.AddedToTable), tableId);
 
-		public void OnAddedToTable(Action<Guid> handler)
-		{
-			if (!this.HasStarted)
-			{
-				this.HubConnection.On(nameof(AddedToTable), handler);
-			}
-		}
+        public void OnAddedToTable(Action<Guid> handler)
+        {
+            if (!this.HasStarted)
+            {
+                this.HubConnection.On(nameof(IPokerClient.AddedToTable), handler);
+            }
+        }
 
-		public void OnRemovedFromTable(Action<Guid> handler)
-		{
-			if (!this.HasStarted)
-			{
-				this.HubConnection.On(nameof(RemovedFromTable), handler);
-			}
-		}
+        public void OnRemovedFromTable(Action<Guid> handler)
+        {
+            if (!this.HasStarted)
+            {
+                this.HubConnection.On(nameof(IPokerClient.RemovedFromTable), handler);
+            }
+        }
 
-		public void OnVoteCasted(Action<PlayerVote> handler)
-		{
-			if (!this.HasStarted)
-			{
-				this.HubConnection.On(nameof(VoteCasted), handler);
-			}
-		}
+        public void OnVoteCasted(Action<PlayerVote> handler)
+        {
+            if (!this.HasStarted)
+            {
+                this.HubConnection.On(nameof(IPokerClient.VoteCasted), handler);
+            }
+        }
 
-		public async Task RemovedFromTable(Guid tableId)
-			=> await this.HubConnection.SendAsync(nameof(RemovedFromTable), tableId);
+        public Task RemoveFromTableAsync(Guid tableId)
+            => this.HubConnection.SendAsync(nameof(IPokerClient.RemovedFromTable), tableId);
 
-		public async Task VoteCasted(PlayerVote vote)
-			=> await this.HubConnection.SendAsync(nameof(VoteCasted), vote);
-	}
+        public Task CastVoteAsync(PlayerVote vote)
+            => this.HubConnection.SendAsync(nameof(IPokerClient.VoteCasted), vote);
+    }
 }

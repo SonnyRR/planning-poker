@@ -9,8 +9,8 @@
 		/// <summary>
 		/// Sends a new message that adds a player to a poker table.
 		/// </summary>
-		/// <param name="tableId">The poker table's unique identifier value.</param>
-		Task AddedToTable(Guid tableId);
+		/// <param name="playerMetadata">The player metadata.</param>
+		Task AddedToTable(PlayerJoined playerMetadata);
 
 		/// <summary>
 		/// Sends a new message that removes a player from a poker table.

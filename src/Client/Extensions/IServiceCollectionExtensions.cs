@@ -90,7 +90,7 @@
 				}
 			});
 
-			services.AddScoped<IPokerSignalRClient, PokerHubClient>();
+			services.AddScoped<IBlazorPokerClient, PokerHubClient>();
 
 			return services;
 		}

@@ -41,7 +41,7 @@
         /// The SignalR client for interacting with poker tables.
         /// </summary>
         [Inject]
-        public IPokerSignalRClient PokerClient { get; set; }
+        public IBlazorPokerClient PokerClient { get; set; }
 
         /// <summary>
         /// The poker table's state.
@@ -65,14 +65,14 @@
         /// Dispatches an action with the player's vote.
         /// </summary>
         public async Task Vote()
-            => await this.PokerClient.VoteCasted(new PlayerVote { Estimation = 3, TableId = this.Id });
+            => await this.PokerClient.CastVoteAsync(new PlayerVote { Estimation = 3, TableId = this.Id });
 
         /// <summary>
         /// Leaves the current poker table.
         /// </summary>
         public async Task Leave()
         {
-            await this.PokerClient.RemovedFromTable(this.TableState.Value.Table.Id);
+            await this.PokerClient.RemoveFromTableAsync(this.TableState.Value.Table.Id);
             this.NavigationManager.NavigateTo(Routes.INDEX);
         }
 
@@ -104,7 +104,7 @@
             if (!this.TableState.Value.IsLoading)
             {
                 this.Logger.LogDebug("Table is present in the store, attempting to add player.");
-                await this.PokerClient.AddedToTable(this.TableState.Value.Table.Id);
+                await this.PokerClient.AddToTableAsync(this.TableState.Value.Table.Id);
                 return;
             }
 
@@ -114,7 +114,7 @@
                 if (action.Table is not null && action.Table.Id != Guid.Empty)
                 {
                     this.Logger.LogDebug("Table was missing from store and loaded explicitly, attempting to add user.");
-                    await this.PokerClient.AddedToTable(this.TableState.Value.Table.Id);
+                    await this.PokerClient.AddToTableAsync(this.TableState.Value.Table.Id);
                     return;
                 }
 

@@ -59,6 +59,14 @@
             if (table is not null)
             {
                 await this.Groups.AddToGroupAsync(this.Context.ConnectionId, table.Id.ToString());
+                await this.Clients
+                    .Group(table.Id.ToString())
+                    .AddedToTable(new PlayerJoined
+                    {
+                        Id = this.currentUserService.UserId,
+                        Username = this.currentUserService.Username
+                    });
+
                 this.logger.LogInformation("User {username} has been added to group & table: {tableId}.", this.UserId, tableId);
                 return;
             }

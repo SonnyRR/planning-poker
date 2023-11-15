@@ -18,7 +18,7 @@
       "request": "launch",
       "preLaunchTask": "build",
       "cwd": "${workspaceFolder}/src/WebAPI",
-      "program": "/bin/Debug/net7.0/PlanningPoker.WebAPI.dll",
+      "program": "/bin/Debug/net8.0/PlanningPoker.WebAPI.dll",
       "args": [],
       "stopAtEntry": false,
       "logging": {
@@ -40,7 +40,7 @@
       "request": "launch",
       "preLaunchTask": "build",
       "cwd": "${workspaceFolder}/src/BFF",
-      "program": "/bin/Debug/net7.0/PlanningPoker.BFF.dll",
+      "program": "/bin/Debug/net8.0/PlanningPoker.BFF.dll",
       "args": [],
       "stopAtEntry": false,
       "logging": {
@@ -61,7 +61,7 @@
       "request": "launch",
       "preLaunchTask": "build",
       "cwd": "${workspaceFolder}/src/Client",
-      "program": "/bin/Debug/net7.0/PlanningPoker.Client.dll",
+      "program": "/bin/Debug/net8.0/PlanningPoker.Client.dll",
       "dotNetConfig": {
         "logging": {
           "moduleLoad": false
@@ -79,7 +79,7 @@
       "request": "launch",
       "preLaunchTask": "build",
       "cwd": "${workspaceFolder}/src/Identity",
-      "program": "/bin/Debug/net7.0/PlanningPoker.Identity.dll",
+      "program": "/bin/Debug/net8.0/PlanningPoker.Identity.dll",
       "args": [],
       "stopAtEntry": false,
       "logging": {

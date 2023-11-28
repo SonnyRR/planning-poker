@@ -162,7 +162,6 @@
 
 			services.AddQuartz(options =>
 			{
-				options.UseMicrosoftDependencyInjectionJobFactory();
 				options.UseSimpleTypeLoader();
 				options.UseInMemoryStore();
 			});

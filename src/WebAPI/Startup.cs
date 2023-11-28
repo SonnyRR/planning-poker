@@ -1,4 +1,5 @@
-﻿namespace PlanningPoker.WebAPI
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+namespace PlanningPoker.WebAPI
 {
 	using CorrelationId;
 	using Microsoft.AspNetCore.Builder;

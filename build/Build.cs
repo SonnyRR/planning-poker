@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using JetBrains.Annotations;
 using Nuke.Common;
@@ -9,13 +10,14 @@ using Nuke.Common.ProjectModel;
 using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
 using Nuke.Common.Tools.GitVersion;
-using Nuke.Common.Utilities.Collections;
 using Serilog;
 using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
 // ReSharper disable MemberCanBeMadeStatic.Local
 [ShutdownDotNetAfterServerBuild]
+[SuppressMessage("ReSharper", "AllUnderscoreLocalParameterName")]
+[SuppressMessage("ReSharper", "CheckNamespace")]
 internal class Build : NukeBuild
 {
     public static int Main()

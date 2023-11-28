@@ -52,7 +52,7 @@
 		public void OnInvalidSubmit(FormInvalidSubmitEventArgs args)
 		{
 			var json = JsonSerializer.Serialize(args, new JsonSerializerOptions() { WriteIndented = true });
-			this.Logger.LogInformation("Invalid Submit", json);
+			this.Logger.LogInformation("Invalid Submit: {0}", json);
 			this.Dispatcher.Dispatch(new PokerTableUnsuccessfulCreationAction(json));
 		}
 

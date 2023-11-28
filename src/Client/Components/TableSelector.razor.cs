@@ -29,6 +29,7 @@
 
 		[Parameter]
 		public EventCallback<JoinExistingTableRequest> TableIdChanged { get; set; }
+        
 		public async Task OnTableCreationSubmit()
 		{
 			await this.OnTableCreationCallback.InvokeAsync();
@@ -37,7 +38,7 @@
 		public void OnTableJoinInvalidSubmit(FormInvalidSubmitEventArgs args)
 		{
 			Guard.Against.Null(args, nameof(args));
-			this.Logger.LogError("Invalid Form Submit", JsonSerializer.Serialize(args, new JsonSerializerOptions() { WriteIndented = true }));
+			this.Logger.LogError("Invalid Form Submit: {0}", JsonSerializer.Serialize(args, new JsonSerializerOptions() { WriteIndented = true }));
 		}
 		public async Task OnTableJoinValidSubmitAsync()
 		{

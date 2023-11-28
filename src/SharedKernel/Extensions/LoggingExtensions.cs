@@ -10,8 +10,8 @@
 
 	using Serilog;
 	using Serilog.Configuration;
-
-	using System;
+    using Serilog.Settings.Configuration;
+    using System;
 	using System.Diagnostics;
 
 	public static class LoggingExtensions
@@ -53,7 +53,12 @@
 			Guard.Against.Null(configuration, nameof(configuration));
 			Guard.Against.NullOrWhiteSpace(configurationSection, nameof(configurationSection));
 
-			return loggerConfiguration.ReadFrom.Configuration(configuration, configurationSection);
+            var configurationReaderOptions = new ConfigurationReaderOptions 
+            {
+                SectionName = configurationSection
+            };
+            
+			return loggerConfiguration.ReadFrom.Configuration(configuration, configurationReaderOptions);
 		}
 
 		/// <summary>

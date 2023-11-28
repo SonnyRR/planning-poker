@@ -28,7 +28,7 @@ internal class Build : NukeBuild
 
     [Solution] public readonly Solution Solution;
 
-    [NuGetPackage("mapster.tool", "Mapster.Tool.dll", Framework = "net6.0")]
+    [NuGetPackage("mapster.tool", "Mapster.Tool.dll", Framework = "net8.0")]
     public readonly Tool Mapster;
 
     [GitRepository] public readonly GitRepository GitRepository;
@@ -85,8 +85,10 @@ internal class Build : NukeBuild
             const string GENERATED_FILES_PATTERN = "**\\*.g.cs";
 
             foreach (var file in this.CoreAssemblyDirectory.GlobFiles(GENERATED_FILES_PATTERN)
-                         .Union(this.SharedKernelAssemblyDirectory.GlobFiles(GENERATED_FILES_PATTERN)))
+                .Union(this.SharedKernelAssemblyDirectory.GlobFiles(GENERATED_FILES_PATTERN)))
+            {
                 file.DeleteFile();
+            }
         });
 
     [UsedImplicitly]
@@ -95,7 +97,7 @@ internal class Build : NukeBuild
         .Executes(() =>
         {
             const string MAPPERS_NAMESPACE = "PlanningPoker.Core.Mapping";
-            var assemblyToScan = this.CoreAssemblyDirectory / "bin" / "Debug" / "net6.0" / "PlanningPoker.Core.dll";
+            var assemblyToScan = this.CoreAssemblyDirectory / "bin" / "Debug" / "net8.0" / "PlanningPoker.Core.dll";
             var generatedFilesDir = this.CoreAssemblyDirectory / "Models" / "Generated";
 
             this.Mapster.Invoke(
@@ -114,6 +116,7 @@ internal class Build : NukeBuild
 
             CopyDirectoryRecursively(generatedFilesDir, this.SharedKernelAssemblyDirectory / "Models" / "Generated",
                 DirectoryExistsPolicy.Merge);
+
             generatedFilesDir.DeleteDirectory();
         });
 

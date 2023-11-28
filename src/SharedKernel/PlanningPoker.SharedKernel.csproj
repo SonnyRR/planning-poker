@@ -9,7 +9,7 @@
         <PackageReference Include="Ardalis.GuardClauses" Version="4.2.0" />
         <PackageReference Include="CorrelationId" Version="3.0.1" />
         <PackageReference Include="FluentValidation" Version="11.8.1" />
-        <PackageReference Include="Mapster" Version="7.4.0" />
+        <PackageReference Include="Mapster" Version="7.4.1-pre01" />
         <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
         <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
         <PackageReference Include="Serilog" Version="3.1.1" />

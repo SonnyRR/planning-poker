@@ -51,8 +51,8 @@ internal class Build : NukeBuild
         .Before(this.Restore)
         .Executes(() =>
         {
-            this.SourceDirectory.GlobDirectories("**/bin", "**/obj").ForEach(dir => dir.DeleteDirectory());
-            this.TestsDirectory.GlobDirectories("**/bin", "**/obj").ForEach(dir => dir.DeleteDirectory());
+            this.SourceDirectory.GlobDirectories("**/{obj,bin}").DeleteDirectories();
+            this.TestsDirectory.GlobDirectories("**/{obj,bin}").DeleteDirectories();
             this.ArtifactsDirectory.CreateOrCleanDirectory();
         });
 

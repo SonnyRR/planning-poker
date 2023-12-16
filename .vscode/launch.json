@@ -6,7 +6,8 @@
       "configurations": [
         "PlanningPoker.Identity - DEV",
         "PlanningPoker.WebAPI - DEV",
-        "PlanningPoker.BFF - DEV"
+        "PlanningPoker.BFF - DEV (Hot Reload)",
+        "PlanningPoker.BFF - DEV (Attach)"
       ],
       "stopAll": true
     }
@@ -56,6 +57,28 @@
       }
     },
     {
+      "name": "PlanningPoker.BFF - DEV (Hot Reload)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "cwd": "${workspaceFolder}/src/BFF",
+      "program": "dotnet",
+      "args": [
+        "watch",
+        "--project",
+        ".",
+        "-lp",
+        "PlanningPoker.BFF - Development"
+      ],
+      "stopAtEntry": false,
+      "logging": {
+        "moduleLoad": false
+      },
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    {
       "name": "PlanningPoker.Client - DEV",
       "type": "blazorwasm",
       "request": "launch",
@@ -72,6 +95,15 @@
       },
       "browser": "edge",
       "url": "https://localhost:5004"
+    },
+    {
+      "name": "PlanningPoker.BFF - DEV (Attach)",
+      "type": "blazorwasm",
+      "request": "attach",
+      "cwd": "${workspaceFolder}/src/BFF",
+      "url": "https://localhost:5002",
+      "timeout": 120000,
+      "browser": "edge"
     },
     {
       "name": "PlanningPoker.Identity - DEV",

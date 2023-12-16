@@ -91,6 +91,7 @@
 			});
 
 			services.AddScoped<IBlazorPokerClient, PokerHubClient>();
+            services.AddSingleton(new JsonSerializerOptions() { WriteIndented = true });
 
 			return services;
 		}

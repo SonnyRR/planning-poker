@@ -17,10 +17,10 @@
 		public JoinExistingTableRequest JoinTableParameters { get; set; } = new();
 
 		[Inject]
-		public ILogger<TableSelector> Logger { get; set; }
+		public ILogger<TableSelector> Logger { get; init; }
 
 		[Inject]
-		public NavigationManager NavigationManager { get; set; }
+		public NavigationManager NavigationManager { get; init; }
 
 		[Parameter]
 		public EventCallback OnTableCreationCallback { get; set; }
@@ -29,6 +29,9 @@
 
 		[Parameter]
 		public EventCallback<JoinExistingTableRequest> TableIdChanged { get; set; }
+
+        [Inject]
+        private JsonSerializerOptions JsonSerializerOptions { get; init; }
         
 		public async Task OnTableCreationSubmit()
 		{
@@ -38,7 +41,7 @@
 		public void OnTableJoinInvalidSubmit(FormInvalidSubmitEventArgs args)
 		{
 			Guard.Against.Null(args, nameof(args));
-			this.Logger.LogError("Invalid Form Submit: {0}", JsonSerializer.Serialize(args, new JsonSerializerOptions() { WriteIndented = true }));
+			this.Logger.LogError("Invalid Form Submit: {args}", JsonSerializer.Serialize(args, this.JsonSerializerOptions));
 		}
 		public async Task OnTableJoinValidSubmitAsync()
 		{

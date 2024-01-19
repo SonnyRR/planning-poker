@@ -11,11 +11,11 @@
         <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="8.0.1" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.1" />
         <PackageReference Include="NetEscapades.AspNetCore.SecurityHeaders" Version="0.21.0" />
-        <PackageReference Include="OpenIddict.AspNetCore" Version="5.0.1" />
-        <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="5.0.1" />
-        <PackageReference Include="OpenIddict.Quartz" Version="5.0.1" />
+        <PackageReference Include="OpenIddict.AspNetCore" Version="5.1.0" />
+        <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="5.1.0" />
+        <PackageReference Include="OpenIddict.Quartz" Version="5.1.0" />
         <PackageReference Include="Quartz.Extensions.Hosting" Version="3.8.0" />
-        <PackageReference Include="Serilog.AspNetCore" Version="8.0.0" />
+        <PackageReference Include="Serilog.AspNetCore" Version="8.0.1" />
         <PackageReference Include="Serilog.AspNetCore.Ingestion" Version="1.0.0-dev-00032" />
         <PackageReference Include="Serilog.Enrichers.CorrelationId" Version="3.0.1" />
         <PackageReference Include="Serilog.Sinks.Console" Version="5.0.1" />

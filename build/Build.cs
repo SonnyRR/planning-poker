@@ -41,6 +41,9 @@ internal class Build : NukeBuild
     [Parameter("The environment. Possible values: Development, Staging, Production")]
     public readonly string AspNetCoreEnvironment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
+    [Parameter("The Entity Framework Core migration name", Name ="migration-name")]
+    public readonly string EFMigrationName = string.Empty;
+
     private AbsolutePath SourceDirectory => RootDirectory / "src";
     private AbsolutePath TestsDirectory => RootDirectory / "tests";
     private AbsolutePath ArtifactsDirectory => RootDirectory / "artifacts";
@@ -133,6 +136,19 @@ internal class Build : NukeBuild
         .OnlyWhenStatic(this.IsLocalEnvironment)
         .Executes(() =>
             DotNet($@"ef database drop -s ""{this.WebApiAssemblyDirectory}""", this.PersistenceAssemblyDirectory));
+
+    [UsedImplicitly]
+    public Target CreateMigration => _ => _
+        .OnlyWhenStatic(this.IsLocalEnvironment)
+        .Requires(() => this.EFMigrationName)
+        .Executes(() =>
+            DotNet($@"ef migrations add {this.EFMigrationName} -s ""{this.WebApiAssemblyDirectory}""", this.PersistenceAssemblyDirectory));
+
+    [UsedImplicitly]
+    public Target RemoveLastMigration => _ => _
+        .OnlyWhenStatic(this.IsLocalEnvironment)
+        .Executes(() =>
+            DotNet($@"ef migrations remove -s ""{this.WebApiAssemblyDirectory}""", this.PersistenceAssemblyDirectory));
 
     private bool IsLocalEnvironment()
     {

@@ -7,7 +7,7 @@
 	/// </summary>
 	public record PlayerVote
 	{
-		public int Estimation { get; init; }
+		public float Estimation { get; init; }
 
 		public Guid TableId { get; set; }
 

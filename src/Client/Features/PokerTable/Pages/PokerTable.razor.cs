@@ -55,6 +55,8 @@
         [Inject]
         public NavigationManager NavigationManager { get; set; }
 
+        public float VoteValue { get; set; }
+
         public void Dispose()
         {
             this.Dispose(true);
@@ -64,8 +66,12 @@
         /// <summary>
         /// Dispatches an action with the player's vote.
         /// </summary>
-        public async Task Vote()
-            => await this.PokerClient.CastVoteAsync(new PlayerVote { Estimation = 3, TableId = this.Id });
+        public async Task Vote(float estimation)
+            => await this.PokerClient.CastVoteAsync(
+                new PlayerVote
+                {
+                    Estimation = estimation, TableId = this.Id
+                });
 
         /// <summary>
         /// Leaves the current poker table.
@@ -145,12 +151,13 @@
             {
                 this.Logger.LogInformation(
                     "{player} voted: {vote} in table {id}", vote.PlayerId, vote.Estimation, vote.TableId);
-                
-                this.StateHasChanged();
+
+                this.VoteValue = vote.Estimation;
+                this.StateHasChanged(null, null);
             });
         }
 
         private void StateHasChanged(object sender, EventArgs args)
-            => this.InvokeAsync(this.StateHasChanged);
+            => base.StateHasChanged();
     }
 }

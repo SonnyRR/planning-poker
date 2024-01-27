@@ -2,7 +2,6 @@
 {
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Components;
-    using Microsoft.AspNetCore.Components.Web;
 
     public partial class Card
 	{
@@ -12,20 +11,12 @@
 		public string UnicodeValue { get; set; }
 
 		[Parameter]
-		public int Value { get; set; }
+		public float Value { get; set; }
 
-        /// <summary>
-        /// Gets or sets the click callback.
-        /// </summary>
-        /// <value>The click callback.</value>
         [Parameter]
-        public EventCallback<MouseEventArgs> Click { get; set; }
+        public EventCallback<float> Click { get; set; }
 
-        /// <summary>
-        /// Handles the <see cref="E:Click" /> event.
-        /// </summary>
-        /// <param name="args">The <see cref="MouseEventArgs"/> instance containing the event data.</param>
-        public virtual async Task OnClick(MouseEventArgs args)
+        public virtual async Task OnClick()
         {
             if (this.clicking)
             {
@@ -36,7 +27,7 @@
             {
                 this.clicking = true;
 
-                await this.Click.InvokeAsync(args);
+                await this.Click.InvokeAsync(this.Value);
             }
             finally
             {

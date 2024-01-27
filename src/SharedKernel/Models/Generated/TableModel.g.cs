@@ -12,8 +12,6 @@ namespace PlanningPoker.SharedKernel.Models.Generated
         public UserModel Owner { get; set; }
         public Guid OwnerId { get; set; }
         public IList<UserModel> Players { get; set; }
-        public DateTimeOffset CreatedOn { get; set; }
         public Guid Id { get; set; }
-        public DateTimeOffset? ModifiedOn { get; set; }
     }
 }

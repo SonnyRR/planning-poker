@@ -9,10 +9,6 @@ namespace PlanningPoker.SharedKernel.Models.Generated
     {
         public DeckType Type { get; set; }
         public List<CardModel> Cards { get; set; }
-        public DateTimeOffset? DeletedOn { get; set; }
-        public bool IsDeleted { get; set; }
-        public DateTimeOffset CreatedOn { get; set; }
         public Guid Id { get; set; }
-        public DateTimeOffset? ModifiedOn { get; set; }
     }
 }

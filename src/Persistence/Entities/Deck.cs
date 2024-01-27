@@ -14,8 +14,6 @@
 		/// <summary>
 		/// The deck's cards.
 		/// </summary>
-		public List<Card> Cards { get; set; } = new();
-
-		public List<DeckCard> DeckCards { get; set; }
+		public List<Card> Cards { get; set; } = [];
 	}
 }

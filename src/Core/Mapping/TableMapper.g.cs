@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using PlanningPoker.Persistence.Entities;
 using PlanningPoker.SharedKernel.Models.Generated;
@@ -11,68 +12,64 @@ namespace PlanningPoker.Core.Mapping
             return p1 == null ? null : new Table()
             {
                 Deck = funcMain1(p1.Deck),
-                DeckId = p1.DeckId,
+                DeckId = funcMain3(p1.Deck == null ? null : (Guid?)p1.Deck.Id),
                 Name = p1.Name,
                 Owner = p1.Owner == null ? null : new User()
                 {
                     Id = p1.Owner.Id,
                     UserName = p1.Owner.UserName
                 },
-                OwnerId = p1.OwnerId,
-                Players = funcMain3(p1.Players),
+                OwnerId = funcMain4(p1.Owner == null ? null : (Guid?)p1.Owner.Id),
+                Players = funcMain5(p1.Players),
                 Id = p1.Id
             };
         }
-        public static Table AdaptTo(this TableModel p5, Table p6)
+        public static Table AdaptTo(this TableModel p7, Table p8)
         {
-            if (p5 == null)
+            if (p7 == null)
             {
                 return null;
             }
-            Table result = p6 ?? new Table();
+            Table result = p8 ?? new Table();
             
-            result.Deck = funcMain4(p5.Deck, result.Deck);
-            result.DeckId = p5.DeckId;
-            result.Name = p5.Name;
-            result.Owner = funcMain6(p5.Owner, result.Owner);
-            result.OwnerId = p5.OwnerId;
-            result.Players = funcMain7(p5.Players, result.Players);
-            result.Id = p5.Id;
+            result.Deck = funcMain6(p7.Deck, result.Deck);
+            result.DeckId = funcMain8(p7.Deck == null ? null : (Guid?)p7.Deck.Id, result.DeckId);
+            result.Name = p7.Name;
+            result.Owner = funcMain9(p7.Owner, result.Owner);
+            result.OwnerId = funcMain10(p7.Owner == null ? null : (Guid?)p7.Owner.Id, result.OwnerId);
+            result.Players = funcMain11(p7.Players, result.Players);
+            result.Id = p7.Id;
             return result;
             
         }
-        public static TableModel AdaptToModel(this Table p15)
+        public static TableModel AdaptToModel(this Table p21)
         {
-            return p15 == null ? null : new TableModel()
+            return p21 == null ? null : new TableModel()
             {
-                Deck = funcMain8(p15.Deck),
-                DeckId = p15.DeckId,
-                Name = p15.Name,
-                Owner = p15.Owner == null ? null : new UserModel()
+                Deck = funcMain12(p21.Deck),
+                Name = p21.Name,
+                Owner = p21.Owner == null ? null : new UserModel()
                 {
-                    Id = p15.Owner.Id,
-                    UserName = p15.Owner.UserName
+                    Id = p21.Owner.Id,
+                    UserName = p21.Owner.UserName
                 },
-                OwnerId = p15.OwnerId,
-                Players = funcMain10(p15.Players),
-                Id = p15.Id
+                Players = funcMain14(p21.Players),
+                Id = p21.Id
             };
         }
-        public static TableModel AdaptTo(this Table p19, TableModel p20)
+        public static TableModel AdaptTo(this Table p25, TableModel p26)
         {
-            if (p19 == null)
+            if (p25 == null)
             {
                 return null;
             }
-            TableModel result = p20 ?? new TableModel();
+            TableModel result = p26 ?? new TableModel();
             
-            result.Deck = funcMain11(p19.Deck, result.Deck);
-            result.DeckId = p19.DeckId;
-            result.Name = p19.Name;
-            result.Owner = funcMain13(p19.Owner, result.Owner);
-            result.OwnerId = p19.OwnerId;
-            result.Players = funcMain14(p19.Players, result.Players);
-            result.Id = p19.Id;
+            result.Deck = funcMain15(p25.Deck, result.Deck);
+            result.Name = p25.Name;
+            result.Owner = funcMain17(p25.Owner, result.Owner);
+            result.Players = funcMain18(p25.Players, result.Players);
+            result.Id = p25.Id;
             return result;
             
         }
@@ -87,22 +84,32 @@ namespace PlanningPoker.Core.Mapping
             };
         }
         
-        private static IList<User> funcMain3(IList<UserModel> p4)
+        private static Guid funcMain3(Guid? p4)
         {
-            if (p4 == null)
+            return p4 == null ? default(Guid) : (Guid)p4;
+        }
+        
+        private static Guid funcMain4(Guid? p5)
+        {
+            return p5 == null ? default(Guid) : (Guid)p5;
+        }
+        
+        private static IList<User> funcMain5(IList<UserModel> p6)
+        {
+            if (p6 == null)
             {
                 return null;
             }
-            IList<User> result = new List<User>(p4.Count);
+            IList<User> result = new List<User>(p6.Count);
             
             ICollection<User> list = result;
             
             int i = 0;
-            int len = p4.Count;
+            int len = p6.Count;
             
             while (i < len)
             {
-                UserModel item = p4[i];
+                UserModel item = p6[i];
                 list.Add(item == null ? null : new User()
                 {
                     Id = item.Id,
@@ -114,51 +121,61 @@ namespace PlanningPoker.Core.Mapping
             
         }
         
-        private static Deck funcMain4(DeckModel p7, Deck p8)
+        private static Deck funcMain6(DeckModel p9, Deck p10)
         {
-            if (p7 == null)
+            if (p9 == null)
             {
                 return null;
             }
-            Deck result = p8 ?? new Deck();
+            Deck result = p10 ?? new Deck();
             
-            result.Type = p7.Type;
-            result.Cards = funcMain5(p7.Cards, result.Cards);
-            result.Id = p7.Id;
+            result.Type = p9.Type;
+            result.Cards = funcMain7(p9.Cards, result.Cards);
+            result.Id = p9.Id;
             return result;
             
         }
         
-        private static User funcMain6(UserModel p11, User p12)
+        private static Guid funcMain8(Guid? p13, Guid p14)
         {
-            if (p11 == null)
+            return p13 == null ? default(Guid) : (Guid)p13;
+        }
+        
+        private static User funcMain9(UserModel p15, User p16)
+        {
+            if (p15 == null)
             {
                 return null;
             }
-            User result = p12 ?? new User();
+            User result = p16 ?? new User();
             
-            result.Id = p11.Id;
-            result.UserName = p11.UserName;
+            result.Id = p15.Id;
+            result.UserName = p15.UserName;
             return result;
             
         }
         
-        private static IList<User> funcMain7(IList<UserModel> p13, IList<User> p14)
+        private static Guid funcMain10(Guid? p17, Guid p18)
         {
-            if (p13 == null)
+            return p17 == null ? default(Guid) : (Guid)p17;
+        }
+        
+        private static IList<User> funcMain11(IList<UserModel> p19, IList<User> p20)
+        {
+            if (p19 == null)
             {
                 return null;
             }
-            IList<User> result = new List<User>(p13.Count);
+            IList<User> result = new List<User>(p19.Count);
             
             ICollection<User> list = result;
             
             int i = 0;
-            int len = p13.Count;
+            int len = p19.Count;
             
             while (i < len)
             {
-                UserModel item = p13[i];
+                UserModel item = p19[i];
                 list.Add(item == null ? null : new User()
                 {
                     Id = item.Id,
@@ -170,32 +187,32 @@ namespace PlanningPoker.Core.Mapping
             
         }
         
-        private static DeckModel funcMain8(Deck p16)
+        private static DeckModel funcMain12(Deck p22)
         {
-            return p16 == null ? null : new DeckModel()
+            return p22 == null ? null : new DeckModel()
             {
-                Type = p16.Type,
-                Cards = funcMain9(p16.Cards),
-                Id = p16.Id
+                Type = p22.Type,
+                Cards = funcMain13(p22.Cards),
+                Id = p22.Id
             };
         }
         
-        private static IList<UserModel> funcMain10(IList<User> p18)
+        private static IList<UserModel> funcMain14(IList<User> p24)
         {
-            if (p18 == null)
+            if (p24 == null)
             {
                 return null;
             }
-            IList<UserModel> result = new List<UserModel>(p18.Count);
+            IList<UserModel> result = new List<UserModel>(p24.Count);
             
             ICollection<UserModel> list = result;
             
             int i = 0;
-            int len = p18.Count;
+            int len = p24.Count;
             
             while (i < len)
             {
-                User item = p18[i];
+                User item = p24[i];
                 list.Add(item == null ? null : new UserModel()
                 {
                     Id = item.Id,
@@ -207,51 +224,51 @@ namespace PlanningPoker.Core.Mapping
             
         }
         
-        private static DeckModel funcMain11(Deck p21, DeckModel p22)
-        {
-            if (p21 == null)
-            {
-                return null;
-            }
-            DeckModel result = p22 ?? new DeckModel();
-            
-            result.Type = p21.Type;
-            result.Cards = funcMain12(p21.Cards, result.Cards);
-            result.Id = p21.Id;
-            return result;
-            
-        }
-        
-        private static UserModel funcMain13(User p25, UserModel p26)
-        {
-            if (p25 == null)
-            {
-                return null;
-            }
-            UserModel result = p26 ?? new UserModel();
-            
-            result.Id = p25.Id;
-            result.UserName = p25.UserName;
-            return result;
-            
-        }
-        
-        private static IList<UserModel> funcMain14(IList<User> p27, IList<UserModel> p28)
+        private static DeckModel funcMain15(Deck p27, DeckModel p28)
         {
             if (p27 == null)
             {
                 return null;
             }
-            IList<UserModel> result = new List<UserModel>(p27.Count);
+            DeckModel result = p28 ?? new DeckModel();
+            
+            result.Type = p27.Type;
+            result.Cards = funcMain16(p27.Cards, result.Cards);
+            result.Id = p27.Id;
+            return result;
+            
+        }
+        
+        private static UserModel funcMain17(User p31, UserModel p32)
+        {
+            if (p31 == null)
+            {
+                return null;
+            }
+            UserModel result = p32 ?? new UserModel();
+            
+            result.Id = p31.Id;
+            result.UserName = p31.UserName;
+            return result;
+            
+        }
+        
+        private static IList<UserModel> funcMain18(IList<User> p33, IList<UserModel> p34)
+        {
+            if (p33 == null)
+            {
+                return null;
+            }
+            IList<UserModel> result = new List<UserModel>(p33.Count);
             
             ICollection<UserModel> list = result;
             
             int i = 0;
-            int len = p27.Count;
+            int len = p33.Count;
             
             while (i < len)
             {
-                User item = p27[i];
+                User item = p33[i];
                 list.Add(item == null ? null : new UserModel()
                 {
                     Id = item.Id,
@@ -289,20 +306,20 @@ namespace PlanningPoker.Core.Mapping
             
         }
         
-        private static List<Card> funcMain5(List<CardModel> p9, List<Card> p10)
+        private static List<Card> funcMain7(List<CardModel> p11, List<Card> p12)
         {
-            if (p9 == null)
+            if (p11 == null)
             {
                 return null;
             }
-            List<Card> result = new List<Card>(p9.Count);
+            List<Card> result = new List<Card>(p11.Count);
             
             int i = 0;
-            int len = p9.Count;
+            int len = p11.Count;
             
             while (i < len)
             {
-                CardModel item = p9[i];
+                CardModel item = p11[i];
                 result.Add(item == null ? null : new Card()
                 {
                     UnicodeValue = item.UnicodeValue,
@@ -315,33 +332,7 @@ namespace PlanningPoker.Core.Mapping
             
         }
         
-        private static List<CardModel> funcMain9(List<Card> p17)
-        {
-            if (p17 == null)
-            {
-                return null;
-            }
-            List<CardModel> result = new List<CardModel>(p17.Count);
-            
-            int i = 0;
-            int len = p17.Count;
-            
-            while (i < len)
-            {
-                Card item = p17[i];
-                result.Add(item == null ? null : new CardModel()
-                {
-                    UnicodeValue = item.UnicodeValue,
-                    Value = item.Value,
-                    Id = item.Id
-                });
-                i++;
-            }
-            return result;
-            
-        }
-        
-        private static List<CardModel> funcMain12(List<Card> p23, List<CardModel> p24)
+        private static List<CardModel> funcMain13(List<Card> p23)
         {
             if (p23 == null)
             {
@@ -355,6 +346,32 @@ namespace PlanningPoker.Core.Mapping
             while (i < len)
             {
                 Card item = p23[i];
+                result.Add(item == null ? null : new CardModel()
+                {
+                    UnicodeValue = item.UnicodeValue,
+                    Value = item.Value,
+                    Id = item.Id
+                });
+                i++;
+            }
+            return result;
+            
+        }
+        
+        private static List<CardModel> funcMain16(List<Card> p29, List<CardModel> p30)
+        {
+            if (p29 == null)
+            {
+                return null;
+            }
+            List<CardModel> result = new List<CardModel>(p29.Count);
+            
+            int i = 0;
+            int len = p29.Count;
+            
+            while (i < len)
+            {
+                Card item = p29[i];
                 result.Add(item == null ? null : new CardModel()
                 {
                     UnicodeValue = item.UnicodeValue,

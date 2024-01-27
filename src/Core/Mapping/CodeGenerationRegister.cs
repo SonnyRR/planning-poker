@@ -22,10 +22,11 @@
                 {
 					cfg.Ignore(e => e.CreatedOn);
 					cfg.Ignore(e => e.ModifiedOn);
+                    cfg.Ignore(e => e.DeckId);
+                    cfg.Ignore(e => e.OwnerId);
                 })
                 .ForType<Card>(cfg =>
                 {
-                    cfg.Ignore(e => e.DeckCards);
                     cfg.Ignore(e => e.CreatedOn);
                     cfg.Ignore(e => e.DeletedOn);
                     cfg.Ignore(e => e.ModifiedOn);
@@ -34,7 +35,6 @@
                 })
                 .ForType<Deck>(cfg =>
                 {
-                    cfg.Ignore(e => e.DeckCards);
                     cfg.Ignore(e => e.CreatedOn);
                     cfg.Ignore(e => e.DeletedOn);
                     cfg.Ignore(e => e.ModifiedOn);

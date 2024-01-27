@@ -26,7 +26,5 @@
 		public float Value { get; set; }
 
 		public List<Deck> Decks { get; set; }
-
-		public List<DeckCard> DeckCards { get; set; }
 	}
 }

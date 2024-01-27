@@ -6,7 +6,8 @@
 	using PlanningPoker.Client.Features.PokerTable.Store;
 	using PlanningPoker.Client.Features.PokerTable.Store.Actions;
 	using PlanningPoker.Client.Records;
-	using PlanningPoker.SharedKernel.Extensions;
+    using PlanningPoker.SharedKernel;
+    using PlanningPoker.SharedKernel.Extensions;
 	using PlanningPoker.SharedKernel.Models.Binding;
 	using PlanningPoker.SharedKernel.Models.Decks;
 	using Radzen;
@@ -39,6 +40,9 @@
 		[Inject]
 		public IState<PokerTableCreationState> TableCreationState { get; set; }
 
+        [Inject(Key = nameof(JsonSerializerConfigurations.LoggingSettings))]
+        private JsonSerializerOptions LoggingSerializerOptions { get; init; }
+
 		public void Dispose()
 		{
 			this.Dispose(true);
@@ -51,8 +55,8 @@
 		/// <param name="args">The invalid submit event arguments.</param>
 		public void OnInvalidSubmit(FormInvalidSubmitEventArgs args)
 		{
-			var json = JsonSerializer.Serialize(args, new JsonSerializerOptions() { WriteIndented = true });
-			this.Logger.LogInformation("Invalid Submit: {0}", json);
+			var json = JsonSerializer.Serialize(args, this.LoggingSerializerOptions);
+			this.Logger.LogInformation("Invalid Submit: {Args}", json);
 			this.Dispatcher.Dispatch(new PokerTableUnsuccessfulCreationAction(json));
 		}
 

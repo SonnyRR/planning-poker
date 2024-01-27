@@ -6,6 +6,7 @@
     using Fluxor;
     using Microsoft.AspNetCore.Components;
     using Microsoft.Extensions.Logging;
+    using Radzen;
     using SharedKernel.Models.Tables;
     using Store;
     using Store.Actions;
@@ -18,6 +19,12 @@
         /// </summary>
         [Inject]
         public IActionSubscriber ActionSubscriber { get; set; }
+
+        /// <summary>
+        /// The Radzen Dialog component service.
+        /// </summary>
+        [Inject]
+        public DialogService DialogService { get; set; }
 
         /// <summary>
         /// The fluxor action dispatcher.
@@ -78,8 +85,20 @@
         /// </summary>
         public async Task Leave()
         {
-            await this.PokerClient.RemoveFromTableAsync(this.TableState.Value.Table.Id);
-            this.NavigationManager.NavigateTo(Routes.INDEX);
+            var dialogOptions = new ConfirmOptions
+            {
+                OkButtonText = "Yes",
+                CancelButtonText = "No",
+            };
+
+            var exitCofirmed = await this.DialogService
+                .Confirm(Table.EXIT_DIALOG_QUESTION, Table.EXIT_DIALOG_TITLE, dialogOptions);
+
+            if (exitCofirmed.GetValueOrDefault())
+            {
+                await this.PokerClient.RemoveFromTableAsync(this.TableState.Value.Table.Id);
+                this.NavigationManager.NavigateTo(Routes.INDEX);
+            }
         }
 
         protected virtual void Dispose(bool disposing)

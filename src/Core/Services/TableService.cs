@@ -10,6 +10,7 @@
 	using System.Linq;
 	using System.Threading;
 	using System.Threading.Tasks;
+    using static SharedKernel.Constants;
 
 	/// <inheritdoc cref="ITableService" />
 	public sealed class TableService : ITableService
@@ -77,7 +78,7 @@
 
 			if (table is null)
 			{
-				this.logger.LogError("Table with id '{id}' not found.", id);
+				this.logger.LogError(LogMessages.TABLE_NOT_FOUND, id);
 				return null;
 			}
 
@@ -109,8 +110,7 @@
 
 			if (tableToUpdate is null)
 			{
-				// TODO: Extract constant.
-				this.logger.LogError("Table with id '{id}' not found.", bindingModel.Id.Value);
+				this.logger.LogError(LogMessages.TABLE_NOT_FOUND, bindingModel.Id.Value);
 				return null;
 			}
 

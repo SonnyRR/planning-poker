@@ -13,5 +13,10 @@
 			public const string POKER_HUB_URI = "/poker";
             public const string USER_GROUP_PREFIX = "g_";
 		}
+
+        public static class LogMessages
+        {
+            public const string TABLE_NOT_FOUND = "Table with id '{Id}' not found.";
+        }
 	}
 }

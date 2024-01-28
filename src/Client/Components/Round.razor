@@ -1,0 +1,22 @@
+﻿<RadzenStack Gap="1rem">
+    <RadzenRow>
+        <RadzenColumn Size="12" Class="rz-p-4 rz-border-radius-1" Style="border: var(--rz-grid-cell-border)">
+            <RadzenText TextStyle="TextStyle.Overline" Class="rz-mt-2 rz-my-0"
+                Style="color: var(--rz-text-tertiary-color);">
+                Cards
+            </RadzenText>
+            <RadzenStack>
+                <div class="d-flex justify-content-center">
+                    @foreach (var card in Deck.Cards.OrderBy(c => c.Value))
+                    {
+                        <Card UnicodeValue=@card.UnicodeValue Value=@card.Value></Card>
+                    }
+                </div>
+            </RadzenStack>
+        </RadzenColumn>
+    </RadzenRow>
+    <RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.End" Gap="0.5rem">
+        <RadzenButton Click="@((args) => DialogService.Close(false))" ButtonStyle="ButtonStyle.Light" Text="Close" />
+        <RadzenButton Click="@((args) => DialogService.Close(true))" Text="Vote" />
+    </RadzenStack>
+</RadzenStack>

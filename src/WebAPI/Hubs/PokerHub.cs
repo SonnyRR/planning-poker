@@ -10,6 +10,7 @@
     using System.Threading.Tasks;
     using static OpenIddict.Abstractions.OpenIddictConstants;
     using static SharedKernel.Constants;
+    using Mapster;
 
     /// <summary>
     /// SignalR hub for interacting with poker tables.
@@ -94,6 +95,16 @@
         {
             vote.PlayerId = this.currentUserService.UserId;
             await this.Clients.Group(vote.TableId.ToString()).VoteCasted(vote);
+        }
+
+        /// <summary>
+        /// Starts a new voting session.
+        /// </summary>
+        /// <param name="tableId">The table's unique identifier.</param>
+        [HubMethodName(nameof(IPokerClient.VotingRoundStarted))]
+        public async Task StartVotingRound(Guid tableId)
+        {
+            await this.Clients.Group(tableId.ToString()).VotingRoundStarted(tableId);
         }
     }
 }

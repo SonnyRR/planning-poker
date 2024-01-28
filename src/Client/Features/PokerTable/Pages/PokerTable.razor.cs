@@ -1,11 +1,13 @@
 ﻿namespace PlanningPoker.Client.Features.PokerTable.Pages
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using Clients;
     using Fluxor;
     using Microsoft.AspNetCore.Components;
     using Microsoft.Extensions.Logging;
+    using PlanningPoker.Client.Components;
     using Radzen;
     using SharedKernel.Models.Tables;
     using Store;
@@ -14,51 +16,27 @@
 
     public partial class PokerTable : IDisposable
     {
-        /// <summary>
-        /// The fluxor action subscriber.
-        /// </summary>
         [Inject]
         public IActionSubscriber ActionSubscriber { get; set; }
 
-        /// <summary>
-        /// The Radzen Dialog component service.
-        /// </summary>
         [Inject]
         public DialogService DialogService { get; set; }
 
-        /// <summary>
-        /// The fluxor action dispatcher.
-        /// </summary>
         [Inject]
         public IDispatcher Dispatcher { get; set; }
 
-        /// <summary>
-        /// The unique identifier of the poker table.
-        /// </summary>
         [Parameter]
         public Guid Id { get; set; }
 
-        /// <summary>
-        /// The logger for this component.
-        /// </summary>
         [Inject]
         public ILogger<PokerTable> Logger { get; set; }
 
-        /// <summary>
-        /// The SignalR client for interacting with poker tables.
-        /// </summary>
         [Inject]
         public IBlazorPokerClient PokerClient { get; set; }
 
-        /// <summary>
-        /// The poker table's state.
-        /// </summary>
         [Inject]
         public IState<PokerTableState> TableState { get; set; }
 
-        /// <summary>
-        /// The route navigation manager.
-        /// </summary>
         [Inject]
         public NavigationManager NavigationManager { get; set; }
 
@@ -99,6 +77,23 @@
                 await this.PokerClient.RemoveFromTableAsync(this.TableState.Value.Table.Id);
                 this.NavigationManager.NavigateTo(Routes.INDEX);
             }
+        }
+
+        public async Task StartVotingRound()
+        {
+            var parameters = new Dictionary<string, object>
+            {
+                { "Deck", this.TableState.Value.Table.Deck }
+            };
+
+            var dialogOptions = new DialogOptions
+            {
+                Height = "50%",
+                Width = "50%"
+            };
+
+            await this.PokerClient.StartVotingRound(this.TableState.Value.Table.Id);
+            // await this.DialogService.OpenAsync<Round>("Voting Round", parameters, dialogOptions);
         }
 
         protected virtual void Dispose(bool disposing)
@@ -172,7 +167,13 @@
                     "{player} voted: {vote} in table {id}", vote.PlayerId, vote.Estimation, vote.TableId);
 
                 this.VoteValue = vote.Estimation;
+
                 this.StateHasChanged(null, null);
+            });
+
+            this.PokerClient.OnVotingRoundStarted((id) =>
+            {
+                this.Logger.LogInformation($"Voting round for table {id} has started.");
             });
         }
 

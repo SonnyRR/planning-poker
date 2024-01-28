@@ -34,6 +34,13 @@
 		void OnVoteCasted(Action<PlayerVote> handler);
 
         /// <summary>
+        /// Registers a handler that is called when the table
+        /// owner has started a new voting session.
+        /// </summary>
+        /// <param name="handler"></param>
+        void OnVotingRoundStarted(Action<Guid> handler);
+
+        /// <summary>
         /// Remove the currently signed-in player from a poker table.
         /// </summary>
         /// <param name="tableId">The table identifier.</param>
@@ -44,5 +51,11 @@
         /// </summary>
         /// <param name="vote">The vote metadata.</param>
         Task CastVoteAsync(PlayerVote vote);
+        
+        /// <summary>
+        /// Starts a new voting round.
+        /// </summary>
+        /// <param name="tableId">The table identifier.</param>
+        Task StartVotingRound(Guid tableId);
 	}
 }

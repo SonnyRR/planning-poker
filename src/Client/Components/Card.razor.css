@@ -5,9 +5,13 @@
     border: 3px solid var(--orange);
 }
 
-    div.playing-card h2 {
-        color: var(--orange);
-    }
+div.playing-card:hover {
+    cursor: pointer;
+}
+
+div.playing-card h2 {
+    color: var(--orange);
+}
 
 .username {
     text-overflow: ellipsis;
@@ -15,8 +19,4 @@
 
 div.main-wrapper {
     width: 7%;
-}
-
-div.main-wrapper:hover {
-    cursor: pointer;
 }

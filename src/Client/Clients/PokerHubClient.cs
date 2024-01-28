@@ -2,6 +2,7 @@
 {
     using Microsoft.AspNetCore.Components;
     using Microsoft.AspNetCore.SignalR.Client;
+    using PlanningPoker.Client.Authorization;
     using PlanningPoker.SharedKernel.Interfaces;
     using PlanningPoker.SharedKernel.Models.Tables;
     using System;
@@ -12,8 +13,8 @@
     /// <inheritdoc cref="IBlazorPokerClient"/>
     public class PokerHubClient : BaseSignalRClient, IBlazorPokerClient
     {
-        public PokerHubClient(NavigationManager navigationManager)
-            : base(navigationManager, POKER_HUB_URI)
+        public PokerHubClient(NavigationManager navigationManager, HostAuthenticationStateProvider hostAuthenticationStateProvider)
+            : base(navigationManager, POKER_HUB_URI, hostAuthenticationStateProvider)
         {
         }
 

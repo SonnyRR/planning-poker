@@ -23,5 +23,7 @@
 		/// </summary>
 		/// <param name="vote">The player's vote</param>
 		Task VoteCasted(PlayerVote vote);
+
+        Task VotingRoundStarted(Guid tableId);
 	}
 }

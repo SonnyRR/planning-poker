@@ -45,10 +45,21 @@
             }
         }
 
+        public void OnVotingRoundStarted(Action<Guid> handler)
+        {
+            if (!this.HasStarted)
+            {
+                this.HubConnection.On(nameof(IPokerClient.VotingRoundStarted), handler);
+            }
+        }
+
         public Task RemoveFromTableAsync(Guid tableId)
             => this.HubConnection.SendAsync(nameof(IPokerClient.RemovedFromTable), tableId);
 
         public Task CastVoteAsync(PlayerVote vote)
             => this.HubConnection.SendAsync(nameof(IPokerClient.VoteCasted), vote);
+
+        public Task StartVotingRound(Guid tableId)
+            => this.HubConnection.SendAsync(nameof(IPokerClient.VotingRoundStarted), tableId);
     }
 }

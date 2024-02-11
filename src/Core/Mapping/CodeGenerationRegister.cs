@@ -20,8 +20,8 @@
             config.AdaptTwoWays("[name]Model")
                 .ForType<Table>(cfg =>
                 {
-					cfg.Ignore(e => e.CreatedOn);
-					cfg.Ignore(e => e.ModifiedOn);
+                    cfg.Ignore(e => e.CreatedOn);
+                    cfg.Ignore(e => e.ModifiedOn);
                     cfg.Ignore(e => e.DeckId);
                     cfg.Ignore(e => e.OwnerId);
                 })
@@ -58,6 +58,17 @@
                     cfg.Ignore(e => e.SecurityStamp);
                     cfg.Ignore(e => e.TwoFactorEnabled);
                     cfg.Ignore(e => e.Tables);
+                })
+                .ForType<Round>(cfg =>
+                {
+                    cfg.Ignore(e => e.CreatedOn);
+                    cfg.Ignore(e => e.ModifiedOn);
+                    cfg.Ignore(e => e.Table);
+                })
+                .ForType<Vote>(cfg =>
+                {
+                    cfg.Ignore(e => e.CreatedOn);
+                    cfg.Ignore(e => e.ModifiedOn);
                 })
                 .MaxDepth(3);
 

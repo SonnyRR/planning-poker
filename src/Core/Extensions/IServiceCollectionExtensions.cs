@@ -20,6 +20,7 @@
 
 			services.AddTransient<ICurrentUserService, CurrentUserService>();
 			services.AddTransient<ITableService, TableService>();
+            services.AddTransient<IRoundService, RoundService>();
 
 			return services;
 		}

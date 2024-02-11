@@ -74,6 +74,8 @@
 				.Include(t => t.Players)
 				.Include(t => t.Deck)
 					.ThenInclude(d => d.Cards)
+                .Include(t => t.Rounds)
+                    .ThenInclude(r => r.Votes)
 				.SingleOrDefaultAsync(t => t.Id == id, ct);
 
 			if (table is null)

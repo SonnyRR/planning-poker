@@ -55,7 +55,7 @@
             => await this.PokerClient.CastVoteAsync(
                 new PlayerVote
                 {
-                    Estimation = estimation, TableId = this.Id
+                    Estimation = estimation, TableId = this.Id, Timestamp = DateTimeOffset.UtcNow
                 });
 
         /// <summary>

@@ -9,8 +9,10 @@
 	{
 		public float Estimation { get; init; }
 
-		public Guid TableId { get; set; }
+		public Guid TableId { get; init; }
 
 		public Guid PlayerId { get; set; }
+
+        public DateTimeOffset Timestamp { get; init; }
 	}
 }

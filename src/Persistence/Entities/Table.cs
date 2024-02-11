@@ -49,5 +49,10 @@
 		/// The card players.
 		/// </summary>
 		public IList<User> Players { get; set; } = new List<User>();
+
+        /// <summary>
+        /// The voting rounds.
+        /// </summary>
+        public IList<Round> Rounds { get; set; } = new List<Round>();
 	}
 }

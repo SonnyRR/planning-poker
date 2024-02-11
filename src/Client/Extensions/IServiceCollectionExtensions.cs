@@ -46,6 +46,7 @@
             services.AddScoped<TooltipService>();
             services.AddScoped<ContextMenuService>();
             services.AddScoped<ITableService, TableService>();
+            services.AddScoped<IRoundService, RoundService>();
             services.TryAddSingleton<AuthenticationStateProvider, HostAuthenticationStateProvider>();
             services.TryAddSingleton(sp => (HostAuthenticationStateProvider)sp.GetRequiredService<AuthenticationStateProvider>());
             services.AddTransient<AuthorizedHandler>();

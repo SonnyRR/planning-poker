@@ -92,8 +92,8 @@
                 Width = "50%"
             };
 
-            await this.PokerClient.StartVotingRound(this.TableState.Value.Table.Id);
-            // await this.DialogService.OpenAsync<Round>("Voting Round", parameters, dialogOptions);
+            // await this.PokerClient.StartVotingRound(this.TableState.Value.Table.Id);
+            await this.DialogService.OpenAsync<Round>("Voting Round", parameters, dialogOptions);
         }
 
         protected virtual void Dispose(bool disposing)

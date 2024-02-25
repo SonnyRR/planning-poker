@@ -1,0 +1,56 @@
+@using PlanningPoker.SharedKernel.Models.Generated
+
+<div class="h-100">
+<RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center" Style="padding: 0.5rem">
+  <RadzenButton Text="Create work item" Icon="note_add" Variant="Variant.Outlined"
+    ButtonStyle="ButtonStyle.Info" Shade="Shade.Light"/>
+</RadzenStack>
+<RadzenDataList Data="@rounds.Take(1)" TItem="RoundModel" PageSize="10" PagerHorizontalAlign="HorizontalAlign.Left" 
+    ShowPagingSummary="true" Density="Density.Compact" AllowPaging="true" AllowVirtualization="false"
+    WrapItems="true">
+    <Template Context="round">
+        <RadzenCard Style="width: 100%; padding: 0;">
+            <RadzenRow Gap="0">
+                <RadzenColumn Size="12" SizeLG="1" Class="rz-p-4 product-title">
+                    <RadzenText TextStyle="TextStyle.H6" TagName="TagName.H5" class="rz-color-secondary">
+                        @(round.Description)</RadzenText>
+                </RadzenColumn>
+                <RadzenColumn Size="12" SizeLG="9" Class="rz-p-4">
+                    <RadzenRow Gap="0">
+                        <RadzenColumn Size="12" SizeMD="6" SizeLG="11">
+                            <RadzenText TextStyle="TextStyle.H6" TagName="TagName.H5" Class="rz-mb-0">In Stock
+                            </RadzenText>
+                            <RadzenText TextStyle="TextStyle.Body2">Lorem ipsum</RadzenText>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeMD="6" SizeLG="1">
+                            <RadzenText TextStyle="TextStyle.H6" TagName="TagName.H6" Class="rz-mb-0">Estimation
+                            </RadzenText>
+                            <RadzenText TextStyle="TextStyle.Body2">5 SP</RadzenText>
+                        </RadzenColumn>
+                    </RadzenRow>
+                </RadzenColumn>
+                <RadzenColumn Size="12" SizeLG="2" Class="rz-p-4">
+                    <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="5px">
+                        <RadzenButton Icon="edit_note" Variant="Variant.Outlined" ButtonStyle="ButtonStyle.Info" Class="rz-mb-0"/> 
+                        <RadzenButton Icon="delete_forever" Variant="Variant.Outlined" ButtonStyle="ButtonStyle.Danger" Class="rz-mb-0" /> 
+                    </RadzenStack>
+                </RadzenColumn>
+            </RadzenRow>
+        </RadzenCard>
+    </Template>
+</RadzenDataList>
+</div>
+
+<style>
+    .product-title {
+        min-height: 72px;
+        background-color: var(--rz-secondary-lighter);
+    }
+
+    .price-badge {
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 20px;
+        padding: 8px;
+    }
+</style>

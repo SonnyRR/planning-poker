@@ -2,53 +2,41 @@
 @using static SharedKernel.Constants.Colors;
 @using static Constants
 
-<div class="h-100">
-    <SpinLoader IsLoading="TableState.Value.IsLoading || TableState.Value.Table is null">
-        <LoadingTemplate>
-            <div class="w-100 h-100 d-flex align-items-center">
-                <Grid Center=@true Color=@PRIMARY />
-            </div>
-        </LoadingTemplate>
-        <ContentTemplate>
-            <div class="container h-100">
-                <RadzenCard class="h-100">
-                    <div class="table-information">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h1 class="table-name">
-                                @TableState.Value.Table.Name
-                            </h1>
-                            <div>
-                            <RadzenButton Click=@StartVotingRound
-                                          Text="Deal Votes"
-                                          Icon="swipe_up"
-                                          ButtonStyle="ButtonStyle.Primary"
-                                          Disabled=@(TableState.Value.IsLoading) />
-                            <RadzenButton Click=@Leave
-                                          Text="Leave"
-                                          Icon="logout"
-                                          ButtonStyle="ButtonStyle.Danger"
-                                          Disabled=@(TableState.Value.IsLoading) />
-                            </div>
+<SpinLoader IsLoading="TableState.Value.IsLoading || TableState.Value.Table is null">
+    <LoadingTemplate>
+        <div class="w-100 h-100 d-flex align-items-center">
+            <Grid Center=@true Color=@PRIMARY />
+        </div>
+    </LoadingTemplate>
+    <ContentTemplate>
+        <div class="container">
+            @* <RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.Center"> *@
+            <RadzenCard>
+                <div class="table-information">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h1 class="table-name">
+                            @TableState.Value.Table.Name
+                        </h1>
+                        <div>
+                            <RadzenButton Click=@StartVotingRound Text="Deal Votes" Icon="swipe_up"
+                                ButtonStyle="ButtonStyle.Success" Disabled=@(TableState.Value.IsLoading) />
+                            <RadzenButton Click=@Leave Text="Leave" Icon="logout" ButtonStyle="ButtonStyle.Danger"
+                                Disabled=@(TableState.Value.IsLoading) />
                         </div>
                     </div>
-                    <hr />
-                    <div class="player-list">
-                        <div class="d-flex">
-                            @foreach (var player in TableState.Value.Table.Players)
-                            {
-                                <Player PlayerId=@player.Id PlayerName=@player.UserName></Player>
-                            }
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-center">
-                        @foreach(var card in TableState.Value.Table.Deck.Cards.OrderBy(c => c.Value))
+                </div>
+                <hr />
+                <div class="player-list">
+                    <div class="d-flex">
+                        @foreach (var player in TableState.Value.Table.Players)
                         {
-                            <Card UnicodeValue=@card.UnicodeValue Value=@card.Value Click="@Vote"></Card>
+                            <Player PlayerId=@player.Id PlayerName=@player.UserName></Player>
                         }
                     </div>
-                </RadzenCard>
-            </div>
-            <h3>@VoteValue</h3>
-        </ContentTemplate>
-    </SpinLoader>
-</div>
+                </div>
+                <RoundList></RoundList>
+            </RadzenCard>
+        </div>
+        @* </RadzenStack> *@ <h3>@VoteValue</h3>
+    </ContentTemplate>
+</SpinLoader>

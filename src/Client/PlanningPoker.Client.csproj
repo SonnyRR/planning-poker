@@ -32,6 +32,10 @@
   <ItemGroup>
     <Folder Include="Features\PokerTable\Store\VotingRound\" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <None Include="Features\Rounds\Components\RoundList.razor" />
+  </ItemGroup>
 
   <ProjectExtensions>
     <VisualStudio>

@@ -12,7 +12,7 @@
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.2" />
         <PackageReference Include="NetEscapades.AspNetCore.SecurityHeaders" Version="0.21.0" />
         <PackageReference Include="OpenIddict.AspNetCore" Version="5.2.0" />
-        <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="5.2.0" />
+        <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="5.3.0" />
         <PackageReference Include="OpenIddict.Quartz" Version="5.2.0" />
         <PackageReference Include="Quartz.Extensions.Hosting" Version="3.8.1" />
         <PackageReference Include="Serilog.AspNetCore" Version="8.0.1" />

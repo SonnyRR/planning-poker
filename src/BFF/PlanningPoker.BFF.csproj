@@ -14,6 +14,14 @@
         <PackageReference Include="OpenIddict.AspNetCore" Version="5.4.0" />
         <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="5.4.0" />
         <PackageReference Include="OpenIddict.Quartz" Version="5.4.0" />
+
+        <!-- 
+            Remove once Microsoft fix the mismatched assembly versions in the 'Microsoft.IdentityModel.Protocols.OpenIdConnect'
+            and the 'Microsoft.IdentityModel.*' packages are updated in the 'OpenIddict' packages.
+        -->
+        <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="7.4.1" />
+        <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="7.4.1" />
+        
         <PackageReference Include="Quartz.Extensions.Hosting" Version="3.8.1" />
         <PackageReference Include="Serilog.AspNetCore" Version="8.0.1" />
         <PackageReference Include="Serilog.AspNetCore.Ingestion" Version="1.0.0-dev-00032" />

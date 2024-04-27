@@ -175,6 +175,11 @@
             {
                 this.Logger.LogInformation($"Voting round for table {id} has started.");
             });
+
+            this.PokerClient.OnVotingRoundCreated(round =>
+            {
+                this.Logger.LogInformation(round.Description);
+            });
         }
 
         private void StateHasChanged(object sender, EventArgs args)

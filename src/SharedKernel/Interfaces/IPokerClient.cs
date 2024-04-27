@@ -1,6 +1,7 @@
 ﻿namespace PlanningPoker.SharedKernel.Interfaces
 {
-	using PlanningPoker.SharedKernel.Models.Tables;
+    using PlanningPoker.SharedKernel.Models.Generated;
+    using PlanningPoker.SharedKernel.Models.Tables;
 	using System;
 	using System.Threading.Tasks;
 
@@ -25,5 +26,9 @@
 		Task VoteCasted(PlayerVote vote);
 
         Task VotingRoundStarted(Guid tableId);
+
+        Task VotingRoundCreated(RoundModel round);
+
+        Task VotingRoundDeleted(Guid roundId);
 	}
 }

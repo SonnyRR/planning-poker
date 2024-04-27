@@ -2,7 +2,7 @@
 
 <div class="h-100">
 <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center" Style="padding: 0.5rem">
-  <RadzenButton Text="Create work item" Icon="note_add" Variant="Variant.Outlined"
+  <RadzenButton Text="Create work item" Icon="note_add" Variant="Variant.Outlined" Click=@CreateVotingRound
     ButtonStyle="ButtonStyle.Info" Shade="Shade.Light"/>
 </RadzenStack>
 <RadzenDataList Data="@rounds.Take(1)" TItem="RoundModel" PageSize="10" PagerHorizontalAlign="HorizontalAlign.Left" 

@@ -2,12 +2,16 @@ namespace PlanningPoker.Client.Features.Rounds.Components
 {
     using System;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
     using Microsoft.AspNetCore.Components;
     using PlanningPoker.SharedKernel.Models.Generated;
     using Radzen;
 
     public partial class RoundList
     {
+        [Parameter]
+        public Guid TableId { get; set; }
+
         public List<RoundModel> rounds => new List<RoundModel>
         {
             new RoundModel
@@ -125,5 +129,21 @@ namespace PlanningPoker.Client.Features.Rounds.Components
 
         [Inject]
         public DialogService DialogService { get; set; }
+
+        public async Task CreateVotingRound()
+        {
+            var parameters = new Dictionary<string, object>
+            {
+                { "TableId", this.TableId }
+            };
+
+            var dialogOptions = new DialogOptions
+            {
+                Height = "38%",
+                Width = "50%"
+            };
+
+            await this.DialogService.OpenAsync<CreateRound>("Create Round", parameters, dialogOptions);
+        }
     }
 }

@@ -6,7 +6,7 @@ namespace PlanningPoker.Client
     using System.Threading;
     using System.Threading.Tasks;
     using PlanningPoker.Client.Services;
-    using PlanningPoker.SharedKernel;
+    using PlanningPoker.SharedKernel.Models.Binding;
     using PlanningPoker.SharedKernel.Models.Generated;
 
     public class RoundService : BaseHttpService, IRoundService

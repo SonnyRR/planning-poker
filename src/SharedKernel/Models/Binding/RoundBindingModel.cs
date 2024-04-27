@@ -1,7 +1,7 @@
 ﻿using System;
 using FluentValidation;
 
-namespace PlanningPoker.SharedKernel
+namespace PlanningPoker.SharedKernel.Models.Binding
 {
     public sealed class RoundBindingModel
     {
@@ -16,6 +16,11 @@ namespace PlanningPoker.SharedKernel
         /// be assigned to.
         /// </summary>
         public Guid TableId { get; set; }
+
+        /// <summary>
+        /// The order index of the round.
+        /// </summary>
+        public short Ordinal { get; set; }
     }
 
     /// <summary>

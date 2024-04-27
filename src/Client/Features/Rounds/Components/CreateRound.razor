@@ -1,0 +1,28 @@
+@using Blazored.FluentValidation
+@using PlanningPoker.SharedKernel.Models.Binding
+
+<RadzenTemplateForm class="my-3" TItem=@RoundBindingModel Data=@RoundParameters Submit=@OnRoundCreateValidSubmitAsync
+    InvalidSubmit=@OnRoundCreateInvalidSubmit>
+    <FluentValidationValidator DisableAssemblyScanning=@true />
+
+    <RadzenStack>
+        <RadzenRow>
+            <RadzenLabel Text="Item description" />
+            <RadzenTextArea Name="DescriptionInput" @bind-Value=@RoundParameters.Description
+                Placeholder="Description..." Class="w-100" Rows="5"  />
+            <RadzenColumn>
+                <div class="rz-message rz-messages-error">
+                    <ValidationMessage For="@(() => RoundParameters.Description)" />
+                    @* <ValidationMessage For="@(() => RoundParameters.TableId)" /> *@
+                </div>
+            </RadzenColumn>
+        </RadzenRow>
+
+        <RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.End" Gap="0.5rem">
+            <RadzenButton Click="@((args) => DialogService.Close(false))" ButtonStyle="ButtonStyle.Light"
+                Text="Close" />
+            <RadzenButton Text="Create" ButtonType="ButtonType.Submit" />
+        </RadzenStack>
+
+    </RadzenStack>
+</RadzenTemplateForm>

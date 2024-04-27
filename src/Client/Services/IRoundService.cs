@@ -3,7 +3,7 @@
     using System;
     using System.Threading;
     using System.Threading.Tasks;
-    using PlanningPoker.SharedKernel;
+    using PlanningPoker.SharedKernel.Models.Binding;
     using PlanningPoker.SharedKernel.Models.Generated;
 
     public interface IRoundService

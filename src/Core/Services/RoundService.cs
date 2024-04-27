@@ -7,7 +7,7 @@
     using Mapster;
     using PlanningPoker.Core.Mapping;
     using PlanningPoker.Persistence;
-    using PlanningPoker.SharedKernel;
+    using PlanningPoker.SharedKernel.Models.Binding;
     using PlanningPoker.SharedKernel.Models.Generated;
 
     public class RoundService : IRoundService
@@ -33,7 +33,7 @@
         {
             Guard.Against.Null(id, nameof(id));
 
-            this.dbContext.Tables.Remove(new() { Id = id });
+            this.dbContext.Rounds.Remove(new() { Id = id });
             return Convert.ToBoolean(await this.dbContext.SaveChangesAsync(ct));
         }
 

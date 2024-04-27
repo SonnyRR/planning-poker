@@ -4,6 +4,7 @@
     using Microsoft.AspNetCore.SignalR.Client;
     using PlanningPoker.Client.Authorization;
     using PlanningPoker.SharedKernel.Interfaces;
+    using PlanningPoker.SharedKernel.Models.Generated;
     using PlanningPoker.SharedKernel.Models.Tables;
     using System;
     using System.Threading.Tasks;
@@ -50,6 +51,14 @@
             if (!this.HasStarted)
             {
                 this.HubConnection.On(nameof(IPokerClient.VotingRoundStarted), handler);
+            }
+        }
+
+        public void OnVotingRoundCreated(Action<RoundModel> handler)
+        {
+            if (!this.HasStarted)
+            {
+                this.HubConnection.On(nameof(IPokerClient.VotingRoundCreated), handler);
             }
         }
 

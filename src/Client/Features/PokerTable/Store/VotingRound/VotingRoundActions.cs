@@ -2,6 +2,7 @@
 {
     using System;
     using PlanningPoker.SharedKernel.Models.Binding;
+    using PlanningPoker.SharedKernel.Models.Generated;
 
     public class StartVotingRoundAction
     {
@@ -17,6 +18,20 @@
             => this.Round = round;
 
         public RoundBindingModel Round { get; init; }
+    }
+
+    public class SetVotingRoundLoadingAction
+    {
+        public SetVotingRoundLoadingAction(bool flag = true) => this.Flag = flag;
+
+        public bool Flag { get; init; }
+    }
+
+    public class SetVotingRoundAction
+    {
+        public SetVotingRoundAction(RoundModel round) => this.Round = round;
+
+        public RoundModel Round { get; init; }
     }
 }
 

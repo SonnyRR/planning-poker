@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,10 +28,6 @@
   
   <ItemGroup>
     <ProjectReference Include="..\SharedKernel\PlanningPoker.SharedKernel.csproj" />
-  </ItemGroup>
-  
-  <ItemGroup>
-    <Folder Include="Features\PokerTable\Store\VotingRound\" />
   </ItemGroup>
   
   <ItemGroup>

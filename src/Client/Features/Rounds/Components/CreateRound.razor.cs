@@ -2,8 +2,10 @@ using System;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Ardalis.GuardClauses;
+using Fluxor;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Logging;
+using PlanningPoker.Client.Features.PokerTable.Store.VotingRound;
 using PlanningPoker.SharedKernel;
 using PlanningPoker.SharedKernel.Models.Binding;
 using Radzen;
@@ -25,6 +27,9 @@ namespace PlanningPoker.Client.Features.Rounds.Components
 
         [Inject]
         public DialogService DialogService { get; set; }
+        
+        [Inject]
+        public IDispatcher Dispatcher { get; set; }
 
         protected override void OnInitialized()
         {
@@ -41,8 +46,8 @@ namespace PlanningPoker.Client.Features.Rounds.Components
         public async Task OnRoundCreateValidSubmitAsync()
         {
             this.Logger.LogDebug("Attempting to join table {TableId}", this.RoundParameters.Description);
+            this.Dispatcher.Dispatch(new CreateVotingRoundAction(this.RoundParameters));
             this.DialogService.Close(true);
-            // await this.TableIdChanged.InvokeAsync(this.JoinTableParameters);
         }
     }
 }

@@ -8,6 +8,7 @@
     using Microsoft.AspNetCore.Components;
     using Microsoft.Extensions.Logging;
     using PlanningPoker.Client.Components;
+    using PlanningPoker.Client.Features.PokerTable.Store.VotingRound;
     using Radzen;
     using SharedKernel.Models.Tables;
     using Store;
@@ -179,6 +180,7 @@
             this.PokerClient.OnVotingRoundCreated(round =>
             {
                 this.Logger.LogInformation(round.Description);
+                this.Dispatcher.Dispatch(new SetVotingRoundAction(round));
             });
         }
 

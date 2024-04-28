@@ -4,11 +4,10 @@
     using System.Threading;
     using System.Threading.Tasks;
     using PlanningPoker.SharedKernel.Models.Binding;
-    using PlanningPoker.SharedKernel.Models.Generated;
 
     public interface IRoundService
     {
-        Task<RoundModel> CreateAsync(RoundBindingModel model, CancellationToken ct = default);
+        Task CreateAsync(RoundBindingModel model, CancellationToken ct = default);
 
         Task DeleteAsync(Guid id, CancellationToken ct = default);
 

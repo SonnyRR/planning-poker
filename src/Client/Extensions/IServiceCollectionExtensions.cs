@@ -8,6 +8,7 @@
 
     using FluentValidation;
     using Fluxor;
+    using Fluxor.Blazor.Web.ReduxDevTools;
     using Microsoft.AspNetCore.Components.Authorization;
     using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
     using Microsoft.Extensions.DependencyInjection;
@@ -78,10 +79,6 @@
                     options.UseReduxDevTools(x =>
                     {
                         x.Name = "Planning Poker";
-                        x.UseSystemTextJson(_ => new()
-                        {
-                            PropertyNameCaseInsensitive = true
-                        });
                         x.EnableStackTrace();
                     });
                 }

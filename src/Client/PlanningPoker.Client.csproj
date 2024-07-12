@@ -16,7 +16,7 @@
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="8.0.7" />
     <PackageReference Include="Radzen.Blazor" Version="4.34.1" />
     <PackageReference Include="Serilog.Exceptions" Version="8.4.0+build.694" />
-    <PackageReference Include="Serilog.Sinks.BrowserConsole" Version="2.0.0" />
+    <PackageReference Include="Serilog.Sinks.BrowserConsole" Version="8.0.0" />
     <PackageReference Include="Serilog.Sinks.BrowserHttp" Version="1.0.0-dev-00032" />
     <PackageReference Include="System.Net.Http.Json" Version="8.0.0" />
   </ItemGroup>

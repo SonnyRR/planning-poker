@@ -23,6 +23,8 @@
         <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="8.0.1" />
         
         <PackageReference Include="Quartz.Extensions.Hosting" Version="3.13.0" />
+        
+        <PackageReference Include="Serilog" Version="4.0.1" />
         <PackageReference Include="Serilog.AspNetCore" Version="8.0.2" />
         <PackageReference Include="Serilog.AspNetCore.Ingestion" Version="1.0.0-dev-00032" />
         <PackageReference Include="Serilog.Enrichers.CorrelationId" Version="3.0.1" />

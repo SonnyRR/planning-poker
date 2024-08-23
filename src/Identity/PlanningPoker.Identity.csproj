@@ -17,7 +17,7 @@
         <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="8.0.8" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.8" />
         <PackageReference Include="OpenIddict.AspNetCore" Version="5.7.1" />
-        <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="5.7.1" />
+        <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="5.8.0" />
         <PackageReference Include="OpenIddict.Quartz" Version="5.7.1" />
         <PackageReference Include="Quartz.Extensions.Hosting" Version="3.13.0" />
         <PackageReference Include="Serilog.AspNetCore" Version="8.0.2" />

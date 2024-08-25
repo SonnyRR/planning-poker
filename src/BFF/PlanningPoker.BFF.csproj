@@ -11,16 +11,16 @@
         <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="8.0.8" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.8" />
         <PackageReference Include="NetEscapades.AspNetCore.SecurityHeaders" Version="0.22.0" />
-        <PackageReference Include="OpenIddict.AspNetCore" Version="5.7.1" />
-        <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="5.7.1" />
-        <PackageReference Include="OpenIddict.Quartz" Version="5.7.1" />
+        <PackageReference Include="OpenIddict.AspNetCore" Version="5.8.0" />
+        <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="5.8.0" />
+        <PackageReference Include="OpenIddict.Quartz" Version="5.8.0" />
 
         <!-- 
             Remove once Microsoft fix the mismatched assembly versions in the 'Microsoft.IdentityModel.Protocols.OpenIdConnect'
             and the 'Microsoft.IdentityModel.*' packages are updated in the 'OpenIddict' packages.
         -->
-        <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.0.1" />
-        <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="8.0.1" />
+        <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.0.2" />
+        <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="8.0.2" />
         
         <PackageReference Include="Quartz.Extensions.Hosting" Version="3.13.0" />
         <PackageReference Include="Serilog.AspNetCore" Version="8.0.2" />

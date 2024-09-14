@@ -11,7 +11,6 @@ using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
 using Nuke.Common.Tools.GitVersion;
 using Serilog;
-using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
 // ReSharper disable MemberCanBeMadeStatic.Local
@@ -20,20 +19,19 @@ using static Nuke.Common.Tools.DotNet.DotNetTasks;
 [SuppressMessage("ReSharper", "CheckNamespace")]
 internal class Build : NukeBuild
 {
-    public static int Main()
-    {
-        return Execute<Build>(x => x.Compile);
-    }
+    public static int Main() => Execute<Build>(b => b.Compile);
 
     [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
     public readonly Configuration Configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
 
-    [Solution] public readonly Solution Solution;
+    [Solution]
+    public readonly Solution Solution;
 
     [NuGetPackage("mapster.tool", "Mapster.Tool.dll", Framework = "net8.0")]
     public readonly Tool Mapster;
 
-    [GitRepository] public readonly GitRepository GitRepository;
+    [GitRepository]
+    public readonly GitRepository GitRepository;
 
     [GitVersion(UpdateBuildNumber = true)]
     public readonly GitVersion GitVersion;
@@ -41,7 +39,7 @@ internal class Build : NukeBuild
     [Parameter("The environment. Possible values: Development, Staging, Production")]
     public readonly string AspNetCoreEnvironment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
-    [Parameter("The Entity Framework Core migration name", Name ="migration-name")]
+    [Parameter("The Entity Framework Core migration name", Name = "migration-name")]
     public readonly string EFMigrationName = string.Empty;
 
     private AbsolutePath SourceDirectory => RootDirectory / "src";
@@ -92,6 +90,7 @@ internal class Build : NukeBuild
             foreach (var file in this.CoreAssemblyDirectory.GlobFiles(GENERATED_FILES_PATTERN)
                 .Union(this.SharedKernelAssemblyDirectory.GlobFiles(GENERATED_FILES_PATTERN)))
             {
+                Log.Information("Deleting '{@file}'", file.Name);
                 file.DeleteFile();
             }
         });
@@ -119,8 +118,7 @@ internal class Build : NukeBuild
             this.Mapster.Invoke(
                 $"mapper -a {assemblyToScan} -o {this.CoreAssemblyDirectory / "Mapping"} -n {MAPPERS_NAMESPACE}");
 
-            CopyDirectoryRecursively(generatedFilesDir, this.SharedKernelAssemblyDirectory / "Models" / "Generated",
-                DirectoryExistsPolicy.Merge);
+            generatedFilesDir.Copy(this.SharedKernelAssemblyDirectory / "Models" / "Generated", ExistsPolicy.MergeAndOverwrite);
 
             generatedFilesDir.DeleteDirectory();
         });

@@ -1,16 +1,16 @@
 assembly-versioning-scheme: MajorMinorPatch
 assembly-file-versioning-scheme: MajorMinorPatch
-mode: Mainline
+mode: ContinuousDeployment
 branches:
   master:
     regex: (origin/)?master
   develop:
     increment: Patch
-    tag: beta
+    label: beta
     regex: (origin/)?dev(elop)?(ment)?$
   feature:
     increment: Inherit
-    mode: ContinuousDeployment
+    regex: (orign/)?feature
 ignore:
   sha: [ ]
 merge-message-formats: { }

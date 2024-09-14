@@ -35,7 +35,7 @@ internal class Build : NukeBuild
 
     [GitRepository] public readonly GitRepository GitRepository;
 
-    [GitVersion(Framework = "net6.0", UpdateBuildNumber = true)]
+    [GitVersion(UpdateBuildNumber = true)]
     public readonly GitVersion GitVersion;
 
     [Parameter("The environment. Possible values: Development, Staging, Production")]

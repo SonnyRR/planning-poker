@@ -7,14 +7,12 @@
         <NukeRootDirectory>..</NukeRootDirectory>
         <NukeScriptDirectory>..</NukeScriptDirectory>
         <NukeTelemetryVersion>1</NukeTelemetryVersion>
-        <!-- TODO: Disable the use of binary formatter when GitVersion.Tool is updated to .NET 8 -->
-        <EnableUnsafeBinaryFormatterSerialization>true</EnableUnsafeBinaryFormatterSerialization>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="Nuke.Common" Version="8.1.0" />
-        <PackageDownload Include="GitVersion.Tool" Version="[5.12.0]"/>
-        <PackageDownload Include="Mapster.Tool" Version="[8.4.1-pre01]"/>
+        <PackageDownload Include="GitVersion.Tool" Version="[6.0.2]" />
+        <PackageDownload Include="Mapster.Tool" Version="[8.4.1-pre01]" />
     </ItemGroup>
 
     <ItemGroup>

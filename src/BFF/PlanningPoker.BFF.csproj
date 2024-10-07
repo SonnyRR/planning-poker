@@ -19,7 +19,7 @@
             Remove once Microsoft fix the mismatched assembly versions in the 'Microsoft.IdentityModel.Protocols.OpenIdConnect'
             and the 'Microsoft.IdentityModel.*' packages are updated in the 'OpenIddict' packages.
         -->
-        <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.1.0" />
+        <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.1.1" />
         <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="8.1.0" />
         
         <PackageReference Include="Quartz.Extensions.Hosting" Version="3.13.0" />

@@ -1,4 +1,4 @@
-﻿@using Radzen.Blazor
+@using Radzen.Blazor
 @inherits LayoutComponentBase
 
 <RadzenDialog />
@@ -7,31 +7,27 @@
 <RadzenContextMenu />
 
 <RadzenLayout>
-    <ChildContent>
-        <RadzenHeader>
-            <ChildContent>
-                <div class="row align-items-center h-100">
-                    <div class="col-3 d-flex">
-                        <img class="logo" src="images/logo.svg" width="184" height="55" @onclick="@(() => NavigationManager.NavigateTo("/"))" />
-                    </div>
-                    <div class="col-3 offset-6">
-                        <LoginControl />
-                    </div>
-                </div>
-            </ChildContent>
-        </RadzenHeader>
-        <RadzenBody>
-            <ChildContent>
-                <RadzenContentContainer Name="main">
-                    @Body
-                </RadzenContentContainer>
-            </ChildContent>
-        </RadzenBody>
-        @* <RadzenFooter>
-            <ChildContent>
-                <RadzenLabel Text="@FooterCopyrightContent">
-                </RadzenLabel>
-            </ChildContent>
-        </RadzenFooter> *@
-    </ChildContent>
+	<ChildContent>
+		<RadzenHeader>
+			<ChildContent>
+				<RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.SpaceBetween">
+					<RadzenImage Path="images/logo.svg" Style="width: 184px; height: 55px" @onclick="@(() => NavigationManager.NavigateTo("/"))" />
+					<LoginControl />
+				</RadzenStack>
+			</ChildContent>
+		</RadzenHeader>
+		<RadzenBody>
+			<ChildContent>
+				<RadzenContentContainer Name="main">
+					@Body
+				</RadzenContentContainer>
+			</ChildContent>
+		</RadzenBody>
+		@* <RadzenFooter>
+		<ChildContent>
+		<RadzenLabel Text="@FooterCopyrightContent">
+		</RadzenLabel>
+		</ChildContent>
+		</RadzenFooter> *@
+	</ChildContent>
 </RadzenLayout>

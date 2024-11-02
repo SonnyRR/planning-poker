@@ -1,5 +1,7 @@
 @using PlanningPoker.Client.Layouts
-<Fluxor.Blazor.Web.StoreInitializer/>
+
+<RadzenTheme Theme="software" @rendermode="RenderMode.InteractiveWebAssembly" />
+<Fluxor.Blazor.Web.StoreInitializer />
 <CascadingAuthenticationState>
     <Router AppAssembly="@typeof(Program).Assembly">
         <Found Context="routeData">

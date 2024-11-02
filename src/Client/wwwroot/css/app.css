@@ -1,6 +1,4 @@
-﻿@import '../../_content/Radzen.Blazor/css/software.css';
-
-.loading-overlay {
+﻿.loading-overlay {
     position: fixed;
     top: 0;
     bottom: 0;

@@ -1,4 +1,4 @@
-﻿namespace PlanningPoker.Client.Extensions
+namespace PlanningPoker.Client.Extensions
 {
     using Ardalis.GuardClauses;
 
@@ -88,6 +88,8 @@
             services.AddScoped<IBlazorPokerClient, PokerHubClient>();
             services.AddSingleton(JsonSerializerConfigurations.Default);
             services.AddKeyedSingleton(nameof(JsonSerializerConfigurations.LoggingSettings), JsonSerializerConfigurations.LoggingSettings);
+
+            services.AddRadzenComponents();
 
             return services;
         }

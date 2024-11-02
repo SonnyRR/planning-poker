@@ -1,20 +1,17 @@
-﻿@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.Authorization
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 
 <AuthorizeView>
-    <Authorized>
-        <div class="row justify-content-end align-items-center w-100">
-            <label class="mr-2">Hello, @context.User.Identity.Name!</label>
-
-            <form method="post" action="api/account/logout">
-                <AntiForgeryTokenInput />
-                <RadzenButton ButtonType=@ButtonType.Submit Text="Sign out" />
-            </form>
-        </div>
-    </Authorized>
-    <NotAuthorized>
-        <div class="row justify-content-end align-items-center w-100">
-            <a href="api/account/login">Log in</a>
-        </div>
-    </NotAuthorized>
+	<Authorized>
+		<RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="12px" Style="margin-right: 12px;">
+			<RadzenLabel>Hello, @context.User.Identity.Name!</RadzenLabel>
+			<form method="post" action="api/account/logout">
+				<AntiForgeryTokenInput />
+				<RadzenButton ButtonType=@ButtonType.Submit Text="Sign out" Size="ButtonSize.Small"/>
+			</form>
+		</RadzenStack>
+	</Authorized>
+	<NotAuthorized>
+		<RadzenLink Path="api/account/login" Text="Login" />
+	</NotAuthorized>
 </AuthorizeView>

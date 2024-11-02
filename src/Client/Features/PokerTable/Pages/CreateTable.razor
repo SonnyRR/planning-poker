@@ -1,4 +1,4 @@
-﻿@attribute [Microsoft.AspNetCore.Components.RouteAttribute(Routes.CREATE_TABLE)]
+@attribute [Microsoft.AspNetCore.Components.RouteAttribute(Routes.CREATE_TABLE)]
 @using Blazored.FluentValidation
 @using PlanningPoker.Client.Records
 @using PlanningPoker.SharedKernel.Models.Binding
@@ -8,55 +8,54 @@
 
 <PageTitle>Create a new table</PageTitle>
 <SpinLoader IsLoading="TableCreationState.Value.Submitting">
-    <LoadingTemplate>
-        <div class="w-100 h-100 d-flex align-items-center">
-            <Grid Center=@true Color=@PRIMARY />
-        </div>
-    </LoadingTemplate>
-    <ContentTemplate>
-        <div class="container h-100 d-flex align-items-center">
-            <div class="col-lg-8 offset-lg-2">
-                <RadzenCard>
-                    <RadzenTemplateForm TItem="TableBindingModel" Data=@Table Submit=@OnSubmit InvalidSubmit=@OnInvalidSubmit>
-                        <FluentValidationValidator DisableAssemblyScanning=@true />
+	<LoadingTemplate>
+		<div class="rz-w-100 rz-h-100 rz-display-flex rz-my-auto">
+			<Grid Center=@true Color=@PRIMARY />
+		</div>
+	</LoadingTemplate>
+	<ContentTemplate>
+		<RadzenRow JustifyContent="JustifyContent.Center" AlignItems="AlignItems.Center" class="rz-h-100 rz-w-100">
+			<RadzenColumn SizeLG="4" Size="6" >
+				<RadzenCard>
+					<RadzenTemplateForm TItem="TableBindingModel" Data=@Table Submit=@OnSubmit InvalidSubmit=@OnInvalidSubmit>
+						<FluentValidationValidator DisableAssemblyScanning=@true />
 
-                        <RadzenFieldset Text="Create a new table">
-                            <div class="row mb-5">
-                                <div class="col-md-4">
-                                    <RadzenLabel Text="Table Name" />
-                                    <small>(3-10 characters)</small>
-                                </div>
-                                <div class="col">
-                                    <RadzenTextBox Name="TableName" Placeholder="Name..." class="w-100" @bind-Value=@Table.Name />
-                                    <div class="rz-message rz-messages-error">
-                                        <ValidationMessage For="@(() => Table.Name)" />
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="row mb-5">
-                                <div class="col-md-4">
-                                    <RadzenLabel Text="Card set" />
-                                    <small>(3-10 characters)</small>
-                                </div>
-                                <div class="col">
-                                    <RadzenDropDown Class="w-100"
-                                                    Placeholder="Deck type..."
-                                                    @bind-Value=@Table.DeckType
-                                                    Data=@DeckTypeEntries
-                                                    ValueProperty=@nameof(DropDownEntry<DeckType>.Value)
-                                                    TextProperty=@nameof(DropDownEntry<DeckType>.DisplayName)>
-                                    </RadzenDropDown>
-                                    <div class="rz-message rz-messages-error">
-                                        <ValidationMessage For="@(() => Table.DeckType)" />
-                                    </div>
-                                </div>
-                            </div>
-                            <RadzenButton ButtonType="ButtonType.Submit" Text="Submit"></RadzenButton>
-                        </RadzenFieldset>
-                    </RadzenTemplateForm>
-                </RadzenCard>
-            </div>
-        </div>
-    </ContentTemplate>
+						<RadzenFieldset Text="Create a new table">
+							<RadzenRow>
+								<RadzenColumn SizeLG="3" Size="12">
+									<RadzenLabel Text="Table Name" />
+									<small>(3-10 characters)</small>
+								</RadzenColumn>
+								<RadzenColumn SizeLG="9" Size="12">
+									<RadzenTextBox Name="TableName" Placeholder="Name..." class="rz-w-100" @bind-Value=@Table.Name />
+									<div class="rz-message rz-messages-error">
+										<ValidationMessage For="@(() => Table.Name)" />
+									</div>
+								</RadzenColumn>
+							</RadzenRow>
+							<RadzenRow>
+								<RadzenColumn SizeLG="3" Size="12">
+									<RadzenLabel Text="Card set" />
+									<small>(3-10 characters)</small>
+								</RadzenColumn>
+								<RadzenColumn SizeLG="9" Size="12">
+									<RadzenDropDown class="rz-w-100"
+													Placeholder="Deck type..."
+													@bind-Value=@Table.DeckType
+													Data=@DeckTypeEntries
+													ValueProperty=@nameof(DropDownEntry<DeckType>.Value)
+													TextProperty=@nameof(DropDownEntry<DeckType>.DisplayName)>
+									</RadzenDropDown>
+									<div class="rz-message rz-messages-error">
+										<ValidationMessage For="@(() => Table.DeckType)" />
+									</div>
+								</RadzenColumn>
+							</RadzenRow>
+							<RadzenButton ButtonType="ButtonType.Submit" Text="Submit" class="rz-mt-1"></RadzenButton>
+						</RadzenFieldset>
+					</RadzenTemplateForm>
+				</RadzenCard>
+			</RadzenColumn>
+		</RadzenRow>
+	</ContentTemplate>
 </SpinLoader>

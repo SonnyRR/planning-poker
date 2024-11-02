@@ -1,37 +1,36 @@
-﻿@using Blazored.FluentValidation
+@using Blazored.FluentValidation
 @using PlanningPoker.SharedKernel.Models.Tables
 
-<RadzenCard>
-    <h3 class="text-center">Join an existing poker table or create a new one:</h3>
-    <div class="row my-2">
-        <div class="col-lg-5 col-md-12 d-flex justify-content-center">
-            <RadzenButton class="w-100" Icon="add_circle_outline" ButtonStyle="ButtonStyle.Primary" Text="Create table" Click="OnTableCreationSubmit" />
-        </div>
-        <div class="col-lg-5 col-md-12 mt-3 mt-lg-0 offset-lg-2 d-flex justify-content-center">
-            <RadzenButton class="w-100" Icon="casino" ButtonStyle="ButtonStyle.Light" Text="Join a table" Click="@(() => ShowTableIdentifierInput = !ShowTableIdentifierInput)" />
-        </div>
-    </div>
-    @if (ShowTableIdentifierInput)
-    {
-        <RadzenTemplateForm class="my-3" TItem=@JoinExistingTableRequest Data=@JoinTableParameters Submit=@OnTableJoinValidSubmitAsync InvalidSubmit=@OnTableJoinInvalidSubmit>
-            <FluentValidationValidator DisableAssemblyScanning=@true />
+<RadzenCard class="rz-min-w-50">
+	<RadzenText TextStyle="TextStyle.H6" TextAlign="TextAlign.Center">
+		Join an existing poker table or create a new one:
+	</RadzenText>
+	<RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.SpaceAround">
+		<RadzenColumn SizeSM="6" Size="12">
+			<RadzenButton class="rz-w-100" Icon="add_circle_outline" ButtonStyle="ButtonStyle.Primary" Text="Create table" Click="OnTableCreationSubmit" />
+		</RadzenColumn>
+		<RadzenColumn SizeSM="6" Size="12">
+			<RadzenButton class="rz-w-100" Icon="casino" ButtonStyle="ButtonStyle.Light" Text="Join a table" Click="@(() => ShowTableIdentifierInput = !ShowTableIdentifierInput)" />
+		</RadzenColumn>
+	</RadzenRow>
+	@if (ShowTableIdentifierInput)
+	{
+		<RadzenTemplateForm class="rz-my-3" TItem=@JoinExistingTableRequest Data=@JoinTableParameters Submit=@OnTableJoinValidSubmitAsync InvalidSubmit=@OnTableJoinInvalidSubmit>
+			<FluentValidationValidator DisableAssemblyScanning=@true />
 
-            <div class="row">
-                <div class="col-lg-9 col-md-12 d-flex justify-content-center">
-                    <RadzenTextBox Name="RoomIdInput" @bind-Value=@JoinTableParameters.Code Placeholder="Table code..." Class="w-100" />
-
-                </div>
-                <div class="col-lg-3 col-md-12 mt-3 mt-lg-0 d-flex justify-content-center">
-                    <RadzenButton class="w-100" ButtonStyle="ButtonStyle.Primary" Text="Enter" ButtonType="ButtonType.Submit" />
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="rz-message rz-messages-error">
-                        <ValidationMessage For="@(() => JoinTableParameters.Code)" />
-                    </div>
-                </div>
-            </div>
-        </RadzenTemplateForm>
-    }
+			<RadzenRow>
+				<RadzenColumn Size="12" SizeLG="9">
+					<RadzenTextBox Name="RoomIdInput" @bind-Value=@JoinTableParameters.Code Placeholder="Table code..." class="rz-w-100" />
+					<div class="rz-message rz-messages-error">
+						<ValidationMessage For="@(() => JoinTableParameters.Code)" />
+					</div>
+				</RadzenColumn>
+				<RadzenColumn Size="12" SizeLG="3">
+					<RadzenButton class="rz-w-100" ButtonStyle="ButtonStyle.Primary" Text="Enter" ButtonType="ButtonType.Submit" />
+				</RadzenColumn>
+			</RadzenRow>
+			<RadzenRow>
+			</RadzenRow>
+		</RadzenTemplateForm>
+	}
 </RadzenCard>

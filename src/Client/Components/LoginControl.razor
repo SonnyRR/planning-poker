@@ -3,7 +3,7 @@
 
 <AuthorizeView>
 	<Authorized>
-		<RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="12px" Style="margin-right: 12px;">
+		<RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="12px" class="rz-mr-6">
 			<RadzenLabel>Hello, @context.User.Identity.Name!</RadzenLabel>
 			<form method="post" action="api/account/logout">
 				<AntiForgeryTokenInput />
@@ -12,6 +12,6 @@
 		</RadzenStack>
 	</Authorized>
 	<NotAuthorized>
-		<RadzenLink Path="api/account/login" Text="Login" />
+		<RadzenLink Path="api/account/login" Text="Login" class="rz-mr-6" />
 	</NotAuthorized>
 </AuthorizeView>

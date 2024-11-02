@@ -1,9 +1,7 @@
-﻿@attribute [Route(Routes.INDEX)]
+@attribute [Route(Routes.INDEX)]
 
 @using static Constants
 
-<div class="container h-100 d-flex align-items-center">
-    <div class="col-lg-8 offset-lg-2">
-        <TableSelector OnTableCreationCallback=@OnTableCreationSubmit TableIdChanged=@JoinExistingTable />
-    </div>
-</div>
+<RadzenRow JustifyContent="JustifyContent.Center" AlignItems="AlignItems.Center" class="rz-h-100 rz-w-100">
+	<TableSelector OnTableCreationCallback=@OnTableCreationSubmit TableIdChanged=@JoinExistingTable />
+</RadzenRow>

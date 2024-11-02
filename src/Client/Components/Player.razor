@@ -1,15 +1,18 @@
-﻿<div class="p-2 main-wrapper">
-    <div class="@Styles" @onclick=@RevealCard @onanimationend="e => RemoveAnimation()">
-        <div class="d-flex justify-content-center h-100">
-            @if (IsVoteRevealed)
-            {
-                <h1 class="my-auto">
-                    @(Vote)
-                </h1>
-            }
-        </div>
-    </div>
-    <h5 class="text-center username">@(PlayerName ?? "N/A")</h5>
-    @*<RadzenButton Text="Vote" Click=@SetVoted />
-    <RadzenButton Text="Reset" Click=@Reset />*@
+<div class="rz-p-2 main-wrapper">
+	<div class="@Styles" @onclick=@RevealCard @onanimationend="e => RemoveAnimation()">
+		<div class="rz-display-flex rz-justify-content-center rz-h-100">
+			<h1 class="rz-my-auto">
+				@if (IsVoteRevealed)
+				{
+					@(Vote)
+				} else
+				{
+					<RadzenLabel>❓</RadzenLabel>
+				}
+			</h1>
+		</div>
+	</div>
+	<RadzenText TextStyle="TextStyle.Subtitle1" TextAlign="TextAlign.Center" Text="@(PlayerName ?? "N/A")"/>
+	@*<RadzenButton Text="Vote" Click=@SetVoted />
+	<RadzenButton Text="Reset" Click=@Reset />*@
 </div>

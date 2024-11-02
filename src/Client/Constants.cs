@@ -1,4 +1,4 @@
-﻿namespace PlanningPoker.Client
+namespace PlanningPoker.Client
 {
     using System;
     using System.Collections.Generic;
@@ -38,10 +38,10 @@
             {
                 return new Dictionary<CardStates, string>
                 {
-                    { CardStates.Pending, "p-1 mx-auto player plain-card" },
-                    { CardStates.Voted, "p-1 mx-auto player voted-card" },
-                    { CardStates.Revealing, "p-1 mx-auto player voted-card card-rotation" },
-                    { CardStates.Revealed, "p-1 mx-auto player result-card" }
+                    { CardStates.Pending, "rz-p-1 rz-mx-auto player plain-card" },
+                    { CardStates.Voted, "rz-p-1 rz-mx-auto player voted-card" },
+                    { CardStates.Revealing, "rz-p-1 rz-mx-auto player voted-card card-rotation" },
+                    { CardStates.Revealed, "rz-p-1 rz-mx-auto player result-card" }
                 }
                 .ToImmutableDictionary();
             });

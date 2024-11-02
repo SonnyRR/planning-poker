@@ -15,7 +15,7 @@
 	</LoadingTemplate>
 	<ContentTemplate>
 		<RadzenRow JustifyContent="JustifyContent.Center" AlignItems="AlignItems.Center" class="rz-h-100 rz-w-100">
-			<RadzenColumn SizeLG="4" Size="6" >
+			<RadzenColumn SizeLG="4" Size="6">
 				<RadzenCard>
 					<RadzenTemplateForm TItem="TableBindingModel" Data=@Table Submit=@OnSubmit InvalidSubmit=@OnInvalidSubmit>
 						<FluentValidationValidator DisableAssemblyScanning=@true />
@@ -40,6 +40,7 @@
 								</RadzenColumn>
 								<RadzenColumn SizeLG="9" Size="12">
 									<RadzenDropDown class="rz-w-100"
+													Style="cursor:pointer"
 													Placeholder="Deck type..."
 													@bind-Value=@Table.DeckType
 													Data=@DeckTypeEntries

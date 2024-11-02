@@ -11,7 +11,7 @@
 		<RadzenHeader>
 			<ChildContent>
 				<RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.SpaceBetween">
-					<RadzenImage Path="images/logo.svg" Style="width: 184px; height: 55px" @onclick="@(() => NavigationManager.NavigateTo("/"))" />
+					<RadzenImage Path="images/logo.svg" Style="width: 184px; height: 55px; cursor:pointer" @onclick="@(() => NavigationManager.NavigateTo("/"))" />
 					<LoginControl />
 				</RadzenStack>
 			</ChildContent>

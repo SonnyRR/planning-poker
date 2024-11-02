@@ -1,4 +1,4 @@
-﻿<RadzenStack Gap="1rem">
+<RadzenStack Gap="1rem">
     <RadzenRow>
         <RadzenColumn Size="12" Class="rz-p-4 rz-border-radius-1" Style="border: var(--rz-grid-cell-border)">
             <RadzenText TextStyle="TextStyle.Overline" Class="rz-mt-2 rz-my-0"
@@ -6,7 +6,7 @@
                 Cards
             </RadzenText>
             <RadzenStack>
-                <div class="d-flex justify-content-center">
+                <div class="rz-display-flex rz-justify-content-center">
                     @foreach (var card in Deck.Cards.OrderBy(c => c.Value))
                     {
                         <Card UnicodeValue=@card.UnicodeValue Value=@card.Value></Card>

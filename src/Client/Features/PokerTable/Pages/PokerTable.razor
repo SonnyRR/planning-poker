@@ -1,19 +1,18 @@
-﻿@attribute [Route(Routes.TABLE)]
+@attribute [Route(Routes.TABLE)]
 @using static SharedKernel.Constants.Colors;
 @using static Constants
 
 <SpinLoader IsLoading="TableState.Value.IsLoading || TableState.Value.Table is null">
     <LoadingTemplate>
-        <div class="w-100 h-100 d-flex align-items-center">
+        <div class="rz-w-100 rz-h-100 rz-display-flex rz-align-items-center">
             <Grid Center=@true Color=@PRIMARY />
         </div>
     </LoadingTemplate>
     <ContentTemplate>
-        <div class="container">
             @* <RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.Center"> *@
             <RadzenCard>
                 <div class="table-information">
-                    <div class="d-flex justify-content-between align-items-center">
+                    <div class="rz-display-flex rz-justify-content-space-between rz-align-items-center">
                         <h1 class="table-name">
                             @TableState.Value.Table.Name
                         </h1>
@@ -27,7 +26,7 @@
                 </div>
                 <hr />
                 <div class="player-list">
-                    <div class="d-flex">
+                    <div class="rz-display-flex">
                         @foreach (var player in TableState.Value.Table.Players)
                         {
                             <Player PlayerId=@player.Id PlayerName=@player.UserName></Player>
@@ -36,7 +35,7 @@
                 </div>
                 <RoundList TableId=@Id></RoundList>
             </RadzenCard>
-        </div>
-        @* </RadzenStack> *@ <h3>@VoteValue</h3>
+        @* </RadzenStack> *@ 
+		<h3>@VoteValue</h3>
     </ContentTemplate>
 </SpinLoader>

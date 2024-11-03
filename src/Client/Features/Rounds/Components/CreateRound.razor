@@ -1,7 +1,7 @@
 @using Blazored.FluentValidation
 @using PlanningPoker.SharedKernel.Models.Binding
 
-<RadzenTemplateForm class="my-3" TItem=@RoundBindingModel Data=@RoundParameters Submit=@OnRoundCreateValidSubmitAsync
+<RadzenTemplateForm class="my-3" TItem=@RoundBindingModel Data=@RoundParameters Submit=@OnRoundCreateValidSubmit
     InvalidSubmit=@OnRoundCreateInvalidSubmit>
     <FluentValidationValidator DisableAssemblyScanning=@true />
 

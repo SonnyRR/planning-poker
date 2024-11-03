@@ -1,4 +1,4 @@
-﻿namespace PlanningPoker.WebAPI.Extensions
+namespace PlanningPoker.WebAPI.Extensions
 {
 	using Ardalis.GuardClauses;
 
@@ -102,7 +102,8 @@
 
 			services.AddSwaggerGen(options =>
 			{
-				options.SwaggerDoc("v1", new OpenApiInfo
+#pragma warning disable S1075 // URIs should not be hardcoded
+                options.SwaggerDoc("v1", new OpenApiInfo
 				{
 					Version = "v1",
 					Title = "Planning Poker API",
@@ -119,8 +120,9 @@
 						Url = new Uri("https://github.com/SonnyRR/planning-poker/blob/master/LICENSE")
 					}
 				});
+#pragma warning restore S1075 // URIs should not be hardcoded
 
-				var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
 				options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 			});
 

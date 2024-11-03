@@ -1,4 +1,4 @@
-﻿namespace PlanningPoker.Client.Authorization
+namespace PlanningPoker.Client.Authorization
 {
 	using Microsoft.AspNetCore.Components;
 	using Microsoft.AspNetCore.Components.Authorization;
@@ -67,7 +67,7 @@
 
 			try
 			{
-				this.logger.LogInformation("Attempting to fetch user from: '{baseAddress}' base url.", this.client.BaseAddress.ToString());
+				this.logger.LogInformation("Attempting to fetch user from: '{BaseAddress}' base url.", this.client.BaseAddress.ToString());
 				user = await this.client.GetFromJsonAsync<UserInfo>("api/User");
 			}
 			catch (Exception exc)

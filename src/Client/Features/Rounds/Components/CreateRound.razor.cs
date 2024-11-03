@@ -27,7 +27,7 @@ namespace PlanningPoker.Client.Features.Rounds.Components
 
         [Inject]
         public DialogService DialogService { get; set; }
-        
+
         [Inject]
         public IDispatcher Dispatcher { get; set; }
 
@@ -43,7 +43,7 @@ namespace PlanningPoker.Client.Features.Rounds.Components
             this.Logger.LogError("Invalid Form Submit: {Args}", JsonSerializer.Serialize(args, this.LoggingSerializerOptions));
         }
 
-        public async Task OnRoundCreateValidSubmitAsync()
+        public void OnRoundCreateValidSubmit()
         {
             this.Logger.LogDebug("Attempting to join table {TableId}", this.RoundParameters.Description);
             this.Dispatcher.Dispatch(new CreateVotingRoundAction(this.RoundParameters));

@@ -1,8 +1,8 @@
-﻿namespace PlanningPoker.Client.Features.PokerTable.Store.VotingRound
+namespace PlanningPoker.Client.Features.PokerTable.Store.VotingRound
 {
+    using Fluxor;
     using System.Net.Http;
     using System.Threading.Tasks;
-    using Fluxor;
 
     public class VotingRoundEffects
     {
@@ -15,14 +15,14 @@
         public async Task Create(CreateVotingRoundAction action, IDispatcher dispatcher)
         {
             dispatcher.Dispatch(new SetVotingRoundLoadingAction());
-            
+
             try
             {
                 await this.roundService.CreateAsync(action.Round);
             }
-            catch (HttpRequestException ex)
+            catch (HttpRequestException)
             {
-                // TODO
+                // TODO: Complete the handling of errors.
             }
         }
     }

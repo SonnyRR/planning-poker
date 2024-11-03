@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 namespace PlanningPoker.Identity.Areas.Identity.Pages.Account
 {
@@ -157,9 +157,9 @@ namespace PlanningPoker.Identity.Areas.Identity.Pages.Account
 
 			// If we got this far, something failed, redisplay form
 			return this.Page();
-		}
+        }
 
-		private User CreateUser()
+        private User CreateUser()
 		{
 			try
 			{

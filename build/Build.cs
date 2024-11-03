@@ -13,10 +13,10 @@ using Nuke.Common.Tools.GitVersion;
 using Serilog;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
-// ReSharper disable MemberCanBeMadeStatic.Local
 [ShutdownDotNetAfterServerBuild]
 [SuppressMessage("ReSharper", "AllUnderscoreLocalParameterName")]
 [SuppressMessage("ReSharper", "CheckNamespace")]
+[SuppressMessage("Minor Code Smell", "S2325:Methods and properties that don't access instance data should be static", Justification = "Not applicable in this project.")]
 internal class Build : NukeBuild
 {
     public static int Main() => Execute<Build>(b => b.Compile);
@@ -90,7 +90,7 @@ internal class Build : NukeBuild
             foreach (var file in this.CoreAssemblyDirectory.GlobFiles(GENERATED_FILES_PATTERN)
                 .Union(this.SharedKernelAssemblyDirectory.GlobFiles(GENERATED_FILES_PATTERN)))
             {
-                Log.Information("Deleting '{@file}'", file.Name);
+                Log.Information("Deleting '{@File}'", file.Name);
                 file.DeleteFile();
             }
         });

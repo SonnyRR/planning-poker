@@ -1,4 +1,4 @@
-﻿namespace PlanningPoker.WebAPI.Hubs
+namespace PlanningPoker.WebAPI.Hubs
 {
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.SignalR;
@@ -68,11 +68,11 @@
                         Username = this.currentUserService.Username
                     });
 
-                this.logger.LogInformation("User {username} has been added to group & table: {tableId}.", this.UserId, tableId);
+                this.logger.LogInformation("User {Username} has been added to group & table: {TableId}.", this.UserId, tableId);
                 return;
             }
 
-            this.logger.LogError("Table: '{tableId}' has not been found!", tableId);
+            this.logger.LogError("Table: '{TableId}' has not been found!", tableId);
         }
 
         /// <summary>

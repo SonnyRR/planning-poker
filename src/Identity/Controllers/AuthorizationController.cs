@@ -1,4 +1,4 @@
-﻿namespace PlanningPoker.Identity.Controllers
+namespace PlanningPoker.Identity.Controllers
 {
     using Identity.Models.View;
     using Identity.Utilities;

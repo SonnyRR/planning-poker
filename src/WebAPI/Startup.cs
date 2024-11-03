@@ -1,4 +1,4 @@
-﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 namespace PlanningPoker.WebAPI
 {
 	using CorrelationId;
@@ -19,7 +19,7 @@ namespace PlanningPoker.WebAPI
 
 		public IConfiguration Configuration { get; }
 
-		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 		{
 			app.UseResponseCompression();
 

@@ -1,8 +1,5 @@
-﻿namespace PlanningPoker.Client.Features.PokerTable.Pages
+namespace PlanningPoker.Client.Features.PokerTable.Pages
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
     using Clients;
     using Fluxor;
     using Microsoft.AspNetCore.Components;
@@ -13,6 +10,9 @@
     using SharedKernel.Models.Tables;
     using Store;
     using Store.Actions;
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
     using static Constants;
 
     public partial class PokerTable : IDisposable
@@ -93,7 +93,11 @@
                 Width = "50%"
             };
 
+
+#pragma warning disable S125 // Sections of code should not be commented out
             // await this.PokerClient.StartVotingRound(this.TableState.Value.Table.Id);
+#pragma warning restore S125 // Sections of code should not be commented out
+
             await this.DialogService.OpenAsync<Round>("Voting Round", parameters, dialogOptions);
         }
 
@@ -139,7 +143,7 @@
                     return;
                 }
 
-                this.Logger.LogWarning("Cannot join poker table with ID: '{id}'", this.Id);
+                this.Logger.LogWarning("Cannot join poker table with ID: '{Id}'", this.Id);
             });
         }
 
@@ -151,7 +155,7 @@
             if (this.TableState.Value.Table?.Id == this.Id)
                 return;
 
-            this.Logger.LogDebug("Table is not present in the store, attempting to load: '{id}'.", this.Id);
+            this.Logger.LogDebug("Table is not present in the store, attempting to load: '{Id}'.", this.Id);
             this.Dispatcher.Dispatch(new PokerTableLoadAction(this.Id));
         }
 
@@ -160,12 +164,12 @@
         /// </summary>
         private void RegisterHubMethodHandlers()
         {
-            this.PokerClient.OnAddedToTable(id => this.Logger.LogDebug("Successfully joined table: {id}.", id));
+            this.PokerClient.OnAddedToTable(id => this.Logger.LogDebug("Successfully joined table: {Id}.", id));
 
             this.PokerClient.OnVoteCasted((vote) =>
             {
                 this.Logger.LogInformation(
-                    "{player} voted: {vote} in table {id}", vote.PlayerId, vote.Estimation, vote.TableId);
+                    "{Player} voted: {Vote} in table {Id}", vote.PlayerId, vote.Estimation, vote.TableId);
 
                 this.VoteValue = vote.Estimation;
 
@@ -174,7 +178,7 @@
 
             this.PokerClient.OnVotingRoundStarted((id) =>
             {
-                this.Logger.LogInformation($"Voting round for table {id} has started.");
+                this.Logger.LogInformation("Voting round for table {Id} has started.", id);
             });
 
             this.PokerClient.OnVotingRoundCreated(round =>

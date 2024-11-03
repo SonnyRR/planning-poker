@@ -1,4 +1,4 @@
-﻿namespace PlanningPoker.Client.Features.PokerTable.Store
+namespace PlanningPoker.Client.Features.PokerTable.Store
 {
 	using Actions;
 	using Fluxor;
@@ -21,7 +21,7 @@
 				IsLoading = false
 			};
 
-		[Obsolete]
+		[Obsolete("Deprecated")]
 		[ReducerMethod(typeof(PokerTableSetInitializedAction))]
 		public static PokerTableState OnSetInitialized(PokerTableState state)
 			=> state with

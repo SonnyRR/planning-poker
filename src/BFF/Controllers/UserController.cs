@@ -1,4 +1,4 @@
-﻿namespace PlanningPoker.BFF.Controllers
+namespace PlanningPoker.BFF.Controllers
 {
 	using IdentityModel;
 
@@ -61,13 +61,15 @@
 					claims.Add(new ClaimValue(userInfo.EmailClaimType, claim.Value));
 				}
 
-				// Uncomment this code if you want to send additional claims to the client.
-				//foreach (var claim in claimsPrincipal.Claims.Except(nameClaims))
-				//{
-				//    claims.Add(new ClaimValue(claim.Type, claim.Value));
-				//}
+#pragma warning disable S125 // Sections of code should not be commented out
+                // Uncomment this code if you want to send additional claims to the client.
+                //foreach (var claim in claimsPrincipal.Claims.Except(nameClaims))
+                //{
+                //    claims.Add(new ClaimValue(claim.Type, claim.Value));
+                //}
+#pragma warning restore S125 // Sections of code should not be commented out
 
-				userInfo.Claims = claims;
+                userInfo.Claims = claims;
 			}
 
 			return userInfo;

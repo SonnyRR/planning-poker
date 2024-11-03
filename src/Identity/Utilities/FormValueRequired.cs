@@ -1,11 +1,12 @@
-﻿namespace PlanningPoker.Identity.Utilities
+namespace PlanningPoker.Identity.Utilities
 {
-	using Microsoft.AspNetCore.Mvc.Abstractions;
-	using Microsoft.AspNetCore.Mvc.ActionConstraints;
-	using Microsoft.AspNetCore.Routing;
+    using Microsoft.AspNetCore.Mvc.Abstractions;
+    using Microsoft.AspNetCore.Mvc.ActionConstraints;
+    using Microsoft.AspNetCore.Routing;
 
-	using System;
+    using System;
 
+    [AttributeUsage(AttributeTargets.Method)]
 	public sealed class FormValueRequiredAttribute : ActionMethodSelectorAttribute
 	{
 		private readonly string name;

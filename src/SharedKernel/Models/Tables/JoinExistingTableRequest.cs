@@ -1,12 +1,12 @@
-﻿namespace PlanningPoker.SharedKernel.Models.Tables
+namespace PlanningPoker.SharedKernel.Models.Tables
 {
-	using FluentValidation;
-	using System;
+    using FluentValidation;
+    using System;
 
-	/// <summary>
-	/// An application/request for joining an existing poker table.
-	/// </summary>
-	public sealed class JoinExistingTableRequest
+    /// <summary>
+    /// An application/request for joining an existing poker table.
+    /// </summary>
+    public sealed class JoinExistingTableRequest
 	{
 		/// <summary>
 		/// The table's unique identifier.
@@ -20,10 +20,10 @@
 		{
 			this.RuleFor(jetr => jetr.Code)
 				.NotEmpty()
-				.Must(this.IsValidGuid)
+				.Must(IsValidGuid)
 				.WithMessage("Not a valid code");
-		}
+        }
 
-		private bool IsValidGuid(string value) => Guid.TryParse(value, out _);
+        private static bool IsValidGuid(string value) => Guid.TryParse(value, out _);
 	}
 }

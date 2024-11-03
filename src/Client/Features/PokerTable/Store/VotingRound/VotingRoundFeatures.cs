@@ -1,11 +1,11 @@
-﻿namespace PlanningPoker.Client.Features.PokerTable.Store.VotingRound
+namespace PlanningPoker.Client.Features.PokerTable.Store.VotingRound
 {
-    using System;
     using Fluxor;
     using PlanningPoker.SharedKernel.Models.Generated;
+    using System;
     using static VotingRoundStates;
 
-    public class VotingRoundFeatures
+    public static class VotingRoundFeatures
     {
         public class PokerTableCreateFeature : Feature<VotingRoundCreationState>
         {

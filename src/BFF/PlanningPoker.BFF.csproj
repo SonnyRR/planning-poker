@@ -34,7 +34,7 @@
         <PackageReference Include="Serilog.Sinks.Async" Version="2.1.0" />
         <PackageReference Include="Serilog.Sinks.Seq" Version="8.0.0" />
         <PackageReference Include="Serilog.Exceptions" Version="8.4.0+build.694" />
-        <PackageReference Include="SonarAnalyzer.CSharp" Version="9.32.0.97167">
+        <PackageReference Include="SonarAnalyzer.CSharp" Version="10.3.0.106239">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>

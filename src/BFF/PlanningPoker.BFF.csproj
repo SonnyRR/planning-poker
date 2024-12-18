@@ -13,7 +13,7 @@
         <PackageReference Include="NetEscapades.AspNetCore.SecurityHeaders" Version="0.24.0" />
         <PackageReference Include="OpenIddict.AspNetCore" Version="5.8.0" />
         <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="5.8.0" />
-        <PackageReference Include="OpenIddict.Quartz" Version="5.8.0" />
+        <PackageReference Include="OpenIddict.Quartz" Version="6.0.0" />
 
         <!-- 
             Remove once Microsoft fix the mismatched assembly versions in the 'Microsoft.IdentityModel.Protocols.OpenIdConnect'

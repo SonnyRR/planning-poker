@@ -16,12 +16,12 @@
         <PackageReference Include="Destructurama.Attributed" Version="5.0.0" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="8.0.11" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.11" />
-        <PackageReference Include="OpenIddict.AspNetCore" Version="5.8.0" />
-        <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="5.8.0" />
-        <PackageReference Include="OpenIddict.Quartz" Version="5.8.0" />
+        <PackageReference Include="OpenIddict.AspNetCore" Version="6.0.0" />
+        <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="6.0.0" />
+        <PackageReference Include="OpenIddict.Quartz" Version="6.0.0" />
         <PackageReference Include="Quartz.Extensions.Hosting" Version="3.13.1" />
         <PackageReference Include="Serilog.AspNetCore" Version="9.0.0" />
-        <PackageReference Include="Roslynator.Analyzers" Version="4.12.9">
+        <PackageReference Include="Roslynator.Analyzers" Version="4.12.10">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
@@ -29,9 +29,9 @@
         <PackageReference Include="Serilog.Enrichers.CorrelationId" Version="3.0.1" />
         <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
         <PackageReference Include="Serilog.Sinks.Async" Version="2.1.0" />
-        <PackageReference Include="Serilog.Sinks.Seq" Version="8.0.0" />
+        <PackageReference Include="Serilog.Sinks.Seq" Version="9.0.0" />
         <PackageReference Include="Serilog.Exceptions" Version="8.4.0+build.694" />
-        <PackageReference Include="SonarAnalyzer.CSharp" Version="10.3.0.106239">
+        <PackageReference Include="SonarAnalyzer.CSharp" Version="10.4.0.108396">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>

@@ -47,8 +47,6 @@ internal class Build : NukeBuild
     private AbsolutePath SourceDirectory => RootDirectory / "src";
     private AbsolutePath TestsDirectory => RootDirectory / "tests";
     private AbsolutePath ArtifactsDirectory => RootDirectory / "artifacts";
-    private AbsolutePath CoreAssemblyDirectory => this.SourceDirectory / "Core";
-    private AbsolutePath SharedKernelAssemblyDirectory => this.SourceDirectory / "SharedKernel";
     private AbsolutePath PersistenceAssemblyDirectory => this.SourceDirectory / "Persistence";
     private AbsolutePath WebApiAssemblyDirectory => this.SourceDirectory / "WebAPI";
     private AbsolutePath GeneratedAssembly => this.SourceDirectory / "Generated";

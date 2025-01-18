@@ -1,4 +1,4 @@
-﻿namespace PlanningPoker.Persistence
+namespace PlanningPoker.Persistence
 {
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;

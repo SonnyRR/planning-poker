@@ -1,4 +1,4 @@
-﻿namespace PlanningPoker.Persistence
+namespace PlanningPoker.Persistence
 {
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -17,7 +17,7 @@
                 .Property(r => r.Description)
                 .IsUnicode()
                 .HasMaxLength(512);
-            
+
             builder.Ignore(r => r.Elapsed);
         }
     }

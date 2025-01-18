@@ -1,19 +1,19 @@
-﻿namespace PlanningPoker.WebAPI.Controllers
+namespace PlanningPoker.WebAPI.Controllers
 {
-	using Microsoft.AspNetCore.Authorization;
-	using Microsoft.AspNetCore.Mvc;
-	using PlanningPoker.Core.Mapping;
-	using PlanningPoker.Core.Services;
-	using PlanningPoker.SharedKernel.Models.Binding;
-	using PlanningPoker.SharedKernel.Models.Generated;
-	using System;
-	using System.Threading;
-	using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using PlanningPoker.Core.Services;
+    using PlanningPoker.Generated.Mapping;
+    using PlanningPoker.Generated.Models;
+    using PlanningPoker.SharedKernel.Models.Binding;
+    using System;
+    using System.Threading;
+    using System.Threading.Tasks;
 
-	/// <summary>
-	/// Responsible for managing poker tables.
-	/// </summary>
-	[Authorize]
+    /// <summary>
+    /// Responsible for managing poker tables.
+    /// </summary>
+    [Authorize]
 	public sealed class TablesController : BasePokerController
 	{
 		private const string ID_ROUTE_PARAM = "{id:guid}";

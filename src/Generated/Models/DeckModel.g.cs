@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
+using PlanningPoker.Generated.Models;
 using PlanningPoker.SharedKernel.Models.Decks;
-using PlanningPoker.SharedKernel.Models.Generated;
 
-namespace PlanningPoker.SharedKernel.Models.Generated
+namespace PlanningPoker.Generated.Models
 {
     public partial class DeckModel
     {

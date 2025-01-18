@@ -6,17 +6,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Generated\PlanningPoker.Generated.csproj" />
     <ProjectReference Include="..\Persistence\PlanningPoker.Persistence.csproj" />
     <ProjectReference Include="..\SharedKernel\PlanningPoker.SharedKernel.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Mapster" Version="7.4.1-pre01" />
+    <PackageReference Include="Mapster" Version="7.4.2-pre01" />
     <PackageReference Include="Roslynator.Analyzers" Version="4.12.10">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="10.4.0.108396">
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="10.5.0.109200">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

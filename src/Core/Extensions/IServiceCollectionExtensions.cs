@@ -1,13 +1,13 @@
 ﻿namespace PlanningPoker.Core.Extensions
 {
-	using Ardalis.GuardClauses;
-	using Microsoft.Extensions.DependencyInjection;
-	using PlanningPoker.Core.Services;
+    using Ardalis.GuardClauses;
+    using Microsoft.Extensions.DependencyInjection;
+    using PlanningPoker.Core.Services;
 
-	/// <summary>
-	/// Contains extension methods for registering application services.
-	/// </summary>
-	public static class IServiceCollectionExtensions
+    /// <summary>
+    /// Contains extension methods for registering application services.
+    /// </summary>
+    public static class IServiceCollectionExtensions
 	{
 		/// <summary>
 		/// Registeres core services.

@@ -1,6 +1,6 @@
 using System;
 
-namespace PlanningPoker.SharedKernel.Models.Generated
+namespace PlanningPoker.Generated.Models
 {
     public partial class CardModel
     {

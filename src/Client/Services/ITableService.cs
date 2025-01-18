@@ -1,15 +1,15 @@
-﻿namespace PlanningPoker.Client.Services
+namespace PlanningPoker.Client.Services
 {
-	using PlanningPoker.SharedKernel.Models.Binding;
-	using PlanningPoker.SharedKernel.Models.Generated;
-	using System;
-	using System.Threading;
-	using System.Threading.Tasks;
+    using PlanningPoker.Generated.Models;
+    using PlanningPoker.SharedKernel.Models.Binding;
+    using System;
+    using System.Threading;
+    using System.Threading.Tasks;
 
-	/// <summary>
-	/// Service responsible for the management of poker tables.
-	/// </summary>
-	public interface ITableService
+    /// <summary>
+    /// Service responsible for the management of poker tables.
+    /// </summary>
+    public interface ITableService
 	{
 		/// <summary>
 		/// Creates a new poker table.

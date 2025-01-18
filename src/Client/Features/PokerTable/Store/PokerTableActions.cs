@@ -1,10 +1,10 @@
-﻿namespace PlanningPoker.Client.Features.PokerTable.Store.Actions
+namespace PlanningPoker.Client.Features.PokerTable.Store.Actions
 {
-	using PlanningPoker.SharedKernel.Models.Binding;
-	using PlanningPoker.SharedKernel.Models.Generated;
-	using System;
+    using PlanningPoker.Generated.Models;
+    using PlanningPoker.SharedKernel.Models.Binding;
+    using System;
 
-	public class PokerTableCreationAction
+    public class PokerTableCreationAction
 	{
 		public PokerTableCreationAction(TableBindingModel bindingModel)
 			=> this.BindingModel = bindingModel;

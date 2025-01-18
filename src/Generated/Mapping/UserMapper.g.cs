@@ -1,7 +1,7 @@
+using PlanningPoker.Generated.Models;
 using PlanningPoker.Persistence.Entities;
-using PlanningPoker.SharedKernel.Models.Generated;
 
-namespace PlanningPoker.Core.Mapping
+namespace PlanningPoker.Generated.Mapping
 {
     public static partial class UserMapper
     {

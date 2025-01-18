@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
-using PlanningPoker.SharedKernel.Models.Generated;
+using Microsoft.AspNetCore.Components;
+using PlanningPoker.Generated.Models;
 using Radzen;
 
 namespace PlanningPoker.Client.Components

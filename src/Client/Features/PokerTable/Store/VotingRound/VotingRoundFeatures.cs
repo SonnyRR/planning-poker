@@ -1,7 +1,7 @@
 namespace PlanningPoker.Client.Features.PokerTable.Store.VotingRound
 {
     using Fluxor;
-    using PlanningPoker.SharedKernel.Models.Generated;
+    using PlanningPoker.Generated.Models;
     using System;
     using static VotingRoundStates;
 

@@ -1,6 +1,6 @@
-﻿namespace PlanningPoker.Client.Features.PokerTable.Store
+namespace PlanningPoker.Client.Features.PokerTable.Store
 {
-    using PlanningPoker.SharedKernel.Models.Generated;
+    using PlanningPoker.Generated.Models;
 
     public record PokerTableState
     {

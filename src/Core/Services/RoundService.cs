@@ -1,14 +1,14 @@
-﻿namespace PlanningPoker.Core
+namespace PlanningPoker.Core.Services
 {
+    using Ardalis.GuardClauses;
+    using Mapster;
+    using PlanningPoker.Generated.Mapping;
+    using PlanningPoker.Generated.Models;
+    using PlanningPoker.Persistence;
+    using PlanningPoker.SharedKernel.Models.Binding;
     using System;
     using System.Threading;
     using System.Threading.Tasks;
-    using Ardalis.GuardClauses;
-    using Mapster;
-    using PlanningPoker.Core.Mapping;
-    using PlanningPoker.Persistence;
-    using PlanningPoker.SharedKernel.Models.Binding;
-    using PlanningPoker.SharedKernel.Models.Generated;
 
     public class RoundService : IRoundService
     {

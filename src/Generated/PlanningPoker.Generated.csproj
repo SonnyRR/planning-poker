@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <LangVersion>latest</LangVersion>
+        <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Remove="Models\Generated\**" />
+        <EmbeddedResource Remove="Models\Generated\**" />
+        <None Remove="Models\Generated\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Mapster" Version="7.4.2-pre01" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Persistence\PlanningPoker.Persistence.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="Models\" />
+        <Folder Include="Mapping\"/>
+    </ItemGroup>
+
+</Project>

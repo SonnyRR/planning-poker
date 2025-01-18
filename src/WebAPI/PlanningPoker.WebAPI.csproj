@@ -6,14 +6,14 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Destructurama.Attributed" Version="5.0.0" />
+		<PackageReference Include="Destructurama.Attributed" Version="5.1.0" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="7.2.0" />
 		<PackageReference Include="Serilog.AspNetCore" Version="9.0.0" />
 		<PackageReference Include="Roslynator.Analyzers" Version="4.12.10">
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="SonarAnalyzer.CSharp" Version="10.4.0.108396">
+		<PackageReference Include="SonarAnalyzer.CSharp" Version="10.5.0.109200">
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
@@ -30,6 +30,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\Core\PlanningPoker.Core.csproj" />
 		<ProjectReference Include="..\SharedKernel\PlanningPoker.SharedKernel.csproj" />
+		<ProjectReference Include="..\Sockets\PlanningPoker.Sockets.csproj" />
 	</ItemGroup>
 
 </Project>

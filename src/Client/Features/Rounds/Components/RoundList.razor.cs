@@ -1,11 +1,11 @@
 namespace PlanningPoker.Client.Features.Rounds.Components
 {
+    using Microsoft.AspNetCore.Components;
+    using PlanningPoker.Generated.Models;
+    using Radzen;
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Microsoft.AspNetCore.Components;
-    using PlanningPoker.SharedKernel.Models.Generated;
-    using Radzen;
 
     public partial class RoundList
     {

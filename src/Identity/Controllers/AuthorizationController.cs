@@ -128,11 +128,11 @@ namespace PlanningPoker.Identity.Controllers
 
             // If prompt=login was specified by the client application,
             // immediately return the user agent to the login page.
-            if (request.HasPrompt(Prompts.Login))
+            if (request.HasPromptValue(PromptValues.Login))
             {
                 // To avoid endless login -> authorization redirects, the prompt=login flag
                 // is removed from the authorization request payload before redirecting the user.
-                var prompt = string.Join(" ", request.GetPrompts().Remove(Prompts.Login));
+                var prompt = string.Join(" ", request.GetPromptValues().Remove(PromptValues.Login));
 
                 var parameters = this.Request.HasFormContentType ?
                     this.Request.Form.Where(parameter => parameter.Key != Parameters.Prompt).ToList() :
@@ -157,7 +157,7 @@ namespace PlanningPoker.Identity.Controllers
             {
                 // If the client application requested promptless authentication,
                 // return an error indicating that the user is not logged in.
-                if (request.HasPrompt(Prompts.None))
+                if (request.HasPromptValue(PromptValues.None))
                 {
                     return this.Forbid(
                         properties: new AuthenticationProperties(new Dictionary<string, string>
@@ -211,7 +211,7 @@ namespace PlanningPoker.Identity.Controllers
                 // return an authorization response without displaying the consent form.
                 case ConsentTypes.Implicit:
                 case ConsentTypes.External when authorizations.Count > 0:
-                case ConsentTypes.Explicit when authorizations.Count > 0 && !request.HasPrompt(Prompts.Consent):
+                case ConsentTypes.Explicit when authorizations.Count > 0 && !request.HasPromptValue(PromptValues.Consent):
                     var principal = await this.signInManager.CreateUserPrincipalAsync(user);
 
                     // Note: in this sample, the granted scopes match the requested scope
@@ -241,8 +241,8 @@ namespace PlanningPoker.Identity.Controllers
 
                 // At this point, no authorization was found in the database and an error must be returned
                 // if the client application specified prompt=none in the authorization request.
-                case ConsentTypes.Explicit when request.HasPrompt(Prompts.None):
-                case ConsentTypes.Systematic when request.HasPrompt(Prompts.None):
+                case ConsentTypes.Explicit when request.HasPromptValue(PromptValues.None):
+                case ConsentTypes.Systematic when request.HasPromptValue(PromptValues.None):
                     return this.Forbid(
                         properties: new AuthenticationProperties(new Dictionary<string, string>
                         {

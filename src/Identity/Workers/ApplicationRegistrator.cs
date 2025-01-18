@@ -1,4 +1,4 @@
-﻿namespace PlanningPoker.Identity.Workers
+namespace PlanningPoker.Identity.Workers
 {
 	using Microsoft.Extensions.DependencyInjection;
 	using Microsoft.Extensions.Hosting;
@@ -58,7 +58,7 @@
 					Permissions =
 					{
 						Permissions.Endpoints.Authorization,
-						Permissions.Endpoints.Logout,
+						Permissions.Endpoints.EndSession,
 						Permissions.Endpoints.Token,
 						Permissions.GrantTypes.AuthorizationCode,
 						Permissions.ResponseTypes.Code,

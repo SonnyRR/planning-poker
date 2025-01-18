@@ -1,4 +1,4 @@
-﻿namespace PlanningPoker.Persistence.Configurations
+namespace PlanningPoker.Persistence.Configurations
 {
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -23,7 +23,7 @@
                 {
                     Id = Guid.Parse("6df8d39e-267d-4396-9e41-fa969fe3e9d9"),
                     Type = DeckType.Fibonacci,
-                    CreatedOn = DateTimeOffset.UtcNow
+                    CreatedOn = new DateTimeOffset(2024, 9, 7, 21, 22, 49, TimeSpan.Zero)
                 }
             );
 

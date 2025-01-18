@@ -1,4 +1,4 @@
-﻿namespace PlanningPoker.Core.Mapping
+namespace PlanningPoker.Generated
 {
     using Mapster;
     using PlanningPoker.Persistence;
@@ -7,7 +7,7 @@
     using System.Linq;
     using System.Reflection;
 
-    public class CodeGenerationRegister : ICodeGenerationRegister
+    public class DataTransferObjectRegister : ICodeGenerationRegister
     {
         public void Register(CodeGenerationConfig config)
         {

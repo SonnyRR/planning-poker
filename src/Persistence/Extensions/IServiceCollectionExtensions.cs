@@ -1,4 +1,4 @@
-﻿namespace PlanningPoker.Persistence.Extensions
+namespace PlanningPoker.Persistence.Extensions
 {
     using Ardalis.GuardClauses;
 

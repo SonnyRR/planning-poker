@@ -1,8 +1,8 @@
-﻿namespace PlanningPoker.Client.Features.PokerTable.Store.VotingRound
+namespace PlanningPoker.Client.Features.PokerTable.Store.VotingRound
 {
-    using System;
+    using PlanningPoker.Generated.Models;
     using PlanningPoker.SharedKernel.Models.Binding;
-    using PlanningPoker.SharedKernel.Models.Generated;
+    using System;
 
     public class StartVotingRoundAction
     {

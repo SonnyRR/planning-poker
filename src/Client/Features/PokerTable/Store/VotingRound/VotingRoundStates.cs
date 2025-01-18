@@ -1,6 +1,6 @@
 namespace PlanningPoker.Client.Features.PokerTable.Store.VotingRound
 {
-    using PlanningPoker.SharedKernel.Models.Generated;
+    using PlanningPoker.Generated.Models;
 
     public static class VotingRoundStates
     {

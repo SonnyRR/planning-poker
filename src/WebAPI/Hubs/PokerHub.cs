@@ -1,16 +1,15 @@
 namespace PlanningPoker.WebAPI.Hubs
 {
+    using Core.Services;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.SignalR;
     using Microsoft.Extensions.Logging;
-    using Core.Services;
-    using SharedKernel.Interfaces;
+    using PlanningPoker.Sockets;
     using SharedKernel.Models.Tables;
     using System;
     using System.Threading.Tasks;
     using static OpenIddict.Abstractions.OpenIddictConstants;
     using static SharedKernel.Constants;
-    using Mapster;
 
     /// <summary>
     /// SignalR hub for interacting with poker tables.

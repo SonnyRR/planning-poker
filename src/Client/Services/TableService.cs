@@ -1,14 +1,14 @@
-﻿namespace PlanningPoker.Client.Services
+namespace PlanningPoker.Client.Services
 {
-	using PlanningPoker.SharedKernel.Models.Binding;
-	using PlanningPoker.SharedKernel.Models.Generated;
-	using System;
-	using System.Net.Http;
-	using System.Threading;
-	using System.Threading.Tasks;
+    using PlanningPoker.Generated.Models;
+    using PlanningPoker.SharedKernel.Models.Binding;
+    using System;
+    using System.Net.Http;
+    using System.Threading;
+    using System.Threading.Tasks;
 
-	/// <inheritdoc cref="ITableService"/>
-	public class TableService : BaseHttpService, ITableService
+    /// <inheritdoc cref="ITableService"/>
+    public class TableService : BaseHttpService, ITableService
 	{
 		private const string ROUTE = "/api/tables";
 

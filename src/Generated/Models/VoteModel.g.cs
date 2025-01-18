@@ -1,7 +1,7 @@
 using System;
-using PlanningPoker.SharedKernel.Models.Generated;
+using PlanningPoker.Generated.Models;
 
-namespace PlanningPoker.SharedKernel.Models.Generated
+namespace PlanningPoker.Generated.Models
 {
     public partial class VoteModel
     {

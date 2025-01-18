@@ -1,6 +1,6 @@
-﻿namespace PlanningPoker.Client.Clients
+namespace PlanningPoker.Client.Clients
 {
-    using PlanningPoker.SharedKernel.Models.Generated;
+    using PlanningPoker.Generated.Models;
     using PlanningPoker.SharedKernel.Models.Tables;
     using System;
     using System.Threading.Tasks;

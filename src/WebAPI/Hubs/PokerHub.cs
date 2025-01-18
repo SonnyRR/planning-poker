@@ -51,7 +51,7 @@ namespace PlanningPoker.WebAPI.Hubs
         /// Adds a user to specified table.
         /// </summary>
         /// <param name="tableId">The table unique identifier.</param>
-        [HubMethodName(nameof(IPokerClient.AddedToTable))]
+        [HubMethodName(nameof(IPokerClient.AddToTable))]
         public async Task AddToTableAsync(Guid tableId)
         {
             var table = await this.tableService.AddPlayerToTable(Guid.Parse(this.UserId), tableId);
@@ -61,7 +61,7 @@ namespace PlanningPoker.WebAPI.Hubs
                 await this.Groups.AddToGroupAsync(this.Context.ConnectionId, table.Id.ToString());
                 await this.Clients
                     .Group(table.Id.ToString())
-                    .AddedToTable(new PlayerJoined
+                    .AddToTable(new PlayerJoined
                     {
                         Id = this.currentUserService.UserId,
                         Username = this.currentUserService.Username
@@ -78,7 +78,7 @@ namespace PlanningPoker.WebAPI.Hubs
         /// Removes a user from a specified table.
         /// </summary>
         /// <param name="tableId">The table's unique identifier.</param>
-        [HubMethodName(nameof(IPokerClient.RemovedFromTable))]
+        [HubMethodName(nameof(IPokerClient.RemoveFromTable))]
         public async Task RemoveFromTableAsync(Guid tableId)
         {
             await this.Groups.RemoveFromGroupAsync(this.Context.ConnectionId, tableId.ToString());
@@ -89,21 +89,21 @@ namespace PlanningPoker.WebAPI.Hubs
         /// Sends a user's vote to all other table players.
         /// </summary>
         /// <param name="vote">The player's vote.</param>
-        [HubMethodName(nameof(IPokerClient.VoteCasted))]
+        [HubMethodName(nameof(IPokerClient.Vote))]
         public async Task VoteAsync(PlayerVote vote)
         {
             vote.PlayerId = this.currentUserService.UserId;
-            await this.Clients.Group(vote.TableId.ToString()).VoteCasted(vote);
+            await this.Clients.Group(vote.TableId.ToString()).Vote(vote);
         }
 
         /// <summary>
         /// Starts a new voting session.
         /// </summary>
         /// <param name="tableId">The table's unique identifier.</param>
-        [HubMethodName(nameof(IPokerClient.VotingRoundStarted))]
+        [HubMethodName(nameof(IPokerClient.StartVotingRound))]
         public async Task StartVotingRound(Guid tableId)
         {
-            await this.Clients.Group(tableId.ToString()).VotingRoundStarted(tableId);
+            await this.Clients.Group(tableId.ToString()).StartVotingRound(tableId);
         }
     }
 }

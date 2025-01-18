@@ -12,25 +12,25 @@ namespace PlanningPoker.Sockets
         /// Sends a new message that adds a player to a poker table.
         /// </summary>
         /// <param name="playerMetadata">The player metadata.</param>
-        Task AddedToTable(PlayerJoined playerMetadata);
+        Task AddToTable(PlayerJoined playerMetadata);
 
         /// <summary>
         /// Sends a new message that removes a player from a poker table.
         /// </summary>
         /// <param name="tableId">The poker table's unique identifier value.</param>
-        Task RemovedFromTable(Guid tableId);
+        Task RemoveFromTable(Guid tableId);
 
         /// <summary>
         /// Sends a new message that a player has voted on a work item.
         /// </summary>
         /// <param name="vote">The player's vote</param>
-        Task VoteCasted(PlayerVote vote);
+        Task Vote(PlayerVote vote);
 
-        Task VotingRoundStarted(Guid tableId);
+        Task StartVotingRound(Guid tableId);
 
-        Task VotingRoundCreated(RoundModel round);
+        Task CreateVotingRound(RoundModel round);
 
-        Task VotingRoundDeleted(Guid roundId);
+        Task DeleteVotingRound(Guid roundId);
     }
 }
 #endif

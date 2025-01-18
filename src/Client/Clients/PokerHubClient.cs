@@ -20,13 +20,13 @@ namespace PlanningPoker.Client.Clients
         }
 
         public Task AddToTableAsync(Guid tableId)
-            => this.HubConnection.SendAsync(nameof(IPokerClient.AddedToTable), tableId);
+            => this.HubConnection.SendAsync(nameof(IPokerClient.AddToTable), tableId);
 
         public void OnAddedToTable(Action<Guid> handler)
         {
             if (!this.HasStarted)
             {
-                this.HubConnection.On(nameof(IPokerClient.AddedToTable), handler);
+                this.HubConnection.On(nameof(IPokerClient.AddToTable), handler);
             }
         }
 
@@ -34,7 +34,7 @@ namespace PlanningPoker.Client.Clients
         {
             if (!this.HasStarted)
             {
-                this.HubConnection.On(nameof(IPokerClient.RemovedFromTable), handler);
+                this.HubConnection.On(nameof(IPokerClient.RemoveFromTable), handler);
             }
         }
 
@@ -42,7 +42,7 @@ namespace PlanningPoker.Client.Clients
         {
             if (!this.HasStarted)
             {
-                this.HubConnection.On(nameof(IPokerClient.VoteCasted), handler);
+                this.HubConnection.On(nameof(IPokerClient.Vote), handler);
             }
         }
 
@@ -50,7 +50,7 @@ namespace PlanningPoker.Client.Clients
         {
             if (!this.HasStarted)
             {
-                this.HubConnection.On(nameof(IPokerClient.VotingRoundStarted), handler);
+                this.HubConnection.On(nameof(IPokerClient.StartVotingRound), handler);
             }
         }
 
@@ -58,17 +58,17 @@ namespace PlanningPoker.Client.Clients
         {
             if (!this.HasStarted)
             {
-                this.HubConnection.On(nameof(IPokerClient.VotingRoundCreated), handler);
+                this.HubConnection.On(nameof(IPokerClient.CreateVotingRound), handler);
             }
         }
 
         public Task RemoveFromTableAsync(Guid tableId)
-            => this.HubConnection.SendAsync(nameof(IPokerClient.RemovedFromTable), tableId);
+            => this.HubConnection.SendAsync(nameof(IPokerClient.RemoveFromTable), tableId);
 
         public Task CastVoteAsync(PlayerVote vote)
-            => this.HubConnection.SendAsync(nameof(IPokerClient.VoteCasted), vote);
+            => this.HubConnection.SendAsync(nameof(IPokerClient.Vote), vote);
 
         public Task StartVotingRound(Guid tableId)
-            => this.HubConnection.SendAsync(nameof(IPokerClient.VotingRoundStarted), tableId);
+            => this.HubConnection.SendAsync(nameof(IPokerClient.StartVotingRound), tableId);
     }
 }

@@ -45,7 +45,7 @@ namespace PlanningPoker.WebAPI
         public async Task<IActionResult> CreateAsync([FromBody] RoundBindingModel bindingModel, CancellationToken ct)
         {
             var round = await this.roundService.CreateAsync(bindingModel, ct);
-            await this.pokerHub.Clients.Group(bindingModel.TableId.ToString()).VotingRoundCreated(round);
+            await this.pokerHub.Clients.Group(bindingModel.TableId.ToString()).CreateVotingRound(round);
             return this.Created();
         }
 
@@ -59,7 +59,7 @@ namespace PlanningPoker.WebAPI
         public async Task<IActionResult> DeleteAsync([FromRoute] Guid id, [FromRoute] Guid tableId, CancellationToken ct)
         {
             await this.roundService.DeleteAsync(id, ct);
-            await this.pokerHub.Clients.Group(tableId.ToString()).VotingRoundDeleted(id);
+            await this.pokerHub.Clients.Group(tableId.ToString()).DeleteVotingRound(id);
             return this.NoContent();
         }
 

@@ -3,6 +3,7 @@ namespace PlanningPoker.Client.Clients
     using PlanningPoker.Generated.Models;
     using PlanningPoker.SharedKernel.Models.Binding;
     using PlanningPoker.SharedKernel.Models.Tables;
+    using PlanningPoker.Sockets;
     using System;
     using System.Threading.Tasks;
 
@@ -56,7 +57,7 @@ namespace PlanningPoker.Client.Clients
         /// <summary>
         /// Registers a handler that is called when the table owner has started a new voting session.
         /// </summary>
-        /// <param name="handler"></param>
+        /// <param name="handler">The handler delegate.</param>
         void OnVotingRoundStarted(Action<Guid> handler);
 
         /// <summary>

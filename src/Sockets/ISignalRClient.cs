@@ -1,4 +1,4 @@
-﻿namespace PlanningPoker.Client.Clients
+namespace PlanningPoker.Sockets
 {
 	using System.Threading.Tasks;
 

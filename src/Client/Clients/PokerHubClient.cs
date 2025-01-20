@@ -57,7 +57,7 @@ namespace PlanningPoker.Client.Clients
         public Task StartVotingRound(Guid tableId)
             => this.HubConnection.SendAsync(nameof(IPokerClient.StartVotingRound), tableId);
 
-        public Task CreateVotingRound(RoundBindingModel bindingModel)
-            => this.HubConnection.SendAsync(nameof(IPokerClient.CreateVotingRound), bindingModel);
+        public Task CreateVotingRound(RoundBindingModel round)
+            => this.HubConnection.SendAsync(nameof(IPokerClient.CreateVotingRound), round);
     }
 }

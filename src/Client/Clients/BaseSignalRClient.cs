@@ -3,6 +3,7 @@ namespace PlanningPoker.Client.Clients
     using Microsoft.AspNetCore.Components;
     using Microsoft.AspNetCore.SignalR.Client;
     using PlanningPoker.Client.Authorization;
+    using PlanningPoker.Sockets;
     using System;
     using System.Net;
     using System.Net.Http;

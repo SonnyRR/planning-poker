@@ -1,4 +1,4 @@
-﻿namespace PlanningPoker.Client.Clients
+namespace PlanningPoker.Client.Clients
 {
     using Microsoft.AspNetCore.Components;
     using Microsoft.AspNetCore.SignalR.Client;
@@ -10,15 +10,15 @@
 
     public abstract class BaseSignalRClient : ISignalRClient, IAsyncDisposable
     {
-		private readonly HostAuthenticationStateProvider hostAuthenticationStateProvider;
-        
+        private readonly HostAuthenticationStateProvider hostAuthenticationStateProvider;
+
         protected BaseSignalRClient(
             NavigationManager navigationManager,
             string hubPath,
             HostAuthenticationStateProvider hostAuthenticationStateProvider)
         {
             this.hostAuthenticationStateProvider = hostAuthenticationStateProvider;
-            
+
             this.HubConnection = new HubConnectionBuilder()
                     .WithUrl(navigationManager.ToAbsoluteUri(hubPath))
                     .WithAutomaticReconnect()

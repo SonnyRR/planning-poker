@@ -1,14 +1,14 @@
-using System;
-using System.Text.Json;
-using System.Threading.Tasks;
 using Ardalis.GuardClauses;
 using Fluxor;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Logging;
+using PlanningPoker.Client.Clients;
 using PlanningPoker.Client.Features.PokerTable.Store.VotingRound;
 using PlanningPoker.SharedKernel;
 using PlanningPoker.SharedKernel.Models.Binding;
 using Radzen;
+using System;
+using System.Text.Json;
 
 namespace PlanningPoker.Client.Features.Rounds.Components
 {
@@ -31,10 +31,14 @@ namespace PlanningPoker.Client.Features.Rounds.Components
         [Inject]
         public IDispatcher Dispatcher { get; set; }
 
+        [Inject]
+        public IBlazorPokerClient PokerClient { get; set; }
+
         protected override void OnInitialized()
         {
             this.RoundParameters.TableId = this.TableId;
-            this.Logger.LogDebug(this.RoundParameters.TableId.ToString());
+
+            this.PokerClient.OnVotingRoundCreated(round => this.Dispatcher.Dispatch(new SetVotingRoundAction(round)));
         }
 
         public void OnRoundCreateInvalidSubmit(FormInvalidSubmitEventArgs args)
@@ -46,7 +50,8 @@ namespace PlanningPoker.Client.Features.Rounds.Components
         public void OnRoundCreateValidSubmit()
         {
             this.Logger.LogDebug("Attempting to join table {TableId}", this.RoundParameters.Description);
-            this.Dispatcher.Dispatch(new CreateVotingRoundAction(this.RoundParameters));
+
+            this.PokerClient.CreateVotingRound(this.RoundParameters);
             this.DialogService.Close(true);
         }
     }

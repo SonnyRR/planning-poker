@@ -4,6 +4,8 @@ namespace PlanningPoker.WebAPI.Hubs
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.SignalR;
     using Microsoft.Extensions.Logging;
+    using PlanningPoker.Core;
+    using PlanningPoker.SharedKernel.Models.Binding;
     using PlanningPoker.Sockets;
     using SharedKernel.Models.Tables;
     using System;
@@ -17,35 +19,31 @@ namespace PlanningPoker.WebAPI.Hubs
     [Authorize]
     public sealed class PokerHub : Hub<IPokerClient>
     {
-        private readonly ILogger<PokerHub> logger;
-        private readonly ITableService tableService;
         private readonly ICurrentUserService currentUserService;
+        private readonly ILogger<PokerHub> logger;
+        private readonly IRoundService roundService;
+        private readonly ITableService tableService;
 
         /// <summary>
         /// Constructs a SignalR hub for managing poker tables.
         /// </summary>
         /// <param name="tableService">An instance of <see cref="ITableService"/>.</param>
         /// <param name="currentUserService">The current user service.</param>
+        /// <param name="roundService"></param>
         /// <param name="logger">An instance of <see cref="ILogger{PokerHub}"/>.</param>
         public PokerHub(
             ITableService tableService,
             ICurrentUserService currentUserService,
+            IRoundService roundService,
             ILogger<PokerHub> logger)
         {
             this.tableService = tableService;
             this.currentUserService = currentUserService;
+            this.roundService = roundService;
             this.logger = logger;
         }
 
         private string UserId => this.Context.User.FindFirst(Claims.Subject)?.Value;
-
-        /// <inheritdoc />
-        public override async Task OnConnectedAsync()
-        {
-            var userName = this.currentUserService.Username;
-            await this.Groups.AddToGroupAsync(this.Context.ConnectionId, $"{Hubs.USER_GROUP_PREFIX}${userName}");
-            await base.OnConnectedAsync();
-        }
 
         /// <summary>
         /// Adds a user to specified table.
@@ -75,6 +73,26 @@ namespace PlanningPoker.WebAPI.Hubs
         }
 
         /// <summary>
+        /// Creates a voting round.
+        /// </summary>
+        /// <param name="bindingModel"></param>
+        /// <returns></returns>
+        [HubMethodName(nameof(IPokerClient.CreateVotingRound))]
+        public async Task CreateVotingRoundAsync(RoundBindingModel bindingModel)
+        {
+            var round = await this.roundService.CreateAsync(bindingModel);
+            await this.Clients.Group(bindingModel.TableId.ToString()).CreateVotingRound(round);
+        }
+
+        /// <inheritdoc />
+        public override async Task OnConnectedAsync()
+        {
+            var userName = this.currentUserService.Username;
+            await this.Groups.AddToGroupAsync(this.Context.ConnectionId, $"{Hubs.USER_GROUP_PREFIX}${userName}");
+            await base.OnConnectedAsync();
+        }
+
+        /// <summary>
         /// Removes a user from a specified table.
         /// </summary>
         /// <param name="tableId">The table's unique identifier.</param>
@@ -86,6 +104,16 @@ namespace PlanningPoker.WebAPI.Hubs
         }
 
         /// <summary>
+        /// Starts a new voting session.
+        /// </summary>
+        /// <param name="tableId">The table's unique identifier.</param>
+        [HubMethodName(nameof(IPokerClient.StartVotingRound))]
+        public async Task StartVotingRound(Guid tableId)
+        {
+            await this.Clients.Group(tableId.ToString()).StartVotingRound(tableId);
+        }
+
+        /// <summary>
         /// Sends a user's vote to all other table players.
         /// </summary>
         /// <param name="vote">The player's vote.</param>
@@ -94,16 +122,6 @@ namespace PlanningPoker.WebAPI.Hubs
         {
             vote.PlayerId = this.currentUserService.UserId;
             await this.Clients.Group(vote.TableId.ToString()).Vote(vote);
-        }
-
-        /// <summary>
-        /// Starts a new voting session.
-        /// </summary>
-        /// <param name="tableId">The table's unique identifier.</param>
-        [HubMethodName(nameof(IPokerClient.StartVotingRound))]
-        public async Task StartVotingRound(Guid tableId)
-        {
-            await this.Clients.Group(tableId.ToString()).StartVotingRound(tableId);
         }
     }
 }

@@ -176,16 +176,7 @@ namespace PlanningPoker.Client.Features.PokerTable.Pages
                 this.StateHasChanged(null, null);
             });
 
-            this.PokerClient.OnVotingRoundStarted((id) =>
-            {
-                this.Logger.LogInformation("Voting round for table {Id} has started.", id);
-            });
-
-            this.PokerClient.OnVotingRoundCreated(round =>
-            {
-                this.Logger.LogInformation(round.Description);
-                this.Dispatcher.Dispatch(new SetVotingRoundAction(round));
-            });
+            this.PokerClient.OnVotingRoundStarted((id) => this.Logger.LogInformation("Voting round for table {Id} has started.", id));
         }
 
         private void StateHasChanged(object sender, EventArgs args)

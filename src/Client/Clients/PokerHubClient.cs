@@ -4,6 +4,7 @@ namespace PlanningPoker.Client.Clients
     using Microsoft.AspNetCore.SignalR.Client;
     using PlanningPoker.Client.Authorization;
     using PlanningPoker.Generated.Models;
+    using PlanningPoker.SharedKernel.Models.Binding;
     using PlanningPoker.SharedKernel.Models.Tables;
     using PlanningPoker.Sockets;
     using System;
@@ -24,42 +25,27 @@ namespace PlanningPoker.Client.Clients
 
         public void OnAddedToTable(Action<Guid> handler)
         {
-            if (!this.HasStarted)
-            {
-                this.HubConnection.On(nameof(IPokerClient.AddToTable), handler);
-            }
+            this.HubConnection.On(nameof(IPokerClient.AddToTable), handler);
         }
 
         public void OnRemovedFromTable(Action<Guid> handler)
         {
-            if (!this.HasStarted)
-            {
-                this.HubConnection.On(nameof(IPokerClient.RemoveFromTable), handler);
-            }
+            this.HubConnection.On(nameof(IPokerClient.RemoveFromTable), handler);
         }
 
         public void OnVoteCasted(Action<PlayerVote> handler)
         {
-            if (!this.HasStarted)
-            {
-                this.HubConnection.On(nameof(IPokerClient.Vote), handler);
-            }
+            this.HubConnection.On(nameof(IPokerClient.Vote), handler);
         }
 
         public void OnVotingRoundStarted(Action<Guid> handler)
         {
-            if (!this.HasStarted)
-            {
-                this.HubConnection.On(nameof(IPokerClient.StartVotingRound), handler);
-            }
+            this.HubConnection.On(nameof(IPokerClient.StartVotingRound), handler);
         }
 
         public void OnVotingRoundCreated(Action<RoundModel> handler)
         {
-            if (!this.HasStarted)
-            {
-                this.HubConnection.On(nameof(IPokerClient.CreateVotingRound), handler);
-            }
+            this.HubConnection.On(nameof(IPokerClient.CreateVotingRound), handler);
         }
 
         public Task RemoveFromTableAsync(Guid tableId)
@@ -70,5 +56,8 @@ namespace PlanningPoker.Client.Clients
 
         public Task StartVotingRound(Guid tableId)
             => this.HubConnection.SendAsync(nameof(IPokerClient.StartVotingRound), tableId);
+
+        public Task CreateVotingRound(RoundBindingModel bindingModel)
+            => this.HubConnection.SendAsync(nameof(IPokerClient.CreateVotingRound), bindingModel);
     }
 }

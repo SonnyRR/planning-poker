@@ -1,7 +1,6 @@
 namespace PlanningPoker.Client.Features.PokerTable.Store.VotingRound
 {
     using PlanningPoker.Generated.Models;
-    using PlanningPoker.SharedKernel.Models.Binding;
     using System;
 
     public class StartVotingRoundAction
@@ -10,14 +9,6 @@ namespace PlanningPoker.Client.Features.PokerTable.Store.VotingRound
             => this.TableId = tableId;
 
         public Guid TableId { get; init; }
-    }
-
-    public class CreateVotingRoundAction
-    {
-        public CreateVotingRoundAction(RoundBindingModel round)
-            => this.Round = round;
-
-        public RoundBindingModel Round { get; init; }
     }
 
     public class SetVotingRoundLoadingAction

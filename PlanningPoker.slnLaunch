@@ -1,0 +1,22 @@
+[
+  {
+    "Name": "Composite",
+    "Projects": [
+      {
+        "Path": "src\\Identity\\PlanningPoker.Identity.csproj",
+        "Action": "StartWithoutDebugging",
+        "DebugTarget": "PlanningPoker.Identity - Development"
+      },
+      {
+        "Path": "src\\WebAPI\\PlanningPoker.WebAPI.csproj",
+        "Action": "StartWithoutDebugging",
+        "DebugTarget": "PlanningPoker.WebAPI - Development"
+      },
+      {
+        "Path": "src\\BFF\\PlanningPoker.BFF.csproj",
+        "Action": "Start",
+        "DebugTarget": "PlanningPoker.BFF - Development"
+      }
+    ]
+  }
+]

@@ -15,7 +15,7 @@
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="9.0.3" PrivateAssets="all" />
         <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="9.0.3" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.3" />
-        <PackageReference Include="Radzen.Blazor" Version="6.3.1" />
+        <PackageReference Include="Radzen.Blazor" Version="6.3.4" />
         <PackageReference Include="Serilog.Exceptions" Version="8.4.0+build.694" />
         <PackageReference Include="Serilog.Sinks.BrowserConsole" Version="8.0.0" />
         <PackageReference Include="Serilog.Sinks.BrowserHttp" Version="1.0.0-dev-00032" />

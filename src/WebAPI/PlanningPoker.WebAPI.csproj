@@ -7,7 +7,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Destructurama.Attributed" Version="5.1.0" />
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="8.0.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="8.1.0" />
 		<PackageReference Include="Serilog.AspNetCore" Version="9.0.0" />
 		<PackageReference Include="Serilog.AspNetCore.Ingestion" Version="1.0.0-dev-00032" />
 		<PackageReference Include="Serilog.Enrichers.CorrelationId" Version="3.0.1" />
@@ -15,8 +15,8 @@
 		<PackageReference Include="Serilog.Sinks.Async" Version="2.1.0" />
 		<PackageReference Include="Serilog.Sinks.Seq" Version="9.0.0" />
 		<PackageReference Include="Serilog.Exceptions" Version="8.4.0+build.694" />
-		<PackageReference Include="OpenIddict.Validation.AspNetCore" Version="6.1.1" />
-		<PackageReference Include="OpenIddict.Validation.SystemNetHttp" Version="6.1.1" />
+		<PackageReference Include="OpenIddict.Validation.AspNetCore" Version="6.2.0" />
+		<PackageReference Include="OpenIddict.Validation.SystemNetHttp" Version="6.2.0" />
 	</ItemGroup>
 
 	<ItemGroup>

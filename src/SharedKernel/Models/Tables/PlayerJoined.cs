@@ -1,7 +1,7 @@
-﻿namespace PlanningPoker.SharedKernel.Models.Tables
+namespace PlanningPoker.SharedKernel.Models.Tables
 {
     using System;
-    
+
     /// <summary>
     /// Represents metadata for a player who joins a poker table.
     /// </summary>
@@ -20,4 +20,3 @@
         public string Username { get; set; }
     }
 }
-

@@ -1,6 +1,3 @@
-using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using JetBrains.Annotations;
 using Nuke.Common;
 using Nuke.Common.CI;
@@ -12,6 +9,9 @@ using Nuke.Common.Tools.DotNet;
 using Nuke.Common.Tools.Git;
 using Nuke.Common.Tools.GitVersion;
 using Serilog;
+using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
 [ShutdownDotNetAfterServerBuild]
@@ -90,24 +90,24 @@ internal class Build : NukeBuild
         });
 
     public Target TagVersion => _ => _
-        .OnlyWhenStatic(() => IsServerBuild && GitRepository.IsOnMainOrMasterBranch())
+        .OnlyWhenStatic(() => IsServerBuild && this.GitRepository.IsOnMainOrMasterBranch())
         .Requires(
-            () => GitAuthorEmail,
-            () => GitAuthorUsername)
+            () => this.GitAuthorEmail,
+            () => this.GitAuthorUsername)
         .Executes(() =>
         {
-            Log.Information("✉️ Configuring Git user.email: {GitAuthorEmail}", GitAuthorEmail);
-            Log.Information("👤 Configuring Git user.name: {GitAuthorUsername}", GitAuthorUsername);
+            Log.Information("✉️ Configuring Git user.email: {GitAuthorEmail}", this.GitAuthorEmail);
+            Log.Information("👤 Configuring Git user.name: {GitAuthorUsername}", this.GitAuthorUsername);
 
             try
             {
                 static void StdOutLogger(OutputType _, string msg) => Log.Debug(msg);
                 static void Git(ArgumentStringHandler args) => GitTasks.Git(args, logger: StdOutLogger);
 
-                Git($"config user.email \"{GitAuthorEmail}\"");
-                Git($"config user.name \"{GitAuthorUsername}\"");
+                Git($"config user.email \"{this.GitAuthorEmail}\"");
+                Git($"config user.name \"{this.GitAuthorUsername}\"");
 
-                Git($"tag -f -a {GitVersion.SemVer} -m \"Release: '{GitVersion.SemVer}'\"");
+                Git($"tag -f -a {this.GitVersion.SemVer} -m \"Release: '{this.GitVersion.SemVer}'\"");
 
                 Git("push --follow-tags");
             }

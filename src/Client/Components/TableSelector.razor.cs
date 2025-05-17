@@ -1,4 +1,4 @@
-﻿namespace PlanningPoker.Client.Components
+namespace PlanningPoker.Client.Components
 {
     using Ardalis.GuardClauses;
     using Microsoft.AspNetCore.Components;

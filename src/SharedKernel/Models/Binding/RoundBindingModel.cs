@@ -1,5 +1,5 @@
-﻿using System;
 using FluentValidation;
+using System;
 
 namespace PlanningPoker.SharedKernel.Models.Binding
 {
@@ -10,7 +10,7 @@ namespace PlanningPoker.SharedKernel.Models.Binding
         /// to be voted in this round.
         /// </summary>
         public string Description { get; set; }
-        
+
         /// <summary>
         /// The table identifier, in which this round should
         /// be assigned to.
@@ -27,11 +27,11 @@ namespace PlanningPoker.SharedKernel.Models.Binding
 	/// Validates table binding models.
 	/// </summary>
 	public class RoundBindingModelValidator : AbstractValidator<RoundBindingModel>
-	{
-		public RoundBindingModelValidator()
-		{
-			this.RuleFor(tm => tm.Description).NotEmpty();
-			this.RuleFor(tm => tm.TableId).NotEmpty();
-		}
-	}
+    {
+        public RoundBindingModelValidator()
+        {
+            this.RuleFor(tm => tm.Description).NotEmpty();
+            this.RuleFor(tm => tm.TableId).NotEmpty();
+        }
+    }
 }

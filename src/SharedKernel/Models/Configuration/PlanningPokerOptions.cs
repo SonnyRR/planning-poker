@@ -1,4 +1,4 @@
-﻿namespace PlanningPoker.SharedKernel.Models.Configuration
+namespace PlanningPoker.SharedKernel.Models.Configuration
 {
     public sealed class PlanningPokerOptions
     {

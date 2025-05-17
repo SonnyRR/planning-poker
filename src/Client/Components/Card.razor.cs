@@ -1,17 +1,17 @@
-﻿namespace PlanningPoker.Client.Components
+namespace PlanningPoker.Client.Components
 {
-    using System.Threading.Tasks;
     using Microsoft.AspNetCore.Components;
+    using System.Threading.Tasks;
 
     public partial class Card
-	{
+    {
         private bool clicking;
 
-		[Parameter]
-		public string UnicodeValue { get; set; }
+        [Parameter]
+        public string UnicodeValue { get; set; }
 
-		[Parameter]
-		public float Value { get; set; }
+        [Parameter]
+        public float Value { get; set; }
 
         [Parameter]
         public EventCallback<float> Click { get; set; }
@@ -34,5 +34,5 @@
                 this.clicking = false;
             }
         }
-	}
+    }
 }

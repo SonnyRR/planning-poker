@@ -1,20 +1,20 @@
-﻿namespace PlanningPoker.BFF.Pages
+namespace PlanningPoker.BFF.Pages
 {
-	using Microsoft.AspNetCore.Mvc;
-	using Microsoft.AspNetCore.Mvc.RazorPages;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.RazorPages;
 
-	using System.Diagnostics;
+    using System.Diagnostics;
 
-	[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-	public class ErrorModel : PageModel
-	{
-		public string RequestId { get; set; }
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public class ErrorModel : PageModel
+    {
+        public string RequestId { get; set; }
 
-		public bool ShowRequestId => !string.IsNullOrEmpty(this.RequestId);
+        public bool ShowRequestId => !string.IsNullOrEmpty(this.RequestId);
 
-		public void OnGet()
-		{
-			this.RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier;
-		}
-	}
+        public void OnGet()
+        {
+            this.RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier;
+        }
+    }
 }

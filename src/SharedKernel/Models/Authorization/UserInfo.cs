@@ -1,19 +1,19 @@
-﻿namespace PlanningPoker.SharedKernel.Models.Authorization
+namespace PlanningPoker.SharedKernel.Models.Authorization
 {
-	using System.Collections.Generic;
+    using System.Collections.Generic;
 
-	public class UserInfo
-	{
-		public static readonly UserInfo Anonymous = new();
+    public class UserInfo
+    {
+        public static readonly UserInfo Anonymous = new();
 
-		public ICollection<ClaimValue> Claims { get; set; } = new List<ClaimValue>();
+        public ICollection<ClaimValue> Claims { get; set; } = new List<ClaimValue>();
 
-		public string EmailClaimType { get; set; }
+        public string EmailClaimType { get; set; }
 
-		public bool IsAuthenticated { get; set; }
+        public bool IsAuthenticated { get; set; }
 
-		public string NameClaimType { get; set; }
+        public string NameClaimType { get; set; }
 
-		public string RoleClaimType { get; set; }
-	}
+        public string RoleClaimType { get; set; }
+    }
 }

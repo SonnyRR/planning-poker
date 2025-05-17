@@ -1,4 +1,4 @@
-﻿namespace PlanningPoker.SharedKernel
+namespace PlanningPoker.SharedKernel
 {
     using System.Text.Json;
     using System.Text.Json.Serialization;

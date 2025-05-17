@@ -1,7 +1,7 @@
-﻿namespace PlanningPoker.Core
+namespace PlanningPoker.Core
 {
-    using System.Threading.Tasks;
     using PlanningPoker.SharedKernel.Models.Tables;
+    using System.Threading.Tasks;
 
     public interface IVotingService
     {

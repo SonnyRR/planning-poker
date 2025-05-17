@@ -1,10 +1,10 @@
-﻿namespace PlanningPoker.Identity.Models.View
+namespace PlanningPoker.Identity.Models.View
 {
-	using Microsoft.AspNetCore.Mvc.ModelBinding;
+    using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-	public sealed class LogoutViewModel
-	{
-		[BindNever]
-		public string RequestId { get; set; }
-	}
+    public sealed class LogoutViewModel
+    {
+        [BindNever]
+        public string RequestId { get; set; }
+    }
 }

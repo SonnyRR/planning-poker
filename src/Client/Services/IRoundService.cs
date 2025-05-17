@@ -1,9 +1,9 @@
-﻿namespace PlanningPoker.Client
+namespace PlanningPoker.Client
 {
+    using PlanningPoker.SharedKernel.Models.Binding;
     using System;
     using System.Threading;
     using System.Threading.Tasks;
-    using PlanningPoker.SharedKernel.Models.Binding;
 
     public interface IRoundService
     {

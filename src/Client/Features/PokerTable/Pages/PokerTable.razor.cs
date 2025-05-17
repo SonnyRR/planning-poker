@@ -56,7 +56,9 @@ namespace PlanningPoker.Client.Features.PokerTable.Pages
             => await this.PokerClient.CastVoteAsync(
                 new PlayerVote
                 {
-                    Estimation = estimation, TableId = this.Id, Timestamp = DateTimeOffset.UtcNow
+                    Estimation = estimation,
+                    TableId = this.Id,
+                    Timestamp = DateTimeOffset.UtcNow
                 });
 
         /// <summary>
@@ -92,7 +94,6 @@ namespace PlanningPoker.Client.Features.PokerTable.Pages
                 Height = "50%",
                 Width = "50%"
             };
-
 
 #pragma warning disable S125 // Sections of code should not be commented out
             // await this.PokerClient.StartVotingRound(this.TableState.Value.Table.Id);

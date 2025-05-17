@@ -1,4 +1,4 @@
-﻿namespace PlanningPoker.Client.Features.PokerTable.Store.VotingRound
+namespace PlanningPoker.Client.Features.PokerTable.Store.VotingRound
 {
     using Fluxor;
     using static VotingRoundStates;

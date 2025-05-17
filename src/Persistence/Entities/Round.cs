@@ -1,8 +1,8 @@
-﻿namespace PlanningPoker.Persistence
+namespace PlanningPoker.Persistence
 {
+    using PlanningPoker.Persistence.Entities;
     using System;
     using System.Collections.Generic;
-    using PlanningPoker.Persistence.Entities;
 
     public class Round : BaseEntity<Guid>
     {

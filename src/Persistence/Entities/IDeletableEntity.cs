@@ -1,11 +1,11 @@
-﻿namespace PlanningPoker.Persistence.Entities
+namespace PlanningPoker.Persistence.Entities
 {
-	using System;
+    using System;
 
-	public interface IDeletableEntity
-	{
-		DateTimeOffset? DeletedOn { get; set; }
+    public interface IDeletableEntity
+    {
+        DateTimeOffset? DeletedOn { get; set; }
 
-		bool IsDeleted { get; set; }
-	}
+        bool IsDeleted { get; set; }
+    }
 }

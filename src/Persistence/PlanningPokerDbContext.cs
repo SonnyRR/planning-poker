@@ -1,4 +1,4 @@
-﻿namespace PlanningPoker.Persistence
+namespace PlanningPoker.Persistence
 {
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;

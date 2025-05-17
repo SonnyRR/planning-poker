@@ -1,12 +1,12 @@
-﻿namespace PlanningPoker.Persistence.Entities
+namespace PlanningPoker.Persistence.Entities
 {
-	using System;
+    using System;
 
-	public abstract class BaseDeletableEntity<TKey> : BaseEntity<TKey>, IDeletableEntity
-		 where TKey : struct, IComparable<TKey>, IEquatable<TKey>
-	{
-		public DateTimeOffset? DeletedOn { get; set; }
+    public abstract class BaseDeletableEntity<TKey> : BaseEntity<TKey>, IDeletableEntity
+         where TKey : struct, IComparable<TKey>, IEquatable<TKey>
+    {
+        public DateTimeOffset? DeletedOn { get; set; }
 
-		public bool IsDeleted { get; set; }
-	}
+        public bool IsDeleted { get; set; }
+    }
 }

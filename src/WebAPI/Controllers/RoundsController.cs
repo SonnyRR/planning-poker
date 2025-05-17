@@ -55,7 +55,7 @@ namespace PlanningPoker.WebAPI
         /// <param name="id">The round's identifier.</param>
         /// <param name="tableId"></param>
         /// <param name="ct">The cancellation token.</param>
-        [HttpDelete(ID_ROUTE_PARAM +"/{tableId:guid}")]
+        [HttpDelete(ID_ROUTE_PARAM + "/{tableId:guid}")]
         public async Task<IActionResult> DeleteAsync([FromRoute] Guid id, [FromRoute] Guid tableId, CancellationToken ct)
         {
             await this.roundService.DeleteAsync(id, ct);

@@ -25,4 +25,3 @@ namespace PlanningPoker.Client.Features.PokerTable.Store.VotingRound
         public RoundModel Round { get; init; }
     }
 }
-

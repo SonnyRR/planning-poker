@@ -1,14 +1,14 @@
-﻿namespace PlanningPoker.Persistence
+namespace PlanningPoker.Persistence
 {
-    using System;
     using PlanningPoker.Persistence.Entities;
+    using System;
 
     public class Vote : BaseEntity<Guid>
     {
         public Guid RoundId { get; set; }
 
         public Round Round { get; set; }
-        
+
         public float Estimation { get; set; }
 
         public TimeSpan Duration { get; set; }

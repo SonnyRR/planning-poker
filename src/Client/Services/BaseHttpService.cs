@@ -1,4 +1,4 @@
-﻿namespace PlanningPoker.Client.Services
+namespace PlanningPoker.Client.Services
 {
     using Ardalis.GuardClauses;
     using PlanningPoker.SharedKernel;

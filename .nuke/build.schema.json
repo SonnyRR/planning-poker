@@ -32,7 +32,8 @@
         "CreateMigration",
         "DropDatabase",
         "RemoveLastMigration",
-        "Restore"
+        "Restore",
+        "TagVersion"
       ]
     },
     "Verbosity": {
@@ -117,6 +118,14 @@
             "Debug",
             "Release"
           ]
+        },
+        "GitAuthorEmail": {
+          "type": "string",
+          "description": "The git author email, used for tagging release commits"
+        },
+        "GitAuthorUsername": {
+          "type": "string",
+          "description": "The git author username, used for tagging release commits"
         },
         "migration-name": {
           "type": "string",

@@ -1,16 +1,1 @@
-assembly-versioning-scheme: MajorMinorPatch
-assembly-file-versioning-scheme: MajorMinorPatch
-mode: ContinuousDeployment
-branches:
-  master:
-    regex: (origin/)?master
-  develop:
-    increment: Patch
-    label: beta
-    regex: (origin/)?dev(elop)?(ment)?$
-  feature:
-    increment: Inherit
-    regex: (orign/)?feature
-ignore:
-  sha: [ ]
-merge-message-formats: { }
+workflow: GitHubFlow/v1

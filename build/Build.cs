@@ -165,31 +165,22 @@ internal class Build : NukeBuild
 
     [UsedImplicitly]
     public Target ApplyMigrations => _ => _
-        .OnlyWhenStatic(this.IsLocalEnvironment)
         .Executes(() =>
             DotNet($"ef database update -s \"{this.WebApiAssemblyDirectory}\"", this.PersistenceAssemblyDirectory));
 
     [UsedImplicitly]
     public Target DropDatabase => _ => _
-        .OnlyWhenStatic(this.IsLocalEnvironment)
         .Executes(() =>
             DotNet($"ef database drop -s \"{this.WebApiAssemblyDirectory}\"", this.PersistenceAssemblyDirectory));
 
     [UsedImplicitly]
     public Target CreateMigration => _ => _
-        .OnlyWhenStatic(this.IsLocalEnvironment)
         .Requires(() => this.EFMigrationName)
         .Executes(() =>
             DotNet($"ef migrations add {this.EFMigrationName} -s \"{this.WebApiAssemblyDirectory}\"", this.PersistenceAssemblyDirectory));
 
     [UsedImplicitly]
     public Target RemoveLastMigration => _ => _
-        .OnlyWhenStatic(this.IsLocalEnvironment)
         .Executes(() =>
             DotNet($"ef migrations remove -s \"{this.WebApiAssemblyDirectory}\"", this.PersistenceAssemblyDirectory));
-
-    private bool IsLocalEnvironment()
-    {
-        return IsLocalBuild && this.AspNetCoreEnvironment == Environments.Development;
-    }
 }

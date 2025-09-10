@@ -33,6 +33,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="Microsoft.NET.Sdk.WebAssembly.Pack" Version="9.0.9" />
         <None Include="Features\Rounds\Components\RoundList.razor" />
     </ItemGroup>
 

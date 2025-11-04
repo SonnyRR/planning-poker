@@ -12,7 +12,7 @@
     <ItemGroup>
         <PackageReference Include="Ardalis.GuardClauses" Version="5.0.0" />
         <PackageReference Include="CorrelationId" Version="3.0.1" />
-        <PackageReference Include="FluentValidation" Version="12.0.0" />
+        <PackageReference Include="FluentValidation" Version="12.1.0" />
         <PackageReference Include="Mapster" Version="9.0.0-pre01" />
         <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.10" />
         <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.10" />

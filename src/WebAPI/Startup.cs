@@ -10,6 +10,7 @@ namespace PlanningPoker.WebAPI
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using PlanningPoker.SharedKernel.Extensions;
+    using Scalar.AspNetCore;
     using Serilog;
     using static SharedKernel.Constants.Hubs;
 
@@ -26,8 +27,6 @@ namespace PlanningPoker.WebAPI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI();
             }
             else
             {
@@ -45,6 +44,16 @@ namespace PlanningPoker.WebAPI
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapOpenApi();
+                endpoints.MapScalarApiReference(
+                    "/planning-poker/documentation",
+                    options =>
+                    {
+                        options.WithTitle("Planning Poker API V1");
+                        options.WithOperationTitleSource(OperationTitleSource.Path);
+                        options.SortTagsAlphabetically();
+
+                    });
                 endpoints.MapDefaultControllerRoute();
                 endpoints.MapHub<PokerHub>(POKER_HUB_URI);
             });

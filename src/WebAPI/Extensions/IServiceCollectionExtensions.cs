@@ -3,20 +3,20 @@ namespace PlanningPoker.WebAPI.Extensions
     using Ardalis.GuardClauses;
 
     using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.OpenApi;
     using Microsoft.AspNetCore.ResponseCompression;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Options;
-    using Microsoft.OpenApi.Models;
+    using Microsoft.OpenApi;
     using OpenIddict.Validation.AspNetCore;
     using PlanningPoker.Core.Extensions;
     using PlanningPoker.Persistence.Extensions;
     using SharedKernel.Models.Configuration;
     using System;
     using System.Collections.Generic;
-    using System.IO;
     using System.Net.Mime;
-    using System.Reflection;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Contains extension methods for registering application services.
@@ -44,7 +44,7 @@ namespace PlanningPoker.WebAPI.Extensions
                 }
             );
 
-            services.AddSwagger();
+            services.AddOpenApi();
             services.AddSignalR();
             services.AddPersistanceServices();
             services.AddHttpContextAccessor();
@@ -92,38 +92,41 @@ namespace PlanningPoker.WebAPI.Extensions
         }
 
         /// <summary>
-        /// Adds swagger configuration.
+        /// Adds OpenAPI configuration.
         /// </summary>
         /// <param name="services">The service collection.</param>
         /// <returns>An instance of <see cref="IServiceCollection"/>.</returns>
-        public static IServiceCollection AddSwagger(this IServiceCollection services)
+        public static IServiceCollection AddOpenApi(this IServiceCollection services)
         {
             Guard.Against.Null(services, nameof(services));
 
-            services.AddSwaggerGen(options =>
+            OpenApiServiceCollectionExtensions.AddOpenApi(services);
+            services.Configure<OpenApiOptions>(options =>
             {
 #pragma warning disable S1075 // URIs should not be hardcoded
-                options.SwaggerDoc("v1", new OpenApiInfo
+                options.OpenApiVersion = OpenApiSpecVersion.OpenApi3_0;
+                options.AddDocumentTransformer((document, _, _) =>
                 {
-                    Version = "v1",
-                    Title = "Planning Poker API",
-                    Description = "API for managing scrum poker tables.",
-                    TermsOfService = new Uri("https://placeholder/terms"),
-                    Contact = new OpenApiContact
+                    document.Info = new OpenApiInfo
                     {
-                        Name = "Vasil Kotsev",
-                        Url = new Uri("https://placeholder.vk")
-                    },
-                    License = new OpenApiLicense
-                    {
-                        Name = "MIT Licence",
-                        Url = new Uri("https://github.com/SonnyRR/planning-poker/blob/master/LICENSE")
-                    }
+                        Version = "v1",
+                        Title = "Planning Poker API",
+                        Description = "API for managing scrum poker tables.",
+                        TermsOfService = new Uri("https://placeholder/terms"),
+                        Contact = new OpenApiContact
+                        {
+                            Name = "Vasil Kotsev",
+                            Url = new Uri("https://placeholder.vk")
+                        },
+                        License = new OpenApiLicense
+                        {
+                            Name = "MIT Licence",
+                            Url = new Uri("https://github.com/SonnyRR/planning-poker/blob/master/LICENSE")
+                        }
+                    };
+                    return Task.CompletedTask;
                 });
 #pragma warning restore S1075 // URIs should not be hardcoded
-
-                var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
             });
 
             return services;

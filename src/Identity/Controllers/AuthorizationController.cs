@@ -16,8 +16,6 @@ namespace PlanningPoker.Identity.Controllers
 
     using Persistence.Entities;
 
-    using SharedKernel.Extensions;
-
     using System;
     using System.Collections.Generic;
     using System.Linq;

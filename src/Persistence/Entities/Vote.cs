@@ -1,6 +1,6 @@
-namespace PlanningPoker.Persistence
+namespace PlanningPoker.Persistence.Entities
 {
-    using PlanningPoker.Persistence.Entities;
+
     using System;
 
     public class Vote : BaseEntity<Guid>

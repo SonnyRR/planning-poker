@@ -1,12 +1,12 @@
-namespace PlanningPoker.SharedKernel
-{
-    using System.Text.Json;
-    using System.Text.Json.Serialization;
+namespace PlanningPoker.SharedKernel;
 
-    /// <summary>
-    /// Provides commons JSON serializer configurations.
-    /// </summary>
-    public static class JsonSerializerConfigurations
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
+/// <summary>
+/// Provides commons JSON serializer configurations.
+/// </summary>
+public static class JsonSerializerConfigurations
     {
         /// <summary>
         /// The default set of JSON serializer options.
@@ -53,4 +53,3 @@ namespace PlanningPoker.SharedKernel
             }
         };
     }
-}

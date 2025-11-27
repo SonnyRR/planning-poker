@@ -1,6 +1,6 @@
-namespace PlanningPoker.Persistence
+namespace PlanningPoker.Persistence.Entities
 {
-    using PlanningPoker.Persistence.Entities;
+
     using System;
     using System.Collections.Generic;
 
@@ -20,6 +20,6 @@ namespace PlanningPoker.Persistence
 
         public TimeSpan? Elapsed => this.EndedOn?.Subtract(this.StartedOn.GetValueOrDefault());
 
-        public IList<Vote> Votes { get; set; } = new List<Vote>();
+        public IList<Vote> Votes { get; set; } = [];
     }
 }

@@ -1,7 +1,7 @@
-namespace PlanningPoker.Persistence
-{
+namespace PlanningPoker.Persistence.Configurations;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
+    using PlanningPoker.Persistence.Entities;
 
     public class VoteConfiguration : IEntityTypeConfiguration<Vote>
     {
@@ -20,4 +20,3 @@ namespace PlanningPoker.Persistence
                 .IsRequired(false);
         }
     }
-}

@@ -5,7 +5,7 @@
   <RadzenButton Text="Create work item" Icon="note_add" Variant="Variant.Outlined" Click=@CreateVotingRound
     ButtonStyle="ButtonStyle.Info" Shade="Shade.Light"/>
 </RadzenStack>
-<RadzenDataList Data="@rounds.Take(1)" TItem="RoundModel" PageSize="10" PagerHorizontalAlign="HorizontalAlign.Left" 
+ <RadzenDataList Data="@Rounds.Take(1)" TItem="RoundModel" PageSize="10" PagerHorizontalAlign="HorizontalAlign.Left"
     ShowPagingSummary="true" Density="Density.Compact" AllowPaging="true" AllowVirtualization="false"
     WrapItems="true">
     <Template Context="round">

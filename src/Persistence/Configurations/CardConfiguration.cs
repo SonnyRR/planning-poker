@@ -1,5 +1,4 @@
-namespace PlanningPoker.Persistence.Configurations
-{
+namespace PlanningPoker.Persistence.Configurations;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
     using PlanningPoker.Persistence.Entities;
@@ -50,4 +49,3 @@ namespace PlanningPoker.Persistence.Configurations
             );
         }
     }
-}

@@ -1,6 +1,6 @@
-namespace PlanningPoker.SharedKernel
-{
-    public static class Constants
+namespace PlanningPoker.SharedKernel;
+
+public static class Constants
     {
         public static class Colors
         {
@@ -19,4 +19,3 @@ namespace PlanningPoker.SharedKernel
             public const string TABLE_NOT_FOUND = "Table with id '{Id}' not found.";
         }
     }
-}

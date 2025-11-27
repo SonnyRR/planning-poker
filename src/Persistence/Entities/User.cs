@@ -10,6 +10,6 @@ namespace PlanningPoker.Persistence.Entities
 
         public bool IsDeleted { get; set; }
 
-        public IList<Table> Tables { get; set; } = new List<Table>();
+        public IList<Table> Tables { get; set; } = [];
     }
 }

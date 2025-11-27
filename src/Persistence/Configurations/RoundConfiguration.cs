@@ -1,7 +1,7 @@
-namespace PlanningPoker.Persistence
-{
+namespace PlanningPoker.Persistence.Configurations;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
+    using PlanningPoker.Persistence.Entities;
 
     public class RoundConfiguration : IEntityTypeConfiguration<Round>
     {
@@ -20,5 +20,4 @@ namespace PlanningPoker.Persistence
 
             builder.Ignore(r => r.Elapsed);
         }
-    }
 }

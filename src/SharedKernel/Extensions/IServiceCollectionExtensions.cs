@@ -1,31 +1,30 @@
-namespace PlanningPoker.SharedKernel.Extensions
+namespace PlanningPoker.SharedKernel.Extensions;
+
+using Ardalis.GuardClauses;
+
+using CorrelationId.DependencyInjection;
+
+using Microsoft.Extensions.DependencyInjection;
+
+using PlanningPoker.SharedKernel.Enrichers;
+
+using System;
+
+public static class IServiceCollectionExtensions
 {
-    using Ardalis.GuardClauses;
-
-    using CorrelationId.DependencyInjection;
-
-    using Microsoft.Extensions.DependencyInjection;
-
-    using PlanningPoker.SharedKernel.Enrichers;
-
-    using System;
-
-    public static class IServiceCollectionExtensions
+    public static IServiceCollection AddSharedKernelServices(this IServiceCollection services)
     {
-        public static IServiceCollection AddSharedKernelServices(this IServiceCollection services)
+        Guard.Against.Null(services);
+
+        services.AddScoped<CorrelationIdEnricher>();
+        services.AddDefaultCorrelationId(cfg =>
         {
-            Guard.Against.Null(services, nameof(services));
+            cfg.IncludeInResponse = true;
+            cfg.UpdateTraceIdentifier = true;
+            cfg.AddToLoggingScope = true;
+            cfg.CorrelationIdGenerator = () => Guid.NewGuid().ToString();
+        });
 
-            services.AddScoped<CorrelationIdEnricher>();
-            services.AddDefaultCorrelationId(cfg =>
-            {
-                cfg.IncludeInResponse = true;
-                cfg.UpdateTraceIdentifier = true;
-                cfg.AddToLoggingScope = true;
-                cfg.CorrelationIdGenerator = () => Guid.NewGuid().ToString();
-            });
-
-            return services;
-        }
+        return services;
     }
 }

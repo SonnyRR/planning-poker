@@ -12,8 +12,7 @@ namespace PlanningPoker.Client.Features.Rounds.Components
         [Parameter]
         public Guid TableId { get; set; }
 
-        public List<RoundModel> rounds => new List<RoundModel>
-        {
+        public RoundModel[] Rounds => [
             new RoundModel
             {
                 Description = "t1",
@@ -124,8 +123,8 @@ namespace PlanningPoker.Client.Features.Rounds.Components
                 StartedOn = DateTimeOffset.UtcNow.AddSeconds(-60),
                 EndedOn = DateTimeOffset.UtcNow,
                 FinalEstimation = 3f
-            }
-        };
+             }
+        ];
 
         [Inject]
         public DialogService DialogService { get; set; }

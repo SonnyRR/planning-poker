@@ -108,13 +108,13 @@ namespace PlanningPoker.Identity.Areas.Identity.Pages.Account
         public async Task OnGetAsync(string returnUrl = null)
         {
             this.ReturnUrl = returnUrl;
-            this.ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            this.ExternalLogins = [.. await this.signInManager.GetExternalAuthenticationSchemesAsync()];
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= this.Url.Content("~/");
-            this.ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            this.ExternalLogins = [.. await this.signInManager.GetExternalAuthenticationSchemesAsync()];
             if (this.ModelState.IsValid)
             {
                 var user = this.CreateUser();

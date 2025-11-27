@@ -1,9 +1,8 @@
-namespace PlanningPoker.SharedKernel.Models.Configuration
-{
-    public sealed class PlanningPokerOptions
-    {
-        public ConnectionStrings ConnectionStrings { get; init; }
+namespace PlanningPoker.SharedKernel.Models.Configuration;
 
-        public OidcConfiguration OidcConfiguration { get; set; }
-    }
+public sealed class PlanningPokerOptions
+{
+    public ConnectionStrings ConnectionStrings { get; init; }
+
+    public OidcConfiguration OidcConfiguration { get; set; }
 }

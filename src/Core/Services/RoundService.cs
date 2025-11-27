@@ -1,10 +1,10 @@
-namespace PlanningPoker.Core.Services
-{
+namespace PlanningPoker.Core.Services;
     using Ardalis.GuardClauses;
     using Mapster;
     using PlanningPoker.Generated.Mapping;
     using PlanningPoker.Generated.Models;
     using PlanningPoker.Persistence;
+using PlanningPoker.Persistence.Entities;
     using PlanningPoker.SharedKernel.Models.Binding;
     using System;
     using System.Threading;
@@ -42,4 +42,3 @@ namespace PlanningPoker.Core.Services
             throw new NotImplementedException();
         }
     }
-}

@@ -1,5 +1,4 @@
-namespace PlanningPoker.Core
-{
+namespace PlanningPoker.Core.Services;
     using PlanningPoker.SharedKernel.Models.Tables;
     using System.Threading.Tasks;
 
@@ -7,4 +6,3 @@ namespace PlanningPoker.Core
     {
         Task Vote(PlayerVote vote);
     }
-}

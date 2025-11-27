@@ -1,14 +1,14 @@
-namespace PlanningPoker.SharedKernel.Enrichers
-{
-    using CorrelationId.Abstractions;
+namespace PlanningPoker.SharedKernel.Enrichers;
 
-    using Serilog.Core;
-    using Serilog.Events;
+using CorrelationId.Abstractions;
 
-    /// <summary>
-    /// Enriches the log event with a 'CorrelationId' of the currently processed request.
-    /// </summary>
-    public class CorrelationIdEnricher : ILogEventEnricher
+using Serilog.Core;
+using Serilog.Events;
+
+/// <summary>
+/// Enriches the log event with a 'CorrelationId' of the currently processed request.
+/// </summary>
+public class CorrelationIdEnricher : ILogEventEnricher
     {
         private readonly ICorrelationContextAccessor correlationContextAccessor;
 
@@ -23,4 +23,3 @@ namespace PlanningPoker.SharedKernel.Enrichers
             logEvent.AddOrUpdateProperty(propertyFactory.CreateProperty("CorrelationId", correlationId));
         }
     }
-}

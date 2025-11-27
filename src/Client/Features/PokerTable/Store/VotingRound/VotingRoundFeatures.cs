@@ -20,7 +20,7 @@ namespace PlanningPoker.Client.Features.PokerTable.Store.VotingRound
             public override string GetName() => nameof(VotingRoundsState);
 
             protected override VotingRoundsState GetInitialState()
-                => new() { Rounds = Array.Empty<RoundModel>() };
+                => new() { Rounds = [] };
         }
     }
 }

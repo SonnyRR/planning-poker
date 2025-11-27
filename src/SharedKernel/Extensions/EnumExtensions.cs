@@ -1,14 +1,14 @@
-namespace PlanningPoker.SharedKernel.Extensions
-{
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.Linq;
-    using System.Reflection;
+namespace PlanningPoker.SharedKernel.Extensions;
 
-    public static class EnumExtensions
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Reflection;
+
+public static class EnumExtensions
     {
-        private static readonly Lazy<Dictionary<Type, MemberInfo[]>> cache = new();
+        private static readonly Lazy<Dictionary<Type, MemberInfo[]>> Cache = new();
 
         /// <summary>
         /// Retrieves all display names for a given enumeration."/>
@@ -18,7 +18,7 @@ namespace PlanningPoker.SharedKernel.Extensions
         public static string[] GetEnumDisplayNames(this Enum @enum)
         {
             var enumType = @enum.GetType();
-            return CacheMembers(enumType).Select(m => m.GetCustomAttribute<DisplayAttribute>()?.GetName() ?? m.Name).ToArray();
+            return [.. CacheMembers(enumType).Select(m => m.GetCustomAttribute<DisplayAttribute>()?.GetName() ?? m.Name)];
         }
 
         /// <summary>
@@ -42,13 +42,12 @@ namespace PlanningPoker.SharedKernel.Extensions
         /// <returns>A <see cref="MemberInfo[]"/> instance.</returns>
         private static MemberInfo[] CacheMembers(Type @type)
         {
-            if (!cache.Value.TryGetValue(@type, out var members))
+            if (!Cache.Value.TryGetValue(@type, out var members))
             {
                 members = @type.GetMembers();
-                cache.Value.Add(@type, members);
+                Cache.Value.Add(@type, members);
             }
 
             return members;
         }
     }
-}

@@ -4,11 +4,11 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace PlanningPoker.Persistence
-{
+namespace PlanningPoker.Persistence;
+
 #pragma warning disable IDE0007 // Use implicit type
-    public class RedisConnection : IDisposable
-    {
+public class RedisConnection : IDisposable
+{
         private long lastReconnectTicks = DateTimeOffset.MinValue.UtcTicks;
         private DateTimeOffset firstErrorTime = DateTimeOffset.MinValue;
         private DateTimeOffset previousErrorTime = DateTimeOffset.MinValue;
@@ -23,7 +23,7 @@ namespace PlanningPoker.Persistence
         // ConnectionMultiplexer instance
         private readonly TimeSpan reconnectErrorThreshold = TimeSpan.FromSeconds(30);
         private readonly TimeSpan estartConnectionTimeout = TimeSpan.FromSeconds(15);
-        private const int RetryMaxAttempts = 5;
+        private const int RETRY_MAX_ATTEMPTS = 5;
 
         private readonly SemaphoreSlim reconnectSemaphore = new(initialCount: 1, maxCount: 1);
         private readonly string connectionString;
@@ -59,7 +59,7 @@ namespace PlanningPoker.Persistence
                 catch (Exception ex) when (ex is RedisConnectionException || ex is SocketException || ex is ObjectDisposedException)
                 {
                     reconnectRetry++;
-                    if (reconnectRetry > RetryMaxAttempts)
+                    if (reconnectRetry > RETRY_MAX_ATTEMPTS)
                     {
                         throw;
                     }
@@ -190,7 +190,6 @@ namespace PlanningPoker.Persistence
             {
                 // An error occurred when disposing the connection.
             }
-        }
     }
 #pragma warning restore IDE0007 // Use implicit type
 }

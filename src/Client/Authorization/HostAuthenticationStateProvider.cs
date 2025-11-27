@@ -14,7 +14,7 @@ namespace PlanningPoker.Client.Authorization
 
     public class HostAuthenticationStateProvider : AuthenticationStateProvider
     {
-        private static readonly TimeSpan userCacheRefreshInterval = TimeSpan.FromSeconds(60);
+        private static readonly TimeSpan UserCacheRefreshInterval = TimeSpan.FromSeconds(60);
 
         private const string LOGIN_PATH = "api/Account/Login";
 
@@ -48,7 +48,7 @@ namespace PlanningPoker.Client.Authorization
         private async ValueTask<ClaimsPrincipal> GetUser(bool useCache = false)
         {
             var now = DateTimeOffset.Now;
-            if (useCache && now < this.userLastCheck + userCacheRefreshInterval)
+            if (useCache && now < this.userLastCheck + UserCacheRefreshInterval)
             {
                 this.logger.LogDebug("Taking user from cache");
                 return this.cachedUser;

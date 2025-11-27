@@ -95,15 +95,12 @@ namespace PlanningPoker.Identity.Controllers
             // Automatically create a permanent authorization to avoid requiring explicit consent
             // for future authorization or token requests containing the same scopes.
             var authorization = authorizations.LastOrDefault();
-            if (authorization == null)
-            {
-                authorization = await this.authorizationManager.CreateAsync(
-                    principal: principal,
-                    subject: await this.userManager.GetUserIdAsync(user),
-                    client: await this.applicationManager.GetIdAsync(application),
-                    type: AuthorizationTypes.Permanent,
-                    scopes: principal.GetScopes());
-            }
+            authorization ??= await this.authorizationManager.CreateAsync(
+                principal: principal,
+                subject: await this.userManager.GetUserIdAsync(user),
+                client: await this.applicationManager.GetIdAsync(application),
+                type: AuthorizationTypes.Permanent,
+                scopes: principal.GetScopes());
 
             principal.SetAuthorizationId(await this.authorizationManager.GetIdAsync(authorization));
 
@@ -132,9 +129,9 @@ namespace PlanningPoker.Identity.Controllers
                 // is removed from the authorization request payload before redirecting the user.
                 var prompt = string.Join(" ", request.GetPromptValues().Remove(PromptValues.Login));
 
-                var parameters = this.Request.HasFormContentType ?
-                    this.Request.Form.Where(parameter => parameter.Key != Parameters.Prompt).ToList() :
-                    this.Request.Query.Where(parameter => parameter.Key != Parameters.Prompt).ToList();
+                var parameters = (this.Request.HasFormContentType ?
+                    this.Request.Form.Where(parameter => parameter.Key != Parameters.Prompt) :
+                    this.Request.Query.Where(parameter => parameter.Key != Parameters.Prompt)).ToList();
 
                 parameters.Add(KeyValuePair.Create(Parameters.Prompt, new StringValues(prompt)));
 
@@ -170,7 +167,7 @@ namespace PlanningPoker.Identity.Controllers
                     properties: new AuthenticationProperties
                     {
                         RedirectUri = this.Request.PathBase + this.Request.Path + QueryString.Create(
-                            this.Request.HasFormContentType ? this.Request.Form.ToList() : this.Request.Query.ToList())
+                            this.Request.HasFormContentType ? [.. this.Request.Form] : [.. this.Request.Query])
                     },
                     authenticationSchemes: IdentityConstants.ApplicationScheme);
             }

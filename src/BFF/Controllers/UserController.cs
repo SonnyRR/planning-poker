@@ -49,7 +49,7 @@ namespace PlanningPoker.BFF.Controllers
 
             if (claimsPrincipal.Claims.Any())
             {
-                var claims = new List<ClaimValue>();
+                List<ClaimValue> claims = [];
 
                 foreach (var claim in claimsPrincipal.FindAll(userInfo.NameClaimType))
                 {

@@ -48,11 +48,11 @@ namespace PlanningPoker.Persistence.Entities
         /// <summary>
         /// The card players.
         /// </summary>
-        public IList<User> Players { get; set; } = new List<User>();
+        public IList<User> Players { get; set; } = [];
 
         /// <summary>
         /// The voting rounds.
         /// </summary>
-        public IList<Round> Rounds { get; set; } = new List<Round>();
+        public IList<Round> Rounds { get; set; } = [];
     }
 }

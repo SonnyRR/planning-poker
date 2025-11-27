@@ -96,7 +96,7 @@ namespace PlanningPoker.Identity.Areas.Identity.Pages.Account
             // Clear the existing external cookie to ensure a clean login process
             await this.HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
-            this.ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            this.ExternalLogins = [.. await this.signInManager.GetExternalAuthenticationSchemesAsync()];
 
             this.ReturnUrl = returnUrl;
         }
@@ -105,7 +105,7 @@ namespace PlanningPoker.Identity.Areas.Identity.Pages.Account
         {
             returnUrl ??= this.Url.Content("~/");
 
-            this.ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            this.ExternalLogins = [.. await this.signInManager.GetExternalAuthenticationSchemesAsync()];
 
             if (this.ModelState.IsValid)
             {

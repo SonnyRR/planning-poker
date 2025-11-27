@@ -1,5 +1,4 @@
-namespace PlanningPoker.Core
-{
+namespace PlanningPoker.Core.Services;
     using PlanningPoker.Generated.Models;
     using PlanningPoker.SharedKernel.Models.Binding;
     using System;
@@ -14,4 +13,3 @@ namespace PlanningPoker.Core
 
         Task Finalize(CancellationToken ct = default);
     }
-}

@@ -68,8 +68,9 @@ namespace PlanningPoker.WebAPI
         /// </summary>
         /// <param name="id">The round's identifier.</param>
         /// <param name="ct">The cancellation token.</param>
+#pragma warning disable IDE0060 // Remove unused parameter
         [HttpPost($"{ID_ROUTE_PARAM}/finalize")]
-        public IActionResult Finalize([FromRoute] Guid id, CancellationToken ct)
+        public IActionResult Finalize([FromRoute] Guid _id, CancellationToken _ct)
         {
             return this.Ok();
         }

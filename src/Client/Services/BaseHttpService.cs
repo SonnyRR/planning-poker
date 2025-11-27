@@ -14,7 +14,7 @@ namespace PlanningPoker.Client.Services
     public abstract class BaseHttpService
     {
         protected readonly HttpClient httpClient;
-        protected readonly JsonSerializerOptions JsonSerializerOptions = JsonSerializerConfigurations.Default;
+        protected readonly JsonSerializerOptions jsonSerializerOptions = JsonSerializerConfigurations.Default;
 
         protected BaseHttpService(IHttpClientFactory httpClientFactory, bool authorized = false)
         {
@@ -30,7 +30,7 @@ namespace PlanningPoker.Client.Services
         }
 
         protected Task<TRes> GetAsync<TRes>(string uri, CancellationToken ct = default) =>
-            this.httpClient.GetFromJsonAsync<TRes>(uri, this.JsonSerializerOptions, ct);
+            this.httpClient.GetFromJsonAsync<TRes>(uri, this.jsonSerializerOptions, ct);
 
         protected async Task PostAsync<TPayload>(string uri, TPayload payload, CancellationToken ct = default)
         {
@@ -71,7 +71,7 @@ namespace PlanningPoker.Client.Services
             TModel model = default;
             if (response.Content is not null && response.Content.Headers.ContentType?.MediaType == MediaTypeNames.Application.Json)
             {
-                model = await response.Content.ReadFromJsonAsync<TModel>(this.JsonSerializerOptions, ct);
+                model = await response.Content.ReadFromJsonAsync<TModel>(this.jsonSerializerOptions, ct);
             }
 
             return model;

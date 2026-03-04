@@ -14,7 +14,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageDownload Include="GitVersion.Tool" Version="[6.5.0]" />
+        <PackageDownload Include="GitVersion.Tool" Version="[6.6.0]" />
         <PackageDownload Include="Mapster.Tool" Version="[9.0.0-pre01]" />
     </ItemGroup>
 

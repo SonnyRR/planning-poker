@@ -1,17 +1,19 @@
 namespace PlanningPoker.WebAPI
 {
+    using System;
+    using System.Threading;
+    using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.SignalR;
-    using PlanningPoker.Core;
+
+    using PlanningPoker.Core.Services;
     using PlanningPoker.Generated.Models;
     using PlanningPoker.SharedKernel.Models.Binding;
     using PlanningPoker.Sockets;
     using PlanningPoker.WebAPI.Controllers;
     using PlanningPoker.WebAPI.Hubs;
-    using System;
-    using System.Threading;
-    using System.Threading.Tasks;
 
     /// <summary>
     /// Responsible for managing work item estimation rounds.

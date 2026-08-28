@@ -12,7 +12,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Mapster" Version="10.0.8-pre07" />
+        <PackageReference Include="Mapster" Version="10.1.0-pre02" />
     </ItemGroup>
 
     <ItemGroup>

@@ -1,19 +1,19 @@
-namespace PlanningPoker.Client.Layouts
+namespace PlanningPoker.Client.Layouts;
+
+using System;
+
+using Microsoft.AspNetCore.Components;
+
+public partial class MainLayout
 {
-    using Microsoft.AspNetCore.Components;
-    using System;
+    public string FooterCopyrightContent { get; set; }
 
-    public partial class MainLayout
+    [Inject]
+    public NavigationManager NavigationManager { get; set; }
+
+    protected override void OnInitialized()
     {
-        public string FooterCopyrightContent { get; set; }
-
-        [Inject]
-        public NavigationManager NavigationManager { get; set; }
-
-        protected override void OnInitialized()
-        {
-            base.OnInitialized();
-            this.FooterCopyrightContent = $"Vasil Kotsev, Copyright Ⓒ {DateTimeOffset.Now.Year}";
-        }
+        base.OnInitialized();
+        this.FooterCopyrightContent = $"Vasil Kotsev, Copyright Ⓒ {DateTimeOffset.Now.Year}";
     }
 }

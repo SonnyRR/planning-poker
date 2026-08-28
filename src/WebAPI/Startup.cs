@@ -1,68 +1,74 @@
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-namespace PlanningPoker.WebAPI
+namespace PlanningPoker.WebAPI;
+
+using CorrelationId;
+
+using Extensions;
+
+using Hubs;
+
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+
+using PlanningPoker.SharedKernel.Extensions;
+
+using Scalar.AspNetCore;
+
+using Serilog;
+
+using static SharedKernel.Constants.Hubs;
+
+public class Startup
 {
-    using CorrelationId;
-    using Extensions;
-    using Hubs;
-    using Microsoft.AspNetCore.Builder;
-    using Microsoft.AspNetCore.Hosting;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Hosting;
-    using PlanningPoker.SharedKernel.Extensions;
-    using Scalar.AspNetCore;
-    using Serilog;
-    using static SharedKernel.Constants.Hubs;
+    public Startup(IConfiguration configuration) => this.Configuration = configuration;
 
-    public class Startup
+    public IConfiguration Configuration { get; }
+
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
-        public Startup(IConfiguration configuration) => this.Configuration = configuration;
+        app.UseResponseCompression();
 
-        public IConfiguration Configuration { get; }
-
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        if (env.IsDevelopment())
         {
-            app.UseResponseCompression();
-
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Error");
-                app.UseHsts();
-            }
-
-            app.UseHttpsRedirection();
-            app.UseCorrelationId();
-            app.UseSerilogIngestion();
-            app.UseSerilogRequestLogging();
-            app.UseRouting();
-            app.UseAuthentication();
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapOpenApi();
-                endpoints.MapScalarApiReference(
-                    "/planning-poker/documentation",
-                    options =>
-                    {
-                        options.WithTitle("Planning Poker API V1");
-                        options.WithOperationTitleSource(OperationTitleSource.Path);
-                        options.SortTagsAlphabetically();
-
-                    });
-                endpoints.MapDefaultControllerRoute();
-                endpoints.MapHub<PokerHub>(POKER_HUB_URI);
-            });
+            app.UseDeveloperExceptionPage();
+        }
+        else
+        {
+            app.UseExceptionHandler("/Error");
+            app.UseHsts();
         }
 
-        public void ConfigureServices(IServiceCollection services)
+        app.UseHttpsRedirection();
+        app.UseCorrelationId();
+        app.UseSerilogIngestion();
+        app.UseSerilogRequestLogging();
+        app.UseRouting();
+        app.UseAuthentication();
+        app.UseAuthorization();
+
+        app.UseEndpoints(endpoints =>
         {
-            services.AddSharedKernelServices();
-            services.AddApiServices(this.Configuration);
-        }
+            endpoints.MapOpenApi();
+            endpoints.MapScalarApiReference(
+                "/planning-poker/documentation",
+                options =>
+                {
+                    options.WithTitle("Planning Poker API V1");
+                    options.WithOperationTitleSource(OperationTitleSource.Path);
+                    options.SortTagsAlphabetically();
+
+                });
+            endpoints.MapDefaultControllerRoute();
+            endpoints.MapHub<PokerHub>(POKER_HUB_URI);
+        });
+    }
+
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.AddSharedKernelServices();
+        services.AddApiServices(this.Configuration);
     }
 }

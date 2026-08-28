@@ -1,11 +1,11 @@
-namespace PlanningPoker.Client
-{
-    using Microsoft.AspNetCore.Components;
-    using System;
+namespace PlanningPoker.Client;
 
-    [EventHandler("ontransitionend", typeof(EventArgs), enableStopPropagation: true, enablePreventDefault: false)]
-    [EventHandler("onanimationend", typeof(EventArgs), enableStopPropagation: true, enablePreventDefault: false)]
-    public static class EventHandlers
-    {
-    }
+using System;
+
+using Microsoft.AspNetCore.Components;
+
+[EventHandler("ontransitionend", typeof(EventArgs), enableStopPropagation: true, enablePreventDefault: false)]
+[EventHandler("onanimationend", typeof(EventArgs), enableStopPropagation: true, enablePreventDefault: false)]
+public static class EventHandlers
+{
 }

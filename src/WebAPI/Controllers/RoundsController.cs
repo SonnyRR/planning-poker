@@ -1,80 +1,78 @@
-namespace PlanningPoker.WebAPI
+namespace PlanningPoker.WebAPI.Controllers;
+
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
+
+using PlanningPoker.Core.Services;
+using PlanningPoker.Generated.Models;
+using PlanningPoker.SharedKernel.Models.Binding;
+using PlanningPoker.Sockets;
+using PlanningPoker.WebAPI.Hubs;
+
+/// <summary>
+/// Responsible for managing work item estimation rounds.
+/// </summary>
+[Authorize]
+public class RoundsController : BasePokerController
 {
-    using System;
-    using System.Threading;
-    using System.Threading.Tasks;
+    private const string ID_ROUTE_PARAM = "{id:guid}";
 
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.SignalR;
-
-    using PlanningPoker.Core.Services;
-    using PlanningPoker.Generated.Models;
-    using PlanningPoker.SharedKernel.Models.Binding;
-    using PlanningPoker.Sockets;
-    using PlanningPoker.WebAPI.Controllers;
-    using PlanningPoker.WebAPI.Hubs;
+    private readonly IRoundService roundService;
+    private readonly IHubContext<PokerHub, IPokerClient> pokerHub;
 
     /// <summary>
-    /// Responsible for managing work item estimation rounds.
+    /// Instantiates a new rounds controller.
     /// </summary>
-    [Authorize]
-    public class RoundsController : BasePokerController
+    /// <param name="roundService"></param>
+    /// <param name="pokerHub"></param>
+    public RoundsController(IRoundService roundService, IHubContext<PokerHub, IPokerClient> pokerHub)
     {
-        private const string ID_ROUTE_PARAM = "{id:guid}";
+        this.roundService = roundService;
+        this.pokerHub = pokerHub;
+    }
 
-        private readonly IRoundService roundService;
-        private readonly IHubContext<PokerHub, IPokerClient> pokerHub;
+    /// <summary>
+    /// Creates a new work item estimation round.
+    /// </summary>
+    /// <param name="bindingModel">The input model.</param>
+    /// <param name="ct">The cancellation token.</param>
+    /// <returns>An instance of <see cref="RoundModel"/>.</returns>
+    [HttpPost]
+    public async Task<IActionResult> CreateAsync([FromBody] RoundBindingModel bindingModel, CancellationToken ct)
+    {
+        var round = await this.roundService.CreateAsync(bindingModel, ct);
+        await this.pokerHub.Clients.Group(bindingModel.TableId.ToString()).CreateVotingRound(round);
+        return this.Created();
+    }
 
-        /// <summary>
-        /// Instantiates a new rounds controller.
-        /// </summary>
-        /// <param name="roundService"></param>
-        /// <param name="pokerHub"></param>
-        public RoundsController(IRoundService roundService, IHubContext<PokerHub, IPokerClient> pokerHub)
-        {
-            this.roundService = roundService;
-            this.pokerHub = pokerHub;
-        }
+    /// <summary>
+    /// Deletes a work item estimation round.
+    /// </summary>
+    /// <param name="id">The round's identifier.</param>
+    /// <param name="tableId"></param>
+    /// <param name="ct">The cancellation token.</param>
+    [HttpDelete(ID_ROUTE_PARAM + "/{tableId:guid}")]
+    public async Task<IActionResult> DeleteAsync([FromRoute] Guid id, [FromRoute] Guid tableId, CancellationToken ct)
+    {
+        await this.roundService.DeleteAsync(id, ct);
+        await this.pokerHub.Clients.Group(tableId.ToString()).DeleteVotingRound(id);
+        return this.NoContent();
+    }
 
-        /// <summary>
-        /// Creates a new work item estimation round.
-        /// </summary>
-        /// <param name="bindingModel">The input model.</param>
-        /// <param name="ct">The cancellation token.</param>
-        /// <returns>An instance of <see cref="RoundModel"/>.</returns>
-        [HttpPost]
-        public async Task<IActionResult> CreateAsync([FromBody] RoundBindingModel bindingModel, CancellationToken ct)
-        {
-            var round = await this.roundService.CreateAsync(bindingModel, ct);
-            await this.pokerHub.Clients.Group(bindingModel.TableId.ToString()).CreateVotingRound(round);
-            return this.Created();
-        }
-
-        /// <summary>
-        /// Deletes a work item estimation round.
-        /// </summary>
-        /// <param name="id">The round's identifier.</param>
-        /// <param name="tableId"></param>
-        /// <param name="ct">The cancellation token.</param>
-        [HttpDelete(ID_ROUTE_PARAM + "/{tableId:guid}")]
-        public async Task<IActionResult> DeleteAsync([FromRoute] Guid id, [FromRoute] Guid tableId, CancellationToken ct)
-        {
-            await this.roundService.DeleteAsync(id, ct);
-            await this.pokerHub.Clients.Group(tableId.ToString()).DeleteVotingRound(id);
-            return this.NoContent();
-        }
-
-        /// <summary>
-        /// Finalizes a work item estimation round.
-        /// </summary>
-        /// <param name="id">The round's identifier.</param>
-        /// <param name="ct">The cancellation token.</param>
+    /// <summary>
+    /// Finalizes a work item estimation round.
+    /// </summary>
+    /// <param name="_id">The round's identifier.</param>
+    /// <param name="_ct">The cancellation token.</param>
 #pragma warning disable IDE0060 // Remove unused parameter
-        [HttpPost($"{ID_ROUTE_PARAM}/finalize")]
-        public IActionResult Finalize([FromRoute] Guid _id, CancellationToken _ct)
-        {
-            return this.Ok();
-        }
+    [HttpPost($"{ID_ROUTE_PARAM}/finalize")]
+    public IActionResult Finalize([FromRoute] Guid _id, CancellationToken _ct)
+    {
+        return this.Ok();
     }
 }

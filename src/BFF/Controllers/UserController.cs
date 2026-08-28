@@ -1,78 +1,77 @@
-namespace PlanningPoker.BFF.Controllers
+namespace PlanningPoker.BFF.Controllers;
+
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+
+using IdentityModel;
+
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+
+using PlanningPoker.SharedKernel.Models.Authorization;
+
+[Route("api/[controller]")]
+[ApiController]
+public class UserController : ControllerBase
 {
-    using IdentityModel;
-
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Mvc;
-
-    using PlanningPoker.SharedKernel.Models.Authorization;
-
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Security.Claims;
-
-    [Route("api/[controller]")]
-    [ApiController]
-    public class UserController : ControllerBase
+    [HttpGet]
+    [AllowAnonymous]
+    public IActionResult GetCurrentUser()
     {
-        [HttpGet]
-        [AllowAnonymous]
-        public IActionResult GetCurrentUser()
+        return this.Ok(this.User.Identity.IsAuthenticated ? CreateUserInfo(this.User) : UserInfo.Anonymous);
+    }
+
+    private static UserInfo CreateUserInfo(ClaimsPrincipal claimsPrincipal)
+    {
+        if (!claimsPrincipal.Identity.IsAuthenticated)
         {
-            return this.Ok(this.User.Identity.IsAuthenticated ? CreateUserInfo(this.User) : UserInfo.Anonymous);
+            return UserInfo.Anonymous;
         }
 
-        private static UserInfo CreateUserInfo(ClaimsPrincipal claimsPrincipal)
+        var userInfo = new UserInfo
         {
-            if (!claimsPrincipal.Identity.IsAuthenticated)
+            IsAuthenticated = true
+        };
+
+        if (claimsPrincipal.Identity is ClaimsIdentity claimsIdentity)
+        {
+            userInfo.NameClaimType = claimsIdentity.NameClaimType;
+            userInfo.RoleClaimType = claimsIdentity.RoleClaimType;
+        }
+        else
+        {
+            userInfo.NameClaimType = JwtClaimTypes.Name;
+            userInfo.RoleClaimType = JwtClaimTypes.Role;
+        }
+
+        userInfo.EmailClaimType = JwtClaimTypes.Email;
+
+        if (claimsPrincipal.Claims.Any())
+        {
+            List<ClaimValue> claims = [];
+
+            foreach (var claim in claimsPrincipal.FindAll(userInfo.NameClaimType))
             {
-                return UserInfo.Anonymous;
+                claims.Add(new ClaimValue(userInfo.NameClaimType, claim.Value));
             }
 
-            var userInfo = new UserInfo
+            foreach (var claim in claimsPrincipal.FindAll(userInfo.EmailClaimType))
             {
-                IsAuthenticated = true
-            };
-
-            if (claimsPrincipal.Identity is ClaimsIdentity claimsIdentity)
-            {
-                userInfo.NameClaimType = claimsIdentity.NameClaimType;
-                userInfo.RoleClaimType = claimsIdentity.RoleClaimType;
+                claims.Add(new ClaimValue(userInfo.EmailClaimType, claim.Value));
             }
-            else
-            {
-                userInfo.NameClaimType = JwtClaimTypes.Name;
-                userInfo.RoleClaimType = JwtClaimTypes.Role;
-            }
-
-            userInfo.EmailClaimType = JwtClaimTypes.Email;
-
-            if (claimsPrincipal.Claims.Any())
-            {
-                List<ClaimValue> claims = [];
-
-                foreach (var claim in claimsPrincipal.FindAll(userInfo.NameClaimType))
-                {
-                    claims.Add(new ClaimValue(userInfo.NameClaimType, claim.Value));
-                }
-
-                foreach (var claim in claimsPrincipal.FindAll(userInfo.EmailClaimType))
-                {
-                    claims.Add(new ClaimValue(userInfo.EmailClaimType, claim.Value));
-                }
 
 #pragma warning disable S125 // Sections of code should not be commented out
-                // Uncomment this code if you want to send additional claims to the client.
-                //foreach (var claim in claimsPrincipal.Claims.Except(nameClaims))
-                //{
-                //    claims.Add(new ClaimValue(claim.Type, claim.Value));
-                //}
+            // Uncomment this code if you want to send additional claims to the client.
+            //foreach (var claim in claimsPrincipal.Claims.Except(nameClaims))
+            //{
+            //    claims.Add(new ClaimValue(claim.Type, claim.Value));
+            //}
 #pragma warning restore S125 // Sections of code should not be commented out
 
-                userInfo.Claims = claims;
-            }
-
-            return userInfo;
+            userInfo.Claims = claims;
         }
+
+        return userInfo;
     }
 }

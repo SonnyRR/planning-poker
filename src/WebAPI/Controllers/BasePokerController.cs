@@ -1,13 +1,12 @@
-namespace PlanningPoker.WebAPI.Controllers
-{
-    using Microsoft.AspNetCore.Mvc;
+namespace PlanningPoker.WebAPI.Controllers;
 
-    /// <summary>
-    /// Base controller.
-    /// </summary>
-    [ApiController]
-    [Route("api/[controller]")]
-    public abstract class BasePokerController : ControllerBase
-    {
-    }
+using Microsoft.AspNetCore.Mvc;
+
+/// <summary>
+/// Base controller.
+/// </summary>
+[ApiController]
+[Route("api/[controller]")]
+public abstract class BasePokerController : ControllerBase
+{
 }

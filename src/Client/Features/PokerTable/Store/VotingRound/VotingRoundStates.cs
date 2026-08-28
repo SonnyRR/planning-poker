@@ -1,25 +1,24 @@
-namespace PlanningPoker.Client.Features.PokerTable.Store.VotingRound
+namespace PlanningPoker.Client.Features.PokerTable.Store.VotingRound;
+
+using PlanningPoker.Generated.Models;
+
+public static class VotingRoundStates
 {
-    using PlanningPoker.Generated.Models;
-
-    public static class VotingRoundStates
+    public record VotingRoundCreationState
     {
-        public record VotingRoundCreationState
-        {
-            public bool Submitting { get; init; }
+        public bool Submitting { get; init; }
 
-            public bool Submitted { get; init; }
+        public bool Submitted { get; init; }
 
-            public string ErrorMessage { get; init; }
-        }
+        public string ErrorMessage { get; init; }
+    }
 
-        public record VotingRoundsState
-        {
-            public bool IsInitialized { get; init; }
+    public record VotingRoundsState
+    {
+        public bool IsInitialized { get; init; }
 
-            public bool IsLoading { get; init; }
+        public bool IsLoading { get; init; }
 
-            public RoundModel[] Rounds { get; init; }
-        }
+        public RoundModel[] Rounds { get; init; }
     }
 }

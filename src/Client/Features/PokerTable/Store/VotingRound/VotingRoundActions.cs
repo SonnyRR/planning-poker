@@ -1,27 +1,27 @@
-namespace PlanningPoker.Client.Features.PokerTable.Store.VotingRound
+namespace PlanningPoker.Client.Features.PokerTable.Store.VotingRound;
+
+using System;
+
+using PlanningPoker.Generated.Models;
+
+public class StartVotingRoundAction
 {
-    using PlanningPoker.Generated.Models;
-    using System;
+    public StartVotingRoundAction(Guid tableId)
+        => this.TableId = tableId;
 
-    public class StartVotingRoundAction
-    {
-        public StartVotingRoundAction(Guid tableId)
-            => this.TableId = tableId;
+    public Guid TableId { get; init; }
+}
 
-        public Guid TableId { get; init; }
-    }
+public class SetVotingRoundLoadingAction
+{
+    public SetVotingRoundLoadingAction(bool flag = true) => this.Flag = flag;
 
-    public class SetVotingRoundLoadingAction
-    {
-        public SetVotingRoundLoadingAction(bool flag = true) => this.Flag = flag;
+    public bool Flag { get; init; }
+}
 
-        public bool Flag { get; init; }
-    }
+public class SetVotingRoundAction
+{
+    public SetVotingRoundAction(RoundModel round) => this.Round = round;
 
-    public class SetVotingRoundAction
-    {
-        public SetVotingRoundAction(RoundModel round) => this.Round = round;
-
-        public RoundModel Round { get; init; }
-    }
+    public RoundModel Round { get; init; }
 }

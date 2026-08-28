@@ -1,10 +1,9 @@
-namespace PlanningPoker.Client
+namespace PlanningPoker.Client;
+
+public enum CardStates
 {
-    public enum CardStates
-    {
-        Pending = 1,
-        Voted,
-        Revealing,
-        Revealed
-    }
+    Pending = 1,
+    Voted,
+    Revealing,
+    Revealed
 }

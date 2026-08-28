@@ -1,13 +1,12 @@
-namespace PlanningPoker.Identity.Models.View
+namespace PlanningPoker.Identity.Models.View;
+
+using System.ComponentModel.DataAnnotations;
+
+public class ErrorViewModel
 {
-    using System.ComponentModel.DataAnnotations;
+    [Display(Name = "Error")]
+    public string Error { get; set; }
 
-    public class ErrorViewModel
-    {
-        [Display(Name = "Error")]
-        public string Error { get; set; }
-
-        [Display(Name = "Description")]
-        public string ErrorDescription { get; set; }
-    }
+    [Display(Name = "Description")]
+    public string ErrorDescription { get; set; }
 }

@@ -1,13 +1,12 @@
-namespace PlanningPoker.BFF.Models.View
+namespace PlanningPoker.BFF.Models.View;
+
+using System.ComponentModel.DataAnnotations;
+
+public sealed class AuthorizeViewModel
 {
-    using System.ComponentModel.DataAnnotations;
+    [Display(Name = "Application")]
+    public string ApplicationName { get; set; }
 
-    public sealed class AuthorizeViewModel
-    {
-        [Display(Name = "Application")]
-        public string ApplicationName { get; set; }
-
-        [Display(Name = "Scope")]
-        public string Scope { get; set; }
-    }
+    [Display(Name = "Scope")]
+    public string Scope { get; set; }
 }

@@ -1,9 +1,10 @@
 namespace PlanningPoker.Core.Services;
-    using PlanningPoker.Generated.Models;
-    using PlanningPoker.SharedKernel.Models.Binding;
     using System;
     using System.Threading;
     using System.Threading.Tasks;
+
+    using PlanningPoker.Generated.Models;
+    using PlanningPoker.SharedKernel.Models.Binding;
 
     public interface IRoundService
     {

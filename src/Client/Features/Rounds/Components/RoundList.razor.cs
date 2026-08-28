@@ -1,148 +1,150 @@
-namespace PlanningPoker.Client.Features.Rounds.Components
+namespace PlanningPoker.Client.Features.Rounds.Components;
+
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+using Microsoft.AspNetCore.Components;
+
+using PlanningPoker.Generated.Models;
+
+using Radzen;
+
+public partial class RoundList
 {
-    using Microsoft.AspNetCore.Components;
-    using PlanningPoker.Generated.Models;
-    using Radzen;
-    using System;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
+    [Parameter]
+    public Guid TableId { get; set; }
 
-    public partial class RoundList
-    {
-        [Parameter]
-        public Guid TableId { get; set; }
-
-        public RoundModel[] Rounds => [
-            new RoundModel
-            {
-                Description = "t1",
-                StartedOn = DateTimeOffset.UtcNow.AddSeconds(-60),
-                EndedOn = DateTimeOffset.UtcNow,
-            },
-            new RoundModel
-            {
-                Description = "t2",
-                StartedOn = DateTimeOffset.UtcNow.AddSeconds(-60),
-                EndedOn = DateTimeOffset.UtcNow,
-                FinalEstimation = 3f
-            },
-            new RoundModel
-            {
-                Description = "t2",
-                StartedOn = DateTimeOffset.UtcNow.AddSeconds(-60),
-                EndedOn = DateTimeOffset.UtcNow,
-                FinalEstimation = 3f
-            },
-            new RoundModel
-            {
-                Description = "t2",
-                StartedOn = DateTimeOffset.UtcNow.AddSeconds(-60),
-                EndedOn = DateTimeOffset.UtcNow,
-                FinalEstimation = 3f
-            },
-            new RoundModel
-            {
-                Description = "t2",
-                StartedOn = DateTimeOffset.UtcNow.AddSeconds(-60),
-                EndedOn = DateTimeOffset.UtcNow,
-                FinalEstimation = 3f
-            },
-            new RoundModel
-            {
-                Description = "t2",
-                StartedOn = DateTimeOffset.UtcNow.AddSeconds(-60),
-                EndedOn = DateTimeOffset.UtcNow,
-                FinalEstimation = 3f
-            },
-            new RoundModel
-            {
-                Description = "t2",
-                StartedOn = DateTimeOffset.UtcNow.AddSeconds(-60),
-                EndedOn = DateTimeOffset.UtcNow,
-                FinalEstimation = 3f
-            },
-            new RoundModel
-            {
-                Description = "t2",
-                StartedOn = DateTimeOffset.UtcNow.AddSeconds(-60),
-                EndedOn = DateTimeOffset.UtcNow,
-                FinalEstimation = 3f
-            },
-            new RoundModel
-            {
-                Description = "t2",
-                StartedOn = DateTimeOffset.UtcNow.AddSeconds(-60),
-                EndedOn = DateTimeOffset.UtcNow,
-                FinalEstimation = 3f
-            },
-            new RoundModel
-            {
-                Description = "t2",
-                StartedOn = DateTimeOffset.UtcNow.AddSeconds(-60),
-                EndedOn = DateTimeOffset.UtcNow,
-                FinalEstimation = 3f
-            },
-            new RoundModel
-            {
-                Description = "t2",
-                StartedOn = DateTimeOffset.UtcNow.AddSeconds(-60),
-                EndedOn = DateTimeOffset.UtcNow,
-                FinalEstimation = 3f
-            },
-            new RoundModel
-            {
-                Description = "t2",
-                StartedOn = DateTimeOffset.UtcNow.AddSeconds(-60),
-                EndedOn = DateTimeOffset.UtcNow,
-                FinalEstimation = 3f
-            },
-            new RoundModel
-            {
-                Description = "t2",
-                StartedOn = DateTimeOffset.UtcNow.AddSeconds(-60),
-                EndedOn = DateTimeOffset.UtcNow,
-                FinalEstimation = 3f
-            },
-            new RoundModel
-            {
-                Description = "t2",
-                StartedOn = DateTimeOffset.UtcNow.AddSeconds(-60),
-                EndedOn = DateTimeOffset.UtcNow,
-                FinalEstimation = 3f
-            },
-            new RoundModel
-            {
-                Description = "t2",
-                StartedOn = DateTimeOffset.UtcNow.AddSeconds(-60),
-                EndedOn = DateTimeOffset.UtcNow,
-                FinalEstimation = 3f
-            },
-            new RoundModel
-            {
-                Description = "t2",
-                StartedOn = DateTimeOffset.UtcNow.AddSeconds(-60),
-                EndedOn = DateTimeOffset.UtcNow,
-                FinalEstimation = 3f
-             }
-        ];
-
-        [Inject]
-        public DialogService DialogService { get; set; }
-
-        public async Task CreateVotingRound()
+    public RoundModel[] Rounds => [
+        new RoundModel
         {
-            var parameters = new Dictionary<string, object>
-            {
-                { "TableId", this.TableId }
-            };
+            Description = "t1",
+            StartedOn = DateTimeOffset.UtcNow.AddSeconds(-60),
+            EndedOn = DateTimeOffset.UtcNow,
+        },
+        new RoundModel
+        {
+            Description = "t2",
+            StartedOn = DateTimeOffset.UtcNow.AddSeconds(-60),
+            EndedOn = DateTimeOffset.UtcNow,
+            FinalEstimation = 3f
+        },
+        new RoundModel
+        {
+            Description = "t2",
+            StartedOn = DateTimeOffset.UtcNow.AddSeconds(-60),
+            EndedOn = DateTimeOffset.UtcNow,
+            FinalEstimation = 3f
+        },
+        new RoundModel
+        {
+            Description = "t2",
+            StartedOn = DateTimeOffset.UtcNow.AddSeconds(-60),
+            EndedOn = DateTimeOffset.UtcNow,
+            FinalEstimation = 3f
+        },
+        new RoundModel
+        {
+            Description = "t2",
+            StartedOn = DateTimeOffset.UtcNow.AddSeconds(-60),
+            EndedOn = DateTimeOffset.UtcNow,
+            FinalEstimation = 3f
+        },
+        new RoundModel
+        {
+            Description = "t2",
+            StartedOn = DateTimeOffset.UtcNow.AddSeconds(-60),
+            EndedOn = DateTimeOffset.UtcNow,
+            FinalEstimation = 3f
+        },
+        new RoundModel
+        {
+            Description = "t2",
+            StartedOn = DateTimeOffset.UtcNow.AddSeconds(-60),
+            EndedOn = DateTimeOffset.UtcNow,
+            FinalEstimation = 3f
+        },
+        new RoundModel
+        {
+            Description = "t2",
+            StartedOn = DateTimeOffset.UtcNow.AddSeconds(-60),
+            EndedOn = DateTimeOffset.UtcNow,
+            FinalEstimation = 3f
+        },
+        new RoundModel
+        {
+            Description = "t2",
+            StartedOn = DateTimeOffset.UtcNow.AddSeconds(-60),
+            EndedOn = DateTimeOffset.UtcNow,
+            FinalEstimation = 3f
+        },
+        new RoundModel
+        {
+            Description = "t2",
+            StartedOn = DateTimeOffset.UtcNow.AddSeconds(-60),
+            EndedOn = DateTimeOffset.UtcNow,
+            FinalEstimation = 3f
+        },
+        new RoundModel
+        {
+            Description = "t2",
+            StartedOn = DateTimeOffset.UtcNow.AddSeconds(-60),
+            EndedOn = DateTimeOffset.UtcNow,
+            FinalEstimation = 3f
+        },
+        new RoundModel
+        {
+            Description = "t2",
+            StartedOn = DateTimeOffset.UtcNow.AddSeconds(-60),
+            EndedOn = DateTimeOffset.UtcNow,
+            FinalEstimation = 3f
+        },
+        new RoundModel
+        {
+            Description = "t2",
+            StartedOn = DateTimeOffset.UtcNow.AddSeconds(-60),
+            EndedOn = DateTimeOffset.UtcNow,
+            FinalEstimation = 3f
+        },
+        new RoundModel
+        {
+            Description = "t2",
+            StartedOn = DateTimeOffset.UtcNow.AddSeconds(-60),
+            EndedOn = DateTimeOffset.UtcNow,
+            FinalEstimation = 3f
+        },
+        new RoundModel
+        {
+            Description = "t2",
+            StartedOn = DateTimeOffset.UtcNow.AddSeconds(-60),
+            EndedOn = DateTimeOffset.UtcNow,
+            FinalEstimation = 3f
+        },
+        new RoundModel
+        {
+            Description = "t2",
+            StartedOn = DateTimeOffset.UtcNow.AddSeconds(-60),
+            EndedOn = DateTimeOffset.UtcNow,
+            FinalEstimation = 3f
+         }
+    ];
 
-            var dialogOptions = new DialogOptions
-            {
-                Height = "38%",
-                Width = "50%"
-            };
+    [Inject]
+    public DialogService DialogService { get; set; }
 
-            await this.DialogService.OpenAsync<CreateRound>("Create Round", parameters, dialogOptions);
-        }
+    public async Task CreateVotingRound()
+    {
+        var parameters = new Dictionary<string, object>
+        {
+            { "TableId", this.TableId }
+        };
+
+        var dialogOptions = new DialogOptions
+        {
+            Height = "38%",
+            Width = "50%"
+        };
+
+        await this.DialogService.OpenAsync<CreateRound>("Create Round", parameters, dialogOptions);
     }
 }

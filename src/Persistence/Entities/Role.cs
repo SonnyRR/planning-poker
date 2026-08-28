@@ -1,16 +1,16 @@
-namespace PlanningPoker.Persistence.Entities
+namespace PlanningPoker.Persistence.Entities;
+
+using System;
+
+using Microsoft.AspNetCore.Identity;
+
+public sealed class Role : IdentityRole<Guid>, IAuditableEntity, IDeletableEntity
 {
-    using Microsoft.AspNetCore.Identity;
-    using System;
+    public DateTimeOffset CreatedOn { get; set; }
 
-    public sealed class Role : IdentityRole<Guid>, IAuditableEntity, IDeletableEntity
-    {
-        public DateTimeOffset CreatedOn { get; set; }
+    public DateTimeOffset? DeletedOn { get; set; }
 
-        public DateTimeOffset? DeletedOn { get; set; }
+    public bool IsDeleted { get; set; }
 
-        public bool IsDeleted { get; set; }
-
-        public DateTimeOffset? ModifiedOn { get; set; }
-    }
+    public DateTimeOffset? ModifiedOn { get; set; }
 }

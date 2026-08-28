@@ -1,54 +1,56 @@
-namespace PlanningPoker.Client.Components
+namespace PlanningPoker.Client.Components;
+
+using System.Text.Json;
+using System.Threading.Tasks;
+
+using Ardalis.GuardClauses;
+
+using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Logging;
+
+using PlanningPoker.SharedKernel;
+using PlanningPoker.SharedKernel.Models.Tables;
+
+using Radzen;
+
+/// <summary>
+/// Prompts the user to enter an existing poker table room or create a new one.
+/// </summary>
+public partial class TableSelector
 {
-    using Ardalis.GuardClauses;
-    using Microsoft.AspNetCore.Components;
-    using Microsoft.Extensions.Logging;
-    using PlanningPoker.SharedKernel;
-    using PlanningPoker.SharedKernel.Models.Tables;
+    public JoinExistingTableRequest JoinTableParameters { get; set; } = new();
 
-    using Radzen;
-    using System.Text.Json;
-    using System.Threading.Tasks;
+    [Inject]
+    public ILogger<TableSelector> Logger { get; init; }
 
-    /// <summary>
-    /// Prompts the user to enter an existing poker table room or create a new one.
-    /// </summary>
-    public partial class TableSelector
+    [Inject]
+    public NavigationManager NavigationManager { get; init; }
+
+    [Parameter]
+    public EventCallback OnTableCreationCallback { get; set; }
+
+    public bool ShowTableIdentifierInput { get; set; }
+
+    [Parameter]
+    public EventCallback<JoinExistingTableRequest> TableIdChanged { get; set; }
+
+    [Inject(Key = nameof(JsonSerializerConfigurations.LoggingSettings))]
+    private JsonSerializerOptions LoggingSerializerOptions { get; init; }
+
+    public async Task OnTableCreationSubmit()
     {
-        public JoinExistingTableRequest JoinTableParameters { get; set; } = new();
+        await this.OnTableCreationCallback.InvokeAsync();
+    }
 
-        [Inject]
-        public ILogger<TableSelector> Logger { get; init; }
+    public void OnTableJoinInvalidSubmit(FormInvalidSubmitEventArgs args)
+    {
+        Guard.Against.Null(args);
+        this.Logger.LogError("Invalid Form Submit: {Args}", JsonSerializer.Serialize(args, this.LoggingSerializerOptions));
+    }
 
-        [Inject]
-        public NavigationManager NavigationManager { get; init; }
-
-        [Parameter]
-        public EventCallback OnTableCreationCallback { get; set; }
-
-        public bool ShowTableIdentifierInput { get; set; }
-
-        [Parameter]
-        public EventCallback<JoinExistingTableRequest> TableIdChanged { get; set; }
-
-        [Inject(Key = nameof(JsonSerializerConfigurations.LoggingSettings))]
-        private JsonSerializerOptions LoggingSerializerOptions { get; init; }
-
-        public async Task OnTableCreationSubmit()
-        {
-            await this.OnTableCreationCallback.InvokeAsync();
-        }
-
-        public void OnTableJoinInvalidSubmit(FormInvalidSubmitEventArgs args)
-        {
-            Guard.Against.Null(args, nameof(args));
-            this.Logger.LogError("Invalid Form Submit: {Args}", JsonSerializer.Serialize(args, this.LoggingSerializerOptions));
-        }
-
-        public async Task OnTableJoinValidSubmitAsync()
-        {
-            this.Logger.LogDebug("Attempting to join table {TableId}", this.JoinTableParameters.Code);
-            await this.TableIdChanged.InvokeAsync(this.JoinTableParameters);
-        }
+    public async Task OnTableJoinValidSubmitAsync()
+    {
+        this.Logger.LogDebug("Attempting to join table {TableId}", this.JoinTableParameters.Code);
+        await this.TableIdChanged.InvokeAsync(this.JoinTableParameters);
     }
 }

@@ -1,38 +1,38 @@
-namespace PlanningPoker.Client.Components
+namespace PlanningPoker.Client.Components;
+
+using System.Threading.Tasks;
+
+using Microsoft.AspNetCore.Components;
+
+public partial class Card
 {
-    using Microsoft.AspNetCore.Components;
-    using System.Threading.Tasks;
+    private bool clicking;
 
-    public partial class Card
+    [Parameter]
+    public string UnicodeValue { get; set; }
+
+    [Parameter]
+    public float Value { get; set; }
+
+    [Parameter]
+    public EventCallback<float> Click { get; set; }
+
+    public virtual async Task OnClick()
     {
-        private bool clicking;
-
-        [Parameter]
-        public string UnicodeValue { get; set; }
-
-        [Parameter]
-        public float Value { get; set; }
-
-        [Parameter]
-        public EventCallback<float> Click { get; set; }
-
-        public virtual async Task OnClick()
+        if (this.clicking)
         {
-            if (this.clicking)
-            {
-                return;
-            }
+            return;
+        }
 
-            try
-            {
-                this.clicking = true;
+        try
+        {
+            this.clicking = true;
 
-                await this.Click.InvokeAsync(this.Value);
-            }
-            finally
-            {
-                this.clicking = false;
-            }
+            await this.Click.InvokeAsync(this.Value);
+        }
+        finally
+        {
+            this.clicking = false;
         }
     }
 }

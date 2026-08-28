@@ -1,15 +1,15 @@
-namespace PlanningPoker.Persistence.Entities
+namespace PlanningPoker.Persistence.Entities;
+
+using System;
+using System.Collections.Generic;
+
+using Microsoft.AspNetCore.Identity;
+
+public sealed class User : IdentityUser<Guid>, IDeletableEntity
 {
-    using Microsoft.AspNetCore.Identity;
-    using System;
-    using System.Collections.Generic;
+    public DateTimeOffset? DeletedOn { get; set; }
 
-    public sealed class User : IdentityUser<Guid>, IDeletableEntity
-    {
-        public DateTimeOffset? DeletedOn { get; set; }
+    public bool IsDeleted { get; set; }
 
-        public bool IsDeleted { get; set; }
-
-        public IList<Table> Tables { get; set; } = [];
-    }
+    public IList<Table> Tables { get; set; } = [];
 }

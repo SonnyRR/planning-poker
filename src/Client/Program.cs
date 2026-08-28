@@ -1,46 +1,45 @@
-namespace PlanningPoker.Client
+namespace PlanningPoker.Client;
+
+using System;
+using System.Threading.Tasks;
+
+using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+
+using PlanningPoker.Client.Extensions;
+using PlanningPoker.SharedKernel.Extensions;
+
+using Serilog;
+
+public static class Program
 {
-    using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-
-    using PlanningPoker.Client.Extensions;
-    using PlanningPoker.SharedKernel.Extensions;
-
-    using Serilog;
-
-    using System;
-    using System.Threading.Tasks;
-
-    public static class Program
+    public static async Task Main(string[] args)
     {
-        public static async Task Main(string[] args)
+        try
         {
-            try
-            {
-                var builder = WebAssemblyHostBuilder.CreateDefault(args);
+            var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
-                builder.Logging.AddSerilog(builder.Configuration);
-                builder.RootComponents.Add<App>("#app");
-                builder.Services.AddClientLayer(builder.HostEnvironment);
+            builder.Logging.AddSerilog(builder.Configuration);
+            builder.RootComponents.Add<App>("#app");
+            builder.Services.AddClientLayer(builder.HostEnvironment);
 
-                await builder.Build().RunAsync();
-            }
-            catch (Exception ex)
+            await builder.Build().RunAsync();
+        }
+        catch (Exception ex)
+        {
+            if (Log.Logger == null || Log.Logger.GetType().Name == "SilentLogger")
             {
-                if (Log.Logger == null || Log.Logger.GetType().Name == "SilentLogger")
-                {
-                    Log.Logger = new LoggerConfiguration()
-                        .MinimumLevel.Debug()
-                        .WriteTo.BrowserConsole()
-                        .CreateLogger();
-                }
+                Log.Logger = new LoggerConfiguration()
+                    .MinimumLevel.Debug()
+                    .WriteTo.BrowserConsole()
+                    .CreateLogger();
+            }
 
-                Log.Fatal(ex, "Host terminated unexpectedly");
-            }
-            finally
-            {
-                Log.Information("Shut down complete");
-                await Log.CloseAndFlushAsync();
-            }
+            Log.Fatal(ex, "Host terminated unexpectedly");
+        }
+        finally
+        {
+            Log.Information("Shut down complete");
+            await Log.CloseAndFlushAsync();
         }
     }
 }

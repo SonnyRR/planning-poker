@@ -1,5 +1,7 @@
 namespace PlanningPoker.SharedKernel.Extensions;
 
+using System;
+
 using Ardalis.GuardClauses;
 
 using CorrelationId.DependencyInjection;
@@ -7,8 +9,6 @@ using CorrelationId.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 
 using PlanningPoker.SharedKernel.Enrichers;
-
-using System;
 
 public static class IServiceCollectionExtensions
 {

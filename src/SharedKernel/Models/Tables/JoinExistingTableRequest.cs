@@ -1,7 +1,8 @@
 namespace PlanningPoker.SharedKernel.Models.Tables;
 
-using FluentValidation;
 using System;
+
+using FluentValidation;
 
 /// <summary>
 /// An application/request for joining an existing poker table.

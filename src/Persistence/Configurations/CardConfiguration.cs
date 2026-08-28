@@ -1,8 +1,11 @@
 namespace PlanningPoker.Persistence.Configurations;
+    using System;
+
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
     using PlanningPoker.Persistence.Entities;
-    using System;
+
     using static Constants;
 
     public class CardConfiguration : IEntityTypeConfiguration<Card>

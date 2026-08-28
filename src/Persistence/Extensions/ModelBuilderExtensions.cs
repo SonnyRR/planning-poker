@@ -1,24 +1,23 @@
-namespace PlanningPoker.Persistence.Extensions
+namespace PlanningPoker.Persistence.Extensions;
+
+using Microsoft.EntityFrameworkCore;
+
+internal static class ModelBuilderExtensions
 {
-    using Microsoft.EntityFrameworkCore;
-
-    internal static class ModelBuilderExtensions
+    internal static ModelBuilder RemoveIdentityTablesPrefix(this ModelBuilder builder)
     {
-        internal static ModelBuilder RemoveIdentityTablesPrefix(this ModelBuilder builder)
+        const string PREFIX = "AspNet";
+
+        foreach (var entityType in builder.Model.GetEntityTypes())
         {
-            const string PREFIX = "AspNet";
+            var tableName = entityType.GetTableName();
 
-            foreach (var entityType in builder.Model.GetEntityTypes())
+            if (!string.IsNullOrWhiteSpace(tableName) && tableName.StartsWith(PREFIX))
             {
-                var tableName = entityType.GetTableName();
-
-                if (!string.IsNullOrWhiteSpace(tableName) && tableName.StartsWith(PREFIX))
-                {
-                    entityType.SetTableName(tableName[PREFIX.Length..]);
-                }
+                entityType.SetTableName(tableName[PREFIX.Length..]);
             }
-
-            return builder;
         }
+
+        return builder;
     }
 }

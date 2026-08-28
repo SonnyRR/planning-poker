@@ -1,4 +1,9 @@
+using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+
 using JetBrains.Annotations;
+
 using Nuke.Common;
 using Nuke.Common.CI;
 using Nuke.Common.Git;
@@ -8,10 +13,9 @@ using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
 using Nuke.Common.Tools.Git;
 using Nuke.Common.Tools.GitVersion;
+
 using Serilog;
-using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
+
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
 [ShutdownDotNetAfterServerBuild]

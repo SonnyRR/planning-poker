@@ -1,10 +1,10 @@
 namespace PlanningPoker.SharedKernel.Extensions;
 
-using Ardalis.GuardClauses;
-
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+
+using Ardalis.GuardClauses;
 
 public static class IAsyncEnumerableExtensions
 {

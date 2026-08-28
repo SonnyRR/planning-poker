@@ -1,22 +1,20 @@
-namespace PlanningPoker.Persistence.Entities
+namespace PlanningPoker.Persistence.Entities;
+
+using System;
+
+public class Vote : BaseEntity<Guid>
 {
+    public Guid RoundId { get; set; }
 
-    using System;
+    public Round Round { get; set; }
 
-    public class Vote : BaseEntity<Guid>
-    {
-        public Guid RoundId { get; set; }
+    public float Estimation { get; set; }
 
-        public Round Round { get; set; }
+    public TimeSpan Duration { get; set; }
 
-        public float Estimation { get; set; }
+    public string Username { get; set; }
 
-        public TimeSpan Duration { get; set; }
+    public Guid? PlayerId { get; set; }
 
-        public string Username { get; set; }
-
-        public Guid? PlayerId { get; set; }
-
-        public User Player { get; set; }
-    }
+    public User Player { get; set; }
 }

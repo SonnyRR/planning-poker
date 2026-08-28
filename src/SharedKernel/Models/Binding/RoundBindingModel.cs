@@ -1,5 +1,6 @@
-using FluentValidation;
 using System;
+
+using FluentValidation;
 
 namespace PlanningPoker.SharedKernel.Models.Binding;
 

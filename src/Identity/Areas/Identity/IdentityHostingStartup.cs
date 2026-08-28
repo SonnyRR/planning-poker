@@ -1,13 +1,12 @@
 using Microsoft.AspNetCore.Hosting;
 
 [assembly: HostingStartup(typeof(PlanningPoker.Identity.Areas.Identity.IdentityHostingStartup))]
-namespace PlanningPoker.Identity.Areas.Identity
+namespace PlanningPoker.Identity.Areas.Identity;
+
+public class IdentityHostingStartup : IHostingStartup
 {
-    public class IdentityHostingStartup : IHostingStartup
+    public void Configure(IWebHostBuilder builder)
     {
-        public void Configure(IWebHostBuilder builder)
-        {
-            builder.ConfigureServices((_, _) => { });
-        }
+        builder.ConfigureServices((_, _) => { });
     }
 }

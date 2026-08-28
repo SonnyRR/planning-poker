@@ -1,26 +1,28 @@
-namespace PlanningPoker.Client.Features.PokerTable.Store.VotingRound
+namespace PlanningPoker.Client.Features.PokerTable.Store.VotingRound;
+
+using System;
+
+using Fluxor;
+
+using PlanningPoker.Generated.Models;
+
+using static VotingRoundStates;
+
+public static class VotingRoundFeatures
 {
-    using Fluxor;
-    using PlanningPoker.Generated.Models;
-    using System;
-    using static VotingRoundStates;
-
-    public static class VotingRoundFeatures
+    public class PokerTableCreateFeature : Feature<VotingRoundCreationState>
     {
-        public class PokerTableCreateFeature : Feature<VotingRoundCreationState>
-        {
-            public override string GetName() => nameof(VotingRoundCreationState);
+        public override string GetName() => nameof(VotingRoundCreationState);
 
-            protected override VotingRoundCreationState GetInitialState()
-                => new();
-        }
+        protected override VotingRoundCreationState GetInitialState()
+            => new();
+    }
 
-        public class PokerTableFeature : Feature<VotingRoundsState>
-        {
-            public override string GetName() => nameof(VotingRoundsState);
+    public class PokerTableFeature : Feature<VotingRoundsState>
+    {
+        public override string GetName() => nameof(VotingRoundsState);
 
-            protected override VotingRoundsState GetInitialState()
-                => new() { Rounds = [] };
-        }
+        protected override VotingRoundsState GetInitialState()
+            => new() { Rounds = [] };
     }
 }

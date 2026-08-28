@@ -1,16 +1,16 @@
-namespace PlanningPoker.Client
+namespace PlanningPoker.Client.Services;
+
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+
+using PlanningPoker.SharedKernel.Models.Binding;
+
+public interface IRoundService
 {
-    using PlanningPoker.SharedKernel.Models.Binding;
-    using System;
-    using System.Threading;
-    using System.Threading.Tasks;
+    Task CreateAsync(RoundBindingModel model, CancellationToken ct = default);
 
-    public interface IRoundService
-    {
-        Task CreateAsync(RoundBindingModel model, CancellationToken ct = default);
+    Task DeleteAsync(Guid id, CancellationToken ct = default);
 
-        Task DeleteAsync(Guid id, CancellationToken ct = default);
-
-        Task Finalize(CancellationToken ct = default);
-    }
+    Task Finalize(CancellationToken ct = default);
 }

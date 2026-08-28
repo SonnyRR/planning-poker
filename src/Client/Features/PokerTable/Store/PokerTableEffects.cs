@@ -1,47 +1,47 @@
-namespace PlanningPoker.Client.Features.PokerTable.Store
+namespace PlanningPoker.Client.Features.PokerTable.Store;
+
+using System.Threading.Tasks;
+
+using Fluxor;
+
+using PlanningPoker.Client.Services;
+
+public class PokerTableEffects
 {
-    using Actions;
-    using Fluxor;
-    using PlanningPoker.Client.Services;
-    using System.Threading.Tasks;
+    private readonly ITableService tableService;
 
-    public class PokerTableEffects
+    public PokerTableEffects(ITableService tableService)
+        => this.tableService = tableService;
+
+    [EffectMethod]
+    public async Task Create(PokerTableCreationAction action, IDispatcher dispatcher)
     {
-        private readonly ITableService tableService;
+        dispatcher.Dispatch(new PokerTableSetLoadingAction());
 
-        public PokerTableEffects(ITableService tableService)
-            => this.tableService = tableService;
-
-        [EffectMethod]
-        public async Task Create(PokerTableCreationAction action, IDispatcher dispatcher)
+        var table = await this.tableService.CreateAsync(action.BindingModel);
+        if (table is not null)
         {
-            dispatcher.Dispatch(new PokerTableSetLoadingAction());
-
-            var table = await this.tableService.CreateAsync(action.BindingModel);
-            if (table is not null)
-            {
-                dispatcher.Dispatch(new PokerTableSuccessfulCreationAction());
-                dispatcher.Dispatch(new PokerTableSetAction(table));
-                return;
-            }
-
-            dispatcher.Dispatch(new PokerTableSetLoadingAction(false));
-            dispatcher.Dispatch(new PokerTableUnsuccessfulCreationAction("Server error."));
-        }
-
-        [EffectMethod]
-        public async Task Load(PokerTableLoadAction action, IDispatcher dispatcher)
-        {
-            dispatcher.Dispatch(new PokerTableSetLoadingAction());
-            var table = await this.tableService.GetByIdAsync(action.Id);
+            dispatcher.Dispatch(new PokerTableSuccessfulCreationAction());
             dispatcher.Dispatch(new PokerTableSetAction(table));
+            return;
         }
 
-        [EffectMethod]
-        public async Task Leave(PokerTableLeaveAction action, IDispatcher dispatcher)
-        {
-            await this.tableService.LeaveAsync(action.Id);
-            dispatcher.Dispatch(new PokerTableSetAction(null));
-        }
+        dispatcher.Dispatch(new PokerTableSetLoadingAction(false));
+        dispatcher.Dispatch(new PokerTableUnsuccessfulCreationAction("Server error."));
+    }
+
+    [EffectMethod]
+    public async Task Load(PokerTableLoadAction action, IDispatcher dispatcher)
+    {
+        dispatcher.Dispatch(new PokerTableSetLoadingAction());
+        var table = await this.tableService.GetByIdAsync(action.Id);
+        dispatcher.Dispatch(new PokerTableSetAction(table));
+    }
+
+    [EffectMethod]
+    public async Task Leave(PokerTableLeaveAction action, IDispatcher dispatcher)
+    {
+        await this.tableService.LeaveAsync(action.Id);
+        dispatcher.Dispatch(new PokerTableSetAction(null));
     }
 }

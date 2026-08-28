@@ -1,8 +1,10 @@
 namespace PlanningPoker.SharedKernel.Models.Binding;
 
-using FluentValidation;
-using PlanningPoker.SharedKernel.Models.Decks;
 using System;
+
+using FluentValidation;
+
+using PlanningPoker.SharedKernel.Models.Decks;
 
 /// <summary>
 /// Represents the information for creating or updating an existing poker table.

@@ -1,14 +1,17 @@
 namespace PlanningPoker.Core.Services;
+    using System;
+    using System.Threading;
+    using System.Threading.Tasks;
+
     using Ardalis.GuardClauses;
+
     using Mapster;
+
     using PlanningPoker.Generated.Mapping;
     using PlanningPoker.Generated.Models;
     using PlanningPoker.Persistence;
 using PlanningPoker.Persistence.Entities;
     using PlanningPoker.SharedKernel.Models.Binding;
-    using System;
-    using System.Threading;
-    using System.Threading.Tasks;
 
     public class RoundService : IRoundService
     {
@@ -21,7 +24,7 @@ using PlanningPoker.Persistence.Entities;
 
         public async Task<RoundModel> CreateAsync(RoundBindingModel model, CancellationToken ct = default)
         {
-            Guard.Against.Null(model, nameof(model));
+            Guard.Against.Null(model);
 
             var roundEntry = await this.dbContext.Rounds.AddAsync(model.Adapt<Round>(), ct);
             await this.dbContext.SaveChangesAsync(ct);
@@ -31,7 +34,7 @@ using PlanningPoker.Persistence.Entities;
 
         public async Task<bool> DeleteAsync(Guid id, CancellationToken ct = default)
         {
-            Guard.Against.Null(id, nameof(id));
+            Guard.Against.Null(id);
 
             this.dbContext.Rounds.Remove(new() { Id = id });
             return Convert.ToBoolean(await this.dbContext.SaveChangesAsync(ct));

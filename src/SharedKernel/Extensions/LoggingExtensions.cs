@@ -1,5 +1,8 @@
 namespace PlanningPoker.SharedKernel.Extensions;
 
+using System;
+using System.Diagnostics;
+
 using Ardalis.GuardClauses;
 
 using Microsoft.Extensions.Configuration;
@@ -11,8 +14,6 @@ using PlanningPoker.SharedKernel.Enrichers;
 using Serilog;
 using Serilog.Configuration;
 using Serilog.Settings.Configuration;
-using System;
-using System.Diagnostics;
 
 public static class LoggingExtensions
 {

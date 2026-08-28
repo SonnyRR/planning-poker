@@ -1,9 +1,9 @@
 namespace PlanningPoker.SharedKernel.Enrichers;
 
+using System;
+
 using Serilog.Core;
 using Serilog.Events;
-
-using System;
 
 public sealed class InstanceEnricher : ILogEventEnricher
 {

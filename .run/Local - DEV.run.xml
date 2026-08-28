@@ -1,8 +1,0 @@
-<component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Local - DEV" type="CompoundRunConfigurationType">
-    <toRun name="PlanningPoker.BFF: PlanningPoker.BFF - Development" type="LaunchSettings" />
-    <toRun name="PlanningPoker.Identity: PlanningPoker.Identity - Development" type="LaunchSettings" />
-    <toRun name="PlanningPoker.WebAPI: PlanningPoker.WebAPI - Development" type="LaunchSettings" />
-    <method v="2" />
-  </configuration>
-</component>

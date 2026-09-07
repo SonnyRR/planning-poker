@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="7.7.0" />
     <ProjectReference Include="..\Generated\PlanningPoker.Generated.csproj" />
   </ItemGroup>
 

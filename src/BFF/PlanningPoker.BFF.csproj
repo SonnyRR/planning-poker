@@ -8,13 +8,13 @@
         <PackageReference Include="Destructurama.Attributed" Version="5.3.0" />
         <PackageReference Include="Edi.RouteDebugger" Version="1.12.0" />
         <PackageReference Include="IdentityModel.AspNetCore" Version="4.3.0" />
-        <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="10.0.11" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="10.0.11" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="10.0.12" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="10.0.12" />
         <PackageReference Include="NetEscapades.AspNetCore.SecurityHeaders" Version="1.3.1" />
-        <PackageReference Include="OpenIddict.AspNetCore" Version="7.6.1" />
-        <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="7.6.1" />
-        <PackageReference Include="OpenIddict.Quartz" Version="7.6.1" />
-        <PackageReference Include="Quartz.Extensions.Hosting" Version="3.20.0" />
+        <PackageReference Include="OpenIddict.AspNetCore" Version="7.7.1" />
+        <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="7.7.1" />
+        <PackageReference Include="OpenIddict.Quartz" Version="7.7.1" />
+        <PackageReference Include="Quartz.Extensions.Hosting" Version="4.2.2" />
         <PackageReference Include="Serilog.AspNetCore" Version="10.0.0" />
         <PackageReference Include="Serilog.AspNetCore.Ingestion" Version="1.0.0-dev-00032" />
         <PackageReference Include="Serilog.Enrichers.CorrelationId" Version="3.0.1" />
